@@ -9,6 +9,7 @@
 #include "MainInputManager.hpp"
 
 #include "InputManager.hpp"
+#include "KeyboardLookup.hpp"
 
 MainInputManager& MainInputManager::getInstance()
 {
@@ -33,7 +34,7 @@ MainInputManagerState MainInputManager::update()
     {
         if (e->isPressed())
         {
-            _state = MainInputManagerState_PLAY_SOUND;
+            _state = e->_type == GamepadEventType_BUTTON_SELECT ? MainInputManagerState_EXIT : MainInputManagerState_PLAY_SOUND;
             break;
         }
     }
@@ -42,7 +43,7 @@ MainInputManagerState MainInputManager::update()
     {
         if (e->isPressed())
         {
-            _state = MainInputManagerState_PLAY_SOUND;
+            _state = e->_key == GOW_KEY_ESCAPE ? MainInputManagerState_EXIT : MainInputManagerState_PLAY_SOUND;
             break;
         }
     }

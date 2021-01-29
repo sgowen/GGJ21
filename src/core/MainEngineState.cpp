@@ -75,9 +75,16 @@ void MainEngineState::onPause()
 void MainEngineState::update()
 {
     MainInputManagerState mims = INPUT_MAIN.update();
-    if (mims == MainInputManagerState_PLAY_SOUND)
+    switch (mims)
     {
-        GOW_AUDIO->playSound(1);
+        case MainInputManagerState_EXIT:
+            // TODO
+            break;
+        case MainInputManagerState_PLAY_SOUND:
+            GOW_AUDIO->playSound(1);
+            break;
+        default:
+            break;
     }
 }
 

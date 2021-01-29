@@ -13,7 +13,8 @@
 enum MainInputManagerState
 {
     MainInputManagerState_DEFAULT =    0,
-    MainInputManagerState_PLAY_SOUND = 1 << 0
+    MainInputManagerState_EXIT =       1 << 0,
+    MainInputManagerState_PLAY_SOUND = 1 << 1
 };
 
 class MainInputManager
