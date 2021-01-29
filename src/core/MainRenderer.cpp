@@ -16,6 +16,8 @@
 #include "MainConfig.hpp"
 #include "MainInputManager.hpp"
 #include "CursorConverter.hpp"
+#include "StringUtil.hpp"
+#include "FPSUtil.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -23,12 +25,14 @@
 #include <assert.h>
 
 MainRenderer::MainRenderer() :
-_font(0, 0, 16, 64, 75, 1024, 1024),
-_framebuffer(2048, 2048),
+_fontRenderer(128, 0, 0, 16, 64, 75, 1024, 1024),
+_framebuffer(),
 _screenRenderer(),
 _shaderManager(),
 _spriteBatcher(128),
-_textureManager()
+_textureManager(),
+_fpsTextView("", 98, 58, 2.24f, 2.625f, TextAlignment_RIGHT),
+_messageTextView("Input anything to hear Jackie", 50, 6, 2.24f, 2.625f, TextAlignment_CENTER)
 {
     // Empty
 }
@@ -40,7 +44,11 @@ MainRenderer::~MainRenderer()
 
 void MainRenderer::createDeviceDependentResources()
 {
-    OGL.loadFramebuffer(_framebuffer, GL_LINEAR, GL_LINEAR);
+    _fontRenderer.createDeviceDependentResources();
+    
+    _framebuffer._width = CFG_MAIN._framebufferWidth;
+    _framebuffer._height = CFG_MAIN._framebufferHeight;
+    OGL.loadFramebuffer(_framebuffer);
     
     _screenRenderer.createDeviceDependentResources();
     _shaderManager.createDeviceDependentResources();
@@ -55,6 +63,8 @@ void MainRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
 
 void MainRenderer::releaseDeviceDependentResources()
 {
+    _fontRenderer.releaseDeviceDependentResources();
+    
     OGL.unloadFramebuffer(_framebuffer);
     
     _screenRenderer.releaseDeviceDependentResources();
@@ -73,10 +83,14 @@ void MainRenderer::render()
     OGL.enableBlending(true);
     
     _spriteBatcher.begin();
+    TextureRegion demo(0, 0, 640, 480, 2048, 2048, 0);
+    _spriteBatcher.addSprite(demo, CFG_MAIN._camWidth / 2, CFG_MAIN._camHeight / 2, CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+    _spriteBatcher.end(_shaderManager.shader("shader_002"), _matrix, _textureManager.texture("demo"));
     
-    // TODO
-    
-    _spriteBatcher.end(_shaderManager.shader("shader_002"), _matrix, _textureManager.texture("texture_font"));
+    int fps = FPS_UTIL.getFPS();
+    _fpsTextView._text = StringUtil::format("%d FPS", fps);
+    _fontRenderer.renderText(_shaderManager.shader("shader_002"), _matrix, _textureManager.texture("texture_font"), _fpsTextView);
+    _fontRenderer.renderText(_shaderManager.shader("shader_002"), _matrix, _textureManager.texture("texture_font"), _messageTextView);
 
     _screenRenderer.renderToScreen(_shaderManager.shader("shader_001"), _framebuffer);
 }

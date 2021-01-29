@@ -10,14 +10,22 @@
 
 #define INPUT_MAIN MainInputManager::getInstance()
 
+enum MainInputManagerState
+{
+    MainInputManagerState_DEFAULT =    0,
+    MainInputManagerState_PLAY_SOUND = 1 << 0
+};
+
 class MainInputManager
 {
 public:
     static MainInputManager& getInstance();
     
-    void update();
+    MainInputManagerState update();
     
-private:    
+private:
+    MainInputManagerState _state;
+    
     MainInputManager();
     ~MainInputManager();
     MainInputManager(const MainInputManager&);

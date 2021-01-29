@@ -77,6 +77,12 @@
   ],
   "textures": [
     {
+      "name": "demo",
+      "filePath": "textures/demo.png",
+      "filterMin": "NEAREST",
+      "filterMag": "NEAREST"
+    },
+    {
       "name": "texture_font",
       "filePath": "textures/texture_font.png",
       "mipMap": false

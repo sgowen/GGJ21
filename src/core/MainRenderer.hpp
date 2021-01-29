@@ -10,13 +10,14 @@
 
 #include <string>
 
-#include "Font.hpp"
+#include "FontRenderer.hpp"
 #include "Framebuffer.hpp"
 #include "ShaderInput.hpp"
 #include "ScreenRenderer.hpp"
 #include "ShaderManager.hpp"
 #include "SpriteBatcher.hpp"
 #include "TextureManager.hpp"
+#include "TextView.hpp"
 
 class MainRenderer
 {
@@ -30,11 +31,13 @@ public:
     void render();
     
 private:
-    Font _font;
+    FontRenderer _fontRenderer;
     Framebuffer _framebuffer;
     mat4 _matrix;
     ScreenRenderer _screenRenderer;
     ShaderManager _shaderManager;
     SpriteBatcher _spriteBatcher;
     TextureManager _textureManager;
+    TextView _fpsTextView;
+    TextView _messageTextView;
 };

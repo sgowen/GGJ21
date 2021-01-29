@@ -1,8 +1,8 @@
 {
-    "FramebufferWidth": "2048",
-    "FramebufferHeight": "2048",
-    "CamWidth": "128",
-    "CamHeight": "128"
+    "FramebufferWidth": "1600",
+    "FramebufferHeight": "960",
+    "CamWidth": "100",
+    "CamHeight": "60"
 }
 
 // Cam Width - should always be the Framebuffer Width divided by 16 for optimal performance

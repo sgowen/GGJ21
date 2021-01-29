@@ -64,17 +64,21 @@ void MainEngineState::releaseDeviceDependentResources()
 
 void MainEngineState::onResume()
 {
-    // Empty
+    GOW_AUDIO->resume();
 }
 
 void MainEngineState::onPause()
 {
-    // Empty
+    GOW_AUDIO->pause();
 }
 
 void MainEngineState::update()
 {
-    INPUT_MAIN.update();
+    MainInputManagerState mims = INPUT_MAIN.update();
+    if (mims == MainInputManagerState_PLAY_SOUND)
+    {
+        GOW_AUDIO->playSound(1);
+    }
 }
 
 void MainEngineState::render(double alpha)
@@ -82,6 +86,7 @@ void MainEngineState::render(double alpha)
     UNUSED(alpha);
     
     _renderer.render();
+    GOW_AUDIO->render();
 }
 
 MainEngineState::MainEngineState() : EngineState(),

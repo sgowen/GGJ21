@@ -16,12 +16,42 @@ MainInputManager& MainInputManager::getInstance()
     return ret;
 }
 
-void MainInputManager::update()
+MainInputManagerState MainInputManager::update()
 {
-    // Empty
+    _state = MainInputManagerState_DEFAULT;
+    
+    for (auto& e : INPUT_MGR.getCursorEvents())
+    {
+        if (e->isPressed())
+        {
+            _state = MainInputManagerState_PLAY_SOUND;
+            break;
+        }
+    }
+    
+    for (auto& e : INPUT_MGR.getGamepadEvents())
+    {
+        if (e->isPressed())
+        {
+            _state = MainInputManagerState_PLAY_SOUND;
+            break;
+        }
+    }
+    
+    for (auto& e : INPUT_MGR.getKeyboardEvents())
+    {
+        if (e->isPressed())
+        {
+            _state = MainInputManagerState_PLAY_SOUND;
+            break;
+        }
+    }
+    
+    return _state;
 }
 
-MainInputManager::MainInputManager()
+MainInputManager::MainInputManager() :
+_state(MainInputManagerState_DEFAULT)
 {
     // Empty
 }

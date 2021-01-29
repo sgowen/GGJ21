@@ -326,8 +326,8 @@
 		BBBA5B0725BB5D1A00C8207D /* b2_distance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA594D25BB5D1900C8207D /* b2_distance.cpp */; };
 		BBBA5B3C25BB953400C8207D /* OverlapTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B3425BB953300C8207D /* OverlapTester.cpp */; };
 		BBBA5B3D25BB953400C8207D /* OverlapTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B3425BB953300C8207D /* OverlapTester.cpp */; };
-		BBBA5B8425BE019E00C8207D /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8325BE019E00C8207D /* Font.cpp */; };
-		BBBA5B8525BE019E00C8207D /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8325BE019E00C8207D /* Font.cpp */; };
+		BBBA5B8425BE019E00C8207D /* FontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */; };
+		BBBA5B8525BE019E00C8207D /* FontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */; };
 		BBBA5B9425BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */; };
 		BBBA5B9525BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */; };
 		BBBA5B9625BE1E3400C8207D /* PolygonBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8F25BE1E3400C8207D /* PolygonBatcher.cpp */; };
@@ -1007,8 +1007,8 @@
 		BBBA5B3425BB953300C8207D /* OverlapTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OverlapTester.cpp; sourceTree = "<group>"; };
 		BBBA5B3725BB953300C8207D /* Triangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
 		BBBA5B3825BB953300C8207D /* Line.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Line.hpp; sourceTree = "<group>"; };
-		BBBA5B8225BE019E00C8207D /* Font.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
-		BBBA5B8325BE019E00C8207D /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		BBBA5B8225BE019E00C8207D /* FontRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FontRenderer.hpp; sourceTree = "<group>"; };
+		BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontRenderer.cpp; sourceTree = "<group>"; };
 		BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DDebugRenderer.cpp; sourceTree = "<group>"; };
 		BBBA5B8B25BE1E3400C8207D /* PolygonBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PolygonBatcher.hpp; sourceTree = "<group>"; };
 		BBBA5B8C25BE1E3400C8207D /* CircleBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CircleBatcher.hpp; sourceTree = "<group>"; };
@@ -1031,6 +1031,7 @@
 		BBBA5C6925C31B1400C8207D /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		BBBA5C8825C332F000C8207D /* RTTI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RTTI.hpp; sourceTree = "<group>"; };
 		BBBA5C8925C332F000C8207D /* RTTI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTTI.cpp; sourceTree = "<group>"; };
+		BBBA5CEB25C3CFC000C8207D /* TextView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextView.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1312,8 +1313,8 @@
 				BBBA57EC25BB58CA00C8207D /* EntityNetworkController.hpp */,
 				BB7B07B425B646BA0021E545 /* FileData.hpp */,
 				BB7B07DB25B646BA0021E545 /* FixedSizePool.hpp */,
-				BBBA5B8325BE019E00C8207D /* Font.cpp */,
-				BBBA5B8225BE019E00C8207D /* Font.hpp */,
+				BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */,
+				BBBA5B8225BE019E00C8207D /* FontRenderer.hpp */,
 				BB7B07B625B646BA0021E545 /* FPSUtil.cpp */,
 				BB7B07A825B646BA0021E545 /* FPSUtil.hpp */,
 				BB7B07BB25B646BA0021E545 /* Framebuffer.hpp */,
@@ -1437,6 +1438,7 @@
 				BBBA57D825BB567300C8207D /* Timing.hpp */,
 				BBBA575025BB175900C8207D /* TransmissionData.hpp */,
 				BBBA5B3725BB953300C8207D /* Triangle.hpp */,
+				BBBA5CEB25C3CFC000C8207D /* TextView.hpp */,
 				BBBA575125BB175900C8207D /* UDPSocket.cpp */,
 				BBBA575925BB175900C8207D /* UDPSocket.hpp */,
 				BB7B07A725B646BA0021E545 /* Vector2.cpp */,
@@ -2536,7 +2538,7 @@
 				BBBA5ABC25BB5D1A00C8207D /* b2_world_callbacks.cpp in Sources */,
 				BBBA472125B9150000C8207D /* NullSound.cpp in Sources */,
 				BBBA46DE25B913D900C8207D /* ALCaptureDevice.m in Sources */,
-				BBBA5B8425BE019E00C8207D /* Font.cpp in Sources */,
+				BBBA5B8425BE019E00C8207D /* FontRenderer.cpp in Sources */,
 				BBBA46F425B913D900C8207D /* OALUtilityActions.m in Sources */,
 				BB7B091D25B659E70021E545 /* MainEngineState.cpp in Sources */,
 				BBBA471F25B9150000C8207D /* NullSoundWrapper.cpp in Sources */,
@@ -2573,7 +2575,7 @@
 				BBBA467F25B9121600C8207D /* ObjectALWrapper.mm in Sources */,
 				BB8BCD0B25B68446005F57B8 /* NSEngine.mm in Sources */,
 				BBBA57F925BB58CA00C8207D /* EntityIDManager.cpp in Sources */,
-				BBBA5B8525BE019E00C8207D /* Font.cpp in Sources */,
+				BBBA5B8525BE019E00C8207D /* FontRenderer.cpp in Sources */,
 				BBBA578025BB175A00C8207D /* NetworkManagerServer.cpp in Sources */,
 				BBBA57AA25BB175A00C8207D /* SocketUtil.cpp in Sources */,
 				BBBA5AC725BB5D1A00C8207D /* b2_polygon_contact.cpp in Sources */,
