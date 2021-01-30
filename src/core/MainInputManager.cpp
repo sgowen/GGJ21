@@ -187,10 +187,8 @@ void MainInputManager::updateReadText()
                 clearTextInput();
                 continue;
             default:
-            {
                 acceptKeyInput(e->_key);
                 continue;
-            }
         }
     }
 }
