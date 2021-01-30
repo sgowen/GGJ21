@@ -20,7 +20,7 @@ enum MainInputManagerState
     MIMS_TEXT_INPUT_READY
 };
 
-enum MainInputManagerUpdateArg
+enum MainInputManagerUpdate
 {
     MIMU_DEFAULT,
     MIMU_READ_TEXT
@@ -33,7 +33,7 @@ class MainInputManager
 public:
     static MainInputManager& getInstance();
     
-    MainInputManagerState update(MainInputManagerUpdateArg mimu);
+    MainInputManagerState update(MainInputManagerUpdate mimu);
     std::string getTextInput();
     void setTextInput(std::string textInput);
     void clearTextInput();

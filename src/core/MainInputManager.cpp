@@ -13,15 +13,13 @@
 #include "MainConfig.hpp"
 #include "StringUtil.hpp"
 
-#include <sstream>
-
 MainInputManager& MainInputManager::getInstance()
 {
     static MainInputManager ret = MainInputManager();
     return ret;
 }
 
-MainInputManagerState MainInputManager::update(MainInputManagerUpdateArg mimu)
+MainInputManagerState MainInputManager::update(MainInputManagerUpdate mimu)
 {
     _state = MIMS_DEFAULT;
     
@@ -122,7 +120,7 @@ void MainInputManager::updateReadText()
 #if IS_MOBILE
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
-        if (!e->isPressed())
+        if (e->_type != CUET_DOWN)
         {
             continue;
         }
@@ -155,7 +153,6 @@ void MainInputManager::updateReadText()
         }
     }
     
-    std::stringstream ss;
     for (KeyboardEvent* e : INPUT_MGR.getKeyboardEvents())
     {
         if (!e->isPressed())

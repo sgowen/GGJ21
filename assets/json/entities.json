@@ -1,0 +1,148 @@
+{
+  "HIDE": {
+    "name": "Hide",
+    "controller": "Hide",
+    "textureMappings": {
+      "0": "HIDE_UP_STILL",
+      "1": "HIDE_DOWN_STILL",
+      "2": "HIDE_LEFT_STILL",
+      "3": "HIDE_LEFT_STILL",
+      "4": "HIDE_UP",
+      "5": "HIDE_DOWN",
+      "6": "HIDE_LEFT",
+      "7": "HIDE_LEFT"
+    },
+    "soundMappings": {
+      "1": 1
+    },
+    "bodyFlags": 8,
+    "width": 4,
+    "height": 4,
+    "stateSensitive": true
+  },
+  "JCKE": {
+    "name": "Jackie",
+    "controller": "Jackie",
+    "textureMappings": {
+      "0": "JACKIE_UP_STILL",
+      "1": "JACKIE_DOWN_STILL",
+      "2": "JACKIE_LEFT_STILL",
+      "3": "JACKIE_LEFT_STILL",
+      "4": "JACKIE_UP",
+      "5": "JACKIE_DOWN",
+      "6": "JACKIE_LEFT",
+      "7": "JACKIE_LEFT"
+    },
+    "soundMappings": {
+      "1": 1
+    },
+    "bodyFlags": 8,
+    "width": 4,
+    "height": 4,
+    "stateSensitive": true
+  },
+  "BT01": {
+    "name": "BG_BASEMENT_TILE_1",
+    "textureMapping": "BG_BASEMENT_TILE_1",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT02": {
+    "name": "BG_BASEMENT_TILE_2",
+    "textureMapping": "BG_BASEMENT_TILE_2",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT03": {
+    "name": "BG_BASEMENT_TILE_3",
+    "textureMapping": "BG_BASEMENT_TILE_3",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT04": {
+    "name": "BG_BASEMENT_TILE_4",
+    "textureMapping": "BG_BASEMENT_TILE_4",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT05": {
+    "name": "BG_BASEMENT_TILE_5",
+    "textureMapping": "BG_BASEMENT_TILE_5",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT06": {
+    "name": "BG_BASEMENT_TILE_6",
+    "textureMapping": "BG_BASEMENT_TILE_6",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT07": {
+    "name": "BG_BASEMENT_TILE_7",
+    "textureMapping": "BG_BASEMENT_TILE_7",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT08": {
+    "name": "BG_BASEMENT_TILE_8",
+    "textureMapping": "BG_BASEMENT_TILE_8",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT09": {
+    "name": "BG_BASEMENT_TILE_9",
+    "textureMapping": "BG_BASEMENT_TILE_9",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT10": {
+    "name": "BG_BASEMENT_TILE_10",
+    "textureMapping": "BG_BASEMENT_TILE_10",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT11": {
+    "name": "BG_BASEMENT_TILE_11",
+    "textureMapping": "BG_BASEMENT_TILE_11",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT12": {
+    "name": "BG_BASEMENT_TILE_12",
+    "textureMapping": "BG_BASEMENT_TILE_12",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "BT13": {
+    "name": "BG_BASEMENT_TILE_13",
+    "textureMapping": "BG_BASEMENT_TILE_13",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  },
+  "FTGR": {
+    "name": "BG_FOREST_TILE_GRASS",
+    "textureMapping": "BG_FOREST_TILE_GRASS",
+    "width": 4,
+    "height": 4
+  },
+  "FTTR": {
+    "name": "BG_FOREST_TILE_TREE",
+    "textureMapping": "BG_FOREST_TILE_TREE",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 1
+  }
+}

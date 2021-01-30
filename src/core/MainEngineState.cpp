@@ -13,6 +13,7 @@
 #include "Assets.hpp"
 #include "MainInputManager.hpp"
 #include "GowAudioEngine.hpp"
+#include "GameEngineState.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -27,6 +28,10 @@ void MainEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+    
+    _state = MESS_DEFAULT;
+    _userEnteredIPAddress.clear();
+    INPUT_MAIN.clearTextInput();
 }
 
 void MainEngineState::execute(Engine* e)
@@ -67,6 +72,7 @@ void MainEngineState::exit(Engine* e)
 
 void MainEngineState::createDeviceDependentResources()
 {
+    ASSETS.initWithJSONFile("json/assets_main.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
 }
@@ -78,6 +84,7 @@ void MainEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int
 
 void MainEngineState::releaseDeviceDependentResources()
 {
+    ASSETS.clear();
     _renderer.releaseDeviceDependentResources();
     GOW_AUDIO.releaseDeviceDependentResources();
 }
@@ -106,7 +113,7 @@ void MainEngineState::update(Engine* e)
             updateInputHostName(e);
             break;
         case MESS_INPUT_JOIN_NAME:
-            updateInputJoinName(e);
+            updateInputJoname(e);
             break;
         default:
             break;
@@ -159,15 +166,14 @@ void MainEngineState::updateInputHostName(Engine* e)
             _state = MESS_DEFAULT;
             break;
         case MIMS_TEXT_INPUT_READY:
-            // TODO
-            INPUT_MAIN.clearTextInput();
+            GameEngineState::sHandleHostServer(e, INPUT_MAIN.getTextInput());
             break;
         default:
             break;
     }
 }
 
-void MainEngineState::updateInputJoinName(Engine* e)
+void MainEngineState::updateInputJoname(Engine* e)
 {
     MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
     switch (mims)
@@ -177,8 +183,7 @@ void MainEngineState::updateInputJoinName(Engine* e)
             INPUT_MAIN.setTextInput(_userEnteredIPAddress);
             break;
         case MIMS_TEXT_INPUT_READY:
-            // TODO
-            INPUT_MAIN.clearTextInput();
+            GameEngineState::sHandleJoinServer(e, _userEnteredIPAddress, INPUT_MAIN.getTextInput());
             break;
         default:
             break;
@@ -195,5 +200,5 @@ MainEngineState::MainEngineState() : State<Engine>(),
 _renderer(),
 _state(MESS_DEFAULT)
 {
-    ASSETS.initWithJSONFile("json/assets_main.json");
+    // Empty
 }

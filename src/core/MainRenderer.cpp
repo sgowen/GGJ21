@@ -9,7 +9,6 @@
 #include "MainRenderer.hpp"
 
 #include "MainEngineState.hpp"
-
 #include "OpenGLWrapper.hpp"
 #include "Macros.hpp"
 #include "Color.hpp"
@@ -19,7 +18,6 @@
 #include "StringUtil.hpp"
 #include "FPSUtil.hpp"
 #include "Constants.hpp"
-#include "MainEngineState.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -109,24 +107,6 @@ void MainRenderer::render()
     TextureRegion demo(0, 0, 640, 480, 2048, 2048, 0);
     _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2, camWidth, camHeight);
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
-    
-    {
-        Texture& t = _textureManager.texture("background_tiles");
-        TextureDescriptor& td = t._descriptor;
-        _spriteBatcher.begin();
-        _spriteBatcher.addSprite(td.textureRegion("BG_BASEMENT_TILE_1"), camWidth / 2, camHeight * 0.4, 4, 4);
-        _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, t);
-    }
-    
-    {
-        static float hideFrameTime = 0;
-        hideFrameTime++;
-        Texture& t = _textureManager.texture("overworld_characters");
-        TextureDescriptor& td = t._descriptor;
-        _spriteBatcher.begin();
-        _spriteBatcher.addSprite(td.textureRegion("HIDE_DOWN", hideFrameTime), camWidth / 2, camHeight * 0.4, 4, 4);
-        _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, t);
-    }
     
     for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
     {

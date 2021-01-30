@@ -1,7 +1,12 @@
 {
-    "framebufferWidth": "1600",
-    "framebufferHeight": "960",
-    "camWidth": "100",
-    "camHeight": "60",
-    "maxTextInputLength": "16"
+  "clientPort": "1337",
+  "serverPort": "9999",
+  "framebufferWidth": "1600",
+  "framebufferHeight": "960",
+  "camWidth": "100",
+  "camHeight": "60",
+  "maxTextInputLength": "16",
+  "maxNumPlayers": "2",
+  "playerMaxSpeed": "16.0",
+  "showDebug": "true"
 }
