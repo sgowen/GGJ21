@@ -1,4 +1,11 @@
 {
+  "sounds": [
+    {
+      "soundID": 1,
+      "filePath": "sounds/Hide_Lines/Hide_attack1.wav",
+      "numInstances": 1
+    }
+  ],
   "shaders": [
     {
       "name": "framebuffer",

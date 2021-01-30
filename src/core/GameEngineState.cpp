@@ -124,6 +124,8 @@ void GameEngineState::enter(Engine* e)
     _map = 0;
     _world = new World(WorldFlag_Client);
     _timing->reset();
+    // TODO, remove
+    GOW_AUDIO.playSound(_isHost ? 1 : 2);
 }
 
 void GameEngineState::execute(Engine* e)

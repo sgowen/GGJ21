@@ -2,7 +2,12 @@
   "sounds": [
     {
       "soundID": 1,
-      "filePath": "sounds/jackie_leftorright2.wav",
+      "filePath": "sounds/Hide_Lines/Hide_forward1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 2,
+      "filePath": "sounds/Jackie_Lines/Jackie_betterdosomething.wav",
       "numInstances": 1
     }
   ],
