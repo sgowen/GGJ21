@@ -1,5 +1,6 @@
 {
-  "clientPort": "1337",
+  "clientPortHost": "1337",
+  "clientPortJoin": "1338",
   "serverPort": "9999",
   "framebufferWidth": "1600",
   "framebufferHeight": "960",
@@ -7,6 +8,6 @@
   "camHeight": "60",
   "maxTextInputLength": "16",
   "maxNumPlayers": "2",
-  "playerMaxSpeed": "16.0",
+  "playerMaxTopDownSpeed": "16.0",
   "showDebug": "true"
 }

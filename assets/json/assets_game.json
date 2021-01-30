@@ -318,6 +318,10 @@
       }
     },
     {
+      "name": "big_sprites",
+      "filePath": "textures/big_sprites.png"
+    },
+    {
       "name": "texture_font",
       "filePath": "textures/texture_font.png",
       "mipMap": false

@@ -49,7 +49,7 @@ private:
     void updateDefault(Engine* e);
     void updateInputIP(Engine* e);
     void updateInputHostName(Engine* e);
-    void updateInputJoname(Engine* e);
+    void updateInputJoinName(Engine* e);
     void render();
     
     MainEngineState();

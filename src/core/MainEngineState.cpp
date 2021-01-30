@@ -14,6 +14,8 @@
 #include "MainInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "GameEngineState.hpp"
+#include "StringUtil.hpp"
+#include "MainConfig.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -113,7 +115,7 @@ void MainEngineState::update(Engine* e)
             updateInputHostName(e);
             break;
         case MESS_INPUT_JOIN_NAME:
-            updateInputJoname(e);
+            updateInputJoinName(e);
             break;
         default:
             break;
@@ -148,7 +150,7 @@ void MainEngineState::updateInputIP(Engine* e)
             _state = MESS_DEFAULT;
             break;
         case MIMS_TEXT_INPUT_READY:
-            _userEnteredIPAddress = INPUT_MAIN.getTextInput();
+            _userEnteredIPAddress = StringUtil::format("%s:%d", INPUT_MAIN.getTextInput().c_str(), CFG_MAIN._serverPort);
             INPUT_MAIN.clearTextInput();
             _state = MESS_INPUT_JOIN_NAME;
             break;
@@ -173,7 +175,7 @@ void MainEngineState::updateInputHostName(Engine* e)
     }
 }
 
-void MainEngineState::updateInputJoname(Engine* e)
+void MainEngineState::updateInputJoinName(Engine* e)
 {
     MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
     switch (mims)

@@ -27,6 +27,7 @@
 #include "Config.hpp"
 #include "MainConfig.hpp"
 #include "GameEngineState.hpp"
+#include "Macros.hpp"
 
 IMPL_RTTI(PlayerController, EntityController);
 
@@ -77,7 +78,7 @@ void PlayerController::processInput(InputState* inputState)
     state = 0;
     const b2Vec2& vel = _entity->getVelocity();
     float desiredVel[2] = { 0.0f, 0.0f };
-    float maxSpeed = CFG_MAIN._playerMaxSpeed;
+    float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
     float maxSpeedHalved = maxSpeed / 2;
     if (IS_BIT_SET(inpt, GISF_MOVING_UP))
     {
@@ -209,7 +210,7 @@ uint16_t PlayerNetworkController::write(OutputMemoryBitStream& op, uint16_t dirt
     
     PlayerController& c = *_controller;
     
-    bool playerInfo = dirtyState & PlayerController::RSTF_PLAYER_INFO;
+    bool playerInfo = IS_BIT_SET(dirtyState, PlayerController::RSTF_PLAYER_INFO);
     op.write(playerInfo);
     if (playerInfo)
     {
@@ -220,7 +221,7 @@ uint16_t PlayerNetworkController::write(OutputMemoryBitStream& op, uint16_t dirt
         writtenState |= PlayerController::RSTF_PLAYER_INFO;
     }
     
-    bool stats = dirtyState & PlayerController::RSTF_STATS;
+    bool stats = IS_BIT_SET(dirtyState, PlayerController::RSTF_STATS);
     op.write(stats);
     if (stats)
     {

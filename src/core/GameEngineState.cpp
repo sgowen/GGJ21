@@ -191,7 +191,8 @@ bool GameEngineState::isLive()
 
 void GameEngineState::joinServer()
 {
-    NetworkManagerClient::create(new SocketClientHelper(_serverIPAddress, _name, CFG_MAIN._clientPort, NW_MGR_CLIENT_CALLBACKS), GAME_ENGINE_CALLBACKS, INPUT_MANAGER_CALLBACKS);
+    uint16_t port = _isHost ? CFG_MAIN._clientPortHost : CFG_MAIN._clientPortJoin;
+    NetworkManagerClient::create(new SocketClientHelper(_serverIPAddress, _name, port, NW_MGR_CLIENT_CALLBACKS), GAME_ENGINE_CALLBACKS, INPUT_MANAGER_CALLBACKS);
     
     assert(NW_MGR_CLIENT);
     
