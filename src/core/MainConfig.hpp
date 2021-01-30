@@ -22,10 +22,14 @@ public:
     int _framebufferHeight;
     int _camWidth;
     int _camHeight;
-    int _splitScreenBarX;
-    int _splitScreenBarY;
-    int _splitScreenBarWidth;
-    int _splitScreenBarHeight;
+    float _splitScreenBarX;
+    float _splitScreenBarY;
+    float _splitScreenBarWidth;
+    float _splitScreenBarHeight;
+    float _hideSpawnX;
+    float _hideSpawnY;
+    float _jackieSpawnX;
+    float _jackieSpawnY;
     int _maxTextInputLength;
     int _maxNumPlayers;
     float _playerMaxTopDownSpeed;

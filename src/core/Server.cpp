@@ -227,10 +227,8 @@ void Server::spawnEntityForPlayer(uint8_t playerId, std::string playerName)
         return;
     }
     
-    float cw = static_cast<float>(CFG_MAIN._camWidth);
-    float ch = static_cast<float>(CFG_MAIN._camHeight);
-    float spawnX = playerId == 1 ? cw / 4 : cw / 4 * 3;
-    float spawnY = ch / 6;
+    float spawnX = playerId == 1 ? CFG_MAIN._hideSpawnX : CFG_MAIN._jackieSpawnX;
+    float spawnY = playerId == 1 ? CFG_MAIN._hideSpawnY : CFG_MAIN._jackieSpawnY;
     
     uint32_t key = playerId == 1 ? 'HIDE' : 'JCKE';
     EntityInstanceDef eid(_entityIDManager->getNextDynamicEntityID(), key, spawnX, spawnY);
