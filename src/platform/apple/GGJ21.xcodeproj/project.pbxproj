@@ -26,7 +26,6 @@
 		BB7B08B325B64A620021E545 /* NSAppleAssetHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */; };
 		BB7B08B525B64A620021E545 /* AssetHandlerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */; };
 		BB7B08B625B64A620021E545 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079D25B646BA0021E545 /* Assets.cpp */; };
-		BB7B08B725B64A620021E545 /* CursorConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079925B646BA0021E545 /* CursorConverter.cpp */; };
 		BB7B08B825B64A620021E545 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07BA25B646BA0021E545 /* InputManager.cpp */; };
 		BB7B08BA25B64A620021E545 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CB25B646BA0021E545 /* Engine.cpp */; };
 		BB7B08BC25B64A620021E545 /* FPSUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B625B646BA0021E545 /* FPSUtil.cpp */; };
@@ -55,7 +54,6 @@
 		BB8BCD1625B68490005F57B8 /* AppleAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079425B646BA0021E545 /* AppleAssetHandler.cpp */; };
 		BB8BCD1825B68490005F57B8 /* AssetHandlerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */; };
 		BB8BCD1925B68490005F57B8 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079D25B646BA0021E545 /* Assets.cpp */; };
-		BB8BCD1A25B68490005F57B8 /* CursorConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079925B646BA0021E545 /* CursorConverter.cpp */; };
 		BB8BCD1B25B68490005F57B8 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07BA25B646BA0021E545 /* InputManager.cpp */; };
 		BB8BCD1D25B68490005F57B8 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CB25B646BA0021E545 /* Engine.cpp */; };
 		BB8BCD2125B68490005F57B8 /* FPSUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B625B646BA0021E545 /* FPSUtil.cpp */; };
@@ -411,7 +409,6 @@
 		BB7B079625B646BA0021E545 /* AppleAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppleAssetHandler.hpp; sourceTree = "<group>"; };
 		BB7B079725B646BA0021E545 /* Engine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
 		BB7B079825B646BA0021E545 /* TextureDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureDescriptor.hpp; sourceTree = "<group>"; };
-		BB7B079925B646BA0021E545 /* CursorConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CursorConverter.cpp; sourceTree = "<group>"; };
 		BB7B079A25B646BA0021E545 /* SpriteBatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteBatcher.cpp; sourceTree = "<group>"; };
 		BB7B079B25B646BA0021E545 /* ShaderManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderManager.hpp; sourceTree = "<group>"; };
 		BB7B079C25B646BA0021E545 /* TextureLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureLoader.cpp; sourceTree = "<group>"; };
@@ -449,7 +446,6 @@
 		BB7B07CA25B646BA0021E545 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 		BB7B07CB25B646BA0021E545 /* Engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
 		BB7B07CC25B646BA0021E545 /* TextureDescriptor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureDescriptor.cpp; sourceTree = "<group>"; };
-		BB7B07CD25B646BA0021E545 /* CursorConverter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CursorConverter.hpp; sourceTree = "<group>"; };
 		BB7B07CE25B646BA0021E545 /* TextureRegion.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureRegion.hpp; sourceTree = "<group>"; };
 		BB7B07CF25B646BA0021E545 /* SpriteBatcher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpriteBatcher.hpp; sourceTree = "<group>"; };
 		BB7B07D025B646BA0021E545 /* PlatformMacros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlatformMacros.hpp; sourceTree = "<group>"; };
@@ -465,8 +461,6 @@
 		BB7B07DD25B646BA0021E545 /* Vector2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector2.hpp; sourceTree = "<group>"; };
 		BB7B08D125B64CF20021E545 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		BB7B090F25B652D80021E545 /* EngineController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EngineController.hpp; sourceTree = "<group>"; };
-		BB7B091125B652D80021E545 /* EngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EngineState.hpp; sourceTree = "<group>"; };
-		BB7B091525B6537D0021E545 /* State.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = State.hpp; sourceTree = "<group>"; };
 		BB7B091625B6537D0021E545 /* StateMachine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateMachine.hpp; sourceTree = "<group>"; };
 		BB7B091725B659280021E545 /* MainEngineController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainEngineController.hpp; sourceTree = "<group>"; };
 		BB7B091825B659280021E545 /* MainEngineController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainEngineController.cpp; sourceTree = "<group>"; };
@@ -879,7 +873,6 @@
 		BBBA576D25BB175A00C8207D /* SocketServerHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketServerHelper.cpp; sourceTree = "<group>"; };
 		BBBA576E25BB175A00C8207D /* ReplicationManagerServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerServer.hpp; sourceTree = "<group>"; };
 		BBBA576F25BB175A00C8207D /* SocketAddress.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketAddress.hpp; sourceTree = "<group>"; };
-		BBBA577025BB175A00C8207D /* SocketAddressFamily.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketAddressFamily.hpp; sourceTree = "<group>"; };
 		BBBA577125BB175A00C8207D /* SocketUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketUtil.cpp; sourceTree = "<group>"; };
 		BBBA577325BB175A00C8207D /* ReplicationAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationAction.hpp; sourceTree = "<group>"; };
 		BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationManagerClient.cpp; sourceTree = "<group>"; };
@@ -1288,15 +1281,12 @@
 				BBBA5BAE25C0AC5B00C8207D /* Config.cpp */,
 				BBBA5BAF25C0AC5B00C8207D /* Config.hpp */,
 				BB7B07BC25B646BA0021E545 /* Constants.hpp */,
-				BB7B079925B646BA0021E545 /* CursorConverter.cpp */,
-				BB7B07CD25B646BA0021E545 /* CursorConverter.hpp */,
 				BB7B07AC25B646BA0021E545 /* CursorEvent.hpp */,
 				BBBA576025BB175900C8207D /* DeliveryNotificationManager.cpp */,
 				BBBA574F25BB175900C8207D /* DeliveryNotificationManager.hpp */,
 				BB7B07CB25B646BA0021E545 /* Engine.cpp */,
 				BB7B079725B646BA0021E545 /* Engine.hpp */,
 				BB7B090F25B652D80021E545 /* EngineController.hpp */,
-				BB7B091125B652D80021E545 /* EngineState.hpp */,
 				BBBA57EB25BB58CA00C8207D /* Entity.cpp */,
 				BBBA57E525BB58C900C8207D /* Entity.hpp */,
 				BBBA57E725BB58CA00C8207D /* EntityController.cpp */,
@@ -1407,7 +1397,6 @@
 				BBBA576F25BB175A00C8207D /* SocketAddress.hpp */,
 				BBBA575525BB175900C8207D /* SocketAddressFactory.cpp */,
 				BBBA575E25BB175900C8207D /* SocketAddressFactory.hpp */,
-				BBBA577025BB175A00C8207D /* SocketAddressFamily.hpp */,
 				BBBA574725BB175800C8207D /* SocketClientHelper.cpp */,
 				BBBA575225BB175900C8207D /* SocketClientHelper.hpp */,
 				BBBA576B25BB175A00C8207D /* SocketPacketHandler.cpp */,
@@ -1423,7 +1412,6 @@
 				BBBA470C25B914FF00C8207D /* SoundWrapper.hpp */,
 				BB7B079A25B646BA0021E545 /* SpriteBatcher.cpp */,
 				BB7B07CF25B646BA0021E545 /* SpriteBatcher.hpp */,
-				BB7B091525B6537D0021E545 /* State.hpp */,
 				BB7B091625B6537D0021E545 /* StateMachine.hpp */,
 				BBBA57C525BB44FF00C8207D /* StringUtil.hpp */,
 				BB7B07BE25B646BA0021E545 /* Texture.hpp */,
@@ -1434,11 +1422,11 @@
 				BB7B07C625B646BA0021E545 /* TextureManager.cpp */,
 				BB7B07B125B646BA0021E545 /* TextureManager.hpp */,
 				BB7B07CE25B646BA0021E545 /* TextureRegion.hpp */,
+				BBBA5CEB25C3CFC000C8207D /* TextView.hpp */,
 				BBBA57D925BB567300C8207D /* Timing.cpp */,
 				BBBA57D825BB567300C8207D /* Timing.hpp */,
 				BBBA575025BB175900C8207D /* TransmissionData.hpp */,
 				BBBA5B3725BB953300C8207D /* Triangle.hpp */,
-				BBBA5CEB25C3CFC000C8207D /* TextView.hpp */,
 				BBBA575125BB175900C8207D /* UDPSocket.cpp */,
 				BBBA575925BB175900C8207D /* UDPSocket.hpp */,
 				BB7B07A725B646BA0021E545 /* Vector2.cpp */,
@@ -2446,7 +2434,6 @@
 				BBBA578525BB175A00C8207D /* OutputMemoryBitStream.cpp in Sources */,
 				BBBA56FE25BA453A00C8207D /* cocoa_monitor.m in Sources */,
 				BBBA474325B92E5C00C8207D /* NullAssetHandler.cpp in Sources */,
-				BB7B08B725B64A620021E545 /* CursorConverter.cpp in Sources */,
 				BBBA578725BB175A00C8207D /* NetworkManagerClient.cpp in Sources */,
 				BBBA5AC425BB5D1A00C8207D /* b2_contact_manager.cpp in Sources */,
 				BBBA5AAE25BB5D1A00C8207D /* b2_chain_circle_contact.cpp in Sources */,
@@ -2632,7 +2619,6 @@
 				BBBA46F525B913D900C8207D /* OALUtilityActions.m in Sources */,
 				BBBA468125B9121600C8207D /* AppleSound.cpp in Sources */,
 				BBBA5B0325BB5D1A00C8207D /* b2_edge_shape.cpp in Sources */,
-				BB8BCD1A25B68490005F57B8 /* CursorConverter.cpp in Sources */,
 				BBBA46CB25B913D900C8207D /* OALAudioTracks.m in Sources */,
 				BBBA5B9B25BE1E3400C8207D /* LineBatcher.cpp in Sources */,
 				BBBA46D125B913D900C8207D /* ALDevice.m in Sources */,

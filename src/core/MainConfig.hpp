@@ -2,7 +2,7 @@
 //  MainConfig.hpp
 //  GGJ21
 //
-//  Created by Stephen Gowen on 1/5/18.
+//  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
@@ -19,12 +19,13 @@ public:
     int _framebufferHeight;
     int _camWidth;
     int _camHeight;
+    int _maxTextInputLength;
     
     void init();
     
 private:
-    MainConfig();
-    ~MainConfig();
+    MainConfig() {}
+    ~MainConfig() {}
     MainConfig(const MainConfig&);
     MainConfig& operator=(const MainConfig&);
 };

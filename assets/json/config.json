@@ -1,9 +1,7 @@
 {
-    "FramebufferWidth": "1600",
-    "FramebufferHeight": "960",
-    "CamWidth": "100",
-    "CamHeight": "60"
+    "framebufferWidth": "1600",
+    "framebufferHeight": "960",
+    "camWidth": "100",
+    "camHeight": "60",
+    "maxTextInputLength": "16"
 }
-
-// Cam Width - should always be the Framebuffer Width divided by 16 for optimal performance
-// Cam Height - should always be the Framebuffer Height divided by 16 for optimal performance

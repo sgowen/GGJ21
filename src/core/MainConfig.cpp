@@ -2,7 +2,7 @@
 //  MainConfig.cpp
 //  GGJ21
 //
-//  Created by Stephen Gowen on 1/5/18.
+//  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
@@ -21,18 +21,9 @@ void MainConfig::init()
     Config c;
     c.initWithJSONFile("json/config.json");
     
-    _framebufferWidth = c.getInt("FramebufferWidth");
-    _framebufferHeight = c.getInt("FramebufferHeight");
-    _camWidth = c.getInt("CamWidth");
-    _camHeight = c.getInt("CamHeight");
-}
-
-MainConfig::MainConfig()
-{
-    // Empty
-}
-
-MainConfig::~MainConfig()
-{
-    // Empty
+    _framebufferWidth = c.getInt("framebufferWidth");
+    _framebufferHeight = c.getInt("framebufferHeight");
+    _camWidth = c.getInt("camWidth");
+    _camHeight = c.getInt("camHeight");
+    _maxTextInputLength = c.getInt("maxTextInputLength");
 }

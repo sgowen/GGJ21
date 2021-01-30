@@ -2,13 +2,11 @@
 //  MainRenderer.h
 //  GGJ21
 //
-//  Created by Stephen Gowen on 2/22/14.
+//  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
 #pragma once
-
-#include <string>
 
 #include "FontRenderer.hpp"
 #include "Framebuffer.hpp"
@@ -19,11 +17,13 @@
 #include "TextureManager.hpp"
 #include "TextView.hpp"
 
+#define NUM_TEXT_VIEWS 9
+
 class MainRenderer
 {
 public:
     MainRenderer();
-    ~MainRenderer();
+    ~MainRenderer() {}
     
     void createDeviceDependentResources();
     void onWindowSizeChanged(int screenWidth, int screenHeight);
@@ -38,6 +38,7 @@ private:
     ShaderManager _shaderManager;
     SpriteBatcher _spriteBatcher;
     TextureManager _textureManager;
-    TextView _fpsTextView;
-    TextView _messageTextView;
+    TextView _textViews[NUM_TEXT_VIEWS];
+    
+    void updateMatrix(float l, float r, float b, float t);
 };

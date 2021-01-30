@@ -2,18 +2,32 @@
 //  MainEngineState.hpp
 //  GGJ21
 //
-//  Created by Stephen Gowen on 2/22/14.
+//  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
 #pragma once
 
-#include "EngineState.hpp"
+#include "StateMachine.hpp"
 
 #include "MainRenderer.hpp"
 
-class MainEngineState : public EngineState
+enum MainEngineStateState
 {
+    MESS_DEFAULT,
+    MESS_INPUT_IP,
+    MESS_INPUT_HOST_NAME,
+    MESS_INPUT_JOIN_NAME
+};
+
+class Engine;
+
+#define ENGINE_STATE_MAIN MainEngineState::getInstance()
+
+class MainEngineState : public State<Engine>
+{
+    friend class MainRenderer;
+    
 public:
     static MainEngineState& getInstance();
     
@@ -21,19 +35,25 @@ public:
     virtual void execute(Engine* e);
     virtual void exit(Engine* e);
     
-    virtual void createDeviceDependentResources();
-    virtual void onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight);
-    virtual void releaseDeviceDependentResources();
-    virtual void onResume();
-    virtual void onPause();
-    virtual void update();
-    virtual void render(double alpha);
-    
 private:    
     MainRenderer _renderer;
+    MainEngineStateState _state;
+    std::string _userEnteredIPAddress;
+    
+    void createDeviceDependentResources();
+    void onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight);
+    void releaseDeviceDependentResources();
+    void resume();
+    void pause();
+    void update(Engine* e);
+    void updateDefault(Engine* e);
+    void updateInputIP(Engine* e);
+    void updateInputHostName(Engine* e);
+    void updateInputJoinName(Engine* e);
+    void render();
     
     MainEngineState();
-    ~MainEngineState();
+    ~MainEngineState() {}
     MainEngineState(const MainEngineState&);
     MainEngineState& operator=(const MainEngineState&);
 };

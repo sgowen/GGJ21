@@ -2,7 +2,7 @@
 //  MainEngineController.hpp
 //  GGJ21
 //
-//  Created by Stephen Gowen on 1/15/17.
+//  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ class MainEngineController : public EngineController
 {
 public:
     MainEngineController();
-    virtual ~MainEngineController();
+    virtual ~MainEngineController() {}
     
-    virtual EngineState* getInitialState();
+    virtual State<Engine>* getInitialState();
 };

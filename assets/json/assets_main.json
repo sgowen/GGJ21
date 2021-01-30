@@ -8,9 +8,9 @@
   ],
   "shaders": [
     {
-      "name": "shader_001",
-      "vertexShaderFilePath": "shaders/shader_001.vsh",
-      "fragmentShaderFilePath": "shaders/shader_001.fsh",
+      "name": "framebuffer",
+      "vertexShaderFilePath": "shaders/framebuffer.vsh",
+      "fragmentShaderFilePath": "shaders/framebuffer.fsh",
       "uniforms": [
         {
           "name": "u_Texture",
@@ -25,9 +25,9 @@
       ]
     },
     {
-      "name": "shader_002",
-      "vertexShaderFilePath": "shaders/shader_002.vsh",
-      "fragmentShaderFilePath": "shaders/shader_002.fsh",
+      "name": "texture",
+      "vertexShaderFilePath": "shaders/texture.vsh",
+      "fragmentShaderFilePath": "shaders/texture.fsh",
       "uniforms": [
         {
           "name": "u_Matrix",
@@ -54,9 +54,9 @@
       ]
     },
     {
-      "name": "shader_003",
-      "vertexShaderFilePath": "shaders/shader_003.vsh",
-      "fragmentShaderFilePath": "shaders/shader_003.fsh",
+      "name": "geometry",
+      "vertexShaderFilePath": "shaders/geometry.vsh",
+      "fragmentShaderFilePath": "shaders/geometry.fsh",
       "uniforms": [
         {
           "name": "u_Matrix",
@@ -73,14 +73,213 @@
           "type": "vec2"
         }
       ]
+    },
+    {
+      "name": "lights",
+      "vertexShaderFilePath": "shaders/lights.vsh",
+      "fragmentShaderFilePath": "shaders/lights.fsh",
+      "uniforms": [
+        {
+          "name": "u_Matrix",
+          "type": "mat4"
+        },
+        {
+          "name": "u_LightPositions",
+          "type": "vec4",
+          "count": 12
+        },
+        {
+          "name": "u_LightColors",
+          "type": "vec4",
+          "count": 12
+        },
+        {
+          "name": "u_AmbientColor",
+          "type": "vec4"
+        },
+        {
+          "name": "u_Falloff",
+          "type": "vec4"
+        },
+        {
+          "name": "u_NumLights",
+          "type": "ivec4"
+        },
+        {
+          "name": "u_Texture",
+          "type": "sampler2D"
+        },
+        {
+          "name": "u_NormalMap",
+          "type": "sampler2D"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "a_Position",
+          "type": "vec2"
+        }
+      ]
     }
   ],
   "textures": [
     {
+      "name": "background_tiles",
+      "filePath": "textures/background_tiles.png",
+      "textureWidth": 1024,
+      "textureHeight": 1024,
+      "mappings": {
+        "BG_BASEMENT_TILE_1": {
+          "x": 0,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_2": {
+          "x": 64,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_3": {
+          "x": 128,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_4": {
+          "x": 192,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_5": {
+          "x": 256,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_6": {
+          "x": 320,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_7": {
+          "x": 384,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_8": {
+          "x": 448,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_9": {
+          "x": 512,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_10": {
+          "x": 576,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_11": {
+          "x": 640,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_12": {
+          "x": 704,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_13": {
+          "x": 768,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_FOREST_TILE_1": {
+          "x": 0,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_FOREST_TILE_TREE": {
+          "x": 64,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        }
+      }
+    },
+    {
       "name": "demo",
-      "filePath": "textures/demo.png",
-      "filterMin": "NEAREST",
-      "filterMag": "NEAREST"
+      "filePath": "textures/demo.png"
+    },
+    {
+      "name": "overworld_characters",
+      "filePath": "textures/overworld_characters.png",
+      "textureWidth": 1024,
+      "textureHeight": 1024,
+      "mappings": {
+        "HIDE_LEFT": {
+          "x": 0,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "HIDE_UP": {
+          "x": 192,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "HIDE_DOWN": {
+          "x": 384,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "JACKIE_LEFT": {
+          "x": 0,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "JACKIE_UP": {
+          "x": 192,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "JACKIE_DOWN": {
+          "x": 384,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        }
+      }
     },
     {
       "name": "texture_font",

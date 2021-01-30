@@ -2,7 +2,7 @@
 //  MainEngineState.cpp
 //  GGJ21
 //
-//  Created by Stephen Gowen on 2/22/14.
+//  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
@@ -11,9 +11,7 @@
 #include "Engine.hpp"
 
 #include "Assets.hpp"
-#include "Macros.hpp"
 #include "MainInputManager.hpp"
-#include "MainConfig.hpp"
 #include "GowAudioEngine.hpp"
 
 #include <stdlib.h>
@@ -33,7 +31,33 @@ void MainEngineState::enter(Engine* e)
 
 void MainEngineState::execute(Engine* e)
 {
-    // Empty
+    switch (e->state())
+    {
+        case ERSA_CREATE_RESOURCES:
+            createDeviceDependentResources();
+            break;
+        case ERSA_WINDOW_SIZE_CHANGED:
+            onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+            break;
+        case ERSA_RELEASE_RESOURCES:
+            releaseDeviceDependentResources();
+            break;
+        case ERSA_RESUME:
+            resume();
+            break;
+        case ERSA_PAUSE:
+            pause();
+            break;
+        case ERSA_UPDATE:
+            update(e);
+            break;
+        case ERSA_RENDER:
+            render();
+            break;
+        case ERSA_DEFAULT:
+        default:
+            break;
+    }
 }
 
 void MainEngineState::exit(Engine* e)
@@ -43,12 +67,8 @@ void MainEngineState::exit(Engine* e)
 
 void MainEngineState::createDeviceDependentResources()
 {
-    CFG_MAIN.init();
-    ASSETS.initWithJSONFile("json/assets_main.json");
-    
     _renderer.createDeviceDependentResources();
-    GowAudioEngine::create();
-    GOW_AUDIO->loadFromAssets();
+    GOW_AUDIO.createDeviceDependentResources();
 }
 
 void MainEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
@@ -59,50 +79,121 @@ void MainEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int
 void MainEngineState::releaseDeviceDependentResources()
 {
     _renderer.releaseDeviceDependentResources();
-    GowAudioEngine::destroy();
+    GOW_AUDIO.releaseDeviceDependentResources();
 }
 
-void MainEngineState::onResume()
+void MainEngineState::resume()
 {
-    GOW_AUDIO->resume();
+    GOW_AUDIO.resume();
 }
 
-void MainEngineState::onPause()
+void MainEngineState::pause()
 {
-    GOW_AUDIO->pause();
+    GOW_AUDIO.pause();
 }
 
-void MainEngineState::update()
+void MainEngineState::update(Engine* e)
 {
-    MainInputManagerState mims = INPUT_MAIN.update();
-    switch (mims)
+    switch (_state)
     {
-        case MainInputManagerState_EXIT:
-            // TODO
+        case MESS_DEFAULT:
+            updateDefault(e);
             break;
-        case MainInputManagerState_PLAY_SOUND:
-            GOW_AUDIO->playSound(1);
+        case MESS_INPUT_IP:
+            updateInputIP(e);
+            break;
+        case MESS_INPUT_HOST_NAME:
+            updateInputHostName(e);
+            break;
+        case MESS_INPUT_JOIN_NAME:
+            updateInputJoinName(e);
             break;
         default:
             break;
     }
 }
 
-void MainEngineState::render(double alpha)
+void MainEngineState::updateDefault(Engine* e)
 {
-    UNUSED(alpha);
-    
+    MainInputManagerState mims = INPUT_MAIN.update(MIMU_DEFAULT);
+    switch (mims)
+    {
+        case MIMS_EXIT:
+            e->setRequestedHostAction(ERHA_EXIT);
+            break;
+        case MIMS_START_SERVER:
+            _state = MESS_INPUT_HOST_NAME;
+            break;
+        case MIMS_JOIN_SERVER:
+            _state = MESS_INPUT_IP;
+            break;
+        default:
+            break;
+    }
+}
+
+void MainEngineState::updateInputIP(Engine* e)
+{
+    MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    switch (mims)
+    {
+        case MIMS_EXIT:
+            _state = MESS_DEFAULT;
+            break;
+        case MIMS_TEXT_INPUT_READY:
+            _userEnteredIPAddress = INPUT_MAIN.getTextInput();
+            INPUT_MAIN.clearTextInput();
+            _state = MESS_INPUT_JOIN_NAME;
+            break;
+        default:
+            break;
+    }
+}
+
+void MainEngineState::updateInputHostName(Engine* e)
+{
+    MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    switch (mims)
+    {
+        case MIMS_EXIT:
+            _state = MESS_DEFAULT;
+            break;
+        case MIMS_TEXT_INPUT_READY:
+            // TODO
+            INPUT_MAIN.clearTextInput();
+            break;
+        default:
+            break;
+    }
+}
+
+void MainEngineState::updateInputJoinName(Engine* e)
+{
+    MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    switch (mims)
+    {
+        case MIMS_EXIT:
+            _state = MESS_INPUT_IP;
+            INPUT_MAIN.setTextInput(_userEnteredIPAddress);
+            break;
+        case MIMS_TEXT_INPUT_READY:
+            // TODO
+            INPUT_MAIN.clearTextInput();
+            break;
+        default:
+            break;
+    }
+}
+
+void MainEngineState::render()
+{
     _renderer.render();
-    GOW_AUDIO->render();
+    GOW_AUDIO.render();
 }
 
-MainEngineState::MainEngineState() : EngineState(),
-_renderer()
+MainEngineState::MainEngineState() : State<Engine>(),
+_renderer(),
+_state(MESS_DEFAULT)
 {
-    // Empty
-}
-
-MainEngineState::~MainEngineState()
-{
-    // Empty
+    ASSETS.initWithJSONFile("json/assets_main.json");
 }
