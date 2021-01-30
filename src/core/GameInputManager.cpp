@@ -69,7 +69,7 @@ GameInputManagerState GameInputManager::update()
         switch (e->_type)
         {
             case GPET_BUTTON_SELECT:
-                _state = GIMS_EXIT;
+                _state = e->isPressed() ? GIMS_EXIT : _state;
                 continue;
             case GPET_D_PAD_UP:
             {
@@ -114,7 +114,7 @@ GameInputManagerState GameInputManager::update()
                 
                 if (!isMovingUp[e->_index])
                 {
-                    isMovingUp[e->_index] = yVal > 0;
+                    isMovingUp[e->_index] = yVal < 0;
                     SET_BIT(_currentState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, isMovingUp[e->_index]);
                 }
                 
@@ -126,7 +126,7 @@ GameInputManagerState GameInputManager::update()
                 
                 if (!isMovingDown[e->_index])
                 {
-                    isMovingDown[e->_index] = yVal < 0;
+                    isMovingDown[e->_index] = yVal > 0;
                     SET_BIT(_currentState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, isMovingDown[e->_index]);
                 }
                 
