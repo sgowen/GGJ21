@@ -28,6 +28,10 @@ void MainConfig::init()
     _framebufferHeight = c.getInt("framebufferHeight");
     _camWidth = c.getInt("camWidth");
     _camHeight = c.getInt("camHeight");
+    _splitScreenBarX = c.getInt("splitScreenBarX");
+    _splitScreenBarY = c.getInt("splitScreenBarY");
+    _splitScreenBarWidth = c.getInt("splitScreenBarWidth");
+    _splitScreenBarHeight = c.getInt("splitScreenBarHeight");
     _maxTextInputLength = c.getInt("maxTextInputLength");
     _maxNumPlayers = c.getInt("maxNumPlayers");
     _playerMaxTopDownSpeed = c.getFloat("playerMaxTopDownSpeed");

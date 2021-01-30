@@ -43,11 +43,11 @@ void World::loadMap(uint32_t map)
     
     clear();
     
-    _map.key = map;
-    _map.name = StringUtil::stringFromFourChar(map);
-    _map.fileName = ENTITY_LAYOUT_MAPPER.getJsonConfigFilePath(map);
+    _map._key = map;
+    _map._name = StringUtil::stringFromFourChar(map);
+    _map._fileName = ENTITY_LAYOUT_MAPPER.getJsonConfigFilePath(map);
     
-    ENTITY_LAYOUT_MAPPER.loadEntityLayout(_map.key, _entityIDManager);
+    ENTITY_LAYOUT_MAPPER.loadEntityLayout(_map._key, _entityIDManager);
     
     EntityLayoutDef& eld = ENTITY_LAYOUT_MAPPER.getEntityLayoutDef();
     for (EntityInstanceDef eid : eld._entities)
@@ -122,17 +122,17 @@ void World::clear()
 
 bool World::isMapLoaded()
 {
-    return _map.key > 0;
+    return _map._key > 0;
 }
 
 std::string& World::getMapName()
 {
-    return _map.name;
+    return _map._name;
 }
 
 std::string& World::getMapFileName()
 {
-    return _map.fileName;
+    return _map._fileName;
 }
 
 std::vector<Entity*>& World::getPlayers()

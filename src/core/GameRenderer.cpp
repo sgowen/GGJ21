@@ -57,8 +57,8 @@ _textViews{
     _fontRenderer.configure(_textViews[2], 0.75f, 0.6f, 0.02f);
     _fontRenderer.configure(_textViews[3], 0.75f, 0.56f, 0.02f);
     _fontRenderer.configure(_textViews[4], 0.75f, 0.52f, 0.02f);
-    _fontRenderer.configure(_textViews[5], 0.25f, 0.92f, 0.02f);
-    _fontRenderer.configure(_textViews[6], 0.75f, 0.92f, 0.02f);
+    _fontRenderer.configure(_textViews[5], 0.25f, 0.12f, 0.02f);
+    _fontRenderer.configure(_textViews[6], 0.75f, 0.12f, 0.02f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -193,10 +193,10 @@ void GameRenderer::renderUI()
 
 void GameRenderer::renderSplitScreen()
 {
-    float cw = CFG_MAIN._camWidth;
-    float ch = CFG_MAIN._camHeight;
-    
     _polygonBatcher.begin();
-    _polygonBatcher.addRektangle((cw / 2) - (cw / 100), 0, (cw / 2) + (cw / 100), ch);
+    _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX,
+                                 CFG_MAIN._splitScreenBarY,
+                                 CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
+                                 CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
     _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
 }

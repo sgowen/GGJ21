@@ -20,15 +20,15 @@ enum WorldFlags
 
 struct Map
 {
-    uint32_t key;
-    std::string fileName;
-    std::string name;
+    uint32_t _key;
+    std::string _fileName;
+    std::string _name;
     
     Map()
     {
-        key = 0;
-        fileName = "";
-        name = "";
+        _key = 0;
+        _fileName = "";
+        _name = "";
     }
 };
 

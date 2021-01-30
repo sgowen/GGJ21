@@ -22,6 +22,10 @@ public:
     int _framebufferHeight;
     int _camWidth;
     int _camHeight;
+    int _splitScreenBarX;
+    int _splitScreenBarY;
+    int _splitScreenBarWidth;
+    int _splitScreenBarHeight;
     int _maxTextInputLength;
     int _maxNumPlayers;
     float _playerMaxTopDownSpeed;
