@@ -33,6 +33,8 @@ public:
     int _maxTextInputLength;
     int _maxNumPlayers;
     float _playerMaxTopDownSpeed;
+    float _monsterMaxTopDownSpeed;
+    float _monsterLineOfSight;
     bool _showDebug;
     
     void init();

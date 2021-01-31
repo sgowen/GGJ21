@@ -1,4 +1,28 @@
 {
+    "MON1": {
+      "name": "Monster",
+      "controller": "Monster",
+      "textureMappings": {
+        "0": "EVIL_HIDE_UP_STILL",
+        "1": "EVIL_HIDE_DOWN_STILL",
+        "2": "EVIL_HIDE_LEFT_STILL",
+        "3": "EVIL_HIDE_LEFT_STILL",
+        "4": "EVIL_HIDE_UP",
+        "5": "EVIL_HIDE_DOWN",
+        "6": "EVIL_HIDE_LEFT",
+        "7": "EVIL_HIDE_LEFT"
+      },
+      "soundMappings": {
+        "1": 0
+      },
+      "soundCollectionMappings": {
+          "5": [1, 2, 3]
+      },
+      "bodyFlags": 2,
+      "width": 4,
+      "height": 4,
+      "stateSensitive": true
+    },
   "HIDE": {
     "name": "Hide",
     "controller": "Hide",
@@ -149,5 +173,13 @@
     "width": 4,
     "height": 4,
     "bodyFlags": 1
+  },
+  "CRYS": {
+    "name": "CRYSTAL_RED",
+    "textureMapping": "CRYSTAL_RED",
+    "bodyFlags": 2,
+    "width": 4,
+    "height": 4,
+    "stateSensitive": true
   }
 }

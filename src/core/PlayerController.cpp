@@ -116,8 +116,6 @@ void PlayerController::processInput(InputState* inputState)
     
     _entity->pose()._velocity.x = desiredVel[0];
     _entity->pose()._velocity.y = desiredVel[1];
-//    LOG("_entity->pose()._velocity.x %f", _entity->pose()._velocity.x);
-//    LOG("_entity->pose()._velocity.y %f", _entity->pose()._velocity.y);
     
     // I know... but look at the sprite sheet
     _entity->pose()._isFacingLeft = state == STAT_MOVING_RIGHT || state == STAT_IDLE_RIGHT;

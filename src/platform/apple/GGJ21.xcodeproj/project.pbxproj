@@ -29,6 +29,8 @@
 		BB21816525C65B9E004398D5 /* JackiePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */; };
 		BB21816625C65B9E004398D5 /* HidePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816325C65B9E004398D5 /* HidePlayerController.cpp */; };
 		BB21816725C65B9E004398D5 /* HidePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816325C65B9E004398D5 /* HidePlayerController.cpp */; };
+		BB21816E25C66D37004398D5 /* MonsterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816C25C66D37004398D5 /* MonsterController.cpp */; };
+		BB21816F25C66D37004398D5 /* MonsterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816C25C66D37004398D5 /* MonsterController.cpp */; };
 		BB2CD6C325C518B3007B8775 /* GameRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */; };
 		BB2CD6C425C518B3007B8775 /* GameRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */; };
 		BB2CD6C525C518B3007B8775 /* GameInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */; };
@@ -390,6 +392,8 @@
 		BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JackiePlayerController.cpp; sourceTree = "<group>"; };
 		BB21816225C65B9E004398D5 /* JackiePlayerController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JackiePlayerController.hpp; sourceTree = "<group>"; };
 		BB21816325C65B9E004398D5 /* HidePlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HidePlayerController.cpp; sourceTree = "<group>"; };
+		BB21816C25C66D37004398D5 /* MonsterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonsterController.cpp; sourceTree = "<group>"; };
+		BB21816D25C66D37004398D5 /* MonsterController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MonsterController.hpp; sourceTree = "<group>"; };
 		BB2CD6BD25C518B2007B8775 /* GameEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameEngineState.hpp; sourceTree = "<group>"; };
 		BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameRenderer.cpp; sourceTree = "<group>"; };
 		BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInputManager.cpp; sourceTree = "<group>"; };
@@ -1543,6 +1547,8 @@
 		BB7B090825B651F20021E545 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				BB21816C25C66D37004398D5 /* MonsterController.cpp */,
+				BB21816D25C66D37004398D5 /* MonsterController.hpp */,
 				BB2CD6C025C518B3007B8775 /* GameEngineState.cpp */,
 				BB2CD6BD25C518B2007B8775 /* GameEngineState.hpp */,
 				BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */,
@@ -2514,6 +2520,7 @@
 				BBBA56F725BA453A00C8207D /* cocoa_time.c in Sources */,
 				BBBA579D25BB175A00C8207D /* MoveList.cpp in Sources */,
 				BB21816425C65B9E004398D5 /* JackiePlayerController.cpp in Sources */,
+				BB21816E25C66D37004398D5 /* MonsterController.cpp in Sources */,
 				BBBA467E25B9121600C8207D /* ObjectALWrapper.mm in Sources */,
 				BBBA46EE25B913D900C8207D /* mach_timing.c in Sources */,
 				BBBA5AE625BB5D1A00C8207D /* b2_timer.cpp in Sources */,
@@ -2674,6 +2681,7 @@
 				BBBA5AFF25BB5D1A00C8207D /* b2_polygon_shape.cpp in Sources */,
 				BBBA579025BB175A00C8207D /* Move.cpp in Sources */,
 				BB21815925C52FF7004398D5 /* SoundUtil.cpp in Sources */,
+				BB21816F25C66D37004398D5 /* MonsterController.cpp in Sources */,
 				BBBA57A025BB175A00C8207D /* SocketAddress.cpp in Sources */,
 				BB21816525C65B9E004398D5 /* JackiePlayerController.cpp in Sources */,
 				BBBA57AE25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */,

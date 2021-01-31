@@ -1107,6 +1107,96 @@
           "y": 64,
           "regionWidth": 64,
           "regionHeight": 64
+        },
+        "EVIL_HIDE_LEFT": {
+          "x": 0,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "EVIL_HIDE_UP": {
+          "x": 192,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "EVIL_HIDE_DOWN": {
+          "x": 384,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "EVIL_HIDE_LEFT_STILL": {
+          "x": 64,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "EVIL_HIDE_UP_STILL": {
+          "x": 256,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "EVIL_HIDE_DOWN_STILL": {
+          "x": 448,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "EVIL_JACKIE_LEFT": {
+          "x": 0,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "EVIL_JACKIE_UP": {
+          "x": 192,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "EVIL_JACKIE_DOWN": {
+          "x": 384,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 12,
+          "numFrames": 3
+        },
+        "EVIL_JACKIE_LEFT_STILL": {
+          "x": 64,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "EVIL_JACKIE_UP_STILL": {
+          "x": 256,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "EVIL_JACKIE_DOWN_STILL": {
+          "x": 448,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CRYSTAL_RED": {
+          "x": 0,
+          "y": 256,
+          "regionWidth": 64,
+          "regionHeight": 64
         }
       }
     },

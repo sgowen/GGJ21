@@ -17,5 +17,7 @@
   "maxTextInputLength": "16",
   "maxNumPlayers": "2",
   "playerMaxTopDownSpeed": "8.0",
+  "monsterMaxTopDownSpeed": "6.0",
+  "monsterLineOfSight": "25",
   "showDebug": "true"
 }

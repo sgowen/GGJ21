@@ -16,6 +16,7 @@
 #include "EntityMapper.hpp"
 #include "HidePlayerController.hpp"
 #include "JackiePlayerController.hpp"
+#include "MonsterController.hpp"
 #include "MainConfig.hpp"
 #include "InputManager.hpp"
 
@@ -38,6 +39,9 @@ MainEngineController::MainEngineController()
     
     ENTITY_MAPPER.registerFunction("Jackie", JackiePlayerController::create);
     ENTITY_MAPPER.registerFunction("Jackie", JackiePlayerNetworkController::create);
+    
+    ENTITY_MAPPER.registerFunction("Monster", MonsterController::create);
+    ENTITY_MAPPER.registerFunction("Monster", MonsterNetworkController::create);
     
     CFG_MAIN.init();
     INPUT_MGR.setMaxNumPlayers(CFG_MAIN._maxNumPlayers);

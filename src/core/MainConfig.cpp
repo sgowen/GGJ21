@@ -39,5 +39,7 @@ void MainConfig::init()
     _maxTextInputLength = c.getInt("maxTextInputLength");
     _maxNumPlayers = c.getInt("maxNumPlayers");
     _playerMaxTopDownSpeed = c.getFloat("playerMaxTopDownSpeed");
+    _monsterMaxTopDownSpeed = c.getFloat("monsterMaxTopDownSpeed");
+    _monsterLineOfSight = c.getFloat("monsterLineOfSight");
     _showDebug = c.getBool("showDebug");
 }
