@@ -125,9 +125,6 @@ void GameEngineState::enter(Engine* e)
     _world = new World(WorldFlag_Client);
     _timing->reset();
     INPUT_GAME.reset();
-    // TODO, remove
-    GOW_AUDIO.playSound(_isHost ? 115 : 37);
-    GOW_AUDIO.playMusic();
 }
 
 void GameEngineState::execute(Engine* e)
@@ -229,6 +226,11 @@ void GameEngineState::createDeviceDependentResources()
     ASSETS.initWithJSONFile("json/assets_game.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
+    // TODO, remove
+    GOW_AUDIO.playSound(_isHost ? 115 : 59);
+    GOW_AUDIO.playMusic(true, 0.1f);
+    GOW_AUDIO.setSoundsDisabled(true);
+    GOW_AUDIO.setMusicDisabled(true);
 }
 
 void GameEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
@@ -260,7 +262,8 @@ void GameEngineState::update(Engine* e)
     if (IS_BIT_SET(_state, GESS_HOST) &&
         !IS_BIT_SET(_state, GESS_CONNECTED))
     {
-        if (NW_MGR_SERVER && NW_MGR_SERVER->isConnected())
+        if (NW_MGR_SERVER != NULL &&
+            NW_MGR_SERVER->isConnected())
         {
             _serverIPAddress = std::string("localhost:9999");
             
@@ -278,10 +281,11 @@ void GameEngineState::update(Engine* e)
         e->getStateMachine().revertToPreviousState();
         return;
     }
-    else if (NW_MGR_CLIENT->hasReceivedNewState())
+    
+    if (NW_MGR_CLIENT->hasReceivedNewState())
     {
         uint32_t map = NW_MGR_CLIENT->getMap();
-        if (_map != map)
+        if (map != 0 && _map != map)
         {
             _map = map;
             _world->loadMap(_map);

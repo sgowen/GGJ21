@@ -31,6 +31,10 @@
 		BB21816725C65B9E004398D5 /* HidePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816325C65B9E004398D5 /* HidePlayerController.cpp */; };
 		BB21816E25C66D37004398D5 /* MonsterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816C25C66D37004398D5 /* MonsterController.cpp */; };
 		BB21816F25C66D37004398D5 /* MonsterController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816C25C66D37004398D5 /* MonsterController.cpp */; };
+		BB21817425C7591D004398D5 /* CrystalController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21817225C7591D004398D5 /* CrystalController.cpp */; };
+		BB21817525C7591D004398D5 /* CrystalController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21817225C7591D004398D5 /* CrystalController.cpp */; };
+		BB21817A25C75AB5004398D5 /* OvenController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21817825C75AB5004398D5 /* OvenController.cpp */; };
+		BB21817B25C75AB5004398D5 /* OvenController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21817825C75AB5004398D5 /* OvenController.cpp */; };
 		BB2CD6C325C518B3007B8775 /* GameRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */; };
 		BB2CD6C425C518B3007B8775 /* GameRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */; };
 		BB2CD6C525C518B3007B8775 /* GameInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */; };
@@ -394,6 +398,10 @@
 		BB21816325C65B9E004398D5 /* HidePlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HidePlayerController.cpp; sourceTree = "<group>"; };
 		BB21816C25C66D37004398D5 /* MonsterController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonsterController.cpp; sourceTree = "<group>"; };
 		BB21816D25C66D37004398D5 /* MonsterController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MonsterController.hpp; sourceTree = "<group>"; };
+		BB21817225C7591D004398D5 /* CrystalController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CrystalController.cpp; sourceTree = "<group>"; };
+		BB21817325C7591D004398D5 /* CrystalController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CrystalController.hpp; sourceTree = "<group>"; };
+		BB21817825C75AB5004398D5 /* OvenController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OvenController.cpp; sourceTree = "<group>"; };
+		BB21817925C75AB5004398D5 /* OvenController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OvenController.hpp; sourceTree = "<group>"; };
 		BB2CD6BD25C518B2007B8775 /* GameEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameEngineState.hpp; sourceTree = "<group>"; };
 		BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameRenderer.cpp; sourceTree = "<group>"; };
 		BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInputManager.cpp; sourceTree = "<group>"; };
@@ -1547,6 +1555,10 @@
 		BB7B090825B651F20021E545 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				BB21817825C75AB5004398D5 /* OvenController.cpp */,
+				BB21817925C75AB5004398D5 /* OvenController.hpp */,
+				BB21817225C7591D004398D5 /* CrystalController.cpp */,
+				BB21817325C7591D004398D5 /* CrystalController.hpp */,
 				BB21816C25C66D37004398D5 /* MonsterController.cpp */,
 				BB21816D25C66D37004398D5 /* MonsterController.hpp */,
 				BB2CD6C025C518B3007B8775 /* GameEngineState.cpp */,
@@ -2481,6 +2493,7 @@
 				BBBA55D525BA43B300C8207D /* GlfwMain.cpp in Sources */,
 				BBBA5AB625BB5D1A00C8207D /* b2_contact.cpp in Sources */,
 				BBBA46D425B913D900C8207D /* ALChannelSource.m in Sources */,
+				BB21817A25C75AB5004398D5 /* OvenController.cpp in Sources */,
 				BBBA56FF25BA453A00C8207D /* window.c in Sources */,
 				BBBA472325B9150000C8207D /* NullAudioEngineHelper.cpp in Sources */,
 				BBBA5B0225BB5D1A00C8207D /* b2_edge_shape.cpp in Sources */,
@@ -2517,6 +2530,7 @@
 				BB7B08BC25B64A620021E545 /* FPSUtil.cpp in Sources */,
 				BBBA57A725BB175A00C8207D /* SocketServerHelper.cpp in Sources */,
 				BBBA5AE225BB5D1A00C8207D /* b2_rope.cpp in Sources */,
+				BB21817425C7591D004398D5 /* CrystalController.cpp in Sources */,
 				BBBA56F725BA453A00C8207D /* cocoa_time.c in Sources */,
 				BBBA579D25BB175A00C8207D /* MoveList.cpp in Sources */,
 				BB21816425C65B9E004398D5 /* JackiePlayerController.cpp in Sources */,
@@ -2677,6 +2691,7 @@
 				BB8BCD1925B68490005F57B8 /* Assets.cpp in Sources */,
 				BBBA5AAD25BB5D1A00C8207D /* b2_joint.cpp in Sources */,
 				BBBA5AB125BB5D1A00C8207D /* b2_weld_joint.cpp in Sources */,
+				BB21817525C7591D004398D5 /* CrystalController.cpp in Sources */,
 				BBBA578825BB175A00C8207D /* NetworkManagerClient.cpp in Sources */,
 				BBBA5AFF25BB5D1A00C8207D /* b2_polygon_shape.cpp in Sources */,
 				BBBA579025BB175A00C8207D /* Move.cpp in Sources */,
@@ -2710,6 +2725,7 @@
 				BBBA46E725B913D900C8207D /* OALAudioFile.m in Sources */,
 				BBBA5AE325BB5D1A00C8207D /* b2_rope.cpp in Sources */,
 				BB16D20225B7623C00C340C1 /* LinuxAssetHandler.cpp in Sources */,
+				BB21817B25C75AB5004398D5 /* OvenController.cpp in Sources */,
 				BBBA57F725BB58CA00C8207D /* EntityManager.cpp in Sources */,
 				BBBA579C25BB175A00C8207D /* PacketHandler.cpp in Sources */,
 				BBBA578625BB175A00C8207D /* OutputMemoryBitStream.cpp in Sources */,

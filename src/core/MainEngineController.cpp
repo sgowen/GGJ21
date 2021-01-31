@@ -17,6 +17,8 @@
 #include "HidePlayerController.hpp"
 #include "JackiePlayerController.hpp"
 #include "MonsterController.hpp"
+#include "CrystalController.hpp"
+#include "OvenController.hpp"
 #include "MainConfig.hpp"
 #include "InputManager.hpp"
 
@@ -42,6 +44,11 @@ MainEngineController::MainEngineController()
     
     ENTITY_MAPPER.registerFunction("Monster", MonsterController::create);
     ENTITY_MAPPER.registerFunction("Monster", MonsterNetworkController::create);
+    
+    ENTITY_MAPPER.registerFunction("Crystal", CrystalController::create);
+    ENTITY_MAPPER.registerFunction("Crystal", CrystalNetworkController::create);
+    ENTITY_MAPPER.registerFunction("Oven", OvenController::create);
+    ENTITY_MAPPER.registerFunction("Oven", OvenNetworkController::create);
     
     CFG_MAIN.init();
     INPUT_MGR.setMaxNumPlayers(CFG_MAIN._maxNumPlayers);

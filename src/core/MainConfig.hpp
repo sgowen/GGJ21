@@ -10,6 +10,8 @@
 
 #define CFG_MAIN MainConfig::getInstance()
 
+#define MSG_ENCOUNTER 0x01u
+
 class MainConfig
 {
 public:
@@ -26,16 +28,20 @@ public:
     float _splitScreenBarY;
     float _splitScreenBarWidth;
     float _splitScreenBarHeight;
-    float _hideSpawnX;
-    float _hideSpawnY;
-    float _jackieSpawnX;
-    float _jackieSpawnY;
     int _maxTextInputLength;
     int _maxNumPlayers;
     float _playerMaxTopDownSpeed;
     float _monsterMaxTopDownSpeed;
     float _monsterLineOfSight;
     bool _showDebug;
+    float _playerBattleX;
+    float _playerBattleY;
+    float _playerBattleWidth;
+    float _playerBattleHeight;
+    float _monsterBattleX;
+    float _monsterBattleY;
+    float _monsterBattleWidth;
+    float _monsterBattleHeight;
     
     void init();
     

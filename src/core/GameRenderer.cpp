@@ -24,7 +24,9 @@
 #include "World.hpp"
 #include "Network.hpp"
 #include "NetworkManagerClient.hpp"
-#include "PlayerController.hpp"
+#include "HidePlayerController.hpp"
+#include "MonsterController.hpp"
+#include "CrystalController.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -57,8 +59,8 @@ _textViews{
     _fontRenderer.configure(_textViews[2], 0.25f, 0.6f, 0.018f);
     _fontRenderer.configure(_textViews[3], 0.25f, 0.56f, 0.018f);
     _fontRenderer.configure(_textViews[4], 0.25f, 0.52f, 0.018f);
-    _fontRenderer.configure(_textViews[5], 0.24f, 0.08f, 0.02f);
-    _fontRenderer.configure(_textViews[6], 0.76f, 0.08f, 0.02f);
+    _fontRenderer.configure(_textViews[5], 0.24f, 0.025f, 0.02f);
+    _fontRenderer.configure(_textViews[6], 0.76f, 0.025f, 0.02f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -102,6 +104,7 @@ void GameRenderer::render()
     renderWorld();
     renderSplitScreen();
     renderUI();
+    renderEncounter();
 
     _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
 }
@@ -137,7 +140,18 @@ void GameRenderer::renderWorld()
     _spriteBatcher.begin();
     for (Entity* e : w->getDynamicEntities())
     {
-        if (!IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        {
+            continue;
+        }
+        
+        if (e->getController()->getRTTI().derivesFrom(CrystalController::rtti))
+        {
+            CrystalController* ec = static_cast<CrystalController*>(e->getController());
+            TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
+            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, ec->getWidthForRender(), ec->getWidthForRender(), e->getAngle(), e->isFacingLeft());
+        }
+        else
         {
             TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
             _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
@@ -150,12 +164,15 @@ void GameRenderer::renderWorld()
     {
         if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
         {
+            PlayerController* pc = static_cast<PlayerController*>(e->getController());
+            
+            // I know... but look at the sprite sheet
+            bool isFacingLeft = pc->getPlayerDirection() == PDIR_RIGHT;
             TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
+            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), isFacingLeft);
         }
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
-    
 }
 
 void GameRenderer::renderUI()
@@ -204,6 +221,55 @@ void GameRenderer::renderUI()
     {
         _fontRenderer.renderText(_shaderManager.shader("texture"), _textureManager.texture("texture_font"), _textViews[i]);
     }
+}
+
+void GameRenderer::renderEncounter()
+{
+    bool isInEncounter = false;
+    World* w = ENGINE_STATE_GAME._world;
+    for (Entity* e : w->getPlayers())
+    {
+        if (e->getController()->getRTTI().derivesFrom(HidePlayerController::rtti))
+        {
+            HidePlayerController* pc = static_cast<HidePlayerController*>(e->getController());
+            isInEncounter = pc->isInEncounter();
+        }
+    }
+    
+    if (!isInEncounter)
+    {
+        return;
+    }
+    
+    _polygonBatcher.begin();
+    _polygonBatcher.addRektangle(0,
+                                 0,
+                                 CFG_MAIN._splitScreenBarX,
+                                 CFG_MAIN._camHeight);
+    _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
+    
+    _spriteBatcher.begin();
+    for (Entity* e : w->getDynamicEntities())
+    {
+        if (e->getController()->getRTTI().derivesFrom(MonsterController::rtti))
+        {
+            MonsterController* ec = static_cast<MonsterController*>(e->getController());
+            TextureRegion tr = ASSETS.findTextureRegion(ec->getTextureMappingForEncounter(), 0);
+            _spriteBatcher.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
+            break;
+        }
+    }
+    for (Entity* e : w->getPlayers())
+    {
+        if (e->getController()->getRTTI().derivesFrom(HidePlayerController::rtti))
+        {
+            HidePlayerController* ec = static_cast<HidePlayerController*>(e->getController());
+            TextureRegion tr = ASSETS.findTextureRegion(ec->getTextureMappingForEncounter(), ec->encounterStateTime());
+            _spriteBatcher.addSprite(tr, CFG_MAIN._playerBattleX, CFG_MAIN._playerBattleY, ec->getWidthForEncounter(), CFG_MAIN._playerBattleHeight, 0);
+            break;
+        }
+    }
+    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("big_sprites"));
 }
 
 void GameRenderer::renderSplitScreen()

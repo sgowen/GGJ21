@@ -72,6 +72,8 @@ void MonsterController::update()
     uint8_t& state = _entity->state()._state;
     uint16_t& stateTime = _entity->state()._stateTime;
     
+    state = STAT_IDLE;
+    
     if (hasTarget)
     {
         float angle = playerPosition.sub(_entity->getPosition().x, _entity->getPosition().y).angle();
@@ -80,16 +82,18 @@ void MonsterController::update()
         
         if (_entity->pose()._velocity.y < 0)
         {
-            state = STAT_MOVING_DOWN;
+            state = STAT_MOVING;
+            _stats._dir = MDIR_DOWN;
         }
         if (_entity->pose()._velocity.y > 0)
         {
-            state = STAT_MOVING_UP;
+            state = STAT_MOVING;
+            _stats._dir = MDIR_UP;
         }
     }
     else
     {
-        state = STAT_IDLE_DOWN;
+        stateTime = 0;
         _entity->pose()._velocity *= 0.86f;
     }
 }
@@ -103,6 +107,48 @@ void MonsterController::receiveMessage(uint16_t message, void* data)
         default:
             break;
     }
+}
+
+std::string MonsterController::getTextureMapping(uint8_t state)
+{
+    switch (_stats._dir)
+    {
+        case MDIR_UP:
+            return "GENERIC_MONSTER_UP";
+        case MDIR_DOWN:
+            return "GENERIC_MONSTER_DOWN";
+        default:
+            assert(false);
+    }
+}
+
+void MonsterController::onCollision(Entity* e)
+{
+    if (!_entity->getNetworkController()->isServer())
+    {
+        return;
+    }
+    
+    if (_entity->isRequestingDeletion())
+    {
+        return;
+    }
+    
+    if (e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
+    {
+        PlayerController* pc = static_cast<PlayerController*>(e->getController());
+        
+        int playerID = pc->getPlayerID();
+        if (playerID == 1)
+        {
+            e->getController()->onMessage(MSG_ENCOUNTER);
+        }
+    }
+}
+
+std::string MonsterController::getTextureMappingForEncounter()
+{
+    return "BIG_WITCH_PRETTY";
 }
 
 #include "InputMemoryBitStream.hpp"
@@ -129,6 +175,7 @@ void MonsterNetworkController::read(InputMemoryBitStream& ip)
     if (stateBit)
     {
         ip.read(c._stats._health);
+        ip.read(c._stats._dir);
         
         c._statsNetworkCache = c._stats;
     }
@@ -147,6 +194,7 @@ uint16_t MonsterNetworkController::write(OutputMemoryBitStream& op, uint16_t dir
     if (stats)
     {
         op.write(c._stats._health);
+        op.write(c._stats._dir);
         
         writtenState |= MonsterController::RSTF_STATS;
     }

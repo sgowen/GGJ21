@@ -20,6 +20,13 @@ class HidePlayerController : public PlayerController
 public:
     HidePlayerController(Entity* e);
     virtual ~HidePlayerController() {}
+    
+    virtual void onMessage(uint16_t message, void* data = NULL);
+    
+    virtual std::string getTextureMapping(uint8_t state);
+
+    std::string getTextureMappingForEncounter();
+    float getWidthForEncounter();
 };
 
 class HidePlayerNetworkController : public PlayerNetworkController

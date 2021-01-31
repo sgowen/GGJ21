@@ -78,10 +78,10 @@ GameInputManagerState GameInputManager::update()
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
         Vector2& v = INPUT_MGR.convert(e);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v.y() > playerY);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v.x() < playerX);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v.y() < playerY);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v.x() > playerX);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v.y() > playerY + 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v.x() < playerX - 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v.y() < playerY - 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v.x() > playerX + 4);
     }
     
     bool isMovingUp[4] = {false};

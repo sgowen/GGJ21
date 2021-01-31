@@ -123,19 +123,21 @@ void Server::update()
             
             for (Entity* e : toDelete)
             {
-                NW_MGR_SERVER->deregisterEntity(e);
-                
                 EntityController* c = e->getController();
                 if (c->getRTTI().derivesFrom(PlayerController::rtti))
                 {
                     PlayerController* pc = static_cast<PlayerController*>(c);
                     assert(pc != NULL);
                     
-                    // This is my shoddy respawn implementation
-                    getInstance()->spawnEntityForPlayer(pc->getPlayerID(), pc->getPlayerName());
+                    // If Hide dies, restart
+                    loadMap();
+                    return;
                 }
-                
-                _world.removeEntity(e);
+                else
+                {
+                    NW_MGR_SERVER->deregisterEntity(e);
+                    _world.removeEntity(e);
+                }
             }
             
             handleDirtyStates(_world.getDynamicEntities());
@@ -163,7 +165,7 @@ World& Server::getWorld()
 
 void Server::handleNewClient(uint8_t playerID, std::string playerName)
 {
-    if (NW_MGR_SERVER->getNumClientsConnected() == 1)
+    if (NW_MGR_SERVER->getNumClientsConnected() >= 1)
     {
         // Time to play!
         
@@ -229,7 +231,7 @@ void Server::spawnEntityForPlayer(uint8_t playerId, std::string playerName)
     }
     
     float spawnX = playerId == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
-    float spawnY = rand() % 16 + 6;
+    float spawnY = playerId == 1 ? rand() % 16 + 6 : rand() % 8 + 6;
     
     uint32_t key = playerId == 1 ? 'HIDE' : 'JCKE';
     EntityInstanceDef eid(_entityIDManager->getNextDynamicEntityID(), key, spawnX, spawnY);

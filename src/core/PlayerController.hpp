@@ -15,6 +15,14 @@
 class InputState;
 struct Rektangle;
 
+enum PlayerDirection
+{
+    PDIR_UP      = 0,
+    PDIR_DOWN    = 1,
+    PDIR_LEFT    = 2,
+    PDIR_RIGHT   = 3
+};
+
 class PlayerController : public EntityController
 {
     friend class PlayerNetworkController;
@@ -25,16 +33,14 @@ class PlayerController : public EntityController
 public:
     PlayerController(Entity* e);
     virtual ~PlayerController() {}
-    
+        
     virtual void update();
-    virtual void receiveMessage(uint16_t message, void* data = NULL);
-    virtual void onFixturesCreated(std::vector<b2Fixture*>& fixtures) {}
-    virtual bool shouldCollide(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) { return false; }
-    virtual void handleBeginContact(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) {}
-    virtual void handleEndContact(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) {}
+    virtual void onMessage(uint16_t message, void* data = NULL);
     
     void processInput(InputState* inputState);
     void enforceBounds(Rektangle& bounds);
+    bool isInEncounter();
+    uint16_t encounterStateTime();
     
     void setAddressHash(uint64_t inValue);
     uint64_t getAddressHash() const;
@@ -44,24 +50,21 @@ public:
     uint32_t getMap() const;
     void setPlayerName(std::string inValue);
     std::string& getPlayerName();
+    PlayerDirection getPlayerDirection();
+    uint16_t getHealth();
     
-private:
+protected:
     enum State
     {
-        STAT_IDLE_UP      = 0,
-        STAT_IDLE_DOWN    = 1,
-        STAT_IDLE_LEFT    = 2,
-        STAT_IDLE_RIGHT   = 3,
-        STAT_MOVING_UP    = 4,
-        STAT_MOVING_DOWN  = 5,
-        STAT_MOVING_LEFT  = 6,
-        STAT_MOVING_RIGHT = 7
+        STAT_IDLE = 0,
+        STAT_MOVING = 1
     };
     
     enum ReadStateFlag
     {
         RSTF_PLAYER_INFO = 1 << 2,
-        RSTF_STATS =       1 << 3
+        RSTF_STATS =       1 << 3,
+        RSTF_ENCOUNTER =   1 << 4
     };
     
     struct PlayerInfo
@@ -96,16 +99,19 @@ private:
     struct Stats
     {
         uint16_t _health;
+        uint8_t _dir;
         
         Stats()
         {
             _health = 3;
+            _dir = PDIR_UP;
         }
         
         friend bool operator==(Stats& lhs, Stats& rhs)
         {
             return
-            lhs._health == rhs._health;
+            lhs._health == rhs._health &&
+            lhs._dir == rhs._dir;
         }
         
         friend bool operator!=(Stats& lhs, Stats& rhs)
@@ -115,6 +121,41 @@ private:
     };
     Stats _stats;
     Stats _statsNetworkCache;
+    
+    enum EncounterState
+    {
+        ESTA_IDLE = 0,
+        ESTA_SWING = 1
+    };
+    
+    struct Encounter
+    {
+        bool _isInCounter;
+        uint16_t _stateTime;
+        uint8_t _state;
+        
+        Encounter()
+        {
+            _isInCounter = false;
+            _stateTime = 0;
+            _state = ESTA_IDLE;
+        }
+        
+        friend bool operator==(Encounter& lhs, Encounter& rhs)
+        {
+            return
+            lhs._isInCounter == rhs._isInCounter &&
+            lhs._stateTime == rhs._stateTime &&
+            lhs._state == rhs._state;
+        }
+        
+        friend bool operator!=(Encounter& lhs, Encounter& rhs)
+        {
+            return !(lhs == rhs);
+        }
+    };
+    Encounter _encounter;
+    Encounter _encounterNetworkCache;
 };
 
 #include "EntityNetworkController.hpp"

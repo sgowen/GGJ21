@@ -109,128 +109,16 @@ void World::stepPhysics()
     for (Entity* e : _dynamicEntities)
     {
         e->selfProcessPhysics();
-        
-        float x = e->getPosition().x;
-        float y = e->getPosition().y;
-        float w = e->getWidth();
-        float h = e->getHeight();
-        Rektangle monsterBounds(x - w / 2, y - h / 2, w, h);
-        
-        for (Entity* se : _staticEntities)
-        {
-            float se_x = se->getPosition().x;
-            float se_y = se->getPosition().y;
-            float se_w = se->getWidth();
-            float se_h = se->getHeight();
-            Rektangle staticEntityBounds(se_x - se_w / 2, se_y - se_h / 2, se_w, se_h);
-            
-            if (OverlapTester::doRektanglesOverlap(monsterBounds, staticEntityBounds))
-            {
-                if (monsterBounds.right() >= staticEntityBounds.left() ||
-                    monsterBounds.left() <= staticEntityBounds.right() ||
-                    monsterBounds.top() >= staticEntityBounds.bottom() ||
-                    monsterBounds.bottom() <= staticEntityBounds.top())
-                {
-                    b2Vec2 vel = e->getVelocity();
-                    vel *= FRAME_RATE;
-                    b2Vec2 pos = e->getPosition();
-                    pos -= vel;
-                    e->setPosition(pos);
-                }
-                break;
-            }
-        }
-        
-        for (Entity* pe : _players)
-        {
-            float pe_x = pe->getPosition().x;
-            float pe_y = pe->getPosition().y;
-            float pe_w = pe->getWidth();
-            float pe_h = pe->getHeight();
-            Rektangle playerBounds(pe_x - pe_w / 2, pe_y - pe_h / 2, pe_w, pe_h);
-            
-            if (OverlapTester::doRektanglesOverlap(monsterBounds, playerBounds))
-            {
-                if (monsterBounds.right() >= playerBounds.left() ||
-                    monsterBounds.left() <= playerBounds.right() ||
-                    monsterBounds.top() >= playerBounds.bottom() ||
-                    monsterBounds.bottom() <= playerBounds.top())
-                {
-                    b2Vec2 vel = e->getVelocity();
-                    vel *= FRAME_RATE;
-                    b2Vec2 pos = e->getPosition();
-                    pos -= vel;
-                    e->setPosition(pos);
-                }
-                break;
-            }
-        }
+        e->selfProcessCollisions(_staticEntities);
+        e->selfProcessCollisions(_players);
+        e->selfProcessCollisions(_dynamicEntities);
     }
     
     for (Entity* e : _players)
     {
         e->selfProcessPhysics();
-        
-        float x = e->getPosition().x;
-        float y = e->getPosition().y;
-        float w = e->getWidth();
-        float h = e->getHeight();
-        Rektangle playerBounds(x - w / 2, y - h / 2, w, h);
-        
-        for (Entity* se : _staticEntities)
-        {
-            float se_x = se->getPosition().x;
-            float se_y = se->getPosition().y;
-            float se_w = se->getWidth();
-            float se_h = se->getHeight();
-            Rektangle staticEntityBounds(se_x - se_w / 2, se_y - se_h / 2, se_w, se_h);
-            
-            if (OverlapTester::doRektanglesOverlap(playerBounds, staticEntityBounds))
-            {
-                if (playerBounds.right() >= staticEntityBounds.left() ||
-                    playerBounds.left() <= staticEntityBounds.right() ||
-                    playerBounds.top() >= staticEntityBounds.bottom() ||
-                    playerBounds.bottom() <= staticEntityBounds.top())
-                {
-                    b2Vec2 vel = e->getVelocity();
-                    vel *= FRAME_RATE;
-                    b2Vec2 pos = e->getPosition();
-                    pos -= vel;
-                    e->setPosition(pos);
-                }
-                break;
-            }
-        }
-        
-        for (Entity* de : _dynamicEntities)
-        {
-            if (de == e)
-            {
-                continue;
-            }
-            
-            float de_x = de->getPosition().x;
-            float de_y = de->getPosition().y;
-            float de_w = de->getWidth();
-            float de_h = de->getHeight();
-            Rektangle dynamicEntityBounds(de_x - de_w / 2, de_y - de_h / 2, de_w, de_h);
-            
-            if (OverlapTester::doRektanglesOverlap(playerBounds, dynamicEntityBounds))
-            {
-                if (playerBounds.right() >= dynamicEntityBounds.left() ||
-                    playerBounds.left() <= dynamicEntityBounds.right() ||
-                    playerBounds.top() >= dynamicEntityBounds.bottom() ||
-                    playerBounds.bottom() <= dynamicEntityBounds.top())
-                {
-                    b2Vec2 vel = e->getVelocity();
-                    vel *= FRAME_RATE;
-                    b2Vec2 pos = e->getPosition();
-                    pos -= vel;
-                    e->setPosition(pos);
-                }
-                break;
-            }
-        }
+        e->selfProcessCollisions(_staticEntities);
+        e->selfProcessCollisions(_dynamicEntities);
     }
     
     for (Entity* e : _players)

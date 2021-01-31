@@ -77,7 +77,7 @@ void MainEngineState::createDeviceDependentResources()
     ASSETS.initWithJSONFile("json/assets_main.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
-    GOW_AUDIO.playMusic();
+    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
 void MainEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)

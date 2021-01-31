@@ -3,19 +3,11 @@
     "name": "Monster",
     "controller": "Monster",
     "textureMappings": {
-      "0": "GENERIC_MONSTER_DOWN_STILL",
-      "1": "GENERIC_MONSTER_DOWN",
-      "2": "GENERIC_MONSTER_UP"
+      "99": "GENERIC_MONSTER_DOWN"
     },
     "soundMappings": {
-      "1": 0
-    },
-    "soundCollectionMappings": {
-      "5": [
-        1,
-        2,
-        3
-      ]
+      "0": 18,
+      "1": 21
     },
     "bodyFlags": 2,
     "width": 4,
@@ -26,26 +18,23 @@
     "name": "Hide",
     "controller": "Hide",
     "textureMappings": {
-      "0": "HIDE_UP_STILL",
-      "1": "HIDE_DOWN_STILL",
-      "2": "HIDE_LEFT_STILL",
-      "3": "HIDE_LEFT_STILL",
-      "4": "HIDE_UP",
-      "5": "HIDE_DOWN",
-      "6": "HIDE_LEFT",
-      "7": "HIDE_LEFT"
+      "99": "HIDE_DOWN"
     },
     "soundMappings": {
-      "1": 0
+      "99": 0
     },
     "soundCollectionMappings": {
-      "5": [
+        "0": [84, 85, 86],
+      "1": [
         87,
         88,
         89,
         90,
         91
-      ]
+      ],
+      "2": [87, 88, 89, 90, 91],
+      "3": [157, 158, 159],
+      "4": [80, 81, 82, 83]
     },
     "bodyFlags": 8,
     "width": 4,
@@ -56,20 +45,13 @@
     "name": "Jackie",
     "controller": "Jackie",
     "textureMappings": {
-      "0": "JACKIE_UP_STILL",
-      "1": "JACKIE_DOWN_STILL",
-      "2": "JACKIE_LEFT_STILL",
-      "3": "JACKIE_LEFT_STILL",
-      "4": "JACKIE_UP",
-      "5": "JACKIE_DOWN",
-      "6": "JACKIE_LEFT",
-      "7": "JACKIE_LEFT"
+      "99": "JACKIE_DOWN"
     },
     "soundMappings": {
-      "1": 0
+      "99": 0
     },
     "soundCollectionMappings": {
-      "5": [
+      "1": [
         33,
         34,
         35,
@@ -193,7 +175,11 @@
   },
   "CRYB": {
     "name": "CRYSTAL_BLUE",
-    "textureMapping": "CRYSTAL_BLUE",
+    "controller": "Crystal",
+    "textureMappings": {
+      "0": "CRYSTAL_BLUE",
+      "1": "EXPLOSION"
+    },
     "bodyFlags": 2,
     "width": 4,
     "height": 4,
@@ -201,7 +187,11 @@
   },
   "CRYR": {
     "name": "CRYSTAL_RED",
-    "textureMapping": "CRYSTAL_RED",
+    "controller": "Crystal",
+    "textureMappings": {
+      "0": "CRYSTAL_RED",
+      "1": "EXPLOSION"
+    },
     "bodyFlags": 2,
     "width": 4,
     "height": 4,
@@ -209,10 +199,23 @@
   },
   "CRYG": {
     "name": "CRYSTAL_GREEN",
-    "textureMapping": "CRYSTAL_GREEN",
+    "controller": "Crystal",
+    "textureMappings": {
+      "0": "CRYSTAL_GREEN",
+      "1": "EXPLOSION"
+    },
     "bodyFlags": 2,
     "width": 4,
     "height": 4,
+    "stateSensitive": true
+  },
+  "OVEN": {
+    "name": "OVEN",
+    "controller": "Oven",
+    "textureMapping": "OVEN",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 2,
     "stateSensitive": true
   }
 }

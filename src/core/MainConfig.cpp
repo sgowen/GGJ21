@@ -32,14 +32,18 @@ void MainConfig::init()
     _splitScreenBarY = c.getFloat("splitScreenBarY");
     _splitScreenBarWidth = c.getFloat("splitScreenBarWidth");
     _splitScreenBarHeight = c.getFloat("splitScreenBarHeight");
-    _hideSpawnX = c.getFloat("hideSpawnX");
-    _hideSpawnY = c.getFloat("hideSpawnY");
-    _jackieSpawnX = c.getFloat("jackieSpawnX");
-    _jackieSpawnY = c.getFloat("jackieSpawnY");
     _maxTextInputLength = c.getInt("maxTextInputLength");
     _maxNumPlayers = c.getInt("maxNumPlayers");
     _playerMaxTopDownSpeed = c.getFloat("playerMaxTopDownSpeed");
     _monsterMaxTopDownSpeed = c.getFloat("monsterMaxTopDownSpeed");
     _monsterLineOfSight = c.getFloat("monsterLineOfSight");
     _showDebug = c.getBool("showDebug");
+    _playerBattleX = c.getFloat("playerBattleX");
+    _playerBattleY = c.getFloat("playerBattleY");
+    _playerBattleWidth = c.getFloat("playerBattleWidth");
+    _playerBattleHeight = c.getFloat("playerBattleHeight");
+    _monsterBattleX = c.getFloat("monsterBattleX");
+    _monsterBattleY = c.getFloat("monsterBattleY");
+    _monsterBattleWidth = c.getFloat("monsterBattleWidth");
+    _monsterBattleHeight = c.getFloat("monsterBattleHeight");
 }

@@ -10,6 +10,12 @@
 
 #include "EntityController.hpp"
 
+enum MonsterDirection
+{
+    MDIR_UP      = 0,
+    MDIR_DOWN    = 1
+};
+
 class MonsterController : public EntityController
 {
     friend class MonsterNetworkController;
@@ -23,17 +29,16 @@ public:
     
     virtual void update();
     virtual void receiveMessage(uint16_t message, void* data = NULL);
-    virtual void onFixturesCreated(std::vector<b2Fixture*>& fixtures) {}
-    virtual bool shouldCollide(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) { return false; }
-    virtual void handleBeginContact(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) {}
-    virtual void handleEndContact(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) {}
+    virtual std::string getTextureMapping(uint8_t state);
+    virtual void onCollision(Entity* e);
+    
+    std::string getTextureMappingForEncounter();
     
 private:
     enum State
     {
-        STAT_IDLE_DOWN    = 0,
-        STAT_MOVING_DOWN  = 1,
-        STAT_MOVING_UP    = 2,
+        STAT_IDLE   = 0,
+        STAT_MOVING = 1
     };
     
     enum ReadStateFlag
@@ -44,16 +49,19 @@ private:
     struct Stats
     {
         uint16_t _health;
+        uint8_t _dir;
         
         Stats()
         {
             _health = 3;
+            _dir = MDIR_DOWN;
         }
         
         friend bool operator==(Stats& lhs, Stats& rhs)
         {
             return
-            lhs._health == rhs._health;
+            lhs._health == rhs._health &&
+            lhs._dir == rhs._dir;
         }
         
         friend bool operator!=(Stats& lhs, Stats& rhs)

@@ -10,14 +10,18 @@
   "splitScreenBarY": "0",
   "splitScreenBarWidth": "4",
   "splitScreenBarHeight": "60",
-  "hideSpawnX": "24",
-  "hideSpawnY": "12",
-  "jackieSpawnX": "76",
-  "jackieSpawnY": "12",
   "maxTextInputLength": "16",
   "maxNumPlayers": "2",
   "playerMaxTopDownSpeed": "8.0",
   "monsterMaxTopDownSpeed": "6.0",
   "monsterLineOfSight": "25",
-  "showDebug": "true"
+  "showDebug": "true",
+  "playerBattleX": "20",
+  "playerBattleY": "30",
+  "playerBattleWidth": "16",
+  "playerBattleHeight": "16",
+  "monsterBattleX": "28",
+  "monsterBattleY": "30",
+  "monsterBattleWidth": "16",
+  "monsterBattleHeight": "20"
 }

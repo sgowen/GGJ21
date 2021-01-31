@@ -20,6 +20,9 @@ class JackiePlayerController : public PlayerController
 public:
     JackiePlayerController(Entity* e);
     virtual ~JackiePlayerController() {}
+    
+    virtual std::string getTextureMapping(uint8_t state);
+    virtual void onCollision(Entity* e);
 };
 
 class JackiePlayerNetworkController : public PlayerNetworkController

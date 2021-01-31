@@ -32,15 +32,15 @@ _shaderManager(),
 _spriteBatcher(128),
 _textureManager(),
 _textViews{
-    TextView(TEXA_CENTER, "Hide"),
-    TextView(TEXA_CENTER, "&"),
-    TextView(TEXA_CENTER, "Jackie"),
+    TextView(TEXA_CENTER, ""),
+    TextView(TEXA_CENTER, ""),
+    TextView(TEXA_CENTER, ""),
     TextView(TEXA_CENTER, "[S]tart Server"),
     TextView(TEXA_CENTER, "[J]oin Server"),
     TextView(TEXA_CENTER, "Enter IP address", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "Enter name", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "", TEXV_HIDDEN),
-    TextView(TEXA_LEFT,   "[ESC] to exit")
+    TextView(TEXA_RIGHT,   "[ESC] to exit")
 }
 {
     _fontRenderer.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
@@ -52,7 +52,7 @@ _textViews{
     _fontRenderer.configure(_textViews[5], 0.5f, 0.12f, 0.025f);
     _fontRenderer.configure(_textViews[6], 0.5f, 0.12f, 0.025f);
     _fontRenderer.configure(_textViews[7], 0.5f, 0.06f, 0.025f);
-    _fontRenderer.configure(_textViews[8], 0.02f, 0.02f, 0.012f);
+    _fontRenderer.configure(_textViews[8], 0.98f, 0.02f, 0.012f);
 }
 
 void MainRenderer::createDeviceDependentResources()
@@ -104,8 +104,8 @@ void MainRenderer::render()
     OGL.enableBlending(true);
     
     _spriteBatcher.begin();
-    TextureRegion demo(0, 0, 640, 480, 2048, 2048, 0);
-    _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2, camWidth, camHeight);
+    TextureRegion demo(0, 480, 1366, 619, 2048, 2048, 0);
+    _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2 + (camHeight * 0.1f), camWidth, camHeight * 0.8f);
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
     
     for (int i = 0; i < NUM_TEXT_VIEWS; ++i)

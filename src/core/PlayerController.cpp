@@ -29,6 +29,8 @@
 #include "MainConfig.hpp"
 #include "GameEngineState.hpp"
 #include "Macros.hpp"
+#include "MonsterController.hpp"
+#include "Server.hpp"
 
 IMPL_RTTI(PlayerController, EntityController);
 IMPL_EntityController_create(PlayerController);
@@ -37,7 +39,9 @@ PlayerController::PlayerController(Entity* e) : EntityController(e),
 _playerInfo(),
 _playerInfoNetworkCache(_playerInfo),
 _stats(),
-_statsNetworkCache(_stats)
+_statsNetworkCache(_stats),
+_encounter(),
+_encounterNetworkCache(_encounter)
 {
     // Empty
 }
@@ -47,15 +51,52 @@ void PlayerController::update()
     uint8_t& state = _entity->state()._state;
     uint16_t& stateTime = _entity->state()._stateTime;
     
-    // TODO
+    ++_encounter._stateTime;
+    
+    if (!_entity->getNetworkController()->isServer())
+    {
+        return;
+    }
+    
+    if (_encounter._state == ESTA_SWING)
+    {
+        if (_encounter._stateTime >= 42)
+        {
+            _encounter._state = ESTA_IDLE;
+            
+            World& w = Server::getInstance()->getWorld();
+            for (Entity* e : w.getDynamicEntities())
+            {
+                if (e->getController()->getRTTI().derivesFrom(MonsterController::rtti))
+                {
+                    e->requestDeletion();
+                    _encounter._isInCounter = false;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (_stats._health == 0)
+    {
+        _entity->requestDeletion();
+    }
 }
 
-void PlayerController::receiveMessage(uint16_t message, void* data)
+void PlayerController::onMessage(uint16_t message, void* data)
 {
     // TODO
     
     switch (message)
     {
+        case MSG_ENCOUNTER:
+        {
+            _encounter._isInCounter = true;
+            _entity->state()._state = STAT_IDLE;
+            _entity->pose()._velocity.x = 0;
+            _entity->pose()._velocity.y = 0;
+            break;
+        }
         default:
             break;
     }
@@ -71,58 +112,74 @@ void PlayerController::processInput(InputState* inputState)
         return;
     }
     
-    uint8_t fromState = _entity->state()._state;
-    uint8_t& state = _entity->state()._state;
-    uint8_t inpt = playerInputState->getInputState();
-    
-    state = 0;
-    const b2Vec2& vel = _entity->getVelocity();
-    float desiredVel[2] = { 0.0f, 0.0f };
-    float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
-    float maxSpeedHalved = maxSpeed / 2;
-    if (IS_BIT_SET(inpt, GISF_MOVING_UP))
+    if (_encounter._isInCounter)
     {
-        state = STAT_MOVING_UP;
-        desiredVel[1] = b2Min(vel.y + maxSpeedHalved, maxSpeed);
+        if (_encounter._state == ESTA_IDLE)
+        {
+            uint8_t inpt = playerInputState->getInputState();
+            if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
+            {
+                _encounter._state = ESTA_SWING;
+                _encounter._stateTime = 0;
+                
+                if (ENGINE_STATE_GAME.isLive())
+                {
+                    GOW_AUDIO.playSound(_entity->getSoundMapping(4));
+                }
+            }
+        }
     }
-    if (IS_BIT_SET(inpt, GISF_MOVING_LEFT))
+    else
     {
-        state = STAT_MOVING_LEFT;
-        desiredVel[0] = b2Max(vel.x - maxSpeedHalved, -maxSpeed);
-    }
-    if (IS_BIT_SET(inpt, GISF_MOVING_DOWN))
-    {
-        state = STAT_MOVING_DOWN;
-        desiredVel[1] = b2Max(vel.y - maxSpeedHalved, -maxSpeed);
-    }
-    if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
-    {
-        state = STAT_MOVING_RIGHT;
-        desiredVel[0] = b2Min(vel.x + maxSpeedHalved, maxSpeed);
-    }
-    
-    if (state == 0)
-    {
-        // Not moving
-        desiredVel[0] = vel.x * 0.86f;
-        desiredVel[1] = vel.y * 0.86f;
+        uint8_t fromState = _entity->state()._state;
+        uint8_t& state = _entity->state()._state;
+        uint16_t& stateTime = _entity->state()._stateTime;
+        uint8_t inpt = playerInputState->getInputState();
         
-        state = fromState == STAT_MOVING_UP ? STAT_IDLE_UP : state;
-        state = fromState == STAT_MOVING_LEFT ? STAT_IDLE_LEFT : state;
-        state = fromState == STAT_MOVING_DOWN ? STAT_IDLE_DOWN : state;
-        state = fromState == STAT_MOVING_RIGHT ? STAT_IDLE_RIGHT : state;
-        state = fromState  < STAT_MOVING_UP ? fromState : state;
-    }
-    
-    _entity->pose()._velocity.x = desiredVel[0];
-    _entity->pose()._velocity.y = desiredVel[1];
-    
-    // I know... but look at the sprite sheet
-    _entity->pose()._isFacingLeft = state == STAT_MOVING_RIGHT || state == STAT_IDLE_RIGHT;
-    
-    if (ENGINE_STATE_GAME.isLive())
-    {
-        SoundUtil::handleSound(_entity, fromState, state);
+        state = STAT_IDLE;
+        const b2Vec2& vel = _entity->getVelocity();
+        float desiredVel[2] = { 0.0f, 0.0f };
+        float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
+        float maxSpeedHalved = maxSpeed / 2;
+        if (IS_BIT_SET(inpt, GISF_MOVING_UP))
+        {
+            state = STAT_MOVING;
+            _stats._dir = PDIR_UP;
+            desiredVel[1] = b2Min(vel.y + maxSpeedHalved, maxSpeed);
+        }
+        if (IS_BIT_SET(inpt, GISF_MOVING_LEFT))
+        {
+            state = STAT_MOVING;
+            _stats._dir = PDIR_LEFT;
+            desiredVel[0] = b2Max(vel.x - maxSpeedHalved, -maxSpeed);
+        }
+        if (IS_BIT_SET(inpt, GISF_MOVING_DOWN))
+        {
+            state = STAT_MOVING;
+            _stats._dir = PDIR_DOWN;
+            desiredVel[1] = b2Max(vel.y - maxSpeedHalved, -maxSpeed);
+        }
+        if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
+        {
+            state = STAT_MOVING;
+            _stats._dir = PDIR_RIGHT;
+            desiredVel[0] = b2Min(vel.x + maxSpeedHalved, maxSpeed);
+        }
+        
+        if (state == STAT_IDLE)
+        {
+            stateTime = 6; // 2nd frame is more appropriate for idle
+            desiredVel[0] = vel.x * 0.86f;
+            desiredVel[1] = vel.y * 0.86f;
+        }
+        
+        _entity->pose()._velocity.x = desiredVel[0];
+        _entity->pose()._velocity.y = desiredVel[1];
+        
+        if (ENGINE_STATE_GAME.isLive())
+        {
+            SoundUtil::handleSound(_entity, fromState, state);
+        }
     }
 }
 
@@ -148,6 +205,16 @@ void PlayerController::enforceBounds(Rektangle& bounds)
     {
         _entity->setPosition(b2Vec2(x, bounds.bottom()));
     }
+}
+
+bool PlayerController::isInEncounter()
+{
+    return _encounter._isInCounter;
+}
+
+uint16_t PlayerController::encounterStateTime()
+{
+    return _encounter._stateTime;
 }
 
 void PlayerController::setAddressHash(uint64_t inValue)
@@ -178,6 +245,16 @@ void PlayerController::setPlayerName(std::string inValue)
 std::string& PlayerController::getPlayerName()
 {
     return _playerInfo._playerName;
+}
+
+PlayerDirection PlayerController::getPlayerDirection()
+{
+    return static_cast<PlayerDirection>(_stats._dir);
+}
+
+uint16_t PlayerController::getHealth()
+{
+    return _stats._health;
 }
 
 #include "InputMemoryBitStream.hpp"
@@ -216,8 +293,30 @@ void PlayerNetworkController::read(InputMemoryBitStream& ip)
     if (stateBit)
     {
         ip.read(c._stats._health);
+        ip.read(c._stats._dir);
         
         c._statsNetworkCache = c._stats;
+    }
+    
+    ip.read(stateBit);
+    if (stateBit)
+    {
+        bool wasInCounter = c._encounter._isInCounter;
+        
+        ip.read(c._encounter._isInCounter);
+        ip.read(c._encounter._stateTime);
+        ip.read(c._encounter._state);
+        
+        c._encounterNetworkCache = c._encounter;
+        
+        if (!wasInCounter && c._encounter._isInCounter)
+        {
+            GOW_AUDIO.playSound(_entity->getSoundMapping(2));
+        }
+        else if (wasInCounter && !c._encounter._isInCounter)
+        {
+            GOW_AUDIO.playSound(_entity->getSoundMapping(3));
+        }
     }
     
     if (!_isLocalPlayer)
@@ -248,8 +347,20 @@ uint16_t PlayerNetworkController::write(OutputMemoryBitStream& op, uint16_t dirt
     if (stats)
     {
         op.write(c._stats._health);
+        op.write(c._stats._dir);
         
         writtenState |= PlayerController::RSTF_STATS;
+    }
+    
+    bool encounter = IS_BIT_SET(dirtyState, PlayerController::RSTF_ENCOUNTER);
+    op.write(encounter);
+    if (encounter)
+    {
+        op.write(c._encounter._isInCounter);
+        op.write(c._encounter._stateTime);
+        op.write(c._encounter._state);
+        
+        writtenState |= PlayerController::RSTF_ENCOUNTER;
     }
     
     return writtenState;
@@ -263,6 +374,7 @@ void PlayerNetworkController::recallNetworkCache()
     
     c._playerInfo = c._playerInfoNetworkCache;
     c._stats = c._statsNetworkCache;
+    c._encounter = c._encounterNetworkCache;
 }
 
 uint16_t PlayerNetworkController::getDirtyState()
@@ -281,6 +393,12 @@ uint16_t PlayerNetworkController::getDirtyState()
     {
         c._statsNetworkCache = c._stats;
         ret |= PlayerController::RSTF_STATS;
+    }
+    
+    if (c._encounterNetworkCache != c._encounter)
+    {
+        c._encounterNetworkCache = c._encounter;
+        ret |= PlayerController::RSTF_ENCOUNTER;
     }
     
     return ret;
