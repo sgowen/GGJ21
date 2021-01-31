@@ -1,4 +1,7 @@
 {
+  "music": {
+    "filePath": "music/music_main.wav"
+  },
   "sounds": [
     {
       "soundID": 1,

@@ -1,6 +1,6 @@
 {
   "music": {
-    "filePath": "music/music_main.wav"
+    "filePath": "music/music_game.wav"
   },
   "sounds": [
     {
@@ -99,10 +99,10 @@
       "numInstances": 1
     },
     {
-          "soundID": 115,
-          "filePath": "sounds/Hide_Lines/Hide_intro1.wav",
-          "numInstances": 1
-        },
+      "soundID": 115,
+      "filePath": "sounds/Hide_Lines/Hide_intro1.wav",
+      "numInstances": 1
+    },
     {
       "soundID": 37,
       "filePath": "sounds/Jackie_Lines/Jackie_intro1.wav",
@@ -502,9 +502,67 @@
           "regionWidth": 64,
           "regionHeight": 64
         },
+        "GENERIC_MONSTER_UP": {
+          "x": 128,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 8,
+          "numFrames": 2
+        },
+        "GENERIC_MONSTER_UP_STILL": {
+          "x": 128,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "GENERIC_MONSTER_DOWN": {
+          "x": 0,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 8,
+          "numFrames": 2
+        },
+        "GENERIC_MONSTER_DOWN_STILL": {
+          "x": 0,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CRYSTAL_BLUE": {
+          "x": 0,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
         "CRYSTAL_RED": {
+          "x": 64,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CRYSTAL_GREEN": {
+          "x": 128,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "OVEN": {
           "x": 0,
           "y": 256,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CELLAR_DOOR": {
+          "x": 0,
+          "y": 320,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "WITCH_DOOR": {
+          "x": 64,
+          "y": 320,
           "regionWidth": 64,
           "regionHeight": 64
         }

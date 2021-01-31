@@ -57,8 +57,8 @@ _textViews{
     _fontRenderer.configure(_textViews[2], 0.25f, 0.6f, 0.018f);
     _fontRenderer.configure(_textViews[3], 0.25f, 0.56f, 0.018f);
     _fontRenderer.configure(_textViews[4], 0.25f, 0.52f, 0.018f);
-    _fontRenderer.configure(_textViews[5], 0.24f, 0.12f, 0.02f);
-    _fontRenderer.configure(_textViews[6], 0.76f, 0.12f, 0.02f);
+    _fontRenderer.configure(_textViews[5], 0.24f, 0.08f, 0.02f);
+    _fontRenderer.configure(_textViews[6], 0.76f, 0.08f, 0.02f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -135,8 +135,27 @@ void GameRenderer::renderWorld()
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    addSpritesToBatcher(w->getDynamicEntities());
+    for (Entity* e : w->getDynamicEntities())
+    {
+        if (!IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        {
+            TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
+            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
+        }
+    }
+    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
+    
+    _spriteBatcher.begin();
+    for (Entity* e : w->getDynamicEntities())
+    {
+        if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        {
+            TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
+            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
+        }
+    }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
+    
 }
 
 void GameRenderer::renderUI()

@@ -31,14 +31,9 @@ public:
 private:
     enum State
     {
-        STAT_IDLE_UP      = 0,
-        STAT_IDLE_DOWN    = 1,
-        STAT_IDLE_LEFT    = 2,
-        STAT_IDLE_RIGHT   = 3,
-        STAT_MOVING_UP    = 4,
-        STAT_MOVING_DOWN  = 5,
-        STAT_MOVING_LEFT  = 6,
-        STAT_MOVING_RIGHT = 7
+        STAT_IDLE_DOWN    = 0,
+        STAT_MOVING_DOWN  = 1,
+        STAT_MOVING_UP    = 2,
     };
     
     enum ReadStateFlag

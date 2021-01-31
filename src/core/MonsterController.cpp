@@ -78,23 +78,11 @@ void MonsterController::update()
         float radians = DEGREES_TO_RADIANS(angle);
         _entity->pose()._velocity.Set(cosf(radians) * CFG_MAIN._monsterMaxTopDownSpeed, sinf(radians) * CFG_MAIN._monsterMaxTopDownSpeed);
         
-        if (_entity->pose()._velocity.x < 0 &&
-            fabs(_entity->pose()._velocity.x) > fabs(_entity->pose()._velocity.y))
-        {
-            state = STAT_MOVING_LEFT;
-        }
-        if (_entity->pose()._velocity.x > 0 &&
-            fabs(_entity->pose()._velocity.x) > fabs(_entity->pose()._velocity.y))
-        {
-            state = STAT_MOVING_RIGHT;
-        }
-        if (_entity->pose()._velocity.y < 0 &&
-            fabs(_entity->pose()._velocity.y) > fabs(_entity->pose()._velocity.x))
+        if (_entity->pose()._velocity.y < 0)
         {
             state = STAT_MOVING_DOWN;
         }
-        if (_entity->pose()._velocity.y > 0 &&
-            fabs(_entity->pose()._velocity.y) > fabs(_entity->pose()._velocity.x))
+        if (_entity->pose()._velocity.y > 0)
         {
             state = STAT_MOVING_UP;
         }
@@ -104,9 +92,6 @@ void MonsterController::update()
         state = STAT_IDLE_DOWN;
         _entity->pose()._velocity *= 0.86f;
     }
-    
-    // I know... but look at the sprite sheet
-    _entity->pose()._isFacingLeft = state == STAT_MOVING_RIGHT || state == STAT_IDLE_RIGHT;
 }
 
 void MonsterController::receiveMessage(uint16_t message, void* data)

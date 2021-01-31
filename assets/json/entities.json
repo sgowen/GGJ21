@@ -1,28 +1,27 @@
 {
-    "MON1": {
-      "name": "Monster",
-      "controller": "Monster",
-      "textureMappings": {
-        "0": "EVIL_HIDE_UP_STILL",
-        "1": "EVIL_HIDE_DOWN_STILL",
-        "2": "EVIL_HIDE_LEFT_STILL",
-        "3": "EVIL_HIDE_LEFT_STILL",
-        "4": "EVIL_HIDE_UP",
-        "5": "EVIL_HIDE_DOWN",
-        "6": "EVIL_HIDE_LEFT",
-        "7": "EVIL_HIDE_LEFT"
-      },
-      "soundMappings": {
-        "1": 0
-      },
-      "soundCollectionMappings": {
-          "5": [1, 2, 3]
-      },
-      "bodyFlags": 2,
-      "width": 4,
-      "height": 4,
-      "stateSensitive": true
+  "MON1": {
+    "name": "Monster",
+    "controller": "Monster",
+    "textureMappings": {
+      "0": "GENERIC_MONSTER_DOWN_STILL",
+      "1": "GENERIC_MONSTER_DOWN",
+      "2": "GENERIC_MONSTER_UP"
     },
+    "soundMappings": {
+      "1": 0
+    },
+    "soundCollectionMappings": {
+      "5": [
+        1,
+        2,
+        3
+      ]
+    },
+    "bodyFlags": 2,
+    "width": 4,
+    "height": 4,
+    "stateSensitive": true
+  },
   "HIDE": {
     "name": "Hide",
     "controller": "Hide",
@@ -40,7 +39,13 @@
       "1": 0
     },
     "soundCollectionMappings": {
-        "5": [87, 88, 89, 90, 91]
+      "5": [
+        87,
+        88,
+        89,
+        90,
+        91
+      ]
     },
     "bodyFlags": 8,
     "width": 4,
@@ -64,7 +69,19 @@
       "1": 0
     },
     "soundCollectionMappings": {
-        "5": [33, 34, 35, 38, 46, 48, 49, 50, 51, 57, 58]
+      "5": [
+        33,
+        34,
+        35,
+        38,
+        46,
+        48,
+        49,
+        50,
+        51,
+        57,
+        58
+      ]
     },
     "bodyFlags": 8,
     "width": 4,
@@ -174,9 +191,25 @@
     "height": 4,
     "bodyFlags": 1
   },
-  "CRYS": {
+  "CRYB": {
+    "name": "CRYSTAL_BLUE",
+    "textureMapping": "CRYSTAL_BLUE",
+    "bodyFlags": 2,
+    "width": 4,
+    "height": 4,
+    "stateSensitive": true
+  },
+  "CRYR": {
     "name": "CRYSTAL_RED",
     "textureMapping": "CRYSTAL_RED",
+    "bodyFlags": 2,
+    "width": 4,
+    "height": 4,
+    "stateSensitive": true
+  },
+  "CRYG": {
+    "name": "CRYSTAL_GREEN",
+    "textureMapping": "CRYSTAL_GREEN",
     "bodyFlags": 2,
     "width": 4,
     "height": 4,
