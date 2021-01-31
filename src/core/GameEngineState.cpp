@@ -126,7 +126,8 @@ void GameEngineState::enter(Engine* e)
     _timing->reset();
     INPUT_GAME.reset();
     // TODO, remove
-    GOW_AUDIO.playSound(_isHost ? 1 : 2);
+    GOW_AUDIO.playSound(_isHost ? 115 : 37);
+    GOW_AUDIO.playMusic();
 }
 
 void GameEngineState::execute(Engine* e)

@@ -100,8 +100,8 @@ void GameRenderer::render()
     OGL.enableBlending(true);
     
     renderWorld();
-    renderUI();
     renderSplitScreen();
+    renderUI();
 
     _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
 }
