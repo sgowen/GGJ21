@@ -17,6 +17,10 @@
 #include "Macros.hpp"
 #include "MathUtil.hpp"
 #include "MainConfig.hpp"
+#include "GameEngineState.hpp"
+#include "PlayerController.hpp"
+#include "World.hpp"
+#include "Entity.hpp"
 
 GameInputManager& GameInputManager::getInstance()
 {
@@ -49,16 +53,36 @@ GameInputManagerState GameInputManager::update()
 {
     _state = GIMS_DEFAULT;
     
-#if IS_MOBILE
+    World* w = ENGINE_STATE_GAME._world;
+    assert(w != NULL);
+    
+    float playerX = CFG_MAIN._camWidth / 2;
+    float playerY = CFG_MAIN._camHeight / 2;
+    for (Entity* e : w->getPlayers())
+    {
+        PlayerController* pc = static_cast<PlayerController*>(e->getController());
+        
+        uint8_t playerID = pc->getPlayerID();
+        if (ENGINE_STATE_GAME._isHost && playerID == 1 && NW_MGR_CLIENT->isPlayerIDLocal(playerID))
+        {
+            playerX = e->getPosition().x;
+            playerY = e->getPosition().y;
+        }
+        else if (!ENGINE_STATE_GAME._isHost && playerID == 2 && NW_MGR_CLIENT->isPlayerIDLocal(playerID))
+        {
+            playerX = e->getPosition().x;
+            playerY = e->getPosition().y;
+        }
+    }
+    
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
         Vector2& v = INPUT_MGR.convert(e);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v.y() > (CFG_MAIN._camHeight / 2));
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v.x() < (CFG_MAIN._camWidth / 2));
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v.y() < (CFG_MAIN._camHeight / 2));
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v.x() > (CFG_MAIN._camHeight / 2));
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v.y() > playerY);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v.x() < playerX);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v.y() < playerY);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v.x() > playerX);
     }
-#endif
     
     bool isMovingUp[4] = {false};
     bool isMovingLeft[4] = {false};
@@ -209,6 +233,17 @@ GameInputState* GameInputManager::getInputState()
 MoveList& GameInputManager::getMoveList()
 {
     return _moveList;
+}
+
+void GameInputManager::reset()
+{
+    _currentState->reset();
+    _inputStates.free(_currentState);
+    _currentState = _inputStates.obtain();
+    _currentState->reset();
+    _pendingMove = NULL;
+    _state = GIMS_DEFAULT;
+    _moveList.clear();
 }
 
 const Move& GameInputManager::sampleInputAsMove()

@@ -13,6 +13,7 @@
 #include <string>
 
 class InputState;
+struct Rektangle;
 
 class PlayerController : public EntityController
 {
@@ -33,6 +34,7 @@ public:
     virtual void handleEndContact(Entity* inEntity, b2Fixture* inFixtureA, b2Fixture* inFixtureB) {}
     
     void processInput(InputState* inputState);
+    void enforceBounds(Rektangle& bounds);
     
     void setAddressHash(uint64_t inValue);
     uint64_t getAddressHash() const;

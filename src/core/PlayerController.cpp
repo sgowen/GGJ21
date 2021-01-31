@@ -12,6 +12,7 @@
 #include <box2d/b2_math.h>
 
 #include "GameInputState.hpp"
+#include "Rektangle.hpp"
 
 #include "World.hpp"
 #include "Macros.hpp"
@@ -121,6 +122,30 @@ void PlayerController::processInput(InputState* inputState)
     
     // I know... but look at the sprite sheet
     _entity->pose()._isFacingLeft = state == STAT_MOVING_RIGHT || state == STAT_IDLE_RIGHT;
+}
+
+void PlayerController::enforceBounds(Rektangle& bounds)
+{
+    float x = _entity->getPosition().x;
+    float y = _entity->getPosition().y;
+    
+    if (_entity->getPosition().x > bounds.right())
+    {
+        _entity->setPosition(b2Vec2(bounds.right(), y));
+    }
+    else if (_entity->getPosition().x < bounds.left())
+    {
+        _entity->setPosition(b2Vec2(bounds.left(), y));
+    }
+    
+    if (_entity->getPosition().y > bounds.top())
+    {
+        _entity->setPosition(b2Vec2(x, bounds.top()));
+    }
+    else if (_entity->getPosition().y < bounds.bottom())
+    {
+        _entity->setPosition(b2Vec2(x, bounds.bottom()));
+    }
 }
 
 void PlayerController::setAddressHash(uint64_t inValue)

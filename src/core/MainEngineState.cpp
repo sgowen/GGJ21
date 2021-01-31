@@ -152,7 +152,7 @@ void MainEngineState::updateInputIP(Engine* e)
             _state = MESS_DEFAULT;
             break;
         case MIMS_TEXT_INPUT_READY:
-            _userEnteredIPAddress = StringUtil::format("%s:%d", INPUT_MAIN.getTextInput().c_str(), CFG_MAIN._serverPort);
+            _userEnteredIPAddress = INPUT_MAIN.getTextInput();
             INPUT_MAIN.clearTextInput();
             _state = MESS_INPUT_JOIN_NAME;
             break;
@@ -187,7 +187,7 @@ void MainEngineState::updateInputJoinName(Engine* e)
             INPUT_MAIN.setTextInput(_userEnteredIPAddress);
             break;
         case MIMS_TEXT_INPUT_READY:
-            GameEngineState::sHandleJoinServer(e, _userEnteredIPAddress, INPUT_MAIN.getTextInput());
+            GameEngineState::sHandleJoinServer(e, StringUtil::format("%s:%d", _userEnteredIPAddress.c_str(), CFG_MAIN._serverPort), INPUT_MAIN.getTextInput());
             break;
         default:
             break;

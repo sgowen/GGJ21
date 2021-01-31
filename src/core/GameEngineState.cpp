@@ -51,13 +51,13 @@ uint64_t GameEngineState::sGetPlayerAddressHash(uint8_t playerIndex)
 {
     uint64_t ret = 0;
     
-    World* world = ENGINE_STATE_GAME._world;
-    assert(world != NULL);
+    World* w = ENGINE_STATE_GAME._world;
+    assert(w != NULL);
     
     uint8_t playerID = playerIndex + 1;
     
     Entity* player = NULL;
-    for (Entity* e : world->getPlayers())
+    for (Entity* e : w->getPlayers())
     {
         PlayerController* pc = static_cast<PlayerController*>(e->getController());
         if (pc->getPlayerID() == playerID)
@@ -80,18 +80,18 @@ uint64_t GameEngineState::sGetPlayerAddressHash(uint8_t playerIndex)
 
 void GameEngineState::sHandleDynamicEntityCreatedOnClient(Entity* e)
 {
-    World* world = ENGINE_STATE_GAME._world;
-    assert(world != NULL);
+    World* w = ENGINE_STATE_GAME._world;
+    assert(w != NULL);
     
-    world->addEntity(e);
+    w->addEntity(e);
 }
 
 void GameEngineState::sHandleDynamicEntityDeletedOnClient(Entity* e)
 {
-    World* world = ENGINE_STATE_GAME._world;
-    assert(world != NULL);
+    World* w = ENGINE_STATE_GAME._world;
+    assert(w != NULL);
     
-    world->removeEntity(e);
+    w->removeEntity(e);
 }
 
 void GameEngineState::sHandleHostServer(Engine* e, std::string name)
@@ -124,6 +124,7 @@ void GameEngineState::enter(Engine* e)
     _map = 0;
     _world = new World(WorldFlag_Client);
     _timing->reset();
+    INPUT_GAME.reset();
     // TODO, remove
     GOW_AUDIO.playSound(_isHost ? 1 : 2);
 }
@@ -164,6 +165,7 @@ void GameEngineState::exit(Engine* e)
     releaseDeviceDependentResources();
     
     delete _world;
+    _world = NULL;
     
     if (NW_MGR_CLIENT != NULL)
     {
@@ -235,6 +237,8 @@ void GameEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int
 
 void GameEngineState::releaseDeviceDependentResources()
 {
+    ENTITY_MAPPER.clear();
+    ENTITY_LAYOUT_MAPPER.clear();
     ASSETS.clear();
     _renderer.releaseDeviceDependentResources();
     GOW_AUDIO.releaseDeviceDependentResources();

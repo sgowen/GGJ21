@@ -53,12 +53,12 @@ _textViews{
 {
     _fontRenderer.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
     _fontRenderer.configure(_textViews[0], 0.5f, 0.12f, 0.02f);
-    _fontRenderer.configure(_textViews[1], 0.75f, 0.7f, 0.02f);
-    _fontRenderer.configure(_textViews[2], 0.75f, 0.6f, 0.02f);
-    _fontRenderer.configure(_textViews[3], 0.75f, 0.56f, 0.02f);
-    _fontRenderer.configure(_textViews[4], 0.75f, 0.52f, 0.02f);
-    _fontRenderer.configure(_textViews[5], 0.25f, 0.12f, 0.02f);
-    _fontRenderer.configure(_textViews[6], 0.75f, 0.12f, 0.02f);
+    _fontRenderer.configure(_textViews[1], 0.25f, 0.7f, 0.018f);
+    _fontRenderer.configure(_textViews[2], 0.25f, 0.6f, 0.018f);
+    _fontRenderer.configure(_textViews[3], 0.25f, 0.56f, 0.018f);
+    _fontRenderer.configure(_textViews[4], 0.25f, 0.52f, 0.018f);
+    _fontRenderer.configure(_textViews[5], 0.24f, 0.12f, 0.02f);
+    _fontRenderer.configure(_textViews[6], 0.76f, 0.12f, 0.02f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -127,15 +127,15 @@ void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
 
 void GameRenderer::renderWorld()
 {
-    World* world = ENGINE_STATE_GAME._world;
+    World* w = ENGINE_STATE_GAME._world;
     
     _spriteBatcher.begin();
-    addSpritesToBatcher(world->getLayers());
-    addSpritesToBatcher(world->getStaticEntities());
+    addSpritesToBatcher(w->getLayers());
+    addSpritesToBatcher(w->getStaticEntities());
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    addSpritesToBatcher(world->getDynamicEntities());
+    addSpritesToBatcher(w->getDynamicEntities());
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
 }
 
@@ -155,8 +155,8 @@ void GameRenderer::renderUI()
     _textViews[4]._visibility = TEXV_HIDDEN;
     _textViews[5]._visibility = TEXV_HIDDEN;
     _textViews[6]._visibility = TEXV_HIDDEN;
-    World* world = ENGINE_STATE_GAME._world;
-    for (Entity* e : world->getPlayers())
+    World* w = ENGINE_STATE_GAME._world;
+    for (Entity* e : w->getPlayers())
     {
         PlayerController* pc = static_cast<PlayerController*>(e->getController());
         
@@ -168,11 +168,7 @@ void GameRenderer::renderUI()
     if (NW_MGR_CLIENT != NULL &&
         NW_MGR_CLIENT->state() == NWCS_WELCOMED)
     {
-        if (world->getPlayers().size() == 2)
-        {
-            
-        }
-        else
+        if (w->getPlayers().size() == 1)
         {
             _textViews[1]._visibility = TEXV_VISIBLE;
             _textViews[2]._visibility = TEXV_VISIBLE;

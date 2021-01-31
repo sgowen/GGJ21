@@ -29,6 +29,7 @@ class Move;
 
 class GameEngineState : public State<Engine>
 {
+    friend class GameInputManager;
     friend class GameRenderer;
     
 public:

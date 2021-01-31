@@ -21,6 +21,9 @@
 #include "GowUtil.hpp"
 #include "Network.hpp"
 #include "Macros.hpp"
+#include "PlayerController.hpp"
+#include "Rektangle.hpp"
+#include "OverlapTester.hpp"
 
 World::World(uint32_t flags) :
 _flags(flags),
@@ -105,6 +108,63 @@ void World::stepPhysics()
     for (Entity* e : _players)
     {
         e->selfProcessPhysics();
+        
+        float w = e->getWidth();
+        float h = e->getHeight();
+        float velX = e->getVelocity().x;
+        float velY = e->getVelocity().y;
+        
+        for (Entity* se : _staticEntities)
+        {
+            float se_x = se->getPosition().x;
+            float se_y = se->getPosition().y;
+            float se_w = se->getWidth();
+            float se_h = se->getHeight();
+            Rektangle playerBounds(e->getPosition().x - w / 2, e->getPosition().y - h / 2, w, h);
+            Rektangle staticEntityBounds(se_x - se_w / 2, se_y - se_h / 2, se_w, se_h);
+            if (OverlapTester::doRektanglesOverlap(playerBounds, staticEntityBounds))
+            {
+                if (velX > 0 &&
+                         playerBounds.right() >= staticEntityBounds.left())
+                {
+                    e->setPosition(b2Vec2(staticEntityBounds.left() - w / 2 - 0.1f, e->getPosition().y));
+                }
+                else if (velX < 0 &&
+                         playerBounds.left() <= staticEntityBounds.right())
+                {
+                    e->setPosition(b2Vec2(staticEntityBounds.right() + w / 2 + 0.1f, e->getPosition().y));
+                }
+                
+                if (velY > 0 &&
+                    playerBounds.top() >= staticEntityBounds.bottom())
+                {
+                    e->setPosition(b2Vec2(e->getPosition().x, staticEntityBounds.bottom() - h / 2 - 0.1f));
+                }
+                else if (velY < 0 &&
+                         playerBounds.bottom() <= staticEntityBounds.top())
+                {
+                    e->setPosition(b2Vec2(e->getPosition().x, staticEntityBounds.top() + h / 2 + 0.1f));
+                }
+                break;
+            }
+        }
+    }
+    
+    for (Entity* e : _players)
+    {
+        // Enforce split screen bounds
+        PlayerController* pc = static_cast<PlayerController*>(e->getController());
+        uint8_t playerID = pc->getPlayerID();
+        if (playerID == 1)
+        {
+            Rektangle play1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
+            pc->enforceBounds(play1ScreenBounds);
+        }
+        else if (playerID == 2)
+        {
+            Rektangle play2ScreenBounds(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
+            pc->enforceBounds(play2ScreenBounds);
+        }
     }
 }
 

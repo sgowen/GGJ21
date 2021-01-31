@@ -86,6 +86,7 @@ void Server::update()
             for (Entity* e : _world.getPlayers())
             {
                 PlayerController* pc = static_cast<PlayerController*>(e->getController());
+                assert(pc != NULL);
                 
                 ClientProxy* client = NW_MGR_SERVER->getClientProxy(pc->getPlayerID());
                 if (client)
@@ -128,7 +129,7 @@ void Server::update()
                 if (c->getRTTI().derivesFrom(PlayerController::rtti))
                 {
                     PlayerController* pc = static_cast<PlayerController*>(c);
-                    assert(pc);
+                    assert(pc != NULL);
                     
                     // This is my shoddy respawn implementation
                     getInstance()->spawnEntityForPlayer(pc->getPlayerID(), pc->getPlayerName());

@@ -117,7 +117,6 @@ void MainInputManager::updateDefault()
 
 void MainInputManager::updateReadText()
 {
-#if IS_MOBILE
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
         if (e->_type != CUET_DOWN)
@@ -129,7 +128,6 @@ void MainInputManager::updateReadText()
         _textInput = "mobile";
         break;
     }
-#endif
     
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {

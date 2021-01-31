@@ -39,6 +39,7 @@ public:
     void clearPendingMove();
     GameInputState* getInputState();
     MoveList& getMoveList();
+    void reset();
     
 private:
     GameInputManagerState _state;
