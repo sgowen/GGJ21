@@ -125,7 +125,7 @@ class PlayerNetworkController : public EntityNetworkController
     
 public:
     PlayerNetworkController(Entity* e, bool isServer);
-    virtual ~PlayerNetworkController();
+    virtual ~PlayerNetworkController() {}
     
     virtual void read(InputMemoryBitStream& ip);
     virtual uint16_t write(OutputMemoryBitStream& op, uint16_t dirtyState);

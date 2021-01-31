@@ -13,7 +13,10 @@
       "7": "HIDE_LEFT"
     },
     "soundMappings": {
-      "1": 1
+      "1": 0
+    },
+    "soundCollectionMappings": {
+        "5": [87, 88, 89, 90, 91]
     },
     "bodyFlags": 8,
     "width": 4,
@@ -34,7 +37,10 @@
       "7": "JACKIE_LEFT"
     },
     "soundMappings": {
-      "1": 1
+      "1": 0
+    },
+    "soundCollectionMappings": {
+        "5": [33, 34, 35, 38, 46, 48, 49, 50, 51, 57, 58]
     },
     "bodyFlags": 8,
     "width": 4,

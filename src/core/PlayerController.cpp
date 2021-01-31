@@ -31,7 +31,6 @@
 #include "Macros.hpp"
 
 IMPL_RTTI(PlayerController, EntityController);
-
 IMPL_EntityController_create(PlayerController);
 
 PlayerController::PlayerController(Entity* e) : EntityController(e),
@@ -105,8 +104,8 @@ void PlayerController::processInput(InputState* inputState)
     if (state == 0)
     {
         // Not moving
-        desiredVel[0] = vel.x * 0.99f;
-        desiredVel[1] = vel.y * 0.99f;
+        desiredVel[0] = vel.x * 0.86f;
+        desiredVel[1] = vel.y * 0.86f;
         
         state = fromState == STAT_MOVING_UP ? STAT_IDLE_UP : state;
         state = fromState == STAT_MOVING_LEFT ? STAT_IDLE_LEFT : state;
@@ -117,11 +116,16 @@ void PlayerController::processInput(InputState* inputState)
     
     _entity->pose()._velocity.x = desiredVel[0];
     _entity->pose()._velocity.y = desiredVel[1];
-    LOG("_entity->pose()._velocity.x %f", _entity->pose()._velocity.x);
-    LOG("_entity->pose()._velocity.y %f", _entity->pose()._velocity.y);
+//    LOG("_entity->pose()._velocity.x %f", _entity->pose()._velocity.x);
+//    LOG("_entity->pose()._velocity.y %f", _entity->pose()._velocity.y);
     
     // I know... but look at the sprite sheet
     _entity->pose()._isFacingLeft = state == STAT_MOVING_RIGHT || state == STAT_IDLE_RIGHT;
+    
+    if (ENGINE_STATE_GAME.isLive())
+    {
+        SoundUtil::handleSound(_entity, fromState, state);
+    }
 }
 
 void PlayerController::enforceBounds(Rektangle& bounds)
@@ -184,11 +188,6 @@ std::string& PlayerController::getPlayerName()
 IMPL_EntityNetworkController_create(PlayerNetworkController);
 
 PlayerNetworkController::PlayerNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer), _controller(static_cast<PlayerController*>(e->getController())), _isLocalPlayer(false)
-{
-    // Empty
-}
-
-PlayerNetworkController::~PlayerNetworkController()
 {
     // Empty
 }

@@ -24,6 +24,7 @@
 #include "PlayerController.hpp"
 #include "Rektangle.hpp"
 #include "OverlapTester.hpp"
+#include "Constants.hpp"
 
 World::World(uint32_t flags) :
 _flags(flags),
@@ -109,10 +110,11 @@ void World::stepPhysics()
     {
         e->selfProcessPhysics();
         
+        float x = e->getPosition().x;
+        float y = e->getPosition().y;
         float w = e->getWidth();
         float h = e->getHeight();
-        float velX = e->getVelocity().x;
-        float velY = e->getVelocity().y;
+        Rektangle playerBounds(x - w / 2, y - h / 2, w, h);
         
         for (Entity* se : _staticEntities)
         {
@@ -120,30 +122,20 @@ void World::stepPhysics()
             float se_y = se->getPosition().y;
             float se_w = se->getWidth();
             float se_h = se->getHeight();
-            Rektangle playerBounds(e->getPosition().x - w / 2, e->getPosition().y - h / 2, w, h);
             Rektangle staticEntityBounds(se_x - se_w / 2, se_y - se_h / 2, se_w, se_h);
+            
             if (OverlapTester::doRektanglesOverlap(playerBounds, staticEntityBounds))
             {
-                if (velX > 0 &&
-                         playerBounds.right() >= staticEntityBounds.left())
+                if (playerBounds.right() >= staticEntityBounds.left() ||
+                    playerBounds.left() <= staticEntityBounds.right() ||
+                    playerBounds.top() >= staticEntityBounds.bottom() ||
+                    playerBounds.bottom() <= staticEntityBounds.top())
                 {
-                    e->setPosition(b2Vec2(staticEntityBounds.left() - w / 2 - 0.1f, e->getPosition().y));
-                }
-                else if (velX < 0 &&
-                         playerBounds.left() <= staticEntityBounds.right())
-                {
-                    e->setPosition(b2Vec2(staticEntityBounds.right() + w / 2 + 0.1f, e->getPosition().y));
-                }
-                
-                if (velY > 0 &&
-                    playerBounds.top() >= staticEntityBounds.bottom())
-                {
-                    e->setPosition(b2Vec2(e->getPosition().x, staticEntityBounds.bottom() - h / 2 - 0.1f));
-                }
-                else if (velY < 0 &&
-                         playerBounds.bottom() <= staticEntityBounds.top())
-                {
-                    e->setPosition(b2Vec2(e->getPosition().x, staticEntityBounds.top() + h / 2 + 0.1f));
+                    b2Vec2 vel = e->getVelocity();
+                    vel *= FRAME_RATE;
+                    b2Vec2 pos = e->getPosition();
+                    pos -= vel;
+                    e->setPosition(pos);
                 }
                 break;
             }

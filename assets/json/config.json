@@ -16,6 +16,6 @@
   "jackieSpawnY": "12",
   "maxTextInputLength": "16",
   "maxNumPlayers": "2",
-  "playerMaxTopDownSpeed": "16.0",
+  "playerMaxTopDownSpeed": "8.0",
   "showDebug": "true"
 }

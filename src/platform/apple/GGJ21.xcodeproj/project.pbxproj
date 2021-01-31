@@ -25,6 +25,10 @@
 		BB21815325C52F00004398D5 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815025C52EFF004398D5 /* PlayerController.cpp */; };
 		BB21815825C52FF7004398D5 /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815725C52FF7004398D5 /* SoundUtil.cpp */; };
 		BB21815925C52FF7004398D5 /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815725C52FF7004398D5 /* SoundUtil.cpp */; };
+		BB21816425C65B9E004398D5 /* JackiePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */; };
+		BB21816525C65B9E004398D5 /* JackiePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */; };
+		BB21816625C65B9E004398D5 /* HidePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816325C65B9E004398D5 /* HidePlayerController.cpp */; };
+		BB21816725C65B9E004398D5 /* HidePlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816325C65B9E004398D5 /* HidePlayerController.cpp */; };
 		BB2CD6C325C518B3007B8775 /* GameRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */; };
 		BB2CD6C425C518B3007B8775 /* GameRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */; };
 		BB2CD6C525C518B3007B8775 /* GameInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */; };
@@ -382,6 +386,10 @@
 		BB21815125C52F00004398D5 /* PlayerController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerController.hpp; sourceTree = "<group>"; };
 		BB21815625C52FF7004398D5 /* SoundUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundUtil.hpp; sourceTree = "<group>"; };
 		BB21815725C52FF7004398D5 /* SoundUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundUtil.cpp; sourceTree = "<group>"; };
+		BB21816025C65B9E004398D5 /* HidePlayerController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HidePlayerController.hpp; sourceTree = "<group>"; };
+		BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JackiePlayerController.cpp; sourceTree = "<group>"; };
+		BB21816225C65B9E004398D5 /* JackiePlayerController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JackiePlayerController.hpp; sourceTree = "<group>"; };
+		BB21816325C65B9E004398D5 /* HidePlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HidePlayerController.cpp; sourceTree = "<group>"; };
 		BB2CD6BD25C518B2007B8775 /* GameEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameEngineState.hpp; sourceTree = "<group>"; };
 		BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameRenderer.cpp; sourceTree = "<group>"; };
 		BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInputManager.cpp; sourceTree = "<group>"; };
@@ -1543,6 +1551,10 @@
 				BB2CD6D425C522B0007B8775 /* GameInputState.hpp */,
 				BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */,
 				BB2CD6C225C518B3007B8775 /* GameRenderer.hpp */,
+				BB21816325C65B9E004398D5 /* HidePlayerController.cpp */,
+				BB21816025C65B9E004398D5 /* HidePlayerController.hpp */,
+				BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */,
+				BB21816225C65B9E004398D5 /* JackiePlayerController.hpp */,
 				BBBA5BCB25C0B17E00C8207D /* MainConfig.cpp */,
 				BBBA5BCA25C0B17E00C8207D /* MainConfig.hpp */,
 				BB7B091825B659280021E545 /* MainEngineController.cpp */,
@@ -2501,6 +2513,7 @@
 				BBBA5AE225BB5D1A00C8207D /* b2_rope.cpp in Sources */,
 				BBBA56F725BA453A00C8207D /* cocoa_time.c in Sources */,
 				BBBA579D25BB175A00C8207D /* MoveList.cpp in Sources */,
+				BB21816425C65B9E004398D5 /* JackiePlayerController.cpp in Sources */,
 				BBBA467E25B9121600C8207D /* ObjectALWrapper.mm in Sources */,
 				BBBA46EE25B913D900C8207D /* mach_timing.c in Sources */,
 				BBBA5AE625BB5D1A00C8207D /* b2_timer.cpp in Sources */,
@@ -2542,6 +2555,7 @@
 				BBBA57FC25BB58CA00C8207D /* EntityNetworkController.cpp in Sources */,
 				BBBA46E025B913D900C8207D /* ALContext.m in Sources */,
 				BBBA56E225BA453A00C8207D /* init.c in Sources */,
+				BB21816625C65B9E004398D5 /* HidePlayerController.cpp in Sources */,
 				BBBA578925BB175A00C8207D /* UDPSocket.cpp in Sources */,
 				BBBA56F425BA453A00C8207D /* egl_context.c in Sources */,
 				BBBA5AFC25BB5D1A00C8207D /* b2_dynamic_tree.cpp in Sources */,
@@ -2661,6 +2675,7 @@
 				BBBA579025BB175A00C8207D /* Move.cpp in Sources */,
 				BB21815925C52FF7004398D5 /* SoundUtil.cpp in Sources */,
 				BBBA57A025BB175A00C8207D /* SocketAddress.cpp in Sources */,
+				BB21816525C65B9E004398D5 /* JackiePlayerController.cpp in Sources */,
 				BBBA57AE25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */,
 				BBBA5AF325BB5D1A00C8207D /* b2_circle_shape.cpp in Sources */,
 				BB2CD6D625C522B0007B8775 /* GameInputState.cpp in Sources */,
@@ -2723,6 +2738,7 @@
 				BBBA577E25BB175A00C8207D /* ReplicationCommand.cpp in Sources */,
 				BBBA5AB925BB5D1A00C8207D /* b2_revolute_joint.cpp in Sources */,
 				BBBA472225B9150000C8207D /* NullSound.cpp in Sources */,
+				BB21816725C65B9E004398D5 /* HidePlayerController.cpp in Sources */,
 				BBBA57A825BB175A00C8207D /* SocketServerHelper.cpp in Sources */,
 				BBBA5AD925BB5D1A00C8207D /* b2_mouse_joint.cpp in Sources */,
 				BBBA5B9525BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */,

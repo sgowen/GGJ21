@@ -14,7 +14,8 @@
 #include "InstanceManager.hpp"
 #include "MainEngineState.hpp"
 #include "EntityMapper.hpp"
-#include "PlayerController.hpp"
+#include "HidePlayerController.hpp"
+#include "JackiePlayerController.hpp"
 #include "MainConfig.hpp"
 #include "InputManager.hpp"
 
@@ -32,11 +33,11 @@ MainEngineController::MainEngineController()
     static EntityIDManager EIMC;
     INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_CLIENT, &EIMC);
     
-    ENTITY_MAPPER.registerFunction("Hide", PlayerController::create);
-    ENTITY_MAPPER.registerFunction("Hide", PlayerNetworkController::create);
+    ENTITY_MAPPER.registerFunction("Hide", HidePlayerController::create);
+    ENTITY_MAPPER.registerFunction("Hide", HidePlayerNetworkController::create);
     
-    ENTITY_MAPPER.registerFunction("Jackie", PlayerController::create);
-    ENTITY_MAPPER.registerFunction("Jackie", PlayerNetworkController::create);
+    ENTITY_MAPPER.registerFunction("Jackie", JackiePlayerController::create);
+    ENTITY_MAPPER.registerFunction("Jackie", JackiePlayerNetworkController::create);
     
     CFG_MAIN.init();
     INPUT_MGR.setMaxNumPlayers(CFG_MAIN._maxNumPlayers);
