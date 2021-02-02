@@ -479,7 +479,6 @@
 		BB7B07B925B646BA0021E545 /* Animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		BB7B07BA25B646BA0021E545 /* InputManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
 		BB7B07BB25B646BA0021E545 /* Framebuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Framebuffer.hpp; sourceTree = "<group>"; };
-		BB7B07BC25B646BA0021E545 /* Constants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Constants.hpp; sourceTree = "<group>"; };
 		BB7B07BE25B646BA0021E545 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		BB7B07BF25B646BA0021E545 /* AssetHandlerFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetHandlerFactory.hpp; sourceTree = "<group>"; };
 		BB7B07C025B646BA0021E545 /* MathUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtil.hpp; sourceTree = "<group>"; };
@@ -1322,7 +1321,6 @@
 				BB7B07C925B646BA0021E545 /* Color.hpp */,
 				BBBA5BAE25C0AC5B00C8207D /* Config.cpp */,
 				BBBA5BAF25C0AC5B00C8207D /* Config.hpp */,
-				BB7B07BC25B646BA0021E545 /* Constants.hpp */,
 				BB7B07AC25B646BA0021E545 /* CursorEvent.hpp */,
 				BBBA576025BB175900C8207D /* DeliveryNotificationManager.cpp */,
 				BBBA574F25BB175900C8207D /* DeliveryNotificationManager.hpp */,
