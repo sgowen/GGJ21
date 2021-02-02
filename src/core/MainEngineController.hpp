@@ -17,4 +17,8 @@ public:
     virtual ~MainEngineController() {}
     
     virtual State<Engine>* getInitialState();
+    virtual double getFrameRate();
+    
+private:
+    double _frameRate;
 };

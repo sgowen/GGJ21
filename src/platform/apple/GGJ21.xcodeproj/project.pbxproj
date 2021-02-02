@@ -67,7 +67,7 @@
 		BB7B08CA25B64A620021E545 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07A725B646BA0021E545 /* Vector2.cpp */; };
 		BB7B08D225B64CF20021E545 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7B08D125B64CF20021E545 /* OpenGL.framework */; };
 		BB7B091925B659280021E545 /* MainEngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091825B659280021E545 /* MainEngineController.cpp */; };
-		BB7B091D25B659E70021E545 /* MainEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091C25B659E70021E545 /* MainEngineState.cpp */; };
+		BB7B091D25B659E70021E545 /* TitleEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091C25B659E70021E545 /* TitleEngineState.cpp */; };
 		BB8BCCEA25B682E8005F57B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8BCCE925B682E8005F57B8 /* AppDelegate.swift */; };
 		BB8BCCEC25B682E8005F57B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8BCCEB25B682E8005F57B8 /* SceneDelegate.swift */; };
 		BB8BCCEE25B682E8005F57B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8BCCED25B682E8005F57B8 /* ViewController.swift */; };
@@ -75,7 +75,7 @@
 		BB8BCCF625B682E9005F57B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB8BCCF425B682E9005F57B8 /* LaunchScreen.storyboard */; };
 		BB8BCD0B25B68446005F57B8 /* NSEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB8BCD0925B68446005F57B8 /* NSEngine.mm */; };
 		BB8BCD1325B68490005F57B8 /* MainEngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091825B659280021E545 /* MainEngineController.cpp */; };
-		BB8BCD1425B68490005F57B8 /* MainEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091C25B659E70021E545 /* MainEngineState.cpp */; };
+		BB8BCD1425B68490005F57B8 /* TitleEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091C25B659E70021E545 /* TitleEngineState.cpp */; };
 		BB8BCD1525B68490005F57B8 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B925B646BA0021E545 /* Animation.cpp */; };
 		BB8BCD1625B68490005F57B8 /* AppleAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079425B646BA0021E545 /* AppleAssetHandler.cpp */; };
 		BB8BCD1825B68490005F57B8 /* AssetHandlerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */; };
@@ -238,10 +238,6 @@
 		BBBA57AE25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */; };
 		BBBA57AF25BB175A00C8207D /* NetworkHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577525BB175A00C8207D /* NetworkHelper.cpp */; };
 		BBBA57B025BB175A00C8207D /* NetworkHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577525BB175A00C8207D /* NetworkHelper.cpp */; };
-		BBBA57D425BB566100C8207D /* InstanceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57D225BB566100C8207D /* InstanceManager.cpp */; };
-		BBBA57D525BB566100C8207D /* InstanceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57D225BB566100C8207D /* InstanceManager.cpp */; };
-		BBBA57DC25BB567300C8207D /* Timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57D925BB567300C8207D /* Timing.cpp */; };
-		BBBA57DD25BB567300C8207D /* Timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57D925BB567300C8207D /* Timing.cpp */; };
 		BBBA57DE25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */; };
 		BBBA57DF25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */; };
 		BBBA57F025BB58CA00C8207D /* EntityLayoutMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E425BB58C900C8207D /* EntityLayoutMapper.cpp */; };
@@ -364,12 +360,10 @@
 		BBBA5B9D25BE1E3400C8207D /* LightRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B9325BE1E3400C8207D /* LightRenderer.cpp */; };
 		BBBA5BB025C0AC5B00C8207D /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5BAE25C0AC5B00C8207D /* Config.cpp */; };
 		BBBA5BB125C0AC5B00C8207D /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5BAE25C0AC5B00C8207D /* Config.cpp */; };
-		BBBA5BCC25C0B17E00C8207D /* MainConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5BCB25C0B17E00C8207D /* MainConfig.cpp */; };
-		BBBA5BCD25C0B17E00C8207D /* MainConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5BCB25C0B17E00C8207D /* MainConfig.cpp */; };
-		BBBA5C2125C2002300C8207D /* MainInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1E25C2002300C8207D /* MainInputManager.cpp */; };
-		BBBA5C2225C2002300C8207D /* MainInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1E25C2002300C8207D /* MainInputManager.cpp */; };
-		BBBA5C2325C2002300C8207D /* MainRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1F25C2002300C8207D /* MainRenderer.cpp */; };
-		BBBA5C2425C2002300C8207D /* MainRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1F25C2002300C8207D /* MainRenderer.cpp */; };
+		BBBA5C2125C2002300C8207D /* TitleInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1E25C2002300C8207D /* TitleInputManager.cpp */; };
+		BBBA5C2225C2002300C8207D /* TitleInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1E25C2002300C8207D /* TitleInputManager.cpp */; };
+		BBBA5C2325C2002300C8207D /* TitleRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1F25C2002300C8207D /* TitleRenderer.cpp */; };
+		BBBA5C2425C2002300C8207D /* TitleRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C1F25C2002300C8207D /* TitleRenderer.cpp */; };
 		BBBA5C6A25C31B1400C8207D /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C6925C31B1400C8207D /* Color.cpp */; };
 		BBBA5C6B25C31B1400C8207D /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C6925C31B1400C8207D /* Color.cpp */; };
 		BBBA5C8A25C332F000C8207D /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C8925C332F000C8207D /* RTTI.cpp */; };
@@ -516,8 +510,8 @@
 		BB7B091625B6537D0021E545 /* StateMachine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateMachine.hpp; sourceTree = "<group>"; };
 		BB7B091725B659280021E545 /* MainEngineController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainEngineController.hpp; sourceTree = "<group>"; };
 		BB7B091825B659280021E545 /* MainEngineController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainEngineController.cpp; sourceTree = "<group>"; };
-		BB7B091B25B659E70021E545 /* MainEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainEngineState.hpp; sourceTree = "<group>"; };
-		BB7B091C25B659E70021E545 /* MainEngineState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainEngineState.cpp; sourceTree = "<group>"; };
+		BB7B091B25B659E70021E545 /* TitleEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TitleEngineState.hpp; sourceTree = "<group>"; };
+		BB7B091C25B659E70021E545 /* TitleEngineState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleEngineState.cpp; sourceTree = "<group>"; };
 		BB8BCCE725B682E8005F57B8 /* GGJ21-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GGJ21-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB8BCCE925B682E8005F57B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB8BCCEB25B682E8005F57B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -530,7 +524,6 @@
 		BB8BCD0925B68446005F57B8 /* NSEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSEngine.mm; sourceTree = "<group>"; };
 		BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardEvent.hpp; sourceTree = "<group>"; };
 		BBBA452F25B8822C00C8207D /* GamepadEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GamepadEvent.hpp; sourceTree = "<group>"; };
-		BBBA453225B8822C00C8207D /* KeyboardLookup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardLookup.hpp; sourceTree = "<group>"; };
 		BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAudioEngineHelper.cpp; sourceTree = "<group>"; };
 		BBBA467325B9121600C8207D /* AppleAudioEngineHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppleAudioEngineHelper.hpp; sourceTree = "<group>"; };
 		BBBA467425B9121600C8207D /* AppleSound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppleSound.hpp; sourceTree = "<group>"; };
@@ -932,10 +925,8 @@
 		BBBA577625BB175A00C8207D /* MemoryBitStreamUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemoryBitStreamUtil.hpp; sourceTree = "<group>"; };
 		BBBA57C525BB44FF00C8207D /* StringUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtil.hpp; sourceTree = "<group>"; };
 		BBBA57CF25BB54D400C8207D /* Pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pool.hpp; sourceTree = "<group>"; };
-		BBBA57D225BB566100C8207D /* InstanceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InstanceManager.cpp; sourceTree = "<group>"; };
 		BBBA57D325BB566100C8207D /* InstanceManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstanceManager.hpp; sourceTree = "<group>"; };
-		BBBA57D825BB567300C8207D /* Timing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Timing.hpp; sourceTree = "<group>"; };
-		BBBA57D925BB567300C8207D /* Timing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timing.cpp; sourceTree = "<group>"; };
+		BBBA57D825BB567300C8207D /* TimeTracker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeTracker.hpp; sourceTree = "<group>"; };
 		BBBA57DA25BB567300C8207D /* WeightedTimedMovingAverage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WeightedTimedMovingAverage.hpp; sourceTree = "<group>"; };
 		BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeightedTimedMovingAverage.cpp; sourceTree = "<group>"; };
 		BBBA57E225BB58C900C8207D /* EntityMapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityMapper.hpp; sourceTree = "<group>"; };
@@ -1067,12 +1058,11 @@
 		BBBA5BAE25C0AC5B00C8207D /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
 		BBBA5BAF25C0AC5B00C8207D /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
 		BBBA5BCA25C0B17E00C8207D /* MainConfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainConfig.hpp; sourceTree = "<group>"; };
-		BBBA5BCB25C0B17E00C8207D /* MainConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainConfig.cpp; sourceTree = "<group>"; };
 		BBBA5C1625C0F26400C8207D /* RapidJSONUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RapidJSONUtil.hpp; sourceTree = "<group>"; };
-		BBBA5C1D25C2002300C8207D /* MainInputManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainInputManager.hpp; sourceTree = "<group>"; };
-		BBBA5C1E25C2002300C8207D /* MainInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainInputManager.cpp; sourceTree = "<group>"; };
-		BBBA5C1F25C2002300C8207D /* MainRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainRenderer.cpp; sourceTree = "<group>"; };
-		BBBA5C2025C2002300C8207D /* MainRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MainRenderer.hpp; sourceTree = "<group>"; };
+		BBBA5C1D25C2002300C8207D /* TitleInputManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TitleInputManager.hpp; sourceTree = "<group>"; };
+		BBBA5C1E25C2002300C8207D /* TitleInputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleInputManager.cpp; sourceTree = "<group>"; };
+		BBBA5C1F25C2002300C8207D /* TitleRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleRenderer.cpp; sourceTree = "<group>"; };
+		BBBA5C2025C2002300C8207D /* TitleRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TitleRenderer.hpp; sourceTree = "<group>"; };
 		BBBA5C6925C31B1400C8207D /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		BBBA5C8825C332F000C8207D /* RTTI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RTTI.hpp; sourceTree = "<group>"; };
 		BBBA5C8925C332F000C8207D /* RTTI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTTI.cpp; sourceTree = "<group>"; };
@@ -1372,10 +1362,8 @@
 				BBBA573B25BB175800C8207D /* InputMemoryBitStream.cpp */,
 				BBBA575425BB175900C8207D /* InputMemoryBitStream.hpp */,
 				BBBA576925BB175900C8207D /* InputState.hpp */,
-				BBBA57D225BB566100C8207D /* InstanceManager.cpp */,
 				BBBA57D325BB566100C8207D /* InstanceManager.hpp */,
 				BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */,
-				BBBA453225B8822C00C8207D /* KeyboardLookup.hpp */,
 				BBBA5B9325BE1E3400C8207D /* LightRenderer.cpp */,
 				BBBA5B9025BE1E3400C8207D /* LightRenderer.hpp */,
 				BBBA5B3825BB953300C8207D /* Line.hpp */,
@@ -1475,8 +1463,7 @@
 				BB7B07B125B646BA0021E545 /* TextureManager.hpp */,
 				BB7B07CE25B646BA0021E545 /* TextureRegion.hpp */,
 				BBBA5CEB25C3CFC000C8207D /* TextView.hpp */,
-				BBBA57D925BB567300C8207D /* Timing.cpp */,
-				BBBA57D825BB567300C8207D /* Timing.hpp */,
+				BBBA57D825BB567300C8207D /* TimeTracker.hpp */,
 				BBBA575025BB175900C8207D /* TransmissionData.hpp */,
 				BBBA5B3725BB953300C8207D /* Triangle.hpp */,
 				BBBA575125BB175900C8207D /* UDPSocket.cpp */,
@@ -1555,12 +1542,8 @@
 		BB7B090825B651F20021E545 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				BB21817825C75AB5004398D5 /* OvenController.cpp */,
-				BB21817925C75AB5004398D5 /* OvenController.hpp */,
 				BB21817225C7591D004398D5 /* CrystalController.cpp */,
 				BB21817325C7591D004398D5 /* CrystalController.hpp */,
-				BB21816C25C66D37004398D5 /* MonsterController.cpp */,
-				BB21816D25C66D37004398D5 /* MonsterController.hpp */,
 				BB2CD6C025C518B3007B8775 /* GameEngineState.cpp */,
 				BB2CD6BD25C518B2007B8775 /* GameEngineState.hpp */,
 				BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */,
@@ -1573,22 +1556,25 @@
 				BB21816025C65B9E004398D5 /* HidePlayerController.hpp */,
 				BB21816125C65B9E004398D5 /* JackiePlayerController.cpp */,
 				BB21816225C65B9E004398D5 /* JackiePlayerController.hpp */,
-				BBBA5BCB25C0B17E00C8207D /* MainConfig.cpp */,
 				BBBA5BCA25C0B17E00C8207D /* MainConfig.hpp */,
 				BB7B091825B659280021E545 /* MainEngineController.cpp */,
 				BB7B091725B659280021E545 /* MainEngineController.hpp */,
-				BB7B091C25B659E70021E545 /* MainEngineState.cpp */,
-				BB7B091B25B659E70021E545 /* MainEngineState.hpp */,
-				BBBA5C1E25C2002300C8207D /* MainInputManager.cpp */,
-				BBBA5C1D25C2002300C8207D /* MainInputManager.hpp */,
-				BBBA5C1F25C2002300C8207D /* MainRenderer.cpp */,
-				BBBA5C2025C2002300C8207D /* MainRenderer.hpp */,
+				BB21816C25C66D37004398D5 /* MonsterController.cpp */,
+				BB21816D25C66D37004398D5 /* MonsterController.hpp */,
+				BB21817825C75AB5004398D5 /* OvenController.cpp */,
+				BB21817925C75AB5004398D5 /* OvenController.hpp */,
 				BB21815025C52EFF004398D5 /* PlayerController.cpp */,
 				BB21815125C52F00004398D5 /* PlayerController.hpp */,
 				BB2CD6CD25C52269007B8775 /* Server.cpp */,
 				BB2CD6CE25C52269007B8775 /* Server.hpp */,
 				BB21815725C52FF7004398D5 /* SoundUtil.cpp */,
 				BB21815625C52FF7004398D5 /* SoundUtil.hpp */,
+				BB7B091C25B659E70021E545 /* TitleEngineState.cpp */,
+				BB7B091B25B659E70021E545 /* TitleEngineState.hpp */,
+				BBBA5C1E25C2002300C8207D /* TitleInputManager.cpp */,
+				BBBA5C1D25C2002300C8207D /* TitleInputManager.hpp */,
+				BBBA5C1F25C2002300C8207D /* TitleRenderer.cpp */,
+				BBBA5C2025C2002300C8207D /* TitleRenderer.hpp */,
 				BB21814A25C5282D004398D5 /* World.cpp */,
 				BB21814B25C5282D004398D5 /* World.hpp */,
 			);
@@ -2487,7 +2473,6 @@
 				BBBA46EA25B913D900C8207D /* NSMutableArray+WeakReferences.m in Sources */,
 				BBBA5AEE25BB5D1A00C8207D /* b2_math.cpp in Sources */,
 				BBBA46CC25B913D900C8207D /* OALAudioTrack.m in Sources */,
-				BBBA57D425BB566100C8207D /* InstanceManager.cpp in Sources */,
 				BBBA56D825BA453A00C8207D /* cocoa_joystick.m in Sources */,
 				BB2CD6C725C518B3007B8775 /* GameEngineState.cpp in Sources */,
 				BBBA55D525BA43B300C8207D /* GlfwMain.cpp in Sources */,
@@ -2502,7 +2487,7 @@
 				BB7B08B525B64A620021E545 /* AssetHandlerFactory.cpp in Sources */,
 				BBBA5AB425BB5D1A00C8207D /* b2_body.cpp in Sources */,
 				BBBA5AFA25BB5D1A00C8207D /* b2_broad_phase.cpp in Sources */,
-				BBBA5C2325C2002300C8207D /* MainRenderer.cpp in Sources */,
+				BBBA5C2325C2002300C8207D /* TitleRenderer.cpp in Sources */,
 				BBBA5B9625BE1E3400C8207D /* PolygonBatcher.cpp in Sources */,
 				BBBA5AEA25BB5D1A00C8207D /* b2_stack_allocator.cpp in Sources */,
 				BBBA56F325BA453A00C8207D /* cocoa_window.m in Sources */,
@@ -2555,7 +2540,6 @@
 				BB7B08C325B64A620021E545 /* ShaderDescriptor.cpp in Sources */,
 				BBBA5AF625BB5D1A00C8207D /* b2_collide_edge.cpp in Sources */,
 				BBBA578F25BB175A00C8207D /* Move.cpp in Sources */,
-				BBBA57DC25BB567300C8207D /* Timing.cpp in Sources */,
 				BB7B08C425B64A620021E545 /* ShaderLoader.cpp in Sources */,
 				BBBA46CA25B913D900C8207D /* OALAudioTracks.m in Sources */,
 				BBBA5AC025BB5D1A00C8207D /* b2_polygon_circle_contact.cpp in Sources */,
@@ -2572,7 +2556,6 @@
 				BB7B08C825B64A620021E545 /* TextureLoader.cpp in Sources */,
 				BBBA578125BB175A00C8207D /* AckRange.cpp in Sources */,
 				BBBA5ABA25BB5D1A00C8207D /* b2_contact_solver.cpp in Sources */,
-				BBBA5BCC25C0B17E00C8207D /* MainConfig.cpp in Sources */,
 				BBBA57FC25BB58CA00C8207D /* EntityNetworkController.cpp in Sources */,
 				BBBA46E025B913D900C8207D /* ALContext.m in Sources */,
 				BBBA56E225BA453A00C8207D /* init.c in Sources */,
@@ -2607,7 +2590,7 @@
 				BBBA57AF25BB175A00C8207D /* NetworkHelper.cpp in Sources */,
 				BBBA46FA25B913D900C8207D /* OALAudioSession.m in Sources */,
 				BBBA5AF825BB5D1A00C8207D /* b2_chain_shape.cpp in Sources */,
-				BBBA5C2125C2002300C8207D /* MainInputManager.cpp in Sources */,
+				BBBA5C2125C2002300C8207D /* TitleInputManager.cpp in Sources */,
 				BBBA5AB825BB5D1A00C8207D /* b2_revolute_joint.cpp in Sources */,
 				BBBA472525B9150000C8207D /* AudioEngineHelperFactory.cpp in Sources */,
 				BBBA46F625B913D900C8207D /* OALAudioActions.m in Sources */,
@@ -2617,7 +2600,7 @@
 				BBBA46DE25B913D900C8207D /* ALCaptureDevice.m in Sources */,
 				BBBA5B8425BE019E00C8207D /* FontRenderer.cpp in Sources */,
 				BBBA46F425B913D900C8207D /* OALUtilityActions.m in Sources */,
-				BB7B091D25B659E70021E545 /* MainEngineState.cpp in Sources */,
+				BB7B091D25B659E70021E545 /* TitleEngineState.cpp in Sources */,
 				BBBA471F25B9150000C8207D /* NullSoundWrapper.cpp in Sources */,
 				BBBA5AAC25BB5D1A00C8207D /* b2_joint.cpp in Sources */,
 				BBBA5AD625BB5D1A00C8207D /* b2_island.cpp in Sources */,
@@ -2662,7 +2645,6 @@
 				BB8BCCEA25B682E8005F57B8 /* AppDelegate.swift in Sources */,
 				BBBA46E525B913D900C8207D /* OALSimpleAudio.m in Sources */,
 				BBBA57A625BB175A00C8207D /* SocketPacketHandler.cpp in Sources */,
-				BBBA57DD25BB567300C8207D /* Timing.cpp in Sources */,
 				BBBA46FB25B913D900C8207D /* OALAudioSession.m in Sources */,
 				BB8BCCEC25B682E8005F57B8 /* SceneDelegate.swift in Sources */,
 				BBBA46D525B913D900C8207D /* ALChannelSource.m in Sources */,
@@ -2675,7 +2657,7 @@
 				BBBA5AF925BB5D1A00C8207D /* b2_chain_shape.cpp in Sources */,
 				BBBA5AD525BB5D1A00C8207D /* b2_world.cpp in Sources */,
 				BBBA5AB325BB5D1A00C8207D /* b2_chain_polygon_contact.cpp in Sources */,
-				BB8BCD1425B68490005F57B8 /* MainEngineState.cpp in Sources */,
+				BB8BCD1425B68490005F57B8 /* TitleEngineState.cpp in Sources */,
 				BBBA474425B92E5C00C8207D /* NullAssetHandler.cpp in Sources */,
 				BBBA5ACB25BB5D1A00C8207D /* b2_edge_circle_contact.cpp in Sources */,
 				BBBA5AEB25BB5D1A00C8207D /* b2_stack_allocator.cpp in Sources */,
@@ -2770,7 +2752,7 @@
 				BBBA5AD325BB5D1A00C8207D /* b2_motor_joint.cpp in Sources */,
 				BBBA46F125B913D900C8207D /* OALActionManager.m in Sources */,
 				BBBA578E25BB175A00C8207D /* SocketAddressFactory.cpp in Sources */,
-				BBBA5C2425C2002300C8207D /* MainRenderer.cpp in Sources */,
+				BBBA5C2425C2002300C8207D /* TitleRenderer.cpp in Sources */,
 				BBBA46F325B913D900C8207D /* OALAction.m in Sources */,
 				BBBA467D25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */,
 				BBBA577825BB175A00C8207D /* InputMemoryBitStream.cpp in Sources */,
@@ -2789,9 +2771,8 @@
 				BBBA5ACF25BB5D1A00C8207D /* b2_friction_joint.cpp in Sources */,
 				BB8BCD2A25B68490005F57B8 /* ShaderManager.cpp in Sources */,
 				BBBA57A425BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */,
-				BBBA5C2225C2002300C8207D /* MainInputManager.cpp in Sources */,
+				BBBA5C2225C2002300C8207D /* TitleInputManager.cpp in Sources */,
 				BBBA57FD25BB58CA00C8207D /* EntityNetworkController.cpp in Sources */,
-				BBBA5BCD25C0B17E00C8207D /* MainConfig.cpp in Sources */,
 				BBBA5AE725BB5D1A00C8207D /* b2_timer.cpp in Sources */,
 				BBBA5AB525BB5D1A00C8207D /* b2_body.cpp in Sources */,
 				BBBA5B9725BE1E3400C8207D /* PolygonBatcher.cpp in Sources */,
@@ -2807,7 +2788,6 @@
 				BBBA577C25BB175A00C8207D /* ClientHelper.cpp in Sources */,
 				BB8BCD2E25B68490005F57B8 /* TextureManager.cpp in Sources */,
 				BBBA5AEF25BB5D1A00C8207D /* b2_math.cpp in Sources */,
-				BBBA57D525BB566100C8207D /* InstanceManager.cpp in Sources */,
 				BBBA57B025BB175A00C8207D /* NetworkHelper.cpp in Sources */,
 				BBBA46DF25B913D900C8207D /* ALCaptureDevice.m in Sources */,
 				BBBA57DF25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */,

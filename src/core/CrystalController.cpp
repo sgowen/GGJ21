@@ -16,8 +16,7 @@
 
 #include "World.hpp"
 #include "Macros.hpp"
-#include "Constants.hpp"
-#include "Timing.hpp"
+#include "TimeTracker.hpp"
 #include "StringUtil.hpp"
 #include "MathUtil.hpp"
 #include "NetworkManagerServer.hpp"

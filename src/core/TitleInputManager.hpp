@@ -1,5 +1,5 @@
 //
-//  MainInputManager.hpp
+//  TitleInputManager.hpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
@@ -11,7 +11,7 @@
 #include <string>
 #include <stdint.h>
 
-enum MainInputManagerState
+enum TitleInputManagerState
 {
     MIMS_DEFAULT,
     MIMS_EXIT,
@@ -20,34 +20,38 @@ enum MainInputManagerState
     MIMS_TEXT_INPUT_READY
 };
 
-enum MainInputManagerUpdate
+enum TitleInputManagerUpdate
 {
     MIMU_DEFAULT,
     MIMU_READ_TEXT
 };
 
-#define INPUT_MAIN MainInputManager::getInstance()
+#define INPUT_MAIN TitleInputManager::getInstance()
 
-class MainInputManager
+class TitleInputManager
 {
 public:
-    static MainInputManager& getInstance();
+    static TitleInputManager& getInstance()
+    {
+        static TitleInputManager ret = TitleInputManager();
+        return ret;
+    }
     
-    MainInputManagerState update(MainInputManagerUpdate mimu);
+    TitleInputManagerState update(TitleInputManagerUpdate mimu);
     std::string getTextInput();
     void setTextInput(std::string textInput);
     void clearTextInput();
     
 private:
-    MainInputManagerState _state;
+    TitleInputManagerState _state;
     std::string _textInput;
     
     void updateDefault();
     void updateReadText();
     void acceptKeyInput(uint16_t key);
     
-    MainInputManager();
-    ~MainInputManager() {}
-    MainInputManager(const MainInputManager&);
-    MainInputManager& operator=(const MainInputManager&);
+    TitleInputManager();
+    ~TitleInputManager() {}
+    TitleInputManager(const TitleInputManager&);
+    TitleInputManager& operator=(const TitleInputManager&);
 };

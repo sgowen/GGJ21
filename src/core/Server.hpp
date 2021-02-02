@@ -17,7 +17,7 @@
 
 class ClientProxy;
 class Entity;
-class Timing;
+class TimeTracker;
 class EntityIDManager;
 
 class Server
@@ -41,7 +41,7 @@ public:
 private:
     static Server* s_instance;
     
-    Timing* _timing;
+    TimeTracker* _timeTracker;
     EntityIDManager* _entityIDManager;
     World _world;
     Pool<GameInputState> _inputStates;

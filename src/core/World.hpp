@@ -35,18 +35,19 @@ struct Map
 struct EntityDef;
 class Entity;
 class EntityIDManager;
+class TimeTracker;
 
 class World
 {
 public:
-    World(uint32_t flags = 0);
+    World(TimeTracker* t, EntityIDManager* eidm, uint32_t flags = 0);
     ~World();
     
     void loadMap(uint32_t map);
     void addEntity(Entity* e);
     void removeEntity(Entity* e);
     void stepPhysics();
-    void clear();
+    void clear(bool skipDynamicEntities = false);
     
     bool isMapLoaded();
     std::string& getMapName();
@@ -57,9 +58,10 @@ public:
     std::vector<Entity*>& getLayers();
     
 private:
-    uint32_t _flags;
+    TimeTracker* _timeTracker;
     EntityIDManager* _entityIDManager;
     Map _map;
+    uint32_t _flags;
     
     std::vector<Entity*> _layers;
     std::vector<Entity*> _staticEntities;
@@ -73,4 +75,7 @@ private:
     
     void refreshPlayers();
     void removeEntity(Entity* e, std::vector<Entity*>& entities);
+    
+    void processPhysics(Entity* e);
+    void processCollisions(Entity* e, std::vector<Entity*>& entities);
 };

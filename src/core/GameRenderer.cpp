@@ -19,7 +19,6 @@
 #include "GameInputManager.hpp"
 #include "StringUtil.hpp"
 #include "FPSUtil.hpp"
-#include "Constants.hpp"
 #include "Assets.hpp"
 #include "World.hpp"
 #include "Network.hpp"
@@ -130,15 +129,15 @@ void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
 
 void GameRenderer::renderWorld()
 {
-    World* w = ENGINE_STATE_GAME._world;
+    World& w = ENGINE_STATE_GAME._world;
     
     _spriteBatcher.begin();
-    addSpritesToBatcher(w->getLayers());
-    addSpritesToBatcher(w->getStaticEntities());
+    addSpritesToBatcher(w.getLayers());
+    addSpritesToBatcher(w.getStaticEntities());
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    for (Entity* e : w->getDynamicEntities())
+    for (Entity* e : w.getDynamicEntities())
     {
         if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
         {
@@ -160,7 +159,7 @@ void GameRenderer::renderWorld()
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    for (Entity* e : w->getDynamicEntities())
+    for (Entity* e : w.getDynamicEntities())
     {
         if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
         {
@@ -191,8 +190,10 @@ void GameRenderer::renderUI()
     _textViews[4]._visibility = TEXV_HIDDEN;
     _textViews[5]._visibility = TEXV_HIDDEN;
     _textViews[6]._visibility = TEXV_HIDDEN;
-    World* w = ENGINE_STATE_GAME._world;
-    for (Entity* e : w->getPlayers())
+    
+    World& w = ENGINE_STATE_GAME._world;
+    
+    for (Entity* e : ENGINE_STATE_GAME._world.getPlayers())
     {
         PlayerController* pc = static_cast<PlayerController*>(e->getController());
         
@@ -204,7 +205,7 @@ void GameRenderer::renderUI()
     if (NW_MGR_CLIENT != NULL &&
         NW_MGR_CLIENT->state() == NWCS_WELCOMED)
     {
-        if (w->getPlayers().size() == 1)
+        if (w.getPlayers().size() == 1)
         {
             _textViews[1]._visibility = TEXV_VISIBLE;
             _textViews[2]._visibility = TEXV_VISIBLE;
@@ -226,8 +227,8 @@ void GameRenderer::renderUI()
 void GameRenderer::renderEncounter()
 {
     bool isInEncounter = false;
-    World* w = ENGINE_STATE_GAME._world;
-    for (Entity* e : w->getPlayers())
+    World& w = ENGINE_STATE_GAME._world;
+    for (Entity* e : w.getPlayers())
     {
         if (e->getController()->getRTTI().derivesFrom(HidePlayerController::rtti))
         {
@@ -249,7 +250,7 @@ void GameRenderer::renderEncounter()
     _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
     
     _spriteBatcher.begin();
-    for (Entity* e : w->getDynamicEntities())
+    for (Entity* e : w.getDynamicEntities())
     {
         if (e->getController()->getRTTI().derivesFrom(MonsterController::rtti))
         {
@@ -259,7 +260,7 @@ void GameRenderer::renderEncounter()
             break;
         }
     }
-    for (Entity* e : w->getPlayers())
+    for (Entity* e : w.getPlayers())
     {
         if (e->getController()->getRTTI().derivesFrom(HidePlayerController::rtti))
         {

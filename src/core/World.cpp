@@ -16,7 +16,7 @@
 #include "EntityNetworkController.hpp"
 #include "InstanceManager.hpp"
 #include "MainConfig.hpp"
-#include "Timing.hpp"
+#include "TimeTracker.hpp"
 #include "StringUtil.hpp"
 #include "GowUtil.hpp"
 #include "Network.hpp"
@@ -24,12 +24,12 @@
 #include "PlayerController.hpp"
 #include "Rektangle.hpp"
 #include "OverlapTester.hpp"
-#include "Constants.hpp"
 
-World::World(uint32_t flags) :
-_flags(flags),
-_entityIDManager(static_cast<EntityIDManager*>(INSTANCE_MGR.get(IS_BIT_SET(_flags, WorldFlag_Server) ? INSK_ENTITY_ID_MANAGER_SERVER : INSK_ENTITY_ID_MANAGER_CLIENT))),
-_map()
+World::World(TimeTracker* t, EntityIDManager* eidm, uint32_t flags) :
+_timeTracker(t),
+_entityIDManager(eidm),
+_map(),
+_flags(flags)
 {
     // Empty
 }
@@ -37,15 +37,13 @@ _map()
 World::~World()
 {
     clear();
-    
-    GowUtil::cleanUpVectorOfPointers(_dynamicEntities);
 }
 
 void World::loadMap(uint32_t map)
 {
     assert(map > 0);
     
-    clear();
+    clear(IS_BIT_SET(_flags, WorldFlag_Client));
     
     _map._key = map;
     _map._name = StringUtil::stringFromFourChar(map);
@@ -108,17 +106,17 @@ void World::stepPhysics()
 {
     for (Entity* e : _dynamicEntities)
     {
-        e->selfProcessPhysics();
-        e->selfProcessCollisions(_staticEntities);
-        e->selfProcessCollisions(_players);
-        e->selfProcessCollisions(_dynamicEntities);
+        processPhysics(e);
+        processCollisions(e, _staticEntities);
+        processCollisions(e, _players);
+        processCollisions(e, _dynamicEntities);
     }
     
     for (Entity* e : _players)
     {
-        e->selfProcessPhysics();
-        e->selfProcessCollisions(_staticEntities);
-        e->selfProcessCollisions(_dynamicEntities);
+        processPhysics(e);
+        processCollisions(e, _staticEntities);
+        processCollisions(e, _dynamicEntities);
     }
     
     for (Entity* e : _players)
@@ -139,12 +137,12 @@ void World::stepPhysics()
     }
 }
 
-void World::clear()
+void World::clear(bool skipDynamicEntities)
 {
     GowUtil::cleanUpVectorOfPointers(_layers);
     GowUtil::cleanUpVectorOfPointers(_staticEntities);
     
-    if (IS_BIT_SET(_flags, WorldFlag_Server))
+    if (!skipDynamicEntities)
     {
         GowUtil::cleanUpVectorOfPointers(_dynamicEntities);
         refreshPlayers();
@@ -235,6 +233,54 @@ void World::removeEntity(Entity* e, std::vector<Entity*>& entities)
         else
         {
             ++i;
+        }
+    }
+}
+
+void World::processPhysics(Entity* e)
+{
+    b2Vec2 vel = e->pose()._velocity;
+    vel *= _timeTracker->_frameRate;
+    e->pose()._position += vel;
+}
+
+void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
+{
+    float x = target->getPosition().x;
+    float y = target->getPosition().y;
+    float w = target->getWidth();
+    float h = target->getHeight();
+    Rektangle bounds(x - w / 2, y - h / 2, w, h);
+    
+    for (Entity* e : entities)
+    {
+        if (target == e)
+        {
+            continue;
+        }
+        
+        float x = e->getPosition().x;
+        float y = e->getPosition().y;
+        float w = e->getWidth();
+        float h = e->getHeight();
+        Rektangle boundsToTest(x - w / 2, y - h / 2, w, h);
+        
+        if (OverlapTester::doRektanglesOverlap(bounds, boundsToTest))
+        {
+            if (bounds.right() >= boundsToTest.left() ||
+                bounds.left() <= boundsToTest.right() ||
+                bounds.top() >= boundsToTest.bottom() ||
+                bounds.bottom() <= boundsToTest.top())
+            {
+                b2Vec2 vel = target->getVelocity();
+                vel *= _timeTracker->_frameRate;
+                b2Vec2 pos = target->getPosition();
+                pos -= vel;
+                target->setPosition(pos);
+            }
+            
+            target->getController()->onCollision(e);
+            break;
         }
     }
 }

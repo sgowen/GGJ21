@@ -1,5 +1,5 @@
 //
-//  MainEngineState.hpp
+//  TitleEngineState.hpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
@@ -10,9 +10,9 @@
 
 #include "StateMachine.hpp"
 
-#include "MainRenderer.hpp"
+#include "TitleRenderer.hpp"
 
-enum MainEngineStateState
+enum TitleEngineStateState
 {
     MESS_DEFAULT,
     MESS_INPUT_IP,
@@ -22,22 +22,26 @@ enum MainEngineStateState
 
 class Engine;
 
-#define ENGINE_STATE_MAIN MainEngineState::getInstance()
+#define ENGINE_STATE_MAIN TitleEngineState::getInstance()
 
-class MainEngineState : public State<Engine>
+class TitleEngineState : public State<Engine>
 {
-    friend class MainRenderer;
+    friend class TitleRenderer;
     
 public:
-    static MainEngineState& getInstance();
+    static TitleEngineState& getInstance()
+    {
+        static TitleEngineState ret = TitleEngineState();
+        return ret;
+    }
     
     virtual void enter(Engine* e);
     virtual void execute(Engine* e);
     virtual void exit(Engine* e);
     
 private:    
-    MainRenderer _renderer;
-    MainEngineStateState _state;
+    TitleRenderer _renderer;
+    TitleEngineStateState _state;
     std::string _userEnteredIPAddress;
     
     void createDeviceDependentResources();
@@ -52,8 +56,8 @@ private:
     void updateInputJoinName(Engine* e);
     void render();
     
-    MainEngineState();
-    ~MainEngineState() {}
-    MainEngineState(const MainEngineState&);
-    MainEngineState& operator=(const MainEngineState&);
+    TitleEngineState();
+    ~TitleEngineState() {}
+    TitleEngineState(const TitleEngineState&);
+    TitleEngineState& operator=(const TitleEngineState&);
 };

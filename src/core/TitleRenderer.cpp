@@ -1,30 +1,29 @@
 //
-//  MainRenderer.cpp
+//  TitleRenderer.cpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "MainRenderer.hpp"
+#include "TitleRenderer.hpp"
 
-#include "MainEngineState.hpp"
+#include "TitleEngineState.hpp"
 #include "OpenGLWrapper.hpp"
 #include "Macros.hpp"
 #include "Color.hpp"
 #include "MainConfig.hpp"
 #include "InputManager.hpp"
-#include "MainInputManager.hpp"
+#include "TitleInputManager.hpp"
 #include "StringUtil.hpp"
 #include "FPSUtil.hpp"
-#include "Constants.hpp"
 
 #include <sstream>
 #include <ctime>
 #include <string>
 #include <assert.h>
 
-MainRenderer::MainRenderer() :
+TitleRenderer::TitleRenderer() :
 _fontRenderer(128, 0, 0, 16, 64, 75, 1024, 1024),
 _framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
 _screenRenderer(),
@@ -55,7 +54,7 @@ _textViews{
     _fontRenderer.configure(_textViews[8], 0.98f, 0.02f, 0.012f);
 }
 
-void MainRenderer::createDeviceDependentResources()
+void TitleRenderer::createDeviceDependentResources()
 {
     _fontRenderer.createDeviceDependentResources();
     
@@ -67,12 +66,12 @@ void MainRenderer::createDeviceDependentResources()
     _textureManager.createDeviceDependentResources();
 }
 
-void MainRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
+void TitleRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
 {
     _screenRenderer.onWindowSizeChanged(screenWidth, screenHeight);
 }
 
-void MainRenderer::releaseDeviceDependentResources()
+void TitleRenderer::releaseDeviceDependentResources()
 {
     _fontRenderer.releaseDeviceDependentResources();
     
@@ -84,9 +83,9 @@ void MainRenderer::releaseDeviceDependentResources()
     _textureManager.releaseDeviceDependentResources();
 }
 
-void MainRenderer::render()
+void TitleRenderer::render()
 {
-    MainEngineStateState mess = ENGINE_STATE_MAIN._state;
+    TitleEngineStateState mess = ENGINE_STATE_MAIN._state;
     
     _textViews[3]._visibility = mess == MESS_DEFAULT ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[4]._visibility = mess == MESS_DEFAULT ? TEXV_VISIBLE : TEXV_HIDDEN;
@@ -116,7 +115,7 @@ void MainRenderer::render()
     _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
 }
 
-void MainRenderer::updateMatrix(float l, float r, float b, float t)
+void TitleRenderer::updateMatrix(float l, float r, float b, float t)
 {
     mat4_identity(_matrix);
     mat4_ortho(_matrix, l, r, b, t, -1, 1);

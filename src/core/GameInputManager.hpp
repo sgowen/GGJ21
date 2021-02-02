@@ -27,7 +27,11 @@ enum GameInputManagerState
 class GameInputManager
 {
 public:
-    static GameInputManager& getInstance();
+    static GameInputManager& getInstance()
+    {
+        static GameInputManager ret = GameInputManager();
+        return ret;
+    }
     
     static void sRemoveProcessedMoves(float lastMoveProcessedOnServerTimestamp);
     static MoveList& sGetMoveList();

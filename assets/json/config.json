@@ -1,4 +1,5 @@
 {
+  "framesPerSecond": "60",
   "clientPortHost": "1337",
   "clientPortJoin": "1338",
   "serverPort": "9999",

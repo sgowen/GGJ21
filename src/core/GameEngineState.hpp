@@ -11,6 +11,7 @@
 #include "StateMachine.hpp"
 
 #include "GameRenderer.hpp"
+#include "World.hpp"
 
 enum GameEngineStateState
 {
@@ -21,7 +22,7 @@ enum GameEngineStateState
 
 class Engine;
 class World;
-class Timing;
+class TimeTracker;
 class Server;
 class Move;
 
@@ -33,7 +34,11 @@ class GameEngineState : public State<Engine>
     friend class GameRenderer;
     
 public:
-    static GameEngineState& getInstance();
+    static GameEngineState& getInstance()
+    {
+        static GameEngineState ret = GameEngineState();
+        return ret;
+    }
     
     static uint64_t sGetPlayerAddressHash(uint8_t playerIndex);
     static void sHandleDynamicEntityCreatedOnClient(Entity* e);
@@ -45,13 +50,13 @@ public:
     virtual void execute(Engine* e);
     virtual void exit(Engine* e);
     
-    World* getWorld();
+    World& getWorld();
     bool isLive();
     
 private:    
     GameRenderer _renderer;
-    World* _world;
-    Timing* _timing;
+    TimeTracker* _timeTracker;
+    World _world;
     uint32_t _state;
     std::string _serverIPAddress;
     std::string _name;

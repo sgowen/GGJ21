@@ -1,25 +1,18 @@
 //
-//  MainInputManager.cpp
+//  TitleInputManager.cpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "MainInputManager.hpp"
+#include "TitleInputManager.hpp"
 
 #include "InputManager.hpp"
-#include "KeyboardLookup.hpp"
 #include "MainConfig.hpp"
 #include "StringUtil.hpp"
 
-MainInputManager& MainInputManager::getInstance()
-{
-    static MainInputManager ret = MainInputManager();
-    return ret;
-}
-
-MainInputManagerState MainInputManager::update(MainInputManagerUpdate mimu)
+TitleInputManagerState TitleInputManager::update(TitleInputManagerUpdate mimu)
 {
     _state = MIMS_DEFAULT;
     
@@ -38,27 +31,27 @@ MainInputManagerState MainInputManager::update(MainInputManagerUpdate mimu)
     return _state;
 }
 
-std::string MainInputManager::getTextInput()
+std::string TitleInputManager::getTextInput()
 {
     return _textInput;
 }
 
-void MainInputManager::setTextInput(std::string textInput)
+void TitleInputManager::setTextInput(std::string textInput)
 {
     _textInput = textInput;
 }
 
-void MainInputManager::clearTextInput()
+void TitleInputManager::clearTextInput()
 {
     _textInput.clear();
 }
 
-void MainInputManager::updateDefault()
+void TitleInputManager::updateDefault()
 {
 #if IS_MOBILE
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
-        if (!e->isPressed())
+        if (!e->isDown())
         {
             continue;
         }
@@ -70,20 +63,20 @@ void MainInputManager::updateDefault()
     
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {
-        if (!e->isPressed())
+        if (!e->isDown())
         {
             continue;
         }
         
-        switch (e->_type)
+        switch (e->_button)
         {
-            case GPET_BUTTON_A:
+            case GPEB_BUTTON_A:
                 _state = MIMS_START_SERVER;
                 continue;
-            case GPET_BUTTON_X:
+            case GPEB_BUTTON_X:
                 _state = MIMS_JOIN_SERVER;
                 continue;
-            case GPET_BUTTON_SELECT:
+            case GPEB_BUTTON_SELECT:
                 _state = MIMS_EXIT;
                 continue;
             default:
@@ -93,7 +86,7 @@ void MainInputManager::updateDefault()
     
     for (KeyboardEvent* e : INPUT_MGR.getKeyboardEvents())
     {
-        if (!e->isPressed())
+        if (!e->isDown())
         {
             continue;
         }
@@ -115,11 +108,11 @@ void MainInputManager::updateDefault()
     }
 }
 
-void MainInputManager::updateReadText()
+void TitleInputManager::updateReadText()
 {
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
-        if (e->_type != CUET_DOWN)
+        if (!e->isDown())
         {
             continue;
         }
@@ -131,18 +124,18 @@ void MainInputManager::updateReadText()
     
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {
-        if (!e->isPressed())
+        if (!e->isDown())
         {
             continue;
         }
         
-        switch (e->_type)
+        switch (e->_button)
         {
-            case GPET_BUTTON_A:
+            case GPEB_BUTTON_A:
                 _state = MIMS_TEXT_INPUT_READY;
                 _textInput = "gamer";
                 continue;
-            case GPET_BUTTON_SELECT:
+            case GPEB_BUTTON_SELECT:
                 _state = MIMS_EXIT;
                 clearTextInput();
                 continue;
@@ -153,12 +146,7 @@ void MainInputManager::updateReadText()
     
     for (KeyboardEvent* e : INPUT_MGR.getKeyboardEvents())
     {
-        if (!e->isPressed())
-        {
-            continue;
-        }
-        
-        if (!isKeySupported(e->_key))
+        if (!e->isDown())
         {
             continue;
         }
@@ -188,7 +176,7 @@ void MainInputManager::updateReadText()
     }
 }
 
-void MainInputManager::acceptKeyInput(uint16_t key)
+void TitleInputManager::acceptKeyInput(uint16_t key)
 {
     if (_textInput.length() > CFG_MAIN._maxTextInputLength)
     {
@@ -199,7 +187,7 @@ void MainInputManager::acceptKeyInput(uint16_t key)
     _textInput += StringUtil::format("%c", c);
 }
 
-MainInputManager::MainInputManager() :
+TitleInputManager::TitleInputManager() :
 _state(MIMS_DEFAULT),
 _textInput("")
 {

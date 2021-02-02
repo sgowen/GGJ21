@@ -10,14 +10,13 @@
 
 #include "ClientProxy.hpp"
 #include "Entity.hpp"
-#include "Timing.hpp"
+#include "TimeTracker.hpp"
 #include "EntityIDManager.hpp"
 
 #include "NetworkManagerServer.hpp"
 #include "EntityManager.hpp"
 #include "SocketServerHelper.hpp"
 #include "MachineAddress.hpp"
-#include "Constants.hpp"
 #include "PlayerController.hpp"
 #include "EntityMapper.hpp"
 #include "EntityLayoutMapper.hpp"
@@ -74,7 +73,7 @@ void Server::sHandleInputStateRelease(InputState* inputState)
 
 void Server::update()
 {
-    _timing->onFrame();
+    _timeTracker->onFrame();
     
     NW_MGR_SERVER->processIncomingPackets();
     
@@ -290,12 +289,12 @@ void Server::handleDirtyStates(std::vector<Entity*>& entities)
 }
 
 Server::Server() :
-_timing(static_cast<Timing*>(INSTANCE_MGR.get(INSK_TIMING_SERVER))),
-_entityIDManager(static_cast<EntityIDManager*>(INSTANCE_MGR.get(INSK_ENTITY_ID_MANAGER_SERVER))),
-_world(WorldFlag_Server),
+_timeTracker(INSTANCE_MGR.get<TimeTracker>(INSK_TIMING_SERVER)),
+_entityIDManager(INSTANCE_MGR.get<EntityIDManager>(INSK_ENTITY_ID_MANAGER_SERVER)),
+_world(_timeTracker, _entityIDManager, WorldFlag_Server),
 _map(0)
 {
-    _timing->reset();
+    _timeTracker->reset();
     
     NetworkManagerServer::create(new SocketServerHelper(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, NW_MGR_SERVER_CALLBACKS), SERVER_CALLBACKS);
     assert(NW_MGR_SERVER != NULL);

@@ -9,8 +9,7 @@
 #include "GameEngineState.hpp"
 
 #include "Engine.hpp"
-#include "World.hpp"
-#include "Timing.hpp"
+#include "TimeTracker.hpp"
 #include "Server.hpp"
 #include "Move.hpp"
 
@@ -28,7 +27,6 @@
 #include "SocketClientHelper.hpp"
 #include "GowAudioEngine.hpp"
 #include "Assets.hpp"
-#include "Constants.hpp"
 #include "EntityMapper.hpp"
 #include "EntityLayoutMapper.hpp"
 #include "MainConfig.hpp"
@@ -41,38 +39,28 @@
 #include <stdlib.h>
 #include <assert.h>
 
-GameEngineState& GameEngineState::getInstance()
-{
-    static GameEngineState ret = GameEngineState();
-    return ret;
-}
-
 uint64_t GameEngineState::sGetPlayerAddressHash(uint8_t playerIndex)
 {
     uint64_t ret = 0;
     
-    World* w = ENGINE_STATE_GAME._world;
-    assert(w != NULL);
+    World& w = ENGINE_STATE_GAME._world;
     
     uint8_t playerID = playerIndex + 1;
     
-    Entity* player = NULL;
-    for (Entity* e : w->getPlayers())
+    PlayerController* player = NULL;
+    for (Entity* e : w.getPlayers())
     {
         PlayerController* pc = static_cast<PlayerController*>(e->getController());
         if (pc->getPlayerID() == playerID)
         {
-            player = e;
+            player = pc;
             break;
         }
     }
     
     if (player != NULL)
     {
-        PlayerController* pc = static_cast<PlayerController*>(player->getController());
-        assert(pc);
-        
-        ret = pc->getAddressHash();
+        ret = player->getAddressHash();
     }
     
     return ret;
@@ -80,18 +68,12 @@ uint64_t GameEngineState::sGetPlayerAddressHash(uint8_t playerIndex)
 
 void GameEngineState::sHandleDynamicEntityCreatedOnClient(Entity* e)
 {
-    World* w = ENGINE_STATE_GAME._world;
-    assert(w != NULL);
-    
-    w->addEntity(e);
+    ENGINE_STATE_GAME._world.addEntity(e);
 }
 
 void GameEngineState::sHandleDynamicEntityDeletedOnClient(Entity* e)
 {
-    World* w = ENGINE_STATE_GAME._world;
-    assert(w != NULL);
-    
-    w->removeEntity(e);
+    ENGINE_STATE_GAME._world.removeEntity(e);
 }
 
 void GameEngineState::sHandleHostServer(Engine* e, std::string name)
@@ -120,11 +102,6 @@ void GameEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
-    
-    _map = 0;
-    _world = new World(WorldFlag_Client);
-    _timing->reset();
-    INPUT_GAME.reset();
 }
 
 void GameEngineState::execute(Engine* e)
@@ -162,8 +139,10 @@ void GameEngineState::exit(Engine* e)
 {
     releaseDeviceDependentResources();
     
-    delete _world;
-    _world = NULL;
+    _world.clear();
+    _timeTracker->reset();
+    INPUT_GAME.reset();
+    _map = 0;
     
     if (NW_MGR_CLIENT != NULL)
     {
@@ -175,11 +154,14 @@ void GameEngineState::exit(Engine* e)
         Server::destroy();
     }
     
-    SET_BIT(_state, GESS_HOST, false);
-    SET_BIT(_state, GESS_CONNECTED, false);
+    _state = GESS_DEFAULT;
+    _serverIPAddress.clear();
+    _name.clear();
+    _isHost = false;
+    _isLive = false;
 }
 
-World* GameEngineState::getWorld()
+World& GameEngineState::getWorld()
 {
     return _world;
 }
@@ -196,7 +178,7 @@ void GameEngineState::joinServer()
     uint16_t port = _isHost ? CFG_MAIN._clientPortHost : CFG_MAIN._clientPortJoin;
     NetworkManagerClient::create(new SocketClientHelper(_serverIPAddress, _name, port, NW_MGR_CLIENT_CALLBACKS), GAME_ENGINE_CALLBACKS, INPUT_MANAGER_CALLBACKS);
     
-    assert(NW_MGR_CLIENT);
+    assert(NW_MGR_CLIENT != NULL);
     
     SET_BIT(_state, GESS_CONNECTED, true);
 }
@@ -205,15 +187,15 @@ void GameEngineState::updateWorld(const Move* move)
 {
     assert(move != NULL);
     
-    for (Entity* e : _world->getPlayers())
+    for (Entity* e : _world.getPlayers())
     {
         PlayerController* pc = static_cast<PlayerController*>(e->getController());
         pc->processInput(move->getInputState());
     }
     
-    _world->stepPhysics();
+    _world.stepPhysics();
     
-    for (Entity* e : _world->getDynamicEntities())
+    for (Entity* e : _world.getDynamicEntities())
     {
         e->update();
     }
@@ -273,7 +255,7 @@ void GameEngineState::update(Engine* e)
         return;
     }
     
-    _timing->onFrame();
+    _timeTracker->onFrame();
     
     NW_MGR_CLIENT->processIncomingPackets();
     if (NW_MGR_CLIENT->state() == NWCS_DISCONNECTED)
@@ -288,10 +270,10 @@ void GameEngineState::update(Engine* e)
         if (map != 0 && _map != map)
         {
             _map = map;
-            _world->loadMap(_map);
+            _world.loadMap(_map);
         }
         
-        for (Entity* e : _world->getDynamicEntities())
+        for (Entity* e : _world.getDynamicEntities())
         {
             e->getNetworkController()->recallNetworkCache();
         }
@@ -331,8 +313,8 @@ void GameEngineState::render()
 
 GameEngineState::GameEngineState() : State<Engine>(),
 _renderer(),
-_world(NULL),
-_timing(static_cast<Timing*>(INSTANCE_MGR.get(INSK_TIMING_CLIENT))),
+_timeTracker(INSTANCE_MGR.get<TimeTracker>(INSK_TIMING_CLIENT)),
+_world(_timeTracker, INSTANCE_MGR.get<EntityIDManager>(INSK_ENTITY_ID_MANAGER_CLIENT), WorldFlag_Client),
 _state(GESS_DEFAULT),
 _serverIPAddress(""),
 _name(""),

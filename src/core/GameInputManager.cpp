@@ -9,8 +9,7 @@
 #include "GameInputManager.hpp"
 
 #include "InputManager.hpp"
-#include "KeyboardLookup.hpp"
-#include "Timing.hpp"
+#include "TimeTracker.hpp"
 #include "InstanceManager.hpp"
 #include "Network.hpp"
 #include "NetworkManagerClient.hpp"
@@ -21,12 +20,6 @@
 #include "PlayerController.hpp"
 #include "World.hpp"
 #include "Entity.hpp"
-
-GameInputManager& GameInputManager::getInstance()
-{
-    static GameInputManager ret = GameInputManager();
-    return ret;
-}
 
 void GameInputManager::sRemoveProcessedMoves(float inLastMoveProcessedOnServerTimestamp)
 {
@@ -53,12 +46,9 @@ GameInputManagerState GameInputManager::update()
 {
     _state = GIMS_DEFAULT;
     
-    World* w = ENGINE_STATE_GAME._world;
-    assert(w != NULL);
-    
     float playerX = CFG_MAIN._camWidth / 2;
     float playerY = CFG_MAIN._camHeight / 2;
-    for (Entity* e : w->getPlayers())
+    for (Entity* e : ENGINE_STATE_GAME._world.getPlayers())
     {
         PlayerController* pc = static_cast<PlayerController*>(e->getController());
         
@@ -90,12 +80,12 @@ GameInputManagerState GameInputManager::update()
     bool isMovingRight[4] = {false};
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {
-        switch (e->_type)
+        switch (e->_button)
         {
-            case GPET_BUTTON_SELECT:
-                _state = e->isPressed() ? GIMS_EXIT : _state;
+            case GPEB_BUTTON_SELECT:
+                _state = e->isDown() ? GIMS_EXIT : _state;
                 continue;
-            case GPET_D_PAD_UP:
+            case GPEB_D_PAD_UP:
             {
                 if (!isMovingUp[e->_index])
                 {
@@ -104,7 +94,7 @@ GameInputManagerState GameInputManager::update()
                 }
                 continue;
             }
-            case GPET_D_PAD_LEFT:
+            case GPEB_D_PAD_LEFT:
             {
                 if (!isMovingLeft[e->_index])
                 {
@@ -113,7 +103,7 @@ GameInputManagerState GameInputManager::update()
                 }
                 continue;
             }
-            case GPET_D_PAD_DOWN:
+            case GPEB_D_PAD_DOWN:
             {
                 if (!isMovingDown[e->_index])
                 {
@@ -122,7 +112,7 @@ GameInputManagerState GameInputManager::update()
                 }
                 continue;
             }
-            case GPET_D_PAD_RIGHT:
+            case GPEB_D_PAD_RIGHT:
             {
                 if (!isMovingRight[e->_index])
                 {
@@ -131,32 +121,29 @@ GameInputManagerState GameInputManager::update()
                 }
                 continue;
             }
-            case GPET_STICK_LEFT:
+            case GPEB_STICK_LEFT:
             {
-                float xVal = sanitizeCloseToZeroValue(e->_x);
-                float yVal = sanitizeCloseToZeroValue(e->_y);
-                
                 if (!isMovingUp[e->_index])
                 {
-                    isMovingUp[e->_index] = yVal < 0;
+                    isMovingUp[e->_index] = e->_y < 0;
                     SET_BIT(_currentState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, isMovingUp[e->_index]);
                 }
                 
                 if (!isMovingLeft[e->_index])
                 {
-                    isMovingLeft[e->_index] = xVal < 0;
+                    isMovingLeft[e->_index] = e->_x < 0;
                     SET_BIT(_currentState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, isMovingLeft[e->_index]);
                 }
                 
                 if (!isMovingDown[e->_index])
                 {
-                    isMovingDown[e->_index] = yVal > 0;
+                    isMovingDown[e->_index] = e->_y > 0;
                     SET_BIT(_currentState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, isMovingDown[e->_index]);
                 }
                 
                 if (!isMovingRight[e->_index])
                 {
-                    isMovingRight[e->_index] = xVal > 0;
+                    isMovingRight[e->_index] = e->_x > 0;
                     SET_BIT(_currentState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, isMovingRight[e->_index]);
                 }
                 continue;
@@ -251,9 +238,9 @@ const Move& GameInputManager::sampleInputAsMove()
     GameInputState* inputState = _inputStates.obtain();
     _currentState->copyTo(inputState);
     
-    Timing* t = static_cast<Timing*>(INSTANCE_MGR.get(INSK_TIMING_CLIENT));
+    TimeTracker* t = INSTANCE_MGR.get<TimeTracker>(INSK_TIMING_CLIENT);
     
-    return _moveList.addMove(inputState, t->getTime());
+    return _moveList.addMove(inputState, t->_time);
 }
 
 void GameInputManager::drop2ndPlayer()

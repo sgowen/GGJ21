@@ -1,5 +1,5 @@
 //
-//  MainRenderer.h
+//  TitleRenderer.h
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
@@ -19,11 +19,11 @@
 
 #define NUM_TEXT_VIEWS 9
 
-class MainRenderer
+class TitleRenderer
 {
 public:
-    MainRenderer();
-    ~MainRenderer() {}
+    TitleRenderer();
+    ~TitleRenderer() {}
     
     void createDeviceDependentResources();
     void onWindowSizeChanged(int screenWidth, int screenHeight);

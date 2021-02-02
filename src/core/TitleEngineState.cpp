@@ -1,17 +1,17 @@
 //
-//  MainEngineState.cpp
+//  TitleEngineState.cpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "MainEngineState.hpp"
+#include "TitleEngineState.hpp"
 
 #include "Engine.hpp"
 
 #include "Assets.hpp"
-#include "MainInputManager.hpp"
+#include "TitleInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "GameEngineState.hpp"
 #include "StringUtil.hpp"
@@ -20,13 +20,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-MainEngineState& MainEngineState::getInstance()
-{
-    static MainEngineState ret = MainEngineState();
-    return ret;
-}
-
-void MainEngineState::enter(Engine* e)
+void TitleEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
@@ -36,7 +30,7 @@ void MainEngineState::enter(Engine* e)
     INPUT_MAIN.clearTextInput();
 }
 
-void MainEngineState::execute(Engine* e)
+void TitleEngineState::execute(Engine* e)
 {
     switch (e->state())
     {
@@ -67,12 +61,12 @@ void MainEngineState::execute(Engine* e)
     }
 }
 
-void MainEngineState::exit(Engine* e)
+void TitleEngineState::exit(Engine* e)
 {
     releaseDeviceDependentResources();
 }
 
-void MainEngineState::createDeviceDependentResources()
+void TitleEngineState::createDeviceDependentResources()
 {
     ASSETS.initWithJSONFile("json/assets_main.json");
     _renderer.createDeviceDependentResources();
@@ -80,29 +74,29 @@ void MainEngineState::createDeviceDependentResources()
     GOW_AUDIO.playMusic(true, 0.1f);
 }
 
-void MainEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
+void TitleEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
 {
     _renderer.onWindowSizeChanged(screenWidth, screenHeight);
 }
 
-void MainEngineState::releaseDeviceDependentResources()
+void TitleEngineState::releaseDeviceDependentResources()
 {
     ASSETS.clear();
     _renderer.releaseDeviceDependentResources();
     GOW_AUDIO.releaseDeviceDependentResources();
 }
 
-void MainEngineState::resume()
+void TitleEngineState::resume()
 {
     GOW_AUDIO.resume();
 }
 
-void MainEngineState::pause()
+void TitleEngineState::pause()
 {
     GOW_AUDIO.pause();
 }
 
-void MainEngineState::update(Engine* e)
+void TitleEngineState::update(Engine* e)
 {
     switch (_state)
     {
@@ -123,9 +117,9 @@ void MainEngineState::update(Engine* e)
     }
 }
 
-void MainEngineState::updateDefault(Engine* e)
+void TitleEngineState::updateDefault(Engine* e)
 {
-    MainInputManagerState mims = INPUT_MAIN.update(MIMU_DEFAULT);
+    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_DEFAULT);
     switch (mims)
     {
         case MIMS_EXIT:
@@ -142,9 +136,9 @@ void MainEngineState::updateDefault(Engine* e)
     }
 }
 
-void MainEngineState::updateInputIP(Engine* e)
+void TitleEngineState::updateInputIP(Engine* e)
 {
-    MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
     switch (mims)
     {
         case MIMS_EXIT:
@@ -160,9 +154,9 @@ void MainEngineState::updateInputIP(Engine* e)
     }
 }
 
-void MainEngineState::updateInputHostName(Engine* e)
+void TitleEngineState::updateInputHostName(Engine* e)
 {
-    MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
     switch (mims)
     {
         case MIMS_EXIT:
@@ -176,9 +170,9 @@ void MainEngineState::updateInputHostName(Engine* e)
     }
 }
 
-void MainEngineState::updateInputJoinName(Engine* e)
+void TitleEngineState::updateInputJoinName(Engine* e)
 {
-    MainInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
     switch (mims)
     {
         case MIMS_EXIT:
@@ -193,13 +187,13 @@ void MainEngineState::updateInputJoinName(Engine* e)
     }
 }
 
-void MainEngineState::render()
+void TitleEngineState::render()
 {
     _renderer.render();
     GOW_AUDIO.render();
 }
 
-MainEngineState::MainEngineState() : State<Engine>(),
+TitleEngineState::TitleEngineState() : State<Engine>(),
 _renderer(),
 _state(MESS_DEFAULT)
 {

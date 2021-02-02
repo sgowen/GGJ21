@@ -12,7 +12,6 @@
 #include <vector>
 
 #include "InputState.hpp"
-#include "Constants.hpp"
 
 enum GameInputStateFlags
 {
@@ -45,8 +44,6 @@ public:
     private:
         uint8_t _playerID;
         uint8_t _inputState;
-        
-        
     };
     
     GameInputState();
