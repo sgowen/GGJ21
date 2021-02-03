@@ -223,11 +223,8 @@ void Server::deleteRobotWithPlayerId(uint8_t playerID)
 
 void Server::spawnEntityForPlayer(uint8_t playerId, std::string playerName)
 {
-    ClientProxy* client = NW_MGR_SERVER->getClientProxy(playerId);
-    if (client == NULL)
-    {
-        return;
-    }
+    ClientProxy* cp = NW_MGR_SERVER->getClientProxy(playerId);
+    assert(cp != NULL);
     
     float spawnX = playerId == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
     float spawnY = playerId == 1 ? rand() % 16 + 6 : rand() % 8 + 6;
@@ -236,7 +233,7 @@ void Server::spawnEntityForPlayer(uint8_t playerId, std::string playerName)
     EntityInstanceDef eid(_entityIDManager->getNextDynamicEntityID(), key, spawnX, spawnY);
     Entity* e = ENTITY_MAPPER.createEntity(&eid, true);
     PlayerController* pc = static_cast<PlayerController*>(e->getController());
-    pc->setAddressHash(client->getMachineAddress()->getHash());
+    pc->setAddressHash(cp->getMachineAddress()->getHash());
     pc->setPlayerName(playerName);
     pc->setPlayerID(playerId);
     
