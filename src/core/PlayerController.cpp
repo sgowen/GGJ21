@@ -177,7 +177,7 @@ void PlayerController::processInput(InputState* inputState)
         
         if (ENGINE_STATE_GAME.isLive())
         {
-            SoundUtil::handleSound(_entity, fromState, state);
+            SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
         }
     }
 }
@@ -320,7 +320,7 @@ void PlayerNetworkController::read(InputMemoryBitStream& ip)
     
     if (!_isLocalPlayer)
     {
-        SoundUtil::handleSound(_entity, fromState, _entity->state()._state);
+        SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
     }
 }
 

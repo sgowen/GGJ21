@@ -12,7 +12,7 @@
 
 #include "GowAudioEngine.hpp"
 
-void SoundUtil::handleSound(Entity* e, uint8_t fromState, uint8_t toState)
+void SoundUtil::playSoundForStateIfChanged(Entity* e, uint8_t fromState, uint8_t toState)
 {
     if (fromState == toState)
     {

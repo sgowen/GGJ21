@@ -179,7 +179,7 @@ void MonsterNetworkController::read(InputMemoryBitStream& ip)
         c._statsNetworkCache = c._stats;
     }
     
-    SoundUtil::handleSound(_entity, fromState, _entity->state()._state);
+    SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
 }
 
 uint16_t MonsterNetworkController::write(OutputMemoryBitStream& op, uint16_t dirtyState)

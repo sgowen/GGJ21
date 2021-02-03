@@ -15,7 +15,7 @@ class Entity;
 class SoundUtil
 {
 public:
-    static void handleSound(Entity* e, uint8_t fromState, uint8_t toState);
+    static void playSoundForStateIfChanged(Entity* e, uint8_t fromState, uint8_t toState);
     
     SoundUtil() {}
     ~SoundUtil() {}
