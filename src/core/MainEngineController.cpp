@@ -26,30 +26,24 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     CFG_MAIN.init();
     
     static TimeTracker TIMS(getFrameRate());
-    INSTANCE_MGR.registerInstance(INSK_TIMING_SERVER, &TIMS);
-    
     static TimeTracker TIMC(getFrameRate());
-    INSTANCE_MGR.registerInstance(INSK_TIMING_CLIENT, &TIMC);
-    
     static EntityIDManager EIMS;
-    INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_SERVER, &EIMS);
-    
     static EntityIDManager EIMC;
+    
+    INSTANCE_MGR.registerInstance(INSK_TIMING_SERVER, &TIMS);
+    INSTANCE_MGR.registerInstance(INSK_TIMING_CLIENT, &TIMC);
+    INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_SERVER, &EIMS);
     INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_CLIENT, &EIMC);
     
-    ENTITY_MAPPER.registerEntityController("Hide", HidePlayerController::create);
-    ENTITY_MAPPER.registerEntityNetworkController("Hide", HidePlayerNetworkController::create);
-    
-    ENTITY_MAPPER.registerEntityController("Jackie", JackiePlayerController::create);
-    ENTITY_MAPPER.registerEntityNetworkController("Jackie", JackiePlayerNetworkController::create);
-    
+    ENTITY_MAPPER.registerEntityController("Hide",    HidePlayerController::create);
+    ENTITY_MAPPER.registerEntityController("Jackie",  JackiePlayerController::create);
     ENTITY_MAPPER.registerEntityController("Monster", MonsterController::create);
-    ENTITY_MAPPER.registerEntityNetworkController("Monster", MonsterNetworkController::create);
-    
     ENTITY_MAPPER.registerEntityController("Crystal", CrystalController::create);
-    ENTITY_MAPPER.registerEntityNetworkController("Crystal", CrystalNetworkController::create);
+    ENTITY_MAPPER.registerEntityController("Oven",    OvenController::create);
     
-    ENTITY_MAPPER.registerEntityController("Oven", OvenController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Hide",    HidePlayerNetworkController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Jackie",  JackiePlayerNetworkController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Monster", MonsterNetworkController::create);
 }
 
 State<Engine>* MainEngineController::getInitialState()

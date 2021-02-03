@@ -34,23 +34,3 @@ private:
         STAT_EXPLODING = 1
     };
 };
-
-#include "EntityNetworkController.hpp"
-
-class CrystalNetworkController : public EntityNetworkController
-{
-    DECL_EntityNetworkController_create;
-    
-public:
-    CrystalNetworkController(Entity* e, bool isServer);
-    virtual ~CrystalNetworkController() {}
-    
-    virtual void read(InputMemoryBitStream& ip);
-    virtual uint16_t write(OutputMemoryBitStream& op, uint16_t dirtyState);
-    
-    virtual void recallNetworkCache();
-    virtual uint16_t getDirtyState();
-    
-private:
-    CrystalController* _controller;
-};
