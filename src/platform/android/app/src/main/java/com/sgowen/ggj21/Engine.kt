@@ -2,14 +2,19 @@ package com.sgowen.ggj21
 
 import android.content.res.AssetManager
 
-class Engine
+class Engine(assetManager: AssetManager)
 {
     init
     {
-        init()
+        init(assetManager)
     }
 
-    external fun createDeviceDependentResources(assetManager: AssetManager)
+    protected fun finalize()
+    {
+        deinit()
+    }
+
+    external fun createDeviceDependentResources()
     external fun onWindowSizeChanged(screenWidth: Int, screenHeight: Int, cursorWidth: Int, cursorHeight: Int)
     external fun releaseDeviceDependentResources()
     external fun onResume()
@@ -20,7 +25,8 @@ class Engine
     external fun onCursorDragged(x: Float, y: Float)
     external fun onCursorUp(x: Float, y: Float)
 
-    private external fun init()
+    private external fun init(assetManager: AssetManager)
+    private external fun deinit()
 
     companion object
     {

@@ -21,32 +21,35 @@
 #include "OvenController.hpp"
 #include "MainConfig.hpp"
 
-MainEngineController::MainEngineController() :
-_frameRate(0)
+MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
     CFG_MAIN.init();
     
-    _frameRate = 1.0 / CFG_MAIN._framesPerSecond;
-    
-    static TimeTracker TIMS(_frameRate);
+    static TimeTracker TIMS(getFrameRate());
     INSTANCE_MGR.registerInstance(INSK_TIMING_SERVER, &TIMS);
-    static TimeTracker TIMC(_frameRate);
+    
+    static TimeTracker TIMC(getFrameRate());
     INSTANCE_MGR.registerInstance(INSK_TIMING_CLIENT, &TIMC);
+    
     static EntityIDManager EIMS;
     INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_SERVER, &EIMS);
+    
     static EntityIDManager EIMC;
     INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_CLIENT, &EIMC);
     
-    ENTITY_MAPPER.registerFunction("Hide", HidePlayerController::create);
-    ENTITY_MAPPER.registerFunction("Hide", HidePlayerNetworkController::create);
-    ENTITY_MAPPER.registerFunction("Jackie", JackiePlayerController::create);
-    ENTITY_MAPPER.registerFunction("Jackie", JackiePlayerNetworkController::create);
-    ENTITY_MAPPER.registerFunction("Monster", MonsterController::create);
-    ENTITY_MAPPER.registerFunction("Monster", MonsterNetworkController::create);
-    ENTITY_MAPPER.registerFunction("Crystal", CrystalController::create);
-    ENTITY_MAPPER.registerFunction("Crystal", CrystalNetworkController::create);
-    ENTITY_MAPPER.registerFunction("Oven", OvenController::create);
-    ENTITY_MAPPER.registerFunction("Oven", OvenNetworkController::create);
+    ENTITY_MAPPER.registerEntityController("Hide", HidePlayerController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Hide", HidePlayerNetworkController::create);
+    
+    ENTITY_MAPPER.registerEntityController("Jackie", JackiePlayerController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Jackie", JackiePlayerNetworkController::create);
+    
+    ENTITY_MAPPER.registerEntityController("Monster", MonsterController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Monster", MonsterNetworkController::create);
+    
+    ENTITY_MAPPER.registerEntityController("Crystal", CrystalController::create);
+    ENTITY_MAPPER.registerEntityNetworkController("Crystal", CrystalNetworkController::create);
+    
+    ENTITY_MAPPER.registerEntityController("Oven", OvenController::create);
 }
 
 State<Engine>* MainEngineController::getInitialState()
@@ -56,5 +59,5 @@ State<Engine>* MainEngineController::getInitialState()
 
 double MainEngineController::getFrameRate()
 {
-    return _frameRate;
+    return 1.0 / CFG_MAIN._framesPerSecond;
 }

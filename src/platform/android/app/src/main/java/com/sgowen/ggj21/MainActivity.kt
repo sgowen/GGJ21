@@ -17,14 +17,37 @@ class MainActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
 
-        engine = Engine()
+        engine = Engine(resources.assets)
 
         setContentView(MyGLSurfaceView(engine, this))
     }
 
+    override fun onResume()
+    {
+        super.onResume()
+
+        if (::engine.isInitialized)
+        {
+            engine.onResume()
+        }
+    }
+
+    override fun onPause()
+    {
+        if (::engine.isInitialized)
+        {
+            engine.onPause()
+        }
+
+        super.onPause()
+    }
+
     override fun onDestroy()
     {
-        engine.releaseDeviceDependentResources()
+        if (::engine.isInitialized)
+        {
+            engine.releaseDeviceDependentResources()
+        }
 
         super.onDestroy()
     }
@@ -60,7 +83,7 @@ class MainActivity : AppCompatActivity()
         {
             setEGLContextClientVersion(3)
 
-            setRenderer(MyGLRenderer(context, engine))
+            setRenderer(MyGLRenderer(engine))
         }
 
         @SuppressLint("ClickableViewAccessibility")
@@ -89,11 +112,11 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private class MyGLRenderer(val context: Context, val engine: Engine) : GLSurfaceView.Renderer
+    private class MyGLRenderer(val engine: Engine) : GLSurfaceView.Renderer
     {
         override fun onSurfaceCreated(unused: GL10, config: EGLConfig)
         {
-            engine.createDeviceDependentResources(assetManager = context.resources.assets)
+            engine.createDeviceDependentResources()
         }
 
         override fun onDrawFrame(unused: GL10)

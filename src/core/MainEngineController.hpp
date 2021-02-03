@@ -13,12 +13,9 @@
 class MainEngineController : public EngineController
 {
 public:
-    MainEngineController();
+    MainEngineController(void* data1 = NULL, void* data2 = NULL);
     virtual ~MainEngineController() {}
     
     virtual State<Engine>* getInitialState();
     virtual double getFrameRate();
-    
-private:
-    double _frameRate;
 };

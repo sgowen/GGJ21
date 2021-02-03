@@ -3,17 +3,14 @@
 
 #include "Engine.hpp"
 #include "MainEngineController.hpp"
-#include "android/JNIAndroidAssetHandler.hpp"
 
 Engine* _engine = NULL;
-MainEngineController _mainEngineController;
+MainEngineController* _mainEngineController = NULL;
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_sgowen_ggj21_Engine_createDeviceDependentResources(JNIEnv *env, jobject thiz, jobject asset_manager)
+Java_com_sgowen_ggj21_Engine_createDeviceDependentResources(JNIEnv *env, jobject thiz)
 {
-    JNIAndroidAssetHandler::create(env, asset_manager);
-
     _engine->createDeviceDependentResources();
 }
 
@@ -29,8 +26,6 @@ JNIEXPORT void JNICALL
 Java_com_sgowen_ggj21_Engine_releaseDeviceDependentResources(JNIEnv *env, jobject thiz)
 {
     _engine->releaseDeviceDependentResources();
-
-    JNIAndroidAssetHandler::destroy();
 }
 
 extern "C"
@@ -84,9 +79,22 @@ Java_com_sgowen_ggj21_Engine_onCursorUp(JNIEnv *env, jobject thiz, jfloat x, jfl
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_sgowen_ggj21_Engine_init(JNIEnv *env, jobject thiz)
+Java_com_sgowen_ggj21_Engine_init(JNIEnv *env, jobject thiz, jobject asset_manager)
 {
+    assert(_mainEngineController == NULL);
+    _mainEngineController = new MainEngineController(env, asset_manager);
+
     assert(_engine == NULL);
-    
-    _engine = new Engine(_mainEngineController);
+    _engine = new Engine(*_mainEngineController);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_sgowen_ggj21_Engine_deinit(JNIEnv *env, jobject thiz)
+{
+    delete _engine;
+    _engine = NULL;
+
+    delete _mainEngineController;
+    _mainEngineController = NULL;
 }
