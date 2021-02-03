@@ -1,189 +1,189 @@
 {
   "music": {
-    "filePath": "audio/music/music_game.wav"
+    "filePath": "assets/audio/music/music_game.wav"
   },
   "sounds": [
     {
       "soundID": 1,
-      "filePath": "audio/treant_lines/treant1.wav",
+      "filePath": "assets/audio/treant_lines/treant1.wav",
       "numInstances": 1
     },
     {
       "soundID": 2,
-      "filePath": "audio/treant_lines/treant2.wav",
+      "filePath": "assets/audio/treant_lines/treant2.wav",
       "numInstances": 1
     },
     {
       "soundID": 3,
-      "filePath": "audio/treant_lines/treant3.wav",
+      "filePath": "assets/audio/treant_lines/treant3.wav",
       "numInstances": 1
     },
     {
       "soundID": 8,
-      "filePath": "audio/sfx/treant_ingrain.wav",
+      "filePath": "assets/audio/sfx/treant_ingrain.wav",
       "numInstances": 2
     },
     {
       "soundID": 84,
-      "filePath": "audio/hide_lines/hide_calmdown1.wav",
+      "filePath": "assets/audio/hide_lines/hide_calmdown1.wav",
       "numInstances": 1
     },
     {
       "soundID": 85,
-      "filePath": "audio/hide_lines/hide_calmdown2.wav",
+      "filePath": "assets/audio/hide_lines/hide_calmdown2.wav",
       "numInstances": 1
     },
     {
       "soundID": 86,
-      "filePath": "audio/hide_lines/hide_calmdown3.wav",
+      "filePath": "assets/audio/hide_lines/hide_calmdown3.wav",
       "numInstances": 1
     },
     {
       "soundID": 87,
-      "filePath": "audio/hide_lines/hide_combatstart1.wav",
+      "filePath": "assets/audio/hide_lines/hide_combatstart1.wav",
       "numInstances": 1
     },
     {
       "soundID": 88,
-      "filePath": "audio/hide_lines/hide_combatstart2.wav",
+      "filePath": "assets/audio/hide_lines/hide_combatstart2.wav",
       "numInstances": 1
     },
     {
       "soundID": 89,
-      "filePath": "audio/hide_lines/hide_combatstart3.wav",
+      "filePath": "assets/audio/hide_lines/hide_combatstart3.wav",
       "numInstances": 1
     },
     {
       "soundID": 90,
-      "filePath": "audio/hide_lines/hide_combatstart4.wav",
+      "filePath": "assets/audio/hide_lines/hide_combatstart4.wav",
       "numInstances": 1
     },
     {
       "soundID": 91,
-      "filePath": "audio/hide_lines/hide_combatstart5.wav",
+      "filePath": "assets/audio/hide_lines/hide_combatstart5.wav",
       "numInstances": 1
     },
     {
       "soundID": 33,
-      "filePath": "audio/jackie_lines/jackie_hmm1.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_hmm1.wav",
       "numInstances": 1
     },
     {
       "soundID": 34,
-      "filePath": "audio/jackie_lines/jackie_hmm2.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_hmm2.wav",
       "numInstances": 1
     },
     {
       "soundID": 35,
-      "filePath": "audio/jackie_lines/jackie_hopehesalright1.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_hopehesalright1.wav",
       "numInstances": 1
     },
     {
       "soundID": 38,
-      "filePath": "audio/jackie_lines/jackie_itsmells1.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_itsmells1.wav",
       "numInstances": 1
     },
     {
       "soundID": 46,
-      "filePath": "audio/jackie_lines/jackie_placeisamaze.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_placeisamaze.wav",
       "numInstances": 1
     },
     {
       "soundID": 48,
-      "filePath": "audio/jackie_lines/jackie_sigh1.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_sigh1.wav",
       "numInstances": 1
     },
     {
       "soundID": 49,
-      "filePath": "audio/jackie_lines/jackie_sigh2.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_sigh2.wav",
       "numInstances": 1
     },
     {
       "soundID": 50,
-      "filePath": "audio/jackie_lines/jackie_sigh3.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_sigh3.wav",
       "numInstances": 1
     },
     {
       "soundID": 51,
-      "filePath": "audio/jackie_lines/jackie_sigh4.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_sigh4.wav",
       "numInstances": 1
     },
     {
       "soundID": 57,
-      "filePath": "audio/jackie_lines/jackie_ugh.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_ugh.wav",
       "numInstances": 1
     },
     {
       "soundID": 58,
-      "filePath": "audio/jackie_lines/jackie_what_swiththepuzzles.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_what_swiththepuzzles.wav",
       "numInstances": 1
     },
     {
       "soundID": 59,
-      "filePath": "audio/jackie_lines/jackie_wherehide1.wav",
+      "filePath": "assets/audio/jackie_lines/jackie_wherehide1.wav",
       "numInstances": 1
     },
     {
       "soundID": 115,
-      "filePath": "audio/hide_lines/hide_intro1.wav",
+      "filePath": "assets/audio/hide_lines/hide_intro1.wav",
       "numInstances": 1
     },
     {
       "soundID": 69,
-      "filePath": "audio/sfx/wall_bump.wav",
+      "filePath": "assets/audio/sfx/wall_bump.wav",
       "numInstances": 2
     },
     {
       "soundID": 157,
-      "filePath": "audio/hide_lines/hide_win1.wav",
+      "filePath": "assets/audio/hide_lines/hide_win1.wav",
       "numInstances": 1
     },
     {
       "soundID": 158,
-      "filePath": "audio/hide_lines/hide_win2.wav",
+      "filePath": "assets/audio/hide_lines/hide_win2.wav",
       "numInstances": 1
     },
     {
       "soundID": 159,
-      "filePath": "audio/hide_lines/hide_win3.wav",
+      "filePath": "assets/audio/hide_lines/hide_win3.wav",
       "numInstances": 1
     },
     {
       "soundID": 18,
-      "filePath": "audio/witch_lines/hagwitch1.wav",
+      "filePath": "assets/audio/witch_lines/hagwitch1.wav",
       "numInstances": 1
     },
     {
       "soundID": 21,
-      "filePath": "audio/witch_lines/hotwitch1.wav",
+      "filePath": "assets/audio/witch_lines/hotwitch1.wav",
       "numInstances": 1
     },
     {
       "soundID": 80,
-      "filePath": "audio/hide_lines/hide_attack1.wav",
+      "filePath": "assets/audio/hide_lines/hide_attack1.wav",
       "numInstances": 1
     },
     {
       "soundID": 81,
-      "filePath": "audio/hide_lines/hide_attack2.wav",
+      "filePath": "assets/audio/hide_lines/hide_attack2.wav",
       "numInstances": 1
     },
     {
       "soundID": 82,
-      "filePath": "audio/hide_lines/hide_attack3.wav",
+      "filePath": "assets/audio/hide_lines/hide_attack3.wav",
       "numInstances": 1
     },
     {
       "soundID": 83,
-      "filePath": "audio/hide_lines/hide_attack4.wav",
+      "filePath": "assets/audio/hide_lines/hide_attack4.wav",
       "numInstances": 1
     }
   ],
   "shaders": [
     {
       "name": "framebuffer",
-      "vertexShaderFilePath": "shaders/framebuffer.vsh",
-      "fragmentShaderFilePath": "shaders/framebuffer.fsh",
+      "vertexShaderFilePath": "assets/shaders/framebuffer.vsh",
+      "fragmentShaderFilePath": "assets/shaders/framebuffer.fsh",
       "uniforms": [
         {
           "name": "u_Texture",
@@ -199,8 +199,8 @@
     },
     {
       "name": "texture",
-      "vertexShaderFilePath": "shaders/texture.vsh",
-      "fragmentShaderFilePath": "shaders/texture.fsh",
+      "vertexShaderFilePath": "assets/shaders/texture.vsh",
+      "fragmentShaderFilePath": "assets/shaders/texture.fsh",
       "uniforms": [
         {
           "name": "u_Matrix",
@@ -228,8 +228,8 @@
     },
     {
       "name": "geometry",
-      "vertexShaderFilePath": "shaders/geometry.vsh",
-      "fragmentShaderFilePath": "shaders/geometry.fsh",
+      "vertexShaderFilePath": "assets/shaders/geometry.vsh",
+      "fragmentShaderFilePath": "assets/shaders/geometry.fsh",
       "uniforms": [
         {
           "name": "u_Matrix",
@@ -249,8 +249,8 @@
     },
     {
       "name": "lights",
-      "vertexShaderFilePath": "shaders/lights.vsh",
-      "fragmentShaderFilePath": "shaders/lights.fsh",
+      "vertexShaderFilePath": "assets/shaders/lights.vsh",
+      "fragmentShaderFilePath": "assets/shaders/lights.fsh",
       "uniforms": [
         {
           "name": "u_Matrix",
@@ -298,7 +298,7 @@
   "textures": [
     {
       "name": "background_tiles",
-      "filePath": "textures/background_tiles.png",
+      "filePath": "assets/textures/background_tiles.png",
       "textureWidth": 1024,
       "textureHeight": 1024,
       "mappings": {
@@ -396,11 +396,11 @@
     },
     {
       "name": "demo",
-      "filePath": "textures/demo.png"
+      "filePath": "assets/textures/demo.png"
     },
     {
       "name": "overworld_characters",
-      "filePath": "textures/overworld_characters.png",
+      "filePath": "assets/textures/overworld_characters.png",
       "textureWidth": 1024,
       "textureHeight": 1024,
       "mappings": {
@@ -530,7 +530,7 @@
     },
     {
       "name": "big_sprites",
-      "filePath": "textures/big_sprites.png",
+      "filePath": "assets/textures/big_sprites.png",
       "mappings": {
         "BIG_HIDE_IDLE": {
           "x": 0,
@@ -585,7 +585,7 @@
     },
     {
       "name": "texture_font",
-      "filePath": "textures/texture_font.png",
+      "filePath": "assets/textures/texture_font.png",
       "mipMap": false
     }
   ]

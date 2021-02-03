@@ -68,7 +68,7 @@ void TitleEngineState::exit(Engine* e)
 
 void TitleEngineState::createDeviceDependentResources()
 {
-    ASSETS.initWithJSONFile("json/assets_main.json");
+    ASSETS.initWithJSONFile("assets/json/assets_main.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
     GOW_AUDIO.playMusic(true, 0.1f);

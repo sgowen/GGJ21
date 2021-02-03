@@ -6,9 +6,5 @@ bin/
 obj/
 
 # copied to project dir after build
-json/
-music/
-shaders/
-sounds/
-textures/
+assets/
 GGJ21

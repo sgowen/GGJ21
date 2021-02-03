@@ -203,9 +203,9 @@ void GameEngineState::updateWorld(const Move* move)
 
 void GameEngineState::createDeviceDependentResources()
 {
-    ENTITY_MAPPER.initWithJSONFile("json/entities.json");
-    ENTITY_LAYOUT_MAPPER.initWithJSONFile("json/maps.json");
-    ASSETS.initWithJSONFile("json/assets_game.json");
+    ENTITY_MAPPER.initWithJSONFile("assets/json/entities.json");
+    ENTITY_LAYOUT_MAPPER.initWithJSONFile("assets/json/maps.json");
+    ASSETS.initWithJSONFile("assets/json/assets_game.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
     // TODO, remove

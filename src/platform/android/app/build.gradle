@@ -22,12 +22,6 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            assets.srcDirs = ['../../../../assets']
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -48,6 +42,14 @@ android {
             version "3.10.2"
         }
     }
+
+    task copyAssets(type: Copy)
+    copyAssets {
+        description = 'Copies assets from root assets into project assets'
+        from '../../../../assets/'
+        into 'src/main/assets/assets/'
+    }
+    preBuild.dependsOn(copyAssets)
 }
 
 dependencies {

@@ -53,7 +53,7 @@ public:
     void init()
     {
         Config c;
-        c.initWithJSONFile("json/config.json");
+        c.initWithJSONFile("assets/json/config.json");
         
         _framesPerSecond = c.getInt("framesPerSecond");
         _clientPortHost = c.getInt("clientPortHost");
