@@ -1,14 +1,7 @@
 {
   "music": {
-    "filePath": "music/music_main.wav"
+    "filePath": "audio/music/music_main.wav"
   },
-  "sounds": [
-    {
-      "soundID": 1,
-      "filePath": "sounds/hide_lines/hide_attack1.wav",
-      "numInstances": 1
-    }
-  ],
   "shaders": [
     {
       "name": "framebuffer",
@@ -60,7 +53,9 @@
   "textures": [
     {
       "name": "demo",
-      "filePath": "textures/demo.png"
+      "filePath": "textures/demo.png",
+      "filterMin": "SMOOTH",
+      "filterMag": "SMOOTH"
     },
     {
       "name": "texture_font",

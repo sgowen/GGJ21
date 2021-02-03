@@ -1,7 +1,8 @@
 {
   "MON1": {
     "name": "Monster",
-    "controller": "Monster",
+    "entityController": "Monster",
+    "entityNetworkController": "Monster",
     "textureMappings": {
       "99": "GENERIC_MONSTER_DOWN"
     },
@@ -16,7 +17,8 @@
   },
   "HIDE": {
     "name": "Hide",
-    "controller": "Hide",
+    "entityController": "Hide",
+    "entityNetworkController": "Hide",
     "textureMappings": {
       "99": "HIDE_DOWN"
     },
@@ -43,7 +45,8 @@
   },
   "JCKE": {
     "name": "Jackie",
-    "controller": "Jackie",
+    "entityController": "Jackie",
+    "entityNetworkController": "Jackie",
     "textureMappings": {
       "99": "JACKIE_DOWN"
     },
@@ -175,7 +178,8 @@
   },
   "CRYB": {
     "name": "CRYSTAL_BLUE",
-    "controller": "Crystal",
+    "entityController": "Crystal",
+    "entityNetworkController": "Crystal",
     "textureMappings": {
       "0": "CRYSTAL_BLUE",
       "1": "EXPLOSION"
@@ -187,7 +191,8 @@
   },
   "CRYR": {
     "name": "CRYSTAL_RED",
-    "controller": "Crystal",
+    "entityController": "Crystal",
+    "entityNetworkController": "Crystal",
     "textureMappings": {
       "0": "CRYSTAL_RED",
       "1": "EXPLOSION"
@@ -199,7 +204,8 @@
   },
   "CRYG": {
     "name": "CRYSTAL_GREEN",
-    "controller": "Crystal",
+    "entityController": "Crystal",
+    "entityNetworkController": "Crystal",
     "textureMappings": {
       "0": "CRYSTAL_GREEN",
       "1": "EXPLOSION"
@@ -211,7 +217,7 @@
   },
   "OVEN": {
     "name": "OVEN",
-    "controller": "Oven",
+    "entityController": "Oven",
     "textureMapping": "OVEN",
     "width": 4,
     "height": 4,

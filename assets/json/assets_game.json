@@ -1,206 +1,181 @@
 {
   "music": {
-    "filePath": "music/music_game.wav"
+    "filePath": "audio/music/music_game.wav"
   },
   "sounds": [
     {
       "soundID": 1,
-      "filePath": "sounds/treant_lines/treant1.wav",
+      "filePath": "audio/treant_lines/treant1.wav",
       "numInstances": 1
     },
     {
       "soundID": 2,
-      "filePath": "sounds/treant_lines/treant2.wav",
+      "filePath": "audio/treant_lines/treant2.wav",
       "numInstances": 1
     },
     {
       "soundID": 3,
-      "filePath": "sounds/treant_lines/treant3.wav",
+      "filePath": "audio/treant_lines/treant3.wav",
       "numInstances": 1
     },
     {
       "soundID": 8,
-      "filePath": "sounds/sfx/treant_ingrain.wav",
+      "filePath": "audio/sfx/treant_ingrain.wav",
       "numInstances": 2
     },
     {
       "soundID": 84,
-      "filePath": "sounds/hide_lines/hide_calmdown1.wav",
+      "filePath": "audio/hide_lines/hide_calmdown1.wav",
       "numInstances": 1
     },
     {
       "soundID": 85,
-      "filePath": "sounds/hide_lines/hide_calmdown2.wav",
+      "filePath": "audio/hide_lines/hide_calmdown2.wav",
       "numInstances": 1
     },
     {
       "soundID": 86,
-      "filePath": "sounds/hide_lines/hide_calmdown3.wav",
+      "filePath": "audio/hide_lines/hide_calmdown3.wav",
       "numInstances": 1
     },
     {
       "soundID": 87,
-      "filePath": "sounds/hide_lines/hide_combatstart1.wav",
+      "filePath": "audio/hide_lines/hide_combatstart1.wav",
       "numInstances": 1
     },
     {
       "soundID": 88,
-      "filePath": "sounds/hide_lines/hide_combatstart2.wav",
+      "filePath": "audio/hide_lines/hide_combatstart2.wav",
       "numInstances": 1
     },
     {
       "soundID": 89,
-      "filePath": "sounds/hide_lines/hide_combatstart3.wav",
+      "filePath": "audio/hide_lines/hide_combatstart3.wav",
       "numInstances": 1
     },
     {
       "soundID": 90,
-      "filePath": "sounds/hide_lines/hide_combatstart4.wav",
+      "filePath": "audio/hide_lines/hide_combatstart4.wav",
       "numInstances": 1
     },
     {
       "soundID": 91,
-      "filePath": "sounds/hide_lines/hide_combatstart5.wav",
+      "filePath": "audio/hide_lines/hide_combatstart5.wav",
       "numInstances": 1
     },
     {
       "soundID": 33,
-      "filePath": "sounds/jackie_lines/jackie_hmm1.wav",
+      "filePath": "audio/jackie_lines/jackie_hmm1.wav",
       "numInstances": 1
     },
     {
       "soundID": 34,
-      "filePath": "sounds/jackie_lines/jackie_hmm2.wav",
+      "filePath": "audio/jackie_lines/jackie_hmm2.wav",
       "numInstances": 1
     },
     {
       "soundID": 35,
-      "filePath": "sounds/jackie_lines/jackie_hopehesalright1.wav",
+      "filePath": "audio/jackie_lines/jackie_hopehesalright1.wav",
       "numInstances": 1
     },
     {
       "soundID": 38,
-      "filePath": "sounds/jackie_lines/jackie_itsmells1.wav",
+      "filePath": "audio/jackie_lines/jackie_itsmells1.wav",
       "numInstances": 1
     },
     {
       "soundID": 46,
-      "filePath": "sounds/jackie_lines/jackie_placeisamaze.wav",
+      "filePath": "audio/jackie_lines/jackie_placeisamaze.wav",
       "numInstances": 1
     },
     {
       "soundID": 48,
-      "filePath": "sounds/jackie_lines/jackie_sigh1.wav",
+      "filePath": "audio/jackie_lines/jackie_sigh1.wav",
       "numInstances": 1
     },
     {
       "soundID": 49,
-      "filePath": "sounds/jackie_lines/jackie_sigh2.wav",
+      "filePath": "audio/jackie_lines/jackie_sigh2.wav",
       "numInstances": 1
     },
     {
       "soundID": 50,
-      "filePath": "sounds/jackie_lines/jackie_sigh3.wav",
+      "filePath": "audio/jackie_lines/jackie_sigh3.wav",
       "numInstances": 1
     },
     {
       "soundID": 51,
-      "filePath": "sounds/jackie_lines/jackie_sigh4.wav",
+      "filePath": "audio/jackie_lines/jackie_sigh4.wav",
       "numInstances": 1
     },
     {
       "soundID": 57,
-      "filePath": "sounds/jackie_lines/jackie_ugh.wav",
+      "filePath": "audio/jackie_lines/jackie_ugh.wav",
       "numInstances": 1
     },
     {
       "soundID": 58,
-      "filePath": "sounds/jackie_lines/jackie_what_swiththepuzzles.wav",
+      "filePath": "audio/jackie_lines/jackie_what_swiththepuzzles.wav",
       "numInstances": 1
     },
     {
       "soundID": 59,
-      "filePath": "sounds/jackie_lines/jackie_wherehide1.wav",
+      "filePath": "audio/jackie_lines/jackie_wherehide1.wav",
       "numInstances": 1
     },
     {
       "soundID": 115,
-      "filePath": "sounds/hide_lines/hide_intro1.wav",
+      "filePath": "audio/hide_lines/hide_intro1.wav",
       "numInstances": 1
     },
     {
       "soundID": 69,
-      "filePath": "sounds/sfx/wall_bump.wav",
+      "filePath": "audio/sfx/wall_bump.wav",
       "numInstances": 2
     },
     {
-      "soundID": 87,
-      "filePath": "sounds/hide_lines/hide_combatstart1.wav",
-      "numInstances": 1
-    },
-    {
-      "soundID": 88,
-      "filePath": "sounds/hide_lines/hide_combatstart2.wav",
-      "numInstances": 1
-    },
-    {
-      "soundID": 89,
-      "filePath": "sounds/hide_lines/hide_combatstart3.wav",
-      "numInstances": 1
-    },
-    {
-      "soundID": 90,
-      "filePath": "sounds/hide_lines/hide_combatstart4.wav",
-      "numInstances": 1
-    },
-    {
-      "soundID": 91,
-      "filePath": "sounds/hide_lines/hide_combatstart5.wav",
-      "numInstances": 1
-    },
-    {
       "soundID": 157,
-      "filePath": "sounds/hide_lines/hide_win1.wav",
+      "filePath": "audio/hide_lines/hide_win1.wav",
       "numInstances": 1
     },
     {
       "soundID": 158,
-      "filePath": "sounds/hide_lines/hide_win2.wav",
+      "filePath": "audio/hide_lines/hide_win2.wav",
       "numInstances": 1
     },
     {
       "soundID": 159,
-      "filePath": "sounds/hide_lines/hide_win3.wav",
+      "filePath": "audio/hide_lines/hide_win3.wav",
       "numInstances": 1
     },
     {
       "soundID": 18,
-      "filePath": "sounds/Witch_lines/hagwitch1.wav",
+      "filePath": "audio/witch_lines/hagwitch1.wav",
       "numInstances": 1
     },
     {
       "soundID": 21,
-      "filePath": "sounds/Witch_lines/hotwitch1.wav",
+      "filePath": "audio/witch_lines/hotwitch1.wav",
       "numInstances": 1
     },
     {
       "soundID": 80,
-      "filePath": "sounds/hide_lines/hide_attack1.wav",
+      "filePath": "audio/hide_lines/hide_attack1.wav",
       "numInstances": 1
     },
     {
       "soundID": 81,
-      "filePath": "sounds/hide_lines/hide_attack2.wav",
+      "filePath": "audio/hide_lines/hide_attack2.wav",
       "numInstances": 1
     },
     {
       "soundID": 82,
-      "filePath": "sounds/hide_lines/hide_attack3.wav",
+      "filePath": "audio/hide_lines/hide_attack3.wav",
       "numInstances": 1
     },
     {
       "soundID": 83,
-      "filePath": "sounds/hide_lines/hide_attack4.wav",
+      "filePath": "audio/hide_lines/hide_attack4.wav",
       "numInstances": 1
     }
   ],
