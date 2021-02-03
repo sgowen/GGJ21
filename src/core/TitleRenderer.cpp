@@ -85,7 +85,7 @@ void TitleRenderer::releaseDeviceDependentResources()
 
 void TitleRenderer::render()
 {
-    TitleEngineStateState mess = ENGINE_STATE_MAIN._state;
+    TitleEngineStateState mess = ENGINE_STATE_TITLE._state;
     
     _textViews[3]._visibility = mess == MESS_DEFAULT ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[4]._visibility = mess == MESS_DEFAULT ? TEXV_VISIBLE : TEXV_HIDDEN;

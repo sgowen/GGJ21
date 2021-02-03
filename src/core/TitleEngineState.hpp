@@ -22,7 +22,7 @@ enum TitleEngineStateState
 
 class Engine;
 
-#define ENGINE_STATE_MAIN TitleEngineState::getInstance()
+#define ENGINE_STATE_TITLE TitleEngineState::getInstance()
 
 class TitleEngineState : public State<Engine>
 {

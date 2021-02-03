@@ -48,7 +48,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
 
 State<Engine>* MainEngineController::getInitialState()
 {
-    return &ENGINE_STATE_MAIN;
+    return &ENGINE_STATE_TITLE;
 }
 
 double MainEngineController::getFrameRate()
