@@ -111,6 +111,7 @@ void TitleInputManager::updateDefault()
 
 void TitleInputManager::updateReadText()
 {
+#if IS_MOBILE
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
         if (!e->isDown())
@@ -122,6 +123,7 @@ void TitleInputManager::updateReadText()
         _textInput = "mobile";
         break;
     }
+#endif
     
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {

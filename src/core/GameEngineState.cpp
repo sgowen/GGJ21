@@ -211,8 +211,6 @@ void GameEngineState::createDeviceDependentResources()
     // TODO, remove
     GOW_AUDIO.playSound(_isHost ? 115 : 59);
     GOW_AUDIO.playMusic(true, 0.1f);
-    GOW_AUDIO.setSoundsDisabled(true);
-    GOW_AUDIO.setMusicDisabled(true);
 }
 
 void GameEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)

@@ -103,7 +103,7 @@ void TitleRenderer::render()
     OGL.enableBlending(true);
     
     _spriteBatcher.begin();
-    TextureRegion demo(0, 480, 1366, 619, 2048, 2048, 0);
+    TextureRegion demo(0, 480, 1366, 619, 2048, 2048);
     _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2 + (camHeight * 0.1f), camWidth, camHeight * 0.8f);
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
     

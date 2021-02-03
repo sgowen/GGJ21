@@ -24,10 +24,6 @@ void TitleEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
-    
-    _state = MESS_DEFAULT;
-    _userEnteredIPAddress.clear();
-    INPUT_MAIN.clearTextInput();
 }
 
 void TitleEngineState::execute(Engine* e)
@@ -64,6 +60,10 @@ void TitleEngineState::execute(Engine* e)
 void TitleEngineState::exit(Engine* e)
 {
     releaseDeviceDependentResources();
+    
+    _state = MESS_DEFAULT;
+    _userEnteredIPAddress.clear();
+    INPUT_MAIN.clearTextInput();
 }
 
 void TitleEngineState::createDeviceDependentResources()
