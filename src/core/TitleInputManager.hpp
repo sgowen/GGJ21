@@ -45,6 +45,7 @@ public:
 private:
     TitleInputManagerState _state;
     std::string _textInput;
+    bool _isControlHeldDown;
     
     void updateDefault();
     void updateReadText();

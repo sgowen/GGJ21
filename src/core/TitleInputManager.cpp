@@ -11,6 +11,7 @@
 #include "InputManager.hpp"
 #include "MainConfig.hpp"
 #include "StringUtil.hpp"
+#include "ClipboardUtil.hpp"
 
 TitleInputManagerState TitleInputManager::update(TitleInputManagerUpdate mimu)
 {
@@ -146,6 +147,11 @@ void TitleInputManager::updateReadText()
     
     for (KeyboardEvent* e : INPUT_MGR.getKeyboardEvents())
     {
+        if (e->_key == GOW_KEY_CMD || e->_key == GOW_KEY_CTRL)
+        {
+            _isControlHeldDown = e->isPressed();
+        }
+        
         if (!e->isDown())
         {
             continue;
@@ -169,8 +175,23 @@ void TitleInputManager::updateReadText()
                 _state = MIMS_EXIT;
                 clearTextInput();
                 continue;
+            case GOW_KEY_V:
+                if (_isControlHeldDown)
+                {
+                    const char* clipboard = CLIPBOARD_UTIL.getClipboardString();
+                    _textInput += clipboard;
+                    if (_textInput.length() >= CFG_MAIN._maxTextInputLength)
+                    {
+                        int remove = (int)_textInput.length() - CFG_MAIN._maxTextInputLength;
+                        _textInput.erase(_textInput.end() - remove, _textInput.end());
+                    }
+                    continue;
+                }
             default:
-                acceptKeyInput(e->_key);
+                if (e->_isChar)
+                {
+                    acceptKeyInput(e->_key);
+                }
                 continue;
         }
     }
@@ -178,7 +199,7 @@ void TitleInputManager::updateReadText()
 
 void TitleInputManager::acceptKeyInput(uint16_t key)
 {
-    if (_textInput.length() > CFG_MAIN._maxTextInputLength)
+    if (_textInput.length() >= CFG_MAIN._maxTextInputLength)
     {
         return;
     }
@@ -189,7 +210,8 @@ void TitleInputManager::acceptKeyInput(uint16_t key)
 
 TitleInputManager::TitleInputManager() :
 _state(MIMS_DEFAULT),
-_textInput("")
+_textInput(""),
+_isControlHeldDown(false)
 {
     // Empty
 }

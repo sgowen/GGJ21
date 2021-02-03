@@ -50,7 +50,6 @@
 		BB7B08B125B64A620021E545 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B925B646BA0021E545 /* Animation.cpp */; };
 		BB7B08B225B64A620021E545 /* AppleAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079425B646BA0021E545 /* AppleAssetHandler.cpp */; };
 		BB7B08B325B64A620021E545 /* NSAppleAssetHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */; };
-		BB7B08B525B64A620021E545 /* AssetHandlerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */; };
 		BB7B08B625B64A620021E545 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079D25B646BA0021E545 /* Assets.cpp */; };
 		BB7B08B825B64A620021E545 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07BA25B646BA0021E545 /* InputManager.cpp */; };
 		BB7B08BA25B64A620021E545 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CB25B646BA0021E545 /* Engine.cpp */; };
@@ -78,7 +77,6 @@
 		BB8BCD1425B68490005F57B8 /* TitleEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091C25B659E70021E545 /* TitleEngineState.cpp */; };
 		BB8BCD1525B68490005F57B8 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B925B646BA0021E545 /* Animation.cpp */; };
 		BB8BCD1625B68490005F57B8 /* AppleAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079425B646BA0021E545 /* AppleAssetHandler.cpp */; };
-		BB8BCD1825B68490005F57B8 /* AssetHandlerFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */; };
 		BB8BCD1925B68490005F57B8 /* Assets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079D25B646BA0021E545 /* Assets.cpp */; };
 		BB8BCD1B25B68490005F57B8 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07BA25B646BA0021E545 /* InputManager.cpp */; };
 		BB8BCD1D25B68490005F57B8 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CB25B646BA0021E545 /* Engine.cpp */; };
@@ -165,8 +163,6 @@
 		BBBA472225B9150000C8207D /* NullSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA471125B914FF00C8207D /* NullSound.cpp */; };
 		BBBA472325B9150000C8207D /* NullAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA471325B914FF00C8207D /* NullAudioEngineHelper.cpp */; };
 		BBBA472425B9150000C8207D /* NullAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA471325B914FF00C8207D /* NullAudioEngineHelper.cpp */; };
-		BBBA472525B9150000C8207D /* AudioEngineHelperFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA471425B914FF00C8207D /* AudioEngineHelperFactory.cpp */; };
-		BBBA472625B9150000C8207D /* AudioEngineHelperFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA471425B914FF00C8207D /* AudioEngineHelperFactory.cpp */; };
 		BBBA474325B92E5C00C8207D /* NullAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA474125B92E5C00C8207D /* NullAssetHandler.cpp */; };
 		BBBA474425B92E5C00C8207D /* NullAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA474125B92E5C00C8207D /* NullAssetHandler.cpp */; };
 		BBBA55D525BA43B300C8207D /* GlfwMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA55D425BA43B300C8207D /* GlfwMain.cpp */; };
@@ -471,7 +467,6 @@
 		BB7B07AD25B646BA0021E545 /* ShaderInput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderInput.hpp; sourceTree = "<group>"; };
 		BB7B07AE25B646BA0021E545 /* ShaderUniform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderUniform.hpp; sourceTree = "<group>"; };
 		BB7B07AF25B646BA0021E545 /* InputManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputManager.hpp; sourceTree = "<group>"; };
-		BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetHandlerFactory.cpp; sourceTree = "<group>"; };
 		BB7B07B125B646BA0021E545 /* TextureManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
 		BB7B07B425B646BA0021E545 /* FileData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileData.hpp; sourceTree = "<group>"; };
 		BB7B07B625B646BA0021E545 /* FPSUtil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FPSUtil.cpp; sourceTree = "<group>"; };
@@ -521,6 +516,7 @@
 		BB8BCD0525B68446005F57B8 /* GGJ21-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GGJ21-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB8BCD0825B68446005F57B8 /* NSEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NSEngine.hpp; sourceTree = "<group>"; };
 		BB8BCD0925B68446005F57B8 /* NSEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSEngine.mm; sourceTree = "<group>"; };
+		BB9C779A25CA2C610021ADD2 /* ClipboardUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClipboardUtil.hpp; sourceTree = "<group>"; };
 		BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardEvent.hpp; sourceTree = "<group>"; };
 		BBBA452F25B8822C00C8207D /* GamepadEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GamepadEvent.hpp; sourceTree = "<group>"; };
 		BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAudioEngineHelper.cpp; sourceTree = "<group>"; };
@@ -604,7 +600,6 @@
 		BBBA471125B914FF00C8207D /* NullSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NullSound.cpp; sourceTree = "<group>"; };
 		BBBA471225B914FF00C8207D /* Sound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sound.hpp; sourceTree = "<group>"; };
 		BBBA471325B914FF00C8207D /* NullAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NullAudioEngineHelper.cpp; sourceTree = "<group>"; };
-		BBBA471425B914FF00C8207D /* AudioEngineHelperFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEngineHelperFactory.cpp; sourceTree = "<group>"; };
 		BBBA471525B914FF00C8207D /* AudioEngineHelperFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngineHelperFactory.hpp; sourceTree = "<group>"; };
 		BBBA471625B914FF00C8207D /* NullAudioEngineHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NullAudioEngineHelper.hpp; sourceTree = "<group>"; };
 		BBBA474125B92E5C00C8207D /* NullAssetHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NullAssetHandler.cpp; sourceTree = "<group>"; };
@@ -1301,12 +1296,10 @@
 				BB7B07AA25B646BA0021E545 /* Animation.hpp */,
 				BB7B079225B646BA0021E545 /* apple */,
 				BB7B07DA25B646BA0021E545 /* AssetHandler.hpp */,
-				BB7B07B025B646BA0021E545 /* AssetHandlerFactory.cpp */,
 				BB7B07BF25B646BA0021E545 /* AssetHandlerFactory.hpp */,
 				BB7B079D25B646BA0021E545 /* Assets.cpp */,
 				BB7B07D325B646BA0021E545 /* Assets.hpp */,
 				BBBA471025B914FF00C8207D /* AudioEngineHelper.hpp */,
-				BBBA471425B914FF00C8207D /* AudioEngineHelperFactory.cpp */,
 				BBBA471525B914FF00C8207D /* AudioEngineHelperFactory.hpp */,
 				BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */,
 				BBBA5B8E25BE1E3400C8207D /* Box2DDebugRenderer.hpp */,
@@ -1317,6 +1310,7 @@
 				BBBA573E25BB175800C8207D /* ClientHelper.hpp */,
 				BBBA575325BB175900C8207D /* ClientProxy.cpp */,
 				BBBA574025BB175800C8207D /* ClientProxy.hpp */,
+				BB9C779A25CA2C610021ADD2 /* ClipboardUtil.hpp */,
 				BBBA5C6925C31B1400C8207D /* Color.cpp */,
 				BB7B07C925B646BA0021E545 /* Color.hpp */,
 				BBBA5BAE25C0AC5B00C8207D /* Config.cpp */,
@@ -2482,7 +2476,6 @@
 				BBBA5B0225BB5D1A00C8207D /* b2_edge_shape.cpp in Sources */,
 				BBBA5AB025BB5D1A00C8207D /* b2_weld_joint.cpp in Sources */,
 				BBBA5AD425BB5D1A00C8207D /* b2_world.cpp in Sources */,
-				BB7B08B525B64A620021E545 /* AssetHandlerFactory.cpp in Sources */,
 				BBBA5AB425BB5D1A00C8207D /* b2_body.cpp in Sources */,
 				BBBA5AFA25BB5D1A00C8207D /* b2_broad_phase.cpp in Sources */,
 				BBBA5C2325C2002300C8207D /* TitleRenderer.cpp in Sources */,
@@ -2590,7 +2583,6 @@
 				BBBA5AF825BB5D1A00C8207D /* b2_chain_shape.cpp in Sources */,
 				BBBA5C2125C2002300C8207D /* TitleInputManager.cpp in Sources */,
 				BBBA5AB825BB5D1A00C8207D /* b2_revolute_joint.cpp in Sources */,
-				BBBA472525B9150000C8207D /* AudioEngineHelperFactory.cpp in Sources */,
 				BBBA46F625B913D900C8207D /* OALAudioActions.m in Sources */,
 				BBBA46DC25B913D900C8207D /* ALBuffer.m in Sources */,
 				BBBA5ABC25BB5D1A00C8207D /* b2_world_callbacks.cpp in Sources */,
@@ -2667,7 +2659,6 @@
 				BBBA5AFB25BB5D1A00C8207D /* b2_broad_phase.cpp in Sources */,
 				BBBA577A25BB175A00C8207D /* ReplicationManagerServer.cpp in Sources */,
 				BBBA5AC925BB5D1A00C8207D /* b2_edge_polygon_contact.cpp in Sources */,
-				BB8BCD1825B68490005F57B8 /* AssetHandlerFactory.cpp in Sources */,
 				BB8BCD1925B68490005F57B8 /* Assets.cpp in Sources */,
 				BBBA5AAD25BB5D1A00C8207D /* b2_joint.cpp in Sources */,
 				BBBA5AB125BB5D1A00C8207D /* b2_weld_joint.cpp in Sources */,
@@ -2685,7 +2676,6 @@
 				BBBA5ADF25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
 				BBBA579225BB175A00C8207D /* ServerHelper.cpp in Sources */,
 				BBBA5AB725BB5D1A00C8207D /* b2_contact.cpp in Sources */,
-				BBBA472625B9150000C8207D /* AudioEngineHelperFactory.cpp in Sources */,
 				BBBA57A225BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */,
 				BB2CD6C625C518B3007B8775 /* GameInputManager.cpp in Sources */,
 				BBBA5AF125BB5D1A00C8207D /* b2_collide_circle.cpp in Sources */,
