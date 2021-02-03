@@ -5,7 +5,7 @@
   "sounds": [
     {
       "soundID": 1,
-      "filePath": "sounds/Hide_Lines/Hide_attack1.wav",
+      "filePath": "sounds/hide_lines/hide_attack1.wav",
       "numInstances": 1
     }
   ],
