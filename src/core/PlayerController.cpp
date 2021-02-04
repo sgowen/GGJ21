@@ -47,9 +47,6 @@ _encounterNetworkCache(_encounter)
 
 void PlayerController::update()
 {
-    uint8_t& state = _entity->state()._state;
-    uint16_t& stateTime = _entity->state()._stateTime;
-    
     ++_encounter._stateTime;
     
     if (!_entity->getNetworkController()->isServer())
@@ -179,30 +176,6 @@ void PlayerController::processInput(InputState* inputState)
         {
             SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
         }
-    }
-}
-
-void PlayerController::enforceBounds(Rektangle& bounds)
-{
-    float x = _entity->getPosition().x;
-    float y = _entity->getPosition().y;
-    
-    if (_entity->getPosition().x > bounds.right())
-    {
-        _entity->setPosition(b2Vec2(bounds.right(), y));
-    }
-    else if (_entity->getPosition().x < bounds.left())
-    {
-        _entity->setPosition(b2Vec2(bounds.left(), y));
-    }
-    
-    if (_entity->getPosition().y > bounds.top())
-    {
-        _entity->setPosition(b2Vec2(x, bounds.top()));
-    }
-    else if (_entity->getPosition().y < bounds.bottom())
-    {
-        _entity->setPosition(b2Vec2(x, bounds.bottom()));
     }
 }
 

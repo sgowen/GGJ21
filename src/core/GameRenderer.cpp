@@ -139,7 +139,7 @@ void GameRenderer::renderWorld()
     _spriteBatcher.begin();
     for (Entity* e : w.getDynamicEntities())
     {
-        if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        if (e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
         {
             continue;
         }
@@ -161,15 +161,17 @@ void GameRenderer::renderWorld()
     _spriteBatcher.begin();
     for (Entity* e : w.getDynamicEntities())
     {
-        if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        if (!e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
         {
-            PlayerController* pc = static_cast<PlayerController*>(e->getController());
-            
-            // I know... but look at the sprite sheet
-            bool isFacingLeft = pc->getPlayerDirection() == PDIR_RIGHT;
-            TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), isFacingLeft);
+            continue;
         }
+        
+        PlayerController* pc = static_cast<PlayerController*>(e->getController());
+        
+        // I know... but look at the sprite sheet
+        bool isFacingLeft = pc->getPlayerDirection() == PDIR_RIGHT;
+        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
+        _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), isFacingLeft);
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
 }

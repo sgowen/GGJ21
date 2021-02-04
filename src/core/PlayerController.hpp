@@ -38,7 +38,6 @@ public:
     virtual void onMessage(uint16_t message, void* data = NULL);
     
     void processInput(InputState* inputState);
-    void enforceBounds(Rektangle& bounds);
     bool isInEncounter();
     uint16_t encounterStateTime();
     

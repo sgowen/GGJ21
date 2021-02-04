@@ -32,10 +32,10 @@ struct Map
     }
 };
 
-struct EntityDef;
 class Entity;
 class EntityIDManager;
 class TimeTracker;
+struct Rektangle;
 
 class World
 {
@@ -71,11 +71,11 @@ private:
     bool isLayer(Entity* e);
     bool isStatic(Entity* e);
     bool isDynamic(Entity* e);
-    bool isDynamic(EntityDef& ed);
     
     void refreshPlayers();
     void removeEntity(Entity* e, std::vector<Entity*>& entities);
     
     void processPhysics(Entity* e);
     void processCollisions(Entity* e, std::vector<Entity*>& entities);
+    void enforceBounds(Entity* e, Rektangle& bounds);
 };

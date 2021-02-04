@@ -10,19 +10,19 @@
 
 #include "Entity.hpp"
 #include "EntityIDManager.hpp"
+#include "TimeTracker.hpp"
+#include "Rektangle.hpp"
 
 #include "EntityMapper.hpp"
 #include "EntityLayoutMapper.hpp"
 #include "EntityNetworkController.hpp"
 #include "InstanceManager.hpp"
 #include "MainConfig.hpp"
-#include "TimeTracker.hpp"
 #include "StringUtil.hpp"
 #include "GowUtil.hpp"
 #include "Network.hpp"
 #include "Macros.hpp"
 #include "PlayerController.hpp"
-#include "Rektangle.hpp"
 #include "OverlapTester.hpp"
 
 World::World(TimeTracker* t, EntityIDManager* eidm, uint32_t flags) :
@@ -55,7 +55,7 @@ void World::loadMap(uint32_t map)
     for (EntityInstanceDef eid : eld._entities)
     {
         EntityDef* ed = ENTITY_MAPPER.getEntityDef(eid._key);
-        if (IS_BIT_SET(_flags, WorldFlag_Client) && isDynamic(*ed))
+        if (IS_BIT_SET(_flags, WorldFlag_Client) && IS_BIT_SET(ed->_bodyFlags, BODF_DYNAMIC))
         {
             // On the client, Dynamic Entities must arrive via network
             continue;
@@ -127,12 +127,12 @@ void World::stepPhysics()
         if (playerID == 1)
         {
             Rektangle play1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            pc->enforceBounds(play1ScreenBounds);
+            enforceBounds(e, play1ScreenBounds);
         }
         else if (playerID == 2)
         {
             Rektangle play2ScreenBounds(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            pc->enforceBounds(play2ScreenBounds);
+            enforceBounds(e, play2ScreenBounds);
         }
     }
 }
@@ -191,17 +191,12 @@ bool World::isLayer(Entity* e)
 
 bool World::isStatic(Entity* e)
 {
-    return IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_STATIC) && !e->getEntityDef()._stateSensitive;
+    return IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_STATIC);
 }
 
 bool World::isDynamic(Entity* e)
 {
-    return isDynamic(e->getEntityDef());
-}
-
-bool World::isDynamic(EntityDef& ed)
-{
-    return (ed._bodyFlags > 0 && !IS_BIT_SET(ed._bodyFlags, BODF_STATIC)) || ed._stateSensitive;
+    return IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_DYNAMIC);
 }
 
 void World::refreshPlayers()
@@ -210,7 +205,7 @@ void World::refreshPlayers()
     
     for (Entity* e : _dynamicEntities)
     {
-        if (IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_PLAYER))
+        if (e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
         {
             _players.push_back(e);
         }
@@ -282,5 +277,30 @@ void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
             target->getController()->onCollision(e);
             break;
         }
+    }
+}
+
+void World::enforceBounds(Entity* e, Rektangle& bounds)
+{
+    float x = e->getPosition().x;
+    float y = e->getPosition().y;
+    
+    if (x > bounds.right())
+    {
+        e->setPosition(b2Vec2(bounds.right(), y));
+    }
+    else if (x < bounds.left())
+    {
+        e->setPosition(b2Vec2(bounds.left(), y));
+    }
+    
+    x = e->getPosition().x;
+    if (y > bounds.top())
+    {
+        e->setPosition(b2Vec2(x, bounds.top()));
+    }
+    else if (y < bounds.bottom())
+    {
+        e->setPosition(b2Vec2(x, bounds.bottom()));
     }
 }
