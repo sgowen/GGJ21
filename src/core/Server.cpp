@@ -230,7 +230,7 @@ void Server::spawnEntityForPlayer(uint8_t playerId, std::string playerName)
     float spawnY = playerId == 1 ? rand() % 16 + 6 : rand() % 8 + 6;
     
     uint32_t key = playerId == 1 ? 'HIDE' : 'JCKE';
-    EntityInstanceDef eid(_entityIDManager->getNextDynamicEntityID(), key, spawnX, spawnY);
+    EntityInstanceDef eid(_entityIDManager->getNextNetworkEntityID(), key, spawnX, spawnY);
     Entity* e = ENTITY_MAPPER.createEntity(&eid, true);
     PlayerController* pc = static_cast<PlayerController*>(e->getController());
     pc->setAddressHash(cp->getMachineAddress()->getHash());
