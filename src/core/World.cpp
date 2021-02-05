@@ -216,33 +216,30 @@ void World::removeEntity(Entity* e, std::vector<Entity*>& entities)
 {
     assert(e != NULL);
     
-    for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); )
+    for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
     {
-        if (e->getID() == (*i)->getID())
+        Entity* entityToDelete = *i;
+        if (entityToDelete == e)
         {
-            delete *i;
+            delete entityToDelete;
             
-            i = entities.erase(i);
+            entities.erase(i);
             return;
-        }
-        else
-        {
-            ++i;
         }
     }
 }
 
 void World::processPhysics(Entity* e)
 {
-    b2Vec2 vel = e->pose()._velocity;
+    Vector2 vel = e->pose()._velocity;
     vel *= _timeTracker->_frameRate;
     e->pose()._position += vel;
 }
 
 void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
 {
-    float x = target->getPosition().x;
-    float y = target->getPosition().y;
+    float x = target->getPosition()._x;
+    float y = target->getPosition()._y;
     float w = target->getWidth();
     float h = target->getHeight();
     Rektangle bounds(x - w / 2, y - h / 2, w, h);
@@ -254,8 +251,8 @@ void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
             continue;
         }
         
-        float x = e->getPosition().x;
-        float y = e->getPosition().y;
+        float x = e->getPosition()._x;
+        float y = e->getPosition()._y;
         float w = e->getWidth();
         float h = e->getHeight();
         Rektangle boundsToTest(x - w / 2, y - h / 2, w, h);
@@ -267,9 +264,9 @@ void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
                 bounds.top() >= boundsToTest.bottom() ||
                 bounds.bottom() <= boundsToTest.top())
             {
-                b2Vec2 vel = target->getVelocity();
+                Vector2 vel = target->getVelocity();
                 vel *= _timeTracker->_frameRate;
-                b2Vec2 pos = target->getPosition();
+                Vector2 pos = target->getPosition();
                 pos -= vel;
                 target->setPosition(pos);
             }
@@ -282,25 +279,25 @@ void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
 
 void World::enforceBounds(Entity* e, Rektangle& bounds)
 {
-    float x = e->getPosition().x;
-    float y = e->getPosition().y;
+    float x = e->getPosition()._x;
+    float y = e->getPosition()._y;
     
     if (x > bounds.right())
     {
-        e->setPosition(b2Vec2(bounds.right(), y));
+        e->setPosition(bounds.right(), y);
     }
     else if (x < bounds.left())
     {
-        e->setPosition(b2Vec2(bounds.left(), y));
+        e->setPosition(bounds.left(), y);
     }
     
-    x = e->getPosition().x;
+    x = e->getPosition()._x;
     if (y > bounds.top())
     {
-        e->setPosition(b2Vec2(x, bounds.top()));
+        e->setPosition(x, bounds.top());
     }
     else if (y < bounds.bottom())
     {
-        e->setPosition(b2Vec2(x, bounds.bottom()));
+        e->setPosition(x, bounds.bottom());
     }
 }

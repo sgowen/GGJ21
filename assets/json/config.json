@@ -24,5 +24,7 @@
   "monsterBattleX": "28",
   "monsterBattleY": "30",
   "monsterBattleWidth": "16",
-  "monsterBattleHeight": "20"
+  "monsterBattleHeight": "20",
+  "sfxDisabled": "true",
+  "musicDisabled": "true"
 }

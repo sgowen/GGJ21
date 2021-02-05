@@ -24,7 +24,7 @@
     "soundMappings": {
       "99": 0
     },
-    "soundCollectionMappings": {
+    "soundRandomMappings": {
       "0": [
         84,
         85,
@@ -70,7 +70,7 @@
     "soundMappings": {
       "99": 0
     },
-    "soundCollectionMappings": {
+    "soundRandomMappings": {
       "1": [
         33,
         34,

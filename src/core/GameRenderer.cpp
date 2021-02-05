@@ -123,7 +123,7 @@ void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
     {
         TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
         
-        _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
+        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
     }
 }
 
@@ -148,12 +148,12 @@ void GameRenderer::renderWorld()
         {
             CrystalController* ec = static_cast<CrystalController*>(e->getController());
             TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, ec->getWidthForRender(), ec->getWidthForRender(), e->getAngle(), e->isFacingLeft());
+            _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, ec->getWidthForRender(), ec->getWidthForRender(), e->getAngle(), e->isFacingLeft());
         }
         else
         {
             TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-            _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
+            _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
         }
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
@@ -171,7 +171,7 @@ void GameRenderer::renderWorld()
         // I know... but look at the sprite sheet
         bool isFacingLeft = pc->getPlayerDirection() == PDIR_RIGHT;
         TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-        _spriteBatcher.addSprite(tr, e->getPosition().x, e->getPosition().y, e->getWidth(), e->getHeight(), e->getAngle(), isFacingLeft);
+        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->getWidth(), e->getHeight(), e->getAngle(), isFacingLeft);
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
 }

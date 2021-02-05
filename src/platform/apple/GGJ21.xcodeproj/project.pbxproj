@@ -53,7 +53,6 @@
 		BB7B08C725B64A620021E545 /* TextureDescriptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CC25B646BA0021E545 /* TextureDescriptor.cpp */; };
 		BB7B08C825B64A620021E545 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079C25B646BA0021E545 /* TextureLoader.cpp */; };
 		BB7B08C925B64A620021E545 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07C625B646BA0021E545 /* TextureManager.cpp */; };
-		BB7B08CA25B64A620021E545 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07A725B646BA0021E545 /* Vector2.cpp */; };
 		BB7B08D225B64CF20021E545 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7B08D125B64CF20021E545 /* OpenGL.framework */; };
 		BB7B091925B659280021E545 /* MainEngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091825B659280021E545 /* MainEngineController.cpp */; };
 		BB7B091D25B659E70021E545 /* TitleEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B091C25B659E70021E545 /* TitleEngineState.cpp */; };
@@ -80,12 +79,13 @@
 		BB8BCD2C25B68490005F57B8 /* TextureDescriptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CC25B646BA0021E545 /* TextureDescriptor.cpp */; };
 		BB8BCD2D25B68490005F57B8 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079C25B646BA0021E545 /* TextureLoader.cpp */; };
 		BB8BCD2E25B68490005F57B8 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07C625B646BA0021E545 /* TextureManager.cpp */; };
-		BB8BCD2F25B68490005F57B8 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07A725B646BA0021E545 /* Vector2.cpp */; };
 		BB8BCD3325B6849A005F57B8 /* NSAppleAssetHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */; };
 		BB9E471725CB0C5D0031FE3A /* EngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E471625CB0C5D0031FE3A /* EngineController.cpp */; };
 		BB9E471825CB0C5D0031FE3A /* EngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E471625CB0C5D0031FE3A /* EngineController.cpp */; };
 		BB9E472625CB469E0031FE3A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E472525CB469E0031FE3A /* assets */; };
 		BB9E472725CB469E0031FE3A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E472525CB469E0031FE3A /* assets */; };
+		BB9E473225CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
+		BB9E473325CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
 		BBBA467A25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467B25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467C25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */; };
@@ -448,7 +448,6 @@
 		BB7B07A025B646BA0021E545 /* OpenGLWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLWrapper.hpp; sourceTree = "<group>"; };
 		BB7B07A225B646BA0021E545 /* ShaderDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderDescriptor.hpp; sourceTree = "<group>"; };
 		BB7B07A525B646BA0021E545 /* ScreenRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ScreenRenderer.hpp; sourceTree = "<group>"; };
-		BB7B07A725B646BA0021E545 /* Vector2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2.cpp; sourceTree = "<group>"; };
 		BB7B07A825B646BA0021E545 /* FPSUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FPSUtil.hpp; sourceTree = "<group>"; };
 		BB7B07A925B646BA0021E545 /* Macros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
 		BB7B07AA25B646BA0021E545 /* Animation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Animation.hpp; sourceTree = "<group>"; };
@@ -508,6 +507,8 @@
 		BB9C779A25CA2C610021ADD2 /* ClipboardUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClipboardUtil.hpp; sourceTree = "<group>"; };
 		BB9E471625CB0C5D0031FE3A /* EngineController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineController.cpp; sourceTree = "<group>"; };
 		BB9E472525CB469E0031FE3A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+		BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityPhysicsController.hpp; sourceTree = "<group>"; };
+		BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityPhysicsController.cpp; sourceTree = "<group>"; };
 		BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardEvent.hpp; sourceTree = "<group>"; };
 		BBBA452F25B8822C00C8207D /* GamepadEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GamepadEvent.hpp; sourceTree = "<group>"; };
 		BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAudioEngineHelper.cpp; sourceTree = "<group>"; };
@@ -1302,6 +1303,8 @@
 				BB7B090F25B652D80021E545 /* EngineController.hpp */,
 				BBBA57EB25BB58CA00C8207D /* Entity.cpp */,
 				BBBA57E525BB58C900C8207D /* Entity.hpp */,
+				BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */,
+				BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */,
 				BBBA57E725BB58CA00C8207D /* EntityController.cpp */,
 				BBBA57E925BB58CA00C8207D /* EntityController.hpp */,
 				BBBA57EA25BB58CA00C8207D /* EntityIDManager.cpp */,
@@ -1439,7 +1442,6 @@
 				BBBA5B3725BB953300C8207D /* Triangle.hpp */,
 				BBBA575125BB175900C8207D /* UDPSocket.cpp */,
 				BBBA575925BB175900C8207D /* UDPSocket.hpp */,
-				BB7B07A725B646BA0021E545 /* Vector2.cpp */,
 				BB7B07DD25B646BA0021E545 /* Vector2.hpp */,
 				BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */,
 				BBBA57DA25BB567300C8207D /* WeightedTimedMovingAverage.hpp */,
@@ -2452,6 +2454,7 @@
 				BB9E471725CB0C5D0031FE3A /* EngineController.cpp in Sources */,
 				BBBA5C2325C2002300C8207D /* TitleRenderer.cpp in Sources */,
 				BBBA5B9625BE1E3400C8207D /* PolygonBatcher.cpp in Sources */,
+				BB9E473225CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */,
 				BBBA5AEA25BB5D1A00C8207D /* b2_stack_allocator.cpp in Sources */,
 				BBBA56F325BA453A00C8207D /* cocoa_window.m in Sources */,
 				BB2CD6C325C518B3007B8775 /* GameRenderer.cpp in Sources */,
@@ -2549,7 +2552,6 @@
 				BBBA46F225B913D900C8207D /* OALAction.m in Sources */,
 				BBBA46D825B913D900C8207D /* ALSource.m in Sources */,
 				BBBA5B9A25BE1E3400C8207D /* LineBatcher.cpp in Sources */,
-				BB7B08CA25B64A620021E545 /* Vector2.cpp in Sources */,
 				BBBA57AF25BB175A00C8207D /* NetworkHelper.cpp in Sources */,
 				BBBA46FA25B913D900C8207D /* OALAudioSession.m in Sources */,
 				BBBA5AF825BB5D1A00C8207D /* b2_chain_shape.cpp in Sources */,
@@ -2755,8 +2757,8 @@
 				BB2CD6C825C518B3007B8775 /* GameEngineState.cpp in Sources */,
 				BBBA46D725B913D900C8207D /* OpenALManager.m in Sources */,
 				BBBA57F525BB58CA00C8207D /* EntityController.cpp in Sources */,
-				BB8BCD2F25B68490005F57B8 /* Vector2.cpp in Sources */,
 				BBBA578C25BB175A00C8207D /* ClientProxy.cpp in Sources */,
+				BB9E473325CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,7 +51,7 @@ private:
     void handleLostClient(ClientProxy* inClientProxy, uint8_t index);
     InputState* handleInputStateCreation();
     void handleInputStateRelease(InputState* inputState);
-    void deleteRobotWithPlayerId(uint8_t playerID);
+    void deletePlayerWithPlayerID(uint8_t playerID);
     void spawnEntityForPlayer(uint8_t playerId, std::string playerName);
     void loadMap();
     void handleDirtyStates(std::vector<Entity*>& entities);

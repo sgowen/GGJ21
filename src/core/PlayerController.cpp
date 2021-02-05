@@ -89,8 +89,8 @@ void PlayerController::onMessage(uint16_t message, void* data)
         {
             _encounter._isInCounter = true;
             _entity->state()._state = STAT_IDLE;
-            _entity->pose()._velocity.x = 0;
-            _entity->pose()._velocity.y = 0;
+            _entity->pose()._velocity._x = 0;
+            _entity->pose()._velocity._y = 0;
             break;
         }
         default:
@@ -133,7 +133,7 @@ void PlayerController::processInput(InputState* inputState)
         uint8_t inpt = playerInputState->getInputState();
         
         state = STAT_IDLE;
-        const b2Vec2& vel = _entity->getVelocity();
+        const Vector2& vel = _entity->getVelocity();
         float desiredVel[2] = { 0.0f, 0.0f };
         float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
         float maxSpeedHalved = maxSpeed / 2;
@@ -141,36 +141,36 @@ void PlayerController::processInput(InputState* inputState)
         {
             state = STAT_MOVING;
             _stats._dir = PDIR_UP;
-            desiredVel[1] = b2Min(vel.y + maxSpeedHalved, maxSpeed);
+            desiredVel[1] = b2Min(vel._y + maxSpeedHalved, maxSpeed);
         }
         if (IS_BIT_SET(inpt, GISF_MOVING_LEFT))
         {
             state = STAT_MOVING;
             _stats._dir = PDIR_LEFT;
-            desiredVel[0] = b2Max(vel.x - maxSpeedHalved, -maxSpeed);
+            desiredVel[0] = b2Max(vel._x - maxSpeedHalved, -maxSpeed);
         }
         if (IS_BIT_SET(inpt, GISF_MOVING_DOWN))
         {
             state = STAT_MOVING;
             _stats._dir = PDIR_DOWN;
-            desiredVel[1] = b2Max(vel.y - maxSpeedHalved, -maxSpeed);
+            desiredVel[1] = b2Max(vel._y - maxSpeedHalved, -maxSpeed);
         }
         if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
         {
             state = STAT_MOVING;
             _stats._dir = PDIR_RIGHT;
-            desiredVel[0] = b2Min(vel.x + maxSpeedHalved, maxSpeed);
+            desiredVel[0] = b2Min(vel._x + maxSpeedHalved, maxSpeed);
         }
         
         if (state == STAT_IDLE)
         {
             stateTime = 6; // 2nd frame is more appropriate for idle
-            desiredVel[0] = vel.x * 0.86f;
-            desiredVel[1] = vel.y * 0.86f;
+            desiredVel[0] = vel._x * 0.86f;
+            desiredVel[1] = vel._y * 0.86f;
         }
         
-        _entity->pose()._velocity.x = desiredVel[0];
-        _entity->pose()._velocity.y = desiredVel[1];
+        _entity->pose()._velocity._x = desiredVel[0];
+        _entity->pose()._velocity._y = desiredVel[1];
         
         if (ENGINE_STATE_GAME.isLive())
         {

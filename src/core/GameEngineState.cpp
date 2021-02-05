@@ -102,6 +102,10 @@ void GameEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+    
+    // TODO, remove
+    GOW_AUDIO.playSound(_isHost ? 115 : 59);
+    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
 void GameEngineState::execute(Engine* e)
@@ -208,9 +212,8 @@ void GameEngineState::createDeviceDependentResources()
     ASSETS.initWithJSONFile("assets/json/assets_game.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
-    // TODO, remove
-    GOW_AUDIO.playSound(_isHost ? 115 : 59);
-    GOW_AUDIO.playMusic(true, 0.1f);
+    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
+    GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
 void GameEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)

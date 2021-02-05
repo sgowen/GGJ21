@@ -18,6 +18,7 @@
 #include "SocketServerHelper.hpp"
 #include "MachineAddress.hpp"
 #include "PlayerController.hpp"
+#include "HidePlayerController.hpp"
 #include "EntityMapper.hpp"
 #include "EntityLayoutMapper.hpp"
 #include "InstanceManager.hpp"
@@ -123,9 +124,9 @@ void Server::update()
             for (Entity* e : toDelete)
             {
                 EntityController* c = e->getController();
-                if (c->getRTTI().derivesFrom(PlayerController::rtti))
+                if (c->getRTTI().derivesFrom(HidePlayerController::rtti))
                 {
-                    PlayerController* pc = static_cast<PlayerController*>(c);
+                    HidePlayerController* pc = static_cast<HidePlayerController*>(c);
                     assert(pc != NULL);
                     
                     // If Hide dies, restart
@@ -181,7 +182,7 @@ void Server::handleLostClient(ClientProxy* cp, uint8_t index)
     {
         uint8_t playerID = cp->getPlayerID(index);
         
-        deleteRobotWithPlayerId(playerID);
+        deletePlayerWithPlayerID(playerID);
     }
     else
     {
@@ -189,7 +190,7 @@ void Server::handleLostClient(ClientProxy* cp, uint8_t index)
         {
             uint8_t playerID = cp->getPlayerID(i);
             
-            deleteRobotWithPlayerId(playerID);
+            deletePlayerWithPlayerID(playerID);
         }
     }
 }
@@ -208,7 +209,7 @@ void Server::handleInputStateRelease(InputState* inputState)
     _inputStates.free(gameInputState);
 }
 
-void Server::deleteRobotWithPlayerId(uint8_t playerID)
+void Server::deletePlayerWithPlayerID(uint8_t playerID)
 {
     for (Entity* e : _world.getPlayers())
     {

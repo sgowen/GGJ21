@@ -24,6 +24,8 @@ void TitleEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+    
+    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
 void TitleEngineState::execute(Engine* e)
@@ -71,7 +73,8 @@ void TitleEngineState::createDeviceDependentResources()
     ASSETS.initWithJSONFile("assets/json/assets_main.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
-    GOW_AUDIO.playMusic(true, 0.1f);
+    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
+    GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
 void TitleEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)

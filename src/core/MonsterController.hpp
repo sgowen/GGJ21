@@ -57,16 +57,16 @@ private:
             _dir = MDIR_DOWN;
         }
         
-        friend bool operator==(Stats& lhs, Stats& rhs)
+        friend bool operator==(Stats& a, Stats& b)
         {
             return
-            lhs._health == rhs._health &&
-            lhs._dir == rhs._dir;
+            a._health == b._health &&
+            a._dir == b._dir;
         }
         
-        friend bool operator!=(Stats& lhs, Stats& rhs)
+        friend bool operator!=(Stats& a, Stats& b)
         {
-            return !(lhs == rhs);
+            return !(a == b);
         }
     };
     Stats _stats;

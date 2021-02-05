@@ -518,7 +518,8 @@
           "regionWidth": 128,
           "regionHeight": 128,
           "frameTime": 6,
-          "numFrames": 7
+          "numFrames": 7,
+          "looping": false
         },
         "KEY": {
           "x": 0,

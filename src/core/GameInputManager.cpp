@@ -55,23 +55,23 @@ GameInputManagerState GameInputManager::update()
         uint8_t playerID = pc->getPlayerID();
         if (ENGINE_STATE_GAME._isHost && playerID == 1 && NW_MGR_CLIENT->isPlayerIDLocal(playerID))
         {
-            playerX = e->getPosition().x;
-            playerY = e->getPosition().y;
+            playerX = e->getPosition()._x;
+            playerY = e->getPosition()._y;
         }
         else if (!ENGINE_STATE_GAME._isHost && playerID == 2 && NW_MGR_CLIENT->isPlayerIDLocal(playerID))
         {
-            playerX = e->getPosition().x;
-            playerY = e->getPosition().y;
+            playerX = e->getPosition()._x;
+            playerY = e->getPosition()._y;
         }
     }
     
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
     {
         Vector2& v = INPUT_MGR.convert(e);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v.y() > playerY + 4);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v.x() < playerX - 4);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v.y() < playerY - 4);
-        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v.x() > playerX + 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v._y > playerY + 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v._x < playerX - 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v._y < playerY - 4);
+        SET_BIT(_currentState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v._x > playerX + 4);
     }
     
     bool isMovingUp[4] = {false};

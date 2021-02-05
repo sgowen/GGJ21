@@ -92,26 +92,26 @@ void CrystalController::push(int dir)
 {
     if (dir == PUIR_UP)
     {
-        _entity->pose()._velocity.x = 0;
-        _entity->pose()._velocity.y = 1 * (rand() % 12);
-        _entity->pose()._position.y += 0.5f;
+        _entity->pose()._velocity._x = 0;
+        _entity->pose()._velocity._y = 1 * (rand() % 12);
+        _entity->pose()._position._y += 0.5f;
     }
     else if (dir == PUIR_DOWN)
     {
-        _entity->pose()._velocity.x = 0;
-        _entity->pose()._velocity.y = -1 * (rand() % 12);
-        _entity->pose()._position.y -= 0.5f;
+        _entity->pose()._velocity._x = 0;
+        _entity->pose()._velocity._y = -1 * (rand() % 12);
+        _entity->pose()._position._y -= 0.5f;
     }
     else if (dir == PUIR_LEFT)
     {
-        _entity->pose()._position.x -= 0.5f;
-        _entity->pose()._velocity.x = -1 * (rand() % 12);
-        _entity->pose()._velocity.y = 0;
+        _entity->pose()._position._x -= 0.5f;
+        _entity->pose()._velocity._x = -1 * (rand() % 12);
+        _entity->pose()._velocity._y = 0;
     }
     else if (dir == PUIR_RIGHT)
     {
-        _entity->pose()._position.x += 0.5f;
-        _entity->pose()._velocity.x = 1 * (rand() % 12);
-        _entity->pose()._velocity.y = 0;
+        _entity->pose()._position._x += 0.5f;
+        _entity->pose()._velocity._x = 1 * (rand() % 12);
+        _entity->pose()._velocity._y = 0;
     }
 }

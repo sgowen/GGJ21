@@ -59,11 +59,11 @@ void MonsterController::update()
         uint8_t playerID = pc->getPlayerID();
         if (playerID == 1)
         {
-            float distance = b2Distance(e->getPosition(), _entity->getPosition());
+            float distance = e->getPosition().dist(_entity->getPosition());
             if (distance < CFG_MAIN._monsterLineOfSight)
             {
                 hasTarget = true;
-                playerPosition.set(e->getPosition().x, e->getPosition().y);
+                playerPosition.set(e->getPosition()._x, e->getPosition()._y);
             }
         }
     }
@@ -75,16 +75,16 @@ void MonsterController::update()
     
     if (hasTarget)
     {
-        float angle = playerPosition.sub(_entity->getPosition().x, _entity->getPosition().y).angle();
+        float angle = playerPosition.sub(_entity->getPosition()._x, _entity->getPosition()._y).angle();
         float radians = DEGREES_TO_RADIANS(angle);
-        _entity->pose()._velocity.Set(cosf(radians) * CFG_MAIN._monsterMaxTopDownSpeed, sinf(radians) * CFG_MAIN._monsterMaxTopDownSpeed);
+        _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN._monsterMaxTopDownSpeed, sinf(radians) * CFG_MAIN._monsterMaxTopDownSpeed);
         
-        if (_entity->pose()._velocity.y < 0)
+        if (_entity->pose()._velocity._y < 0)
         {
             state = STAT_MOVING;
             _stats._dir = MDIR_DOWN;
         }
-        if (_entity->pose()._velocity.y > 0)
+        if (_entity->pose()._velocity._y > 0)
         {
             state = STAT_MOVING;
             _stats._dir = MDIR_UP;

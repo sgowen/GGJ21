@@ -79,17 +79,17 @@ protected:
             _playerName = "Unknown";
         }
         
-        friend bool operator==(PlayerInfo& lhs, PlayerInfo& rhs)
+        friend bool operator==(PlayerInfo& a, PlayerInfo& b)
         {
             return
-            lhs._addressHash == rhs._addressHash &&
-            lhs._playerID    == rhs._playerID &&
-            lhs._playerName  == rhs._playerName;
+            a._addressHash == b._addressHash &&
+            a._playerID    == b._playerID &&
+            a._playerName  == b._playerName;
         }
         
-        friend bool operator!=(PlayerInfo& lhs, PlayerInfo& rhs)
+        friend bool operator!=(PlayerInfo& a, PlayerInfo& b)
         {
-            return !(lhs == rhs);
+            return !(a == b);
         }
     };
     PlayerInfo _playerInfo;
@@ -106,16 +106,16 @@ protected:
             _dir = PDIR_UP;
         }
         
-        friend bool operator==(Stats& lhs, Stats& rhs)
+        friend bool operator==(Stats& a, Stats& b)
         {
             return
-            lhs._health == rhs._health &&
-            lhs._dir == rhs._dir;
+            a._health == b._health &&
+            a._dir == b._dir;
         }
         
-        friend bool operator!=(Stats& lhs, Stats& rhs)
+        friend bool operator!=(Stats& a, Stats& b)
         {
-            return !(lhs == rhs);
+            return !(a == b);
         }
     };
     Stats _stats;
@@ -140,17 +140,17 @@ protected:
             _state = ESTA_IDLE;
         }
         
-        friend bool operator==(Encounter& lhs, Encounter& rhs)
+        friend bool operator==(Encounter& a, Encounter& b)
         {
             return
-            lhs._isInCounter == rhs._isInCounter &&
-            lhs._stateTime == rhs._stateTime &&
-            lhs._state == rhs._state;
+            a._isInCounter == b._isInCounter &&
+            a._stateTime == b._stateTime &&
+            a._state == b._state;
         }
         
-        friend bool operator!=(Encounter& lhs, Encounter& rhs)
+        friend bool operator!=(Encounter& a, Encounter& b)
         {
-            return !(lhs == rhs);
+            return !(a == b);
         }
     };
     Encounter _encounter;
