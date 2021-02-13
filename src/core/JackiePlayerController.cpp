@@ -11,15 +11,10 @@
 #include "Entity.hpp"
 #include "CrystalController.hpp"
 
-IMPL_RTTI(JackiePlayerController, PlayerController);
-IMPL_EntityController_create(JackiePlayerController);
+IMPL_RTTI(JackiePlayerController, PlayerController)
+IMPL_EntityController_create(JackiePlayerController)
 
-JackiePlayerController::JackiePlayerController(Entity* e) : PlayerController(e)
-{
-    // Empty
-}
-
-std::string JackiePlayerController::getTextureMapping(uint8_t state)
+std::string JackiePlayerController::getTextureMapping()
 {
     switch (_stats._dir)
     {
@@ -37,22 +32,10 @@ std::string JackiePlayerController::getTextureMapping(uint8_t state)
 
 void JackiePlayerController::onCollision(Entity* e)
 {
-    if (!_entity->getNetworkController()->isServer())
+    if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        return;
-    }
-    
-    if (e->getController()->getRTTI().derivesFrom(CrystalController::rtti))
-    {
-        CrystalController* ec = static_cast<CrystalController*>(e->getController());
+        CrystalController* ec = static_cast<CrystalController*>(e->controller());
         
         ec->push(_stats._dir);
     }
-}
-
-IMPL_EntityNetworkController_create(JackiePlayerNetworkController);
-
-JackiePlayerNetworkController::JackiePlayerNetworkController(Entity* e, bool isServer) : PlayerNetworkController(e, isServer)
-{
-    // Empty
 }

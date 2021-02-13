@@ -14,8 +14,6 @@
 
 #include <string>
 
-#define INPUT_MANAGER_CALLBACKS GameInputManager::sRemoveProcessedMoves, GameInputManager::sGetMoveList, GameInputManager::sOnPlayerWelcomed
-
 enum GameInputManagerState
 {
     GIMS_DEFAULT,
@@ -33,23 +31,18 @@ public:
         return ret;
     }
     
-    static void sRemoveProcessedMoves(float lastMoveProcessedOnServerTimestamp);
-    static MoveList& sGetMoveList();
-    static void sOnPlayerWelcomed(uint8_t playerID);
-    static void sHandleInputStateRelease(InputState* inputState);
-    
     GameInputManagerState update();
     const Move* getPendingMove();
-    void clearPendingMove();
-    GameInputState* getInputState();
+    GameInputState* inputState();
     MoveList& getMoveList();
+    void free(GameInputState* gis);
     void reset();
     
 private:
     GameInputManagerState _state;
     
-    Pool<GameInputState> _inputStates;
-    GameInputState* _currentState;
+    Pool<GameInputState> _poolGameInputState;
+    GameInputState* _inputState;
     MoveList _moveList;
     const Move* _pendingMove;
     

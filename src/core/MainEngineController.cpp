@@ -9,41 +9,39 @@
 #include "MainEngineController.hpp"
 
 #include "Network.hpp"
-#include "TimeTracker.hpp"
-#include "EntityIDManager.hpp"
-#include "InstanceManager.hpp"
+#include "InstanceRegistry.hpp"
 #include "TitleEngineState.hpp"
-#include "EntityMapper.hpp"
+#include "EntityManager.hpp"
 #include "HidePlayerController.hpp"
 #include "JackiePlayerController.hpp"
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
 #include "OvenController.hpp"
 #include "MainConfig.hpp"
+#include "EntityTopDownPhysicsController.hpp"
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
     CFG_MAIN.init();
     
-    static TimeTracker TIMS(getFrameRate());
-    static TimeTracker TIMC(getFrameRate());
-    static EntityIDManager EIMS;
-    static EntityIDManager EIMC;
+    std::map<std::string, EntityControllerCreationFunc> config;
+    config.emplace("Hide", HidePlayerController::create);
+    config.emplace("Jackie", JackiePlayerController::create);
+    config.emplace("Monster", MonsterController::create);
+    config.emplace("Crystal", CrystalController::create);
+    config.emplace("Oven", OvenController::create);
+    registerControllers(config);
     
-    INSTANCE_MGR.registerInstance(INSK_TIMING_SERVER, &TIMS);
-    INSTANCE_MGR.registerInstance(INSK_TIMING_CLIENT, &TIMC);
-    INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_SERVER, &EIMS);
-    INSTANCE_MGR.registerInstance(INSK_ENTITY_ID_MANAGER_CLIENT, &EIMC);
+    std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
+    configNW.emplace("Hide", HidePlayerNetworkController::create);
+    configNW.emplace("Jackie", PlayerNetworkController::create);
+    configNW.emplace("Monster", MonsterNetworkController::create);
+    configureForNetwork(configNW);
     
-    ENTITY_MAPPER.registerEntityController("Hide",    HidePlayerController::create);
-    ENTITY_MAPPER.registerEntityController("Jackie",  JackiePlayerController::create);
-    ENTITY_MAPPER.registerEntityController("Monster", MonsterController::create);
-    ENTITY_MAPPER.registerEntityController("Crystal", CrystalController::create);
-    ENTITY_MAPPER.registerEntityController("Oven",    OvenController::create);
-    
-    ENTITY_MAPPER.registerEntityNetworkController("Hide",    HidePlayerNetworkController::create);
-    ENTITY_MAPPER.registerEntityNetworkController("Jackie",  JackiePlayerNetworkController::create);
-    ENTITY_MAPPER.registerEntityNetworkController("Monster", MonsterNetworkController::create);
+    // TODO, don't like, should be able to set globally
+    std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
+    configPhysics.emplace("Entity", EntityTopDownPhysicsController::create);
+    registerPhysicsControllers(configPhysics);
 }
 
 State<Engine>* MainEngineController::getInitialState()

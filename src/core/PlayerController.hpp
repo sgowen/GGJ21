@@ -33,21 +33,14 @@ class PlayerController : public EntityController
 public:
     PlayerController(Entity* e);
     virtual ~PlayerController() {}
-        
-    virtual void update();
-    virtual void onMessage(uint16_t message, void* data = NULL);
     
-    void processInput(InputState* inputState);
-    bool isInEncounter();
-    uint16_t encounterStateTime();
+    virtual void processInput(InputState* inputState, bool isLocal = false);
     
-    void setAddressHash(uint64_t inValue);
+    void setAddressHash(uint64_t value);
     uint64_t getAddressHash() const;
-    void setPlayerID(uint8_t inValue);
+    void setPlayerID(uint8_t value);
     uint8_t getPlayerID() const;
-    void setMap(uint32_t inValue);
-    uint32_t getMap() const;
-    void setPlayerName(std::string inValue);
+    void setPlayerName(std::string value);
     std::string& getPlayerName();
     PlayerDirection getPlayerDirection();
     uint16_t getHealth();
@@ -62,8 +55,7 @@ protected:
     enum ReadStateFlag
     {
         RSTF_PLAYER_INFO = 1 << 2,
-        RSTF_STATS =       1 << 3,
-        RSTF_ENCOUNTER =   1 << 4
+        RSTF_STATS =       1 << 3
     };
     
     struct PlayerInfo
@@ -93,7 +85,7 @@ protected:
         }
     };
     PlayerInfo _playerInfo;
-    PlayerInfo _playerInfoNetworkCache;
+    PlayerInfo _playerInfoCache;
     
     struct Stats
     {
@@ -119,63 +111,21 @@ protected:
         }
     };
     Stats _stats;
-    Stats _statsNetworkCache;
-    
-    enum EncounterState
-    {
-        ESTA_IDLE = 0,
-        ESTA_SWING = 1
-    };
-    
-    struct Encounter
-    {
-        bool _isInCounter;
-        uint16_t _stateTime;
-        uint8_t _state;
-        
-        Encounter()
-        {
-            _isInCounter = false;
-            _stateTime = 0;
-            _state = ESTA_IDLE;
-        }
-        
-        friend bool operator==(Encounter& a, Encounter& b)
-        {
-            return
-            a._isInCounter == b._isInCounter &&
-            a._stateTime == b._stateTime &&
-            a._state == b._state;
-        }
-        
-        friend bool operator!=(Encounter& a, Encounter& b)
-        {
-            return !(a == b);
-        }
-    };
-    Encounter _encounter;
-    Encounter _encounterNetworkCache;
+    Stats _statsCache;
 };
 
 #include "EntityNetworkController.hpp"
 
 class PlayerNetworkController : public EntityNetworkController
 {
+public:
     DECL_EntityNetworkController_create;
     
-public:
-    PlayerNetworkController(Entity* e, bool isServer);
+    PlayerNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer) {}
     virtual ~PlayerNetworkController() {}
     
-    virtual void read(InputMemoryBitStream& ip);
-    virtual uint16_t write(OutputMemoryBitStream& op, uint16_t dirtyState);
-    
-    virtual void recallNetworkCache();
-    virtual uint16_t getDirtyState();
-    
-    bool isLocalPlayer();
-    
-private:
-    PlayerController* _controller;
-    bool _isLocalPlayer;
+    virtual void read(InputMemoryBitStream& imbs);
+    virtual uint16_t write(OutputMemoryBitStream& ombs, uint16_t dirtyState);
+    virtual void recallCache();
+    virtual uint16_t refreshDirtyState();
 };

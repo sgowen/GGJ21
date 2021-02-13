@@ -13,18 +13,12 @@
 #include "GameRenderer.hpp"
 #include "World.hpp"
 
-enum GameEngineStateState
-{
-    GESS_DEFAULT =       0,
-    GESS_HOST =          1 << 0,
-    GESS_CONNECTED =     1 << 1
-};
-
 class Engine;
 class World;
 class TimeTracker;
 class Server;
 class Move;
+class Entity;
 
 #define ENGINE_STATE_GAME GameEngineState::getInstance()
 
@@ -34,38 +28,26 @@ class GameEngineState : public State<Engine>
     friend class GameRenderer;
     
 public:
+    static const std::string ARG_IP_ADDRESS;
+    static const std::string ARG_USERNAME;
+    
     static GameEngineState& getInstance()
     {
         static GameEngineState ret = GameEngineState();
         return ret;
     }
     
-    static uint64_t sGetPlayerAddressHash(uint8_t playerIndex);
-    static void sHandleDynamicEntityCreatedOnClient(Entity* e);
-    static void sHandleDynamicEntityDeletedOnClient(Entity* e);
-    static void sHandleHostServer(Engine* e, std::string name);
-    static void sHandleJoinServer(Engine* e, std::string serverIPAddress, std::string name);
-    
     virtual void enter(Engine* e);
     virtual void execute(Engine* e);
     virtual void exit(Engine* e);
     
+    Entity* getControlledPlayer();
     World& getWorld();
-    bool isLive();
+    bool isHost();
     
-private:    
-    GameRenderer _renderer;
-    TimeTracker* _timeTracker;
+private:
     World _world;
-    uint32_t _state;
-    std::string _serverIPAddress;
-    std::string _name;
-    uint32_t _map;
-    bool _isHost;
-    bool _isLive;
-    
-    void joinServer();
-    void updateWorld(const Move* move);
+    GameRenderer _renderer;
     
     void createDeviceDependentResources();
     void onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight);
@@ -74,6 +56,8 @@ private:
     void pause();
     void update(Engine* e);
     void render();
+    
+    void updateWorld(const Move* move, bool isLocal);
     
     GameEngineState();
     ~GameEngineState() {}

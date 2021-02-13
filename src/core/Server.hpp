@@ -17,8 +17,20 @@
 
 class ClientProxy;
 class Entity;
-class TimeTracker;
-class EntityIDManager;
+struct MapDef;
+
+struct PlayerDef
+{
+    uint8_t _playerID;
+    std::string _playerName;
+    
+    PlayerDef(uint8_t playerID, std::string playerName) :
+    _playerID(playerID),
+    _playerName(playerName)
+    {
+        // Empty
+    }
+};
 
 class Server
 {
@@ -27,34 +39,28 @@ public:
     static Server* getInstance();
     static void destroy();
     
-    static void sHandleDynamicEntityCreatedOnServer(Entity* e);
-    static void sHandleDynamicEntityDeletedOnServer(Entity* e);
-    static void sHandleNewClient(uint8_t playerID, std::string playerName);
-    static void sHandleLostClient(ClientProxy* inClientProxy, uint8_t index);
-    static InputState* sHandleInputStateCreation();
-    static void sHandleInputStateRelease(InputState* inputState);
-    
+    void handleNewClient(uint8_t playerID, std::string playerName);
+    void handleLostClient(ClientProxy& cp, uint8_t index);
+    InputState* handleInputStateCreation();
+    void handleInputStateRelease(InputState* inputState);
+    void loadEntityLayout(EntityLayoutDef& eld);
+    void restart();
+    std::vector<PlayerDef>& getPlayers();
     void update();
-    uint8_t getPlayerIDForRobotBeingCreated();
     World& getWorld();
 
 private:
     static Server* s_instance;
     
-    TimeTracker* _timeTracker;
-    EntityIDManager* _entityIDManager;
     World _world;
-    Pool<GameInputState> _inputStates;
-    uint32_t _map;
+    Pool<GameInputState> _poolGameInputState;
+    bool _isRestarting;
+    std::vector<PlayerDef> _players;
     
-    void handleNewClient(uint8_t playerID, std::string playerName);
-    void handleLostClient(ClientProxy* inClientProxy, uint8_t index);
-    InputState* handleInputStateCreation();
-    void handleInputStateRelease(InputState* inputState);
-    void deletePlayerWithPlayerID(uint8_t playerID);
-    void spawnEntityForPlayer(uint8_t playerId, std::string playerName);
-    void loadMap();
+    void registerPlayer(uint8_t playerID, std::string playerName);
+    void removePlayer(uint8_t playerID);
     void handleDirtyStates(std::vector<Entity*>& entities);
+    void removeProcessedMoves();
     
     Server();
     ~Server();

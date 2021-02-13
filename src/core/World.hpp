@@ -8,29 +8,11 @@
 
 #pragma once
 
+#include "EntityLayoutManager.hpp"
+
 #include <memory>
 #include <vector>
 #include <string>
-
-enum WorldFlags
-{
-    WorldFlag_Server = 1 << 0,
-    WorldFlag_Client = 1 << 1
-};
-
-struct Map
-{
-    uint32_t _key;
-    std::string _fileName;
-    std::string _name;
-    
-    Map()
-    {
-        _key = 0;
-        _fileName = "";
-        _name = "";
-    }
-};
 
 class Entity;
 class EntityIDManager;
@@ -40,42 +22,37 @@ struct Rektangle;
 class World
 {
 public:
-    World(TimeTracker* t, EntityIDManager* eidm, uint32_t flags = 0);
+    World();
     ~World();
     
-    void loadMap(uint32_t map);
-    void addEntity(Entity* e);
-    void removeEntity(Entity* e);
-    void stepPhysics();
-    void clear(bool skipDynamicEntities = false);
+    void populateFromEntityLayout(EntityLayoutDef& eld, bool isServer);
+    void addNetworkEntity(Entity* e);
+    void removeNetworkEntity(Entity* e);
+    void stepPhysics(TimeTracker* tt);
+    void clearLayout();
+    void clearNetwork();
     
-    bool isMapLoaded();
-    std::string& getMapName();
-    std::string& getMapFileName();
-    std::vector<Entity*>& getPlayers();
-    std::vector<Entity*>& getDynamicEntities();
-    std::vector<Entity*>& getStaticEntities();
+    bool isEntityLayoutLoaded();
+    uint32_t getEntityLayoutKey();
+    std::string& getEntityLayoutName();
+    std::string& getEntityLayoutFilePath();
     std::vector<Entity*>& getLayers();
+    std::vector<Entity*>& getStaticEntities();
+    std::vector<Entity*>& getNetworkEntities();
+    std::vector<Entity*>& getPlayers();
     
 private:
-    TimeTracker* _timeTracker;
-    EntityIDManager* _entityIDManager;
-    Map _map;
-    uint32_t _flags;
-    
+    EntityLayoutDef _entityLayout;
     std::vector<Entity*> _layers;
     std::vector<Entity*> _staticEntities;
-    std::vector<Entity*> _dynamicEntities;
+    std::vector<Entity*> _networkEntities;
     std::vector<Entity*> _players;
     
     bool isLayer(Entity* e);
     bool isStatic(Entity* e);
     bool isDynamic(Entity* e);
-    
-    void refreshPlayers();
+    bool isPlayer(Entity* e);
+    void addEntity(Entity* e);
+    void removeEntity(Entity* e);
     void removeEntity(Entity* e, std::vector<Entity*>& entities);
-    
-    void processPhysics(Entity* e);
-    void processCollisions(Entity* e, std::vector<Entity*>& entities);
-    void enforceBounds(Entity* e, Rektangle& bounds);
 };

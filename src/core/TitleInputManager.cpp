@@ -57,7 +57,7 @@ void TitleInputManager::updateDefault()
             continue;
         }
         
-        _state = MIMS_START_SERVER;
+        _state = MIMS_START_SRVR;
         break;
     }
 #endif
@@ -72,10 +72,10 @@ void TitleInputManager::updateDefault()
         switch (e->_button)
         {
             case GPEB_BUTTON_A:
-                _state = MIMS_START_SERVER;
+                _state = MIMS_START_SRVR;
                 continue;
             case GPEB_BUTTON_X:
-                _state = MIMS_JOIN_SERVER;
+                _state = MIMS_JOIN_SRVR;
                 continue;
             case GPEB_BUTTON_SELECT:
                 _state = MIMS_EXIT;
@@ -95,10 +95,10 @@ void TitleInputManager::updateDefault()
         switch (e->_key)
         {
             case GOW_KEY_S:
-                _state = MIMS_START_SERVER;
+                _state = MIMS_START_SRVR;
                 continue;
             case GOW_KEY_J:
-                _state = MIMS_JOIN_SERVER;
+                _state = MIMS_JOIN_SRVR;
                 continue;
             case GOW_KEY_ESCAPE:
                 _state = MIMS_EXIT;

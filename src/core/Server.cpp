@@ -14,27 +14,25 @@
 #include "EntityIDManager.hpp"
 
 #include "NetworkManagerServer.hpp"
-#include "EntityManager.hpp"
-#include "SocketServerHelper.hpp"
-#include "MachineAddress.hpp"
+#include "EntityRegistry.hpp"
+#include "SocketAddress.hpp"
 #include "PlayerController.hpp"
 #include "HidePlayerController.hpp"
-#include "EntityMapper.hpp"
-#include "EntityLayoutMapper.hpp"
-#include "InstanceManager.hpp"
+#include "EntityManager.hpp"
+#include "EntityLayoutManager.hpp"
+#include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"
 #include "Network.hpp"
+#include "StringUtil.hpp"
 
 #include <ctime>
 #include <assert.h>
-
-#define SERVER_CALLBACKS Server::sHandleNewClient, Server::sHandleLostClient, Server::sHandleInputStateCreation, Server::sHandleInputStateRelease
 
 Server* Server::s_instance = NULL;
 
 void Server::create()
 {
-    assert(!s_instance);
+    assert(s_instance == NULL);
     
     s_instance = new Server();
 }
@@ -46,158 +44,39 @@ Server * Server::getInstance()
 
 void Server::destroy()
 {
-    assert(s_instance);
+    assert(s_instance != NULL);
     
     delete s_instance;
     s_instance = NULL;
 }
 
-void Server::sHandleNewClient(uint8_t playerID, std::string playerName)
-{
-    getInstance()->handleNewClient(playerID, playerName);
-}
-
-void Server::sHandleLostClient(ClientProxy* cp, uint8_t index)
-{
-    getInstance()->handleLostClient(cp, index);
-}
-
-InputState* Server::sHandleInputStateCreation()
-{
-    return getInstance()->handleInputStateCreation();
-}
-
-void Server::sHandleInputStateRelease(InputState* inputState)
-{
-    getInstance()->handleInputStateRelease(inputState);
-}
-
-void Server::update()
-{
-    _timeTracker->onFrame();
-    
-    NW_MGR_SERVER->processIncomingPackets();
-    
-    int moveCount = NW_MGR_SERVER->getMoveCount();
-    if (moveCount > 0)
-    {
-        for (int i = 0; i < moveCount; ++i)
-        {
-            for (Entity* e : _world.getPlayers())
-            {
-                PlayerController* pc = static_cast<PlayerController*>(e->getController());
-                assert(pc != NULL);
-                
-                ClientProxy* client = NW_MGR_SERVER->getClientProxy(pc->getPlayerID());
-                if (client)
-                {
-                    MoveList& moveList = client->getUnprocessedMoveList();
-                    Move* move = moveList.getMoveAtIndex(i);
-                    if (move)
-                    {
-                        pc->processInput(move->getInputState());
-                        
-                        moveList.markMoveAsProcessed(move);
-                        
-                        client->setLastMoveTimestampDirty(true);
-                    }
-                }
-            }
-            
-            _world.stepPhysics();
-            
-            std::vector<Entity*> toDelete;
-            
-            for (Entity* e : _world.getDynamicEntities())
-            {
-                if (!e->isRequestingDeletion())
-                {
-                    e->update();
-                }
-                
-                if (e->isRequestingDeletion())
-                {
-                    toDelete.push_back(e);
-                }
-            }
-            
-            for (Entity* e : toDelete)
-            {
-                EntityController* c = e->getController();
-                if (c->getRTTI().derivesFrom(HidePlayerController::rtti))
-                {
-                    HidePlayerController* pc = static_cast<HidePlayerController*>(c);
-                    assert(pc != NULL);
-                    
-                    // If Hide dies, restart
-                    loadMap();
-                    return;
-                }
-                else
-                {
-                    NW_MGR_SERVER->deregisterEntity(e);
-                    _world.removeEntity(e);
-                }
-            }
-            
-            handleDirtyStates(_world.getDynamicEntities());
-        }
-        
-        for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
-        {
-            uint8_t playerID = i + 1;
-            ClientProxy* client = NW_MGR_SERVER->getClientProxy(playerID);
-            if (client)
-            {
-                MoveList& moveList = client->getUnprocessedMoveList();
-                moveList.removeProcessedMoves(client->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), Server::sHandleInputStateRelease);
-            }
-        }
-    }
-    
-    NW_MGR_SERVER->sendOutgoingPackets();
-}
-
-World& Server::getWorld()
-{
-    return _world;
-}
-
 void Server::handleNewClient(uint8_t playerID, std::string playerName)
 {
-    if (NW_MGR_SERVER->getNumClientsConnected() >= 1)
-    {
-        // Time to play!
-        
-        _map = 'R001';
-        loadMap();
-    }
+    _players.emplace_back(playerID, playerName);
     
-    spawnEntityForPlayer(playerID, playerName);
+    registerPlayer(playerID, playerName);
 }
 
-void Server::handleLostClient(ClientProxy* cp, uint8_t index)
+void Server::handleLostClient(ClientProxy& cp, uint8_t index)
 {
     if (index >= 1)
     {
-        uint8_t playerID = cp->getPlayerID(index);
-        
-        deletePlayerWithPlayerID(playerID);
+        uint8_t playerID = cp.getPlayerID(index);
+        removePlayer(playerID);
     }
     else
     {
-        for (int i = 0; i < cp->getNumPlayers(); ++i)
+        for (int i = 0; i < cp.getNumPlayers(); ++i)
         {
-            uint8_t playerID = cp->getPlayerID(i);
-            
-            deletePlayerWithPlayerID(playerID);
+            uint8_t playerID = cp.getPlayerID(i);
+            removePlayer(playerID);
         }
     }
 }
 
 InputState* Server::handleInputStateCreation()
 {
-    InputState* ret = _inputStates.obtain();
+    InputState* ret = _poolGameInputState.obtain();
     ret->reset();
     
     return ret;
@@ -206,71 +85,172 @@ InputState* Server::handleInputStateCreation()
 void Server::handleInputStateRelease(InputState* inputState)
 {
     GameInputState* gameInputState = static_cast<GameInputState*>(inputState);
-    _inputStates.free(gameInputState);
+    _poolGameInputState.free(gameInputState);
 }
 
-void Server::deletePlayerWithPlayerID(uint8_t playerID)
+void Server::loadEntityLayout(EntityLayoutDef& eld)
 {
-    for (Entity* e : _world.getPlayers())
+    std::vector<Entity*>& networkEntities = _world.getNetworkEntities();
+    while (!networkEntities.empty())
     {
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
-        if (pc->getPlayerID() == playerID)
+        NW_MGR_SRVR->deregisterEntity(networkEntities.front());
+    }
+    
+    ENTITY_LAYOUT_MGR.loadEntityLayout(eld, INST_REG.get<EntityIDManager>(INSK_EID_SRVR));
+    _world.populateFromEntityLayout(eld, true);
+    
+    for (auto& eid : eld._entitiesNetwork)
+    {
+        NW_MGR_SRVR->registerEntity(ENTITY_MGR.createEntity(eid, true));
+    }
+}
+
+void Server::restart()
+{
+    if (_isRestarting)
+    {
+        return;
+    }
+    
+    _isRestarting = true;
+    std::vector<Entity*>& players = _world.getPlayers();
+    while (!players.empty())
+    {
+        Entity* e = players.front();
+        NW_MGR_SRVR->deregisterEntity(e);
+        LOG("NW_MGR_SRVR->deregisterEntity %d", e->getID());
+    }
+    _isRestarting = false;
+    
+    for (int i = 0; i < _players.size(); ++i)
+    {
+        registerPlayer(_players[i]._playerID, _players[i]._playerName);
+    }
+}
+
+std::vector<PlayerDef>& Server::getPlayers()
+{
+    return _players;
+}
+
+void Server::update()
+{
+    INST_REG.get<TimeTracker>(INSK_TIME_SRVR)->onFrame();
+    
+    NW_MGR_SRVR->processIncomingPackets();
+    
+    // TODO, this attempts to figure out an average
+    // really, what we need to do is lockstep
+    // process moves that correspond to the same server timestamp
+    int moveCount = NW_MGR_SRVR->getMoveCount();
+    for (int i = 0; i < moveCount; ++i)
+    {
+        for (Entity* e : _world.getPlayers())
         {
-            e->requestDeletion();
+            PlayerController* c = static_cast<PlayerController*>(e->controller());
+            assert(c != NULL);
+            
+            ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
+            assert (cp != NULL);
+            
+            MoveList& ml = cp->getUnprocessedMoveList();
+            Move* m = ml.getMoveAtIndex(i);
+            if (m == NULL)
+            {
+                continue;
+            }
+            
+            c->processInput(m->inputState());
+            ml.markMoveAsProcessed(m);
+            cp->setLastMoveTimestampDirty(true);
+        }
+        
+        _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
+        
+        std::vector<Entity*> toDelete;
+        for (Entity* e : _world.getPlayers())
+        {
+            e->update();
+            if (e->isRequestingDeletion())
+            {
+                toDelete.push_back(e);
+            }
+        }
+        for (Entity* e : _world.getNetworkEntities())
+        {
+            e->update();
+            if (e->isRequestingDeletion())
+            {
+                toDelete.push_back(e);
+            }
+        }
+        for (Entity* e : toDelete)
+        {
+            NW_MGR_SRVR->deregisterEntity(e);
+            LOG("Deregister");
+        }
+        
+        LOG("Player Entities");
+        handleDirtyStates(_world.getPlayers());
+        LOG("Network Entities");
+        handleDirtyStates(_world.getNetworkEntities());
+    }
+    
+    removeProcessedMoves();
+    
+    NW_MGR_SRVR->sendOutgoingPackets();
+}
+
+World& Server::getWorld()
+{
+    return _world;
+}
+
+void Server::registerPlayer(uint8_t playerID, std::string playerName)
+{
+    ClientProxy* cp = NW_MGR_SRVR->getClientProxy(playerID);
+    assert(cp != NULL);
+    
+    float spawnX = playerID == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
+    float spawnY = playerID == 1 ? rand() % 16 + 6 : rand() % 8 + 6;
+    
+    uint32_t key = playerID == 1 ? 'HIDE' : 'JCKE';
+    uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextPlayerEntityID();
+    EntityInstanceDef eid(networkID, key, spawnX, spawnY);
+    Entity* e = ENTITY_MGR.createEntity(eid, true);
+    PlayerController* c = static_cast<PlayerController*>(e->controller());
+    c->setAddressHash(cp->getSocketAddress()->getHash());
+    c->setPlayerName(playerName);
+    c->setPlayerID(playerID);
+    if (c->getRTTI().isExactly(HidePlayerController::rtti))
+    {
+        HidePlayerController* hpc = static_cast<HidePlayerController*>(c);
+        hpc->setEntityLayoutKey('LO01');
+    }
+    
+    NW_MGR_SRVR->registerEntity(e);
+}
+
+void Server::removePlayer(uint8_t playerID)
+{
+    for (std::vector<PlayerDef>::iterator i = _players.begin(); i != _players.end(); ++i)
+    {
+        PlayerDef& pd = *i;
+        if (pd._playerID == playerID)
+        {
+            _players.erase(i);
             break;
         }
     }
-}
-
-void Server::spawnEntityForPlayer(uint8_t playerId, std::string playerName)
-{
-    ClientProxy* cp = NW_MGR_SERVER->getClientProxy(playerId);
-    assert(cp != NULL);
     
-    float spawnX = playerId == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
-    float spawnY = playerId == 1 ? rand() % 16 + 6 : rand() % 8 + 6;
-    
-    uint32_t key = playerId == 1 ? 'HIDE' : 'JCKE';
-    EntityInstanceDef eid(_entityIDManager->getNextNetworkEntityID(), key, spawnX, spawnY);
-    Entity* e = ENTITY_MAPPER.createEntity(&eid, true);
-    PlayerController* pc = static_cast<PlayerController*>(e->getController());
-    pc->setAddressHash(cp->getMachineAddress()->getHash());
-    pc->setPlayerName(playerName);
-    pc->setPlayerID(playerId);
-    
-    _world.addEntity(e);
-    
-    NW_MGR_SERVER->registerEntity(e);
-}
-
-void Server::loadMap()
-{
-    std::vector<uint8_t> playerIDs;
-    std::vector<std::string> playerNames;
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
-        playerIDs.push_back(pc->getPlayerID());
-        playerNames.push_back(pc->getPlayerName());
-    }
-    
-    for (Entity* e : _world.getDynamicEntities())
-    {
-        NW_MGR_SERVER->deregisterEntity(e);
-    }
-    
-    _world.loadMap(_map);
-    
-    for (Entity* e : _world.getDynamicEntities())
-    {
-        NW_MGR_SERVER->registerEntity(e);
-    }
-    
-    NW_MGR_SERVER->setMap(_map);
-    
-    for (int i = 0; i < playerIDs.size() && i < playerNames.size(); ++i)
-    {
-        handleNewClient(playerIDs[i], playerNames[i]);
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        if (c->getPlayerID() == playerID)
+        {
+            NW_MGR_SRVR->deregisterEntity(e);
+            break;
+        }
     }
 }
 
@@ -278,24 +258,104 @@ void Server::handleDirtyStates(std::vector<Entity*>& entities)
 {
     for (Entity* e : entities)
     {
-        uint16_t dirtyState = e->getNetworkController()->getDirtyState();
+        uint16_t dirtyState = e->networkController()->refreshDirtyState();
         if (dirtyState > 0)
         {
-            NW_MGR_SERVER->setStateDirty(e->getID(), dirtyState);
+            LOG("dirtyState > 0");
+            NW_MGR_SRVR->setStateDirty(e->getID(), dirtyState);
         }
     }
 }
 
-Server::Server() :
-_timeTracker(INSTANCE_MGR.get<TimeTracker>(INSK_TIMING_SERVER)),
-_entityIDManager(INSTANCE_MGR.get<EntityIDManager>(INSK_ENTITY_ID_MANAGER_SERVER)),
-_world(_timeTracker, _entityIDManager, WorldFlag_Server),
-_map(0)
+void cb_server_onEntityRegistered(Entity* e)
 {
-    _timeTracker->reset();
+    Server::getInstance()->getWorld().addNetworkEntity(e);
     
-    NetworkManagerServer::create(new SocketServerHelper(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, NW_MGR_SERVER_CALLBACKS), SERVER_CALLBACKS);
-    assert(NW_MGR_SERVER != NULL);
+    if (e->controller()->getRTTI().isExactly(HidePlayerController::rtti))
+    {
+        HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
+        uint32_t key = c->getEntityLayoutKey();
+        EntityLayoutDef& eld = ENTITY_LAYOUT_MGR.findEntityLayoutDef(key);
+        Server::getInstance()->loadEntityLayout(eld);
+    }
+}
+
+void cb_server_onEntityDeregistered(Entity* e)
+{
+    bool needsRestart = false;
+    
+    if (e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti))
+    {
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        assert(c != NULL);
+        
+        std::vector<PlayerDef>& players = Server::getInstance()->getPlayers();
+        for (std::vector<PlayerDef>::iterator i = players.begin(); i != players.end(); ++i)
+        {
+            PlayerDef& pd = *i;
+            if (pd._playerID == c->getPlayerID())
+            {
+                needsRestart = true;
+                break;
+            }
+        }
+    }
+    
+    Server::getInstance()->getWorld().removeNetworkEntity(e);
+    
+    if (needsRestart)
+    {
+        Server::getInstance()->restart();
+    }
+}
+
+void cb_server_handleNewClient(uint8_t playerID, std::string playerName)
+{
+    Server::getInstance()->handleNewClient(playerID, playerName);
+}
+
+void cb_server_handleLostClient(ClientProxy& cp, uint8_t index)
+{
+    Server::getInstance()->handleLostClient(cp, index);
+}
+
+InputState* cb_server_handleInputStateCreation()
+{
+    return Server::getInstance()->handleInputStateCreation();
+}
+
+void cb_server_handleInputStateRelease(InputState* inputState)
+{
+    Server::getInstance()->handleInputStateRelease(inputState);
+}
+
+void Server::removeProcessedMoves()
+{
+    for (Entity* e : _world.getPlayers())
+    {
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        assert(c != NULL);
+        
+        ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
+        assert(cp != NULL);
+        
+        MoveList& moveList = cp->getUnprocessedMoveList();
+        moveList.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
+    }
+}
+
+#define SERVER_CBS cb_server_onEntityRegistered, cb_server_onEntityDeregistered, cb_server_handleNewClient, cb_server_handleLostClient, cb_server_handleInputStateCreation, cb_server_handleInputStateRelease
+
+Server::Server() :
+_world(),
+_isRestarting(false)
+{
+    INST_REG.get<TimeTracker>(INSK_TIME_SRVR)->reset();
+    INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->resetNextNetworkEntityID();
+    INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->resetNextPlayerEntityID();
+    
+    NetworkManagerServer::create(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, SERVER_CBS);
+    assert(NW_MGR_SRVR != NULL);
 }
 
 Server::~Server()

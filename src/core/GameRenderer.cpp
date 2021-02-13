@@ -33,7 +33,7 @@
 #include <assert.h>
 
 GameRenderer::GameRenderer() :
-_fontRenderer(128, 0, 0, 16, 64, 75, 1024, 1024),
+_fontRenderer(256, 0, 0, 16, 16, 16, 256, 256),
 _framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
 _polygonBatcher(1, true),
 _screenRenderer(),
@@ -41,7 +41,7 @@ _shaderManager(),
 _spriteBatcher(4096),
 _textureManager(),
 _textViews{
-    TextView(TEXA_CENTER, "Joining Server..., [ESC] to exit", TEXV_HIDDEN),
+    TextView(TEXA_CENTER, "Joining Server... [ESC] to exit", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "Lost Jackie again...", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "She needs to connect", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "a controller or", TEXV_HIDDEN),
@@ -121,15 +121,19 @@ void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
 {
     for (Entity* e : entities)
     {
-        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
+        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->stateTime());
         
-        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
+        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->width(), e->height(), e->getAngle(), e->isFacingLeft());
     }
 }
 
 void GameRenderer::renderWorld()
 {
     World& w = ENGINE_STATE_GAME._world;
+    if (!w.isEntityLayoutLoaded())
+    {
+        return;
+    }
     
     _spriteBatcher.begin();
     addSpritesToBatcher(w.getLayers());
@@ -137,41 +141,22 @@ void GameRenderer::renderWorld()
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    for (Entity* e : w.getDynamicEntities())
+    for (Entity* e : w.getNetworkEntities())
     {
-        if (e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
-        {
-            continue;
-        }
-        
-        if (e->getController()->getRTTI().derivesFrom(CrystalController::rtti))
-        {
-            CrystalController* ec = static_cast<CrystalController*>(e->getController());
-            TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-            _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, ec->getWidthForRender(), ec->getWidthForRender(), e->getAngle(), e->isFacingLeft());
-        }
-        else
-        {
-            TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-            _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->getWidth(), e->getHeight(), e->getAngle(), e->isFacingLeft());
-        }
+        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->stateTime());
+        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->width(), e->height(), e->getAngle(), e->isFacingLeft());
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    for (Entity* e : w.getDynamicEntities())
+    for (Entity* e : w.getPlayers())
     {
-        if (!e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
-        {
-            continue;
-        }
-        
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
         
         // I know... but look at the sprite sheet
-        bool isFacingLeft = pc->getPlayerDirection() == PDIR_RIGHT;
-        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->getStateTime());
-        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->getWidth(), e->getHeight(), e->getAngle(), isFacingLeft);
+        bool flipX = c->getPlayerDirection() == PDIR_RIGHT;
+        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->stateTime());
+        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->width(), e->height(), e->getAngle(), flipX);
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
 }
@@ -194,18 +179,17 @@ void GameRenderer::renderUI()
     _textViews[6]._visibility = TEXV_HIDDEN;
     
     World& w = ENGINE_STATE_GAME._world;
-    
-    for (Entity* e : ENGINE_STATE_GAME._world.getPlayers())
+    for (Entity* e : w.getPlayers())
     {
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
         
-        int playerID = pc->getPlayerID();
-        _textViews[playerID + 4]._text = StringUtil::format("%i|%s", playerID, pc->getPlayerName().c_str()).c_str();
+        int playerID = c->getPlayerID();
+        _textViews[playerID + 4]._text = StringUtil::format("%i|%s", playerID, c->getPlayerName().c_str()).c_str();
         _textViews[playerID + 4]._visibility = TEXV_VISIBLE;
     }
     
-    if (NW_MGR_CLIENT != NULL &&
-        NW_MGR_CLIENT->state() == NWCS_WELCOMED)
+    if (NW_MGR_CLNT != NULL &&
+        NW_MGR_CLNT->state() == NWCS_WELCOMED)
     {
         if (w.getPlayers().size() == 1)
         {
@@ -232,10 +216,10 @@ void GameRenderer::renderEncounter()
     World& w = ENGINE_STATE_GAME._world;
     for (Entity* e : w.getPlayers())
     {
-        if (e->getController()->getRTTI().derivesFrom(HidePlayerController::rtti))
+        if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
         {
-            HidePlayerController* pc = static_cast<HidePlayerController*>(e->getController());
-            isInEncounter = pc->isInEncounter();
+            HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
+            isInEncounter = c->isInEncounter();
         }
     }
     
@@ -252,11 +236,11 @@ void GameRenderer::renderEncounter()
     _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
     
     _spriteBatcher.begin();
-    for (Entity* e : w.getDynamicEntities())
+    for (Entity* e : w.getNetworkEntities())
     {
-        if (e->getController()->getRTTI().derivesFrom(MonsterController::rtti))
+        if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti))
         {
-            MonsterController* ec = static_cast<MonsterController*>(e->getController());
+            MonsterController* ec = static_cast<MonsterController*>(e->controller());
             TextureRegion tr = ASSETS.findTextureRegion(ec->getTextureMappingForEncounter(), 0);
             _spriteBatcher.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
             break;
@@ -264,9 +248,9 @@ void GameRenderer::renderEncounter()
     }
     for (Entity* e : w.getPlayers())
     {
-        if (e->getController()->getRTTI().derivesFrom(HidePlayerController::rtti))
+        if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
         {
-            HidePlayerController* ec = static_cast<HidePlayerController*>(e->getController());
+            HidePlayerController* ec = static_cast<HidePlayerController*>(e->controller());
             TextureRegion tr = ASSETS.findTextureRegion(ec->getTextureMappingForEncounter(), ec->encounterStateTime());
             _spriteBatcher.addSprite(tr, CFG_MAIN._playerBattleX, CFG_MAIN._playerBattleY, ec->getWidthForEncounter(), CFG_MAIN._playerBattleHeight, 0);
             break;

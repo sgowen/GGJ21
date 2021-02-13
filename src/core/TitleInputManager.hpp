@@ -15,8 +15,8 @@ enum TitleInputManagerState
 {
     MIMS_DEFAULT,
     MIMS_EXIT,
-    MIMS_START_SERVER,
-    MIMS_JOIN_SERVER,
+    MIMS_START_SRVR,
+    MIMS_JOIN_SRVR,
     MIMS_TEXT_INPUT_READY
 };
 

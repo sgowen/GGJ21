@@ -20,53 +20,53 @@ GameInputState::GameInputState() : InputState()
     _playerInputStates.resize(CFG_MAIN._maxNumPlayers);
 }
 
-void GameInputState::write(OutputMemoryBitStream& inOutputStream) const
+void GameInputState::write(OutputMemoryBitStream& ombs) const
 {
     for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
     {
         bool playerID = _playerInputStates[i]._playerID != NW_INPUT_UNASSIGNED;
-        inOutputStream.write(playerID);
+        ombs.write(playerID);
         if (playerID)
         {
-            _playerInputStates[i].write(inOutputStream);
+            _playerInputStates[i].write(ombs);
         }
     }
 }
 
-void GameInputState::read(InputMemoryBitStream& inInputStream)
+void GameInputState::read(InputMemoryBitStream& imbs)
 {
     for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
     {
         bool isInputAssignedBit;
-        inInputStream.read(isInputAssignedBit);
+        imbs.read(isInputAssignedBit);
         if (isInputAssignedBit)
         {
-            _playerInputStates[i].read(inInputStream);
+            _playerInputStates[i].read(imbs);
         }
     }
 }
 
 void GameInputState::reset()
 {
-    for (PlayerInputState& is : _playerInputStates)
+    for (PlayerInputState& pis : _playerInputStates)
     {
-        is._playerID = NW_INPUT_UNASSIGNED;
-        is._inputState = 0;
+        pis._playerID = NW_INPUT_UNASSIGNED;
+        pis._inputState = 0;
     }
 }
 
 bool GameInputState::isEqual(InputState* inputState) const
 {
-    GameInputState* in = static_cast<GameInputState*>(inputState);
+    GameInputState* gis = static_cast<GameInputState*>(inputState);
     
     for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
     {
-        if (in->_playerInputStates[i]._playerID != _playerInputStates[i]._playerID)
+        if (gis->_playerInputStates[i]._playerID != _playerInputStates[i]._playerID)
         {
             return false;
         }
         
-        if (in->_playerInputStates[i]._inputState != _playerInputStates[i]._inputState)
+        if (gis->_playerInputStates[i]._inputState != _playerInputStates[i]._inputState)
         {
             return false;
         }
@@ -77,12 +77,12 @@ bool GameInputState::isEqual(InputState* inputState) const
 
 void GameInputState::copyTo(InputState* inputState) const
 {
-    GameInputState* gameInputState = static_cast<GameInputState*>(inputState);
+    GameInputState* gis = static_cast<GameInputState*>(inputState);
     
     for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
     {
-        gameInputState->_playerInputStates[i]._playerID = _playerInputStates[i]._playerID;
-        gameInputState->_playerInputStates[i]._inputState = _playerInputStates[i]._inputState;
+        gis->_playerInputStates[i]._playerID = _playerInputStates[i]._playerID;
+        gis->_playerInputStates[i]._inputState = _playerInputStates[i]._inputState;
     }
 }
 
@@ -130,19 +130,24 @@ GameInputState::PlayerInputState& GameInputState::getPlayerInputState(int index)
     return _playerInputStates[index];
 }
 
-void GameInputState::PlayerInputState::write(OutputMemoryBitStream& inOutputStream) const
+void GameInputState::PlayerInputState::write(OutputMemoryBitStream& ombs) const
 {
-    inOutputStream.write<uint8_t, 3>(_playerID);
-    inOutputStream.write<uint8_t, 5>(_inputState);
+    ombs.write<uint8_t, 3>(_playerID);
+    ombs.write<uint8_t, 5>(_inputState);
 }
 
-void GameInputState::PlayerInputState::read(InputMemoryBitStream& inInputStream)
+void GameInputState::PlayerInputState::read(InputMemoryBitStream& imbs)
 {
-    inInputStream.read<uint8_t, 3>(_playerID);
-    inInputStream.read<uint8_t, 5>(_inputState);
+    imbs.read<uint8_t, 3>(_playerID);
+    imbs.read<uint8_t, 5>(_inputState);
 }
 
-uint8_t GameInputState::PlayerInputState::getInputState()
+uint8_t GameInputState::PlayerInputState::playerID()
+{
+    return _playerID;
+}
+
+uint8_t GameInputState::PlayerInputState::inputState()
 {
     return _inputState;
 }

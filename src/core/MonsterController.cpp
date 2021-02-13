@@ -9,7 +9,6 @@
 #include "MonsterController.hpp"
 
 #include "Entity.hpp"
-#include <box2d/b2_math.h>
 
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
@@ -29,21 +28,21 @@
 #include "GameEngineState.hpp"
 #include "Macros.hpp"
 #include "Server.hpp"
-#include "PlayerController.hpp"
+#include "HidePlayerController.hpp"
 
-IMPL_RTTI(MonsterController, EntityController);
-IMPL_EntityController_create(MonsterController);
+IMPL_RTTI(MonsterController, EntityController)
+IMPL_EntityController_create(MonsterController)
 
 MonsterController::MonsterController(Entity* e) : EntityController(e),
 _stats(),
-_statsNetworkCache(_stats)
+_statsCache(_stats)
 {
     // Empty
 }
 
 void MonsterController::update()
 {
-    if (!_entity->getNetworkController()->isServer())
+    if (!_entity->networkController()->isServer())
     {
         return;
     }
@@ -55,8 +54,8 @@ void MonsterController::update()
     std::vector<Entity*>& players = w.getPlayers();
     for (Entity* e : players)
     {
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
-        uint8_t playerID = pc->getPlayerID();
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        uint8_t playerID = c->getPlayerID();
         if (playerID == 1)
         {
             float distance = e->getPosition().dist(_entity->getPosition());
@@ -97,18 +96,7 @@ void MonsterController::update()
     }
 }
 
-void MonsterController::receiveMessage(uint16_t message, void* data)
-{
-    // TODO
-    
-    switch (message)
-    {
-        default:
-            break;
-    }
-}
-
-std::string MonsterController::getTextureMapping(uint8_t state)
+std::string MonsterController::getTextureMapping()
 {
     switch (_stats._dir)
     {
@@ -123,25 +111,10 @@ std::string MonsterController::getTextureMapping(uint8_t state)
 
 void MonsterController::onCollision(Entity* e)
 {
-    if (!_entity->getNetworkController()->isServer())
+    if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
     {
-        return;
-    }
-    
-    if (_entity->isRequestingDeletion())
-    {
-        return;
-    }
-    
-    if (e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
-    {
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
-        
-        int playerID = pc->getPlayerID();
-        if (playerID == 1)
-        {
-            e->getController()->onMessage(MSG_ENCOUNTER);
-        }
+        HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
+        c->onMessage(MSG_ENCOUNTER);
     }
 }
 
@@ -153,47 +126,42 @@ std::string MonsterController::getTextureMappingForEncounter()
 #include "InputMemoryBitStream.hpp"
 #include "OutputMemoryBitStream.hpp"
 
-IMPL_EntityNetworkController_create(MonsterNetworkController);
+IMPL_EntityNetworkController_create(MonsterNetworkController)
 
-MonsterNetworkController::MonsterNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer), _controller(static_cast<MonsterController*>(e->getController()))
+void MonsterNetworkController::read(InputMemoryBitStream& imbs)
 {
-    // Empty
-}
-
-void MonsterNetworkController::read(InputMemoryBitStream& ip)
-{
-    uint8_t fromState = _entity->stateNetworkCache()._state;
+    uint8_t fromState = _entity->stateCache()._state;
     
-    EntityNetworkController::read(ip);
+    EntityNetworkController::read(imbs);
     
-    MonsterController& c = *_controller;
+    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
     
     bool stateBit;
     
-    ip.read(stateBit);
+    imbs.read(stateBit);
     if (stateBit)
     {
-        ip.read(c._stats._health);
-        ip.read(c._stats._dir);
+        imbs.read(c->_stats._health);
+        imbs.read(c->_stats._dir);
         
-        c._statsNetworkCache = c._stats;
+        c->_statsCache = c->_stats;
     }
     
     SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
 }
 
-uint16_t MonsterNetworkController::write(OutputMemoryBitStream& op, uint16_t dirtyState)
+uint16_t MonsterNetworkController::write(OutputMemoryBitStream& ombs, uint16_t dirtyState)
 {
-    uint16_t writtenState = EntityNetworkController::write(op, dirtyState);
+    uint16_t writtenState = EntityNetworkController::write(ombs, dirtyState);
     
-    MonsterController& c = *_controller;
+    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
     
     bool stats = IS_BIT_SET(dirtyState, MonsterController::RSTF_STATS);
-    op.write(stats);
+    ombs.write(stats);
     if (stats)
     {
-        op.write(c._stats._health);
-        op.write(c._stats._dir);
+        ombs.write(c->_stats._health);
+        ombs.write(c->_stats._dir);
         
         writtenState |= MonsterController::RSTF_STATS;
     }
@@ -201,24 +169,24 @@ uint16_t MonsterNetworkController::write(OutputMemoryBitStream& op, uint16_t dir
     return writtenState;
 }
 
-void MonsterNetworkController::recallNetworkCache()
+void MonsterNetworkController::recallCache()
 {
-    EntityNetworkController::recallNetworkCache();
+    EntityNetworkController::recallCache();
     
-    MonsterController& c = *_controller;
+    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
     
-    c._stats = c._statsNetworkCache;
+    c->_stats = c->_statsCache;
 }
 
-uint16_t MonsterNetworkController::getDirtyState()
+uint16_t MonsterNetworkController::refreshDirtyState()
 {
-    uint16_t ret = EntityNetworkController::getDirtyState();
+    uint16_t ret = EntityNetworkController::refreshDirtyState();
     
-    MonsterController& c = *_controller;
+    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
     
-    if (c._statsNetworkCache != c._stats)
+    if (c->_statsCache != c->_stats)
     {
-        c._statsNetworkCache = c._stats;
+        c->_statsCache = c->_stats;
         ret |= MonsterController::RSTF_STATS;
     }
     

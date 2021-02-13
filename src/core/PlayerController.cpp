@@ -9,7 +9,6 @@
 #include "PlayerController.hpp"
 
 #include "Entity.hpp"
-#include <box2d/b2_math.h>
 
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
@@ -31,74 +30,19 @@
 #include "MonsterController.hpp"
 #include "Server.hpp"
 
-IMPL_RTTI(PlayerController, EntityController);
-IMPL_EntityController_create(PlayerController);
+IMPL_RTTI(PlayerController, EntityController)
+IMPL_EntityController_create(PlayerController)
 
 PlayerController::PlayerController(Entity* e) : EntityController(e),
 _playerInfo(),
-_playerInfoNetworkCache(_playerInfo),
+_playerInfoCache(_playerInfo),
 _stats(),
-_statsNetworkCache(_stats),
-_encounter(),
-_encounterNetworkCache(_encounter)
+_statsCache(_stats)
 {
     // Empty
 }
 
-void PlayerController::update()
-{
-    ++_encounter._stateTime;
-    
-    if (!_entity->getNetworkController()->isServer())
-    {
-        return;
-    }
-    
-    if (_encounter._state == ESTA_SWING)
-    {
-        if (_encounter._stateTime >= 42)
-        {
-            _encounter._state = ESTA_IDLE;
-            
-            World& w = Server::getInstance()->getWorld();
-            for (Entity* e : w.getDynamicEntities())
-            {
-                if (e->getController()->getRTTI().derivesFrom(MonsterController::rtti))
-                {
-                    e->requestDeletion();
-                    _encounter._isInCounter = false;
-                    break;
-                }
-            }
-        }
-    }
-    
-    if (_stats._health == 0)
-    {
-        _entity->requestDeletion();
-    }
-}
-
-void PlayerController::onMessage(uint16_t message, void* data)
-{
-    // TODO
-    
-    switch (message)
-    {
-        case MSG_ENCOUNTER:
-        {
-            _encounter._isInCounter = true;
-            _entity->state()._state = STAT_IDLE;
-            _entity->pose()._velocity._x = 0;
-            _entity->pose()._velocity._y = 0;
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-void PlayerController::processInput(InputState* inputState)
+void PlayerController::processInput(InputState* inputState, bool isLocal)
 {
     GameInputState* is = static_cast<GameInputState*>(inputState);
     uint8_t playerID = getPlayerID();
@@ -108,90 +52,60 @@ void PlayerController::processInput(InputState* inputState)
         return;
     }
     
-    if (_encounter._isInCounter)
+    uint8_t fromState = _entity->state()._state;
+    uint8_t& state = _entity->state()._state;
+    uint16_t& stateTime = _entity->state()._stateTime;
+    uint8_t inpt = playerInputState->inputState();
+    
+    state = STAT_IDLE;
+    const Vector2& vel = _entity->getVelocity();
+    float desiredVel[2] = { 0.0f, 0.0f };
+    float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
+    float maxSpeedHalved = maxSpeed / 2;
+    if (IS_BIT_SET(inpt, GISF_MOVING_UP))
     {
-        if (_encounter._state == ESTA_IDLE)
-        {
-            uint8_t inpt = playerInputState->getInputState();
-            if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
-            {
-                _encounter._state = ESTA_SWING;
-                _encounter._stateTime = 0;
-                
-                if (ENGINE_STATE_GAME.isLive())
-                {
-                    GOW_AUDIO.playSound(_entity->getSoundMapping(4));
-                }
-            }
-        }
+        state = STAT_MOVING;
+        _stats._dir = PDIR_UP;
+        desiredVel[1] = MIN(vel._y + maxSpeedHalved, maxSpeed);
     }
-    else
+    if (IS_BIT_SET(inpt, GISF_MOVING_LEFT))
     {
-        uint8_t fromState = _entity->state()._state;
-        uint8_t& state = _entity->state()._state;
-        uint16_t& stateTime = _entity->state()._stateTime;
-        uint8_t inpt = playerInputState->getInputState();
-        
-        state = STAT_IDLE;
-        const Vector2& vel = _entity->getVelocity();
-        float desiredVel[2] = { 0.0f, 0.0f };
-        float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
-        float maxSpeedHalved = maxSpeed / 2;
-        if (IS_BIT_SET(inpt, GISF_MOVING_UP))
-        {
-            state = STAT_MOVING;
-            _stats._dir = PDIR_UP;
-            desiredVel[1] = b2Min(vel._y + maxSpeedHalved, maxSpeed);
-        }
-        if (IS_BIT_SET(inpt, GISF_MOVING_LEFT))
-        {
-            state = STAT_MOVING;
-            _stats._dir = PDIR_LEFT;
-            desiredVel[0] = b2Max(vel._x - maxSpeedHalved, -maxSpeed);
-        }
-        if (IS_BIT_SET(inpt, GISF_MOVING_DOWN))
-        {
-            state = STAT_MOVING;
-            _stats._dir = PDIR_DOWN;
-            desiredVel[1] = b2Max(vel._y - maxSpeedHalved, -maxSpeed);
-        }
-        if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
-        {
-            state = STAT_MOVING;
-            _stats._dir = PDIR_RIGHT;
-            desiredVel[0] = b2Min(vel._x + maxSpeedHalved, maxSpeed);
-        }
-        
-        if (state == STAT_IDLE)
-        {
-            stateTime = 6; // 2nd frame is more appropriate for idle
-            desiredVel[0] = vel._x * 0.86f;
-            desiredVel[1] = vel._y * 0.86f;
-        }
-        
-        _entity->pose()._velocity._x = desiredVel[0];
-        _entity->pose()._velocity._y = desiredVel[1];
-        
-        if (ENGINE_STATE_GAME.isLive())
-        {
-            SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
-        }
+        state = STAT_MOVING;
+        _stats._dir = PDIR_LEFT;
+        desiredVel[0] = MAX(vel._x - maxSpeedHalved, -maxSpeed);
+    }
+    if (IS_BIT_SET(inpt, GISF_MOVING_DOWN))
+    {
+        state = STAT_MOVING;
+        _stats._dir = PDIR_DOWN;
+        desiredVel[1] = MAX(vel._y - maxSpeedHalved, -maxSpeed);
+    }
+    if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
+    {
+        state = STAT_MOVING;
+        _stats._dir = PDIR_RIGHT;
+        desiredVel[0] = MIN(vel._x + maxSpeedHalved, maxSpeed);
+    }
+    
+    if (state == STAT_IDLE)
+    {
+        stateTime = 6; // 2nd frame is more appropriate for idle
+        desiredVel[0] = vel._x * 0.86f;
+        desiredVel[1] = vel._y * 0.86f;
+    }
+    
+    _entity->pose()._velocity._x = desiredVel[0];
+    _entity->pose()._velocity._y = desiredVel[1];
+    
+    if (isLocal)
+    {
+        SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
     }
 }
 
-bool PlayerController::isInEncounter()
+void PlayerController::setAddressHash(uint64_t value)
 {
-    return _encounter._isInCounter;
-}
-
-uint16_t PlayerController::encounterStateTime()
-{
-    return _encounter._stateTime;
-}
-
-void PlayerController::setAddressHash(uint64_t inValue)
-{
-    _playerInfo._addressHash = inValue;
+    _playerInfo._addressHash = value;
 }
 
 uint64_t PlayerController::getAddressHash() const
@@ -199,9 +113,9 @@ uint64_t PlayerController::getAddressHash() const
     return _playerInfo._addressHash;
 }
 
-void PlayerController::setPlayerID(uint8_t inValue)
+void PlayerController::setPlayerID(uint8_t value)
 {
-    _playerInfo._playerID = inValue;
+    _playerInfo._playerID = value;
 }
 
 uint8_t PlayerController::getPlayerID() const
@@ -209,9 +123,9 @@ uint8_t PlayerController::getPlayerID() const
     return _playerInfo._playerID;
 }
 
-void PlayerController::setPlayerName(std::string inValue)
+void PlayerController::setPlayerName(std::string value)
 {
-    _playerInfo._playerName = inValue;
+    _playerInfo._playerName = value;
 }
 
 std::string& PlayerController::getPlayerName()
@@ -232,151 +146,100 @@ uint16_t PlayerController::getHealth()
 #include "InputMemoryBitStream.hpp"
 #include "OutputMemoryBitStream.hpp"
 
-IMPL_EntityNetworkController_create(PlayerNetworkController);
+IMPL_EntityNetworkController_create(PlayerNetworkController)
 
-PlayerNetworkController::PlayerNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer), _controller(static_cast<PlayerController*>(e->getController())), _isLocalPlayer(false)
+void PlayerNetworkController::read(InputMemoryBitStream& imbs)
 {
-    // Empty
-}
-
-void PlayerNetworkController::read(InputMemoryBitStream& ip)
-{
-    uint8_t fromState = _entity->stateNetworkCache()._state;
+    uint8_t fromState = _entity->stateCache()._state;
     
-    EntityNetworkController::read(ip);
+    EntityNetworkController::read(imbs);
     
-    PlayerController& c = *_controller;
+    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
     
     bool stateBit;
     
-    ip.read(stateBit);
+    imbs.read(stateBit);
     if (stateBit)
     {
-        ip.read(c._playerInfo._addressHash);
-        ip.read<uint8_t, 3>(c._playerInfo._playerID);
-        ip.readSmall(c._playerInfo._playerName);
+        imbs.read(c->_playerInfo._addressHash);
+        imbs.read<uint8_t, 3>(c->_playerInfo._playerID);
+        imbs.readSmall(c->_playerInfo._playerName);
         
-        _isLocalPlayer = NW_MGR_CLIENT->isPlayerIDLocal(c._playerInfo._playerID);
-        
-        c._playerInfoNetworkCache = c._playerInfo;
+        c->_playerInfoCache = c->_playerInfo;
     }
     
-    ip.read(stateBit);
+    imbs.read(stateBit);
     if (stateBit)
     {
-        ip.read(c._stats._health);
-        ip.read(c._stats._dir);
+        imbs.read(c->_stats._health);
+        imbs.read(c->_stats._dir);
         
-        c._statsNetworkCache = c._stats;
+        c->_statsCache = c->_stats;
     }
     
-    ip.read(stateBit);
-    if (stateBit)
-    {
-        bool wasInCounter = c._encounter._isInCounter;
-        
-        ip.read(c._encounter._isInCounter);
-        ip.read(c._encounter._stateTime);
-        ip.read(c._encounter._state);
-        
-        c._encounterNetworkCache = c._encounter;
-        
-        if (!wasInCounter && c._encounter._isInCounter)
-        {
-            GOW_AUDIO.playSound(_entity->getSoundMapping(2));
-        }
-        else if (wasInCounter && !c._encounter._isInCounter)
-        {
-            GOW_AUDIO.playSound(_entity->getSoundMapping(3));
-        }
-    }
-    
-    if (!_isLocalPlayer)
+    if (!NW_MGR_CLNT->isPlayerIDLocal(c->_playerInfo._playerID))
     {
         SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
     }
 }
 
-uint16_t PlayerNetworkController::write(OutputMemoryBitStream& op, uint16_t dirtyState)
+uint16_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_t dirtyState)
 {
-    uint16_t writtenState = EntityNetworkController::write(op, dirtyState);
+    uint16_t writtenState = EntityNetworkController::write(ombs, dirtyState);
     
-    PlayerController& c = *_controller;
+    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
     
-    bool playerInfo = IS_BIT_SET(dirtyState, PlayerController::RSTF_PLAYER_INFO);
-    op.write(playerInfo);
-    if (playerInfo)
+    bool RSTF_PLAYER_INFO = IS_BIT_SET(dirtyState, PlayerController::RSTF_PLAYER_INFO);
+    ombs.write(RSTF_PLAYER_INFO);
+    if (RSTF_PLAYER_INFO)
     {
-        op.write(c._playerInfo._addressHash);
-        op.write<uint8_t, 3>(c._playerInfo._playerID);
-        op.writeSmall(c._playerInfo._playerName);
+        ombs.write(c->_playerInfo._addressHash);
+        ombs.write<uint8_t, 3>(c->_playerInfo._playerID);
+        ombs.writeSmall(c->_playerInfo._playerName);
         
         writtenState |= PlayerController::RSTF_PLAYER_INFO;
     }
     
-    bool stats = IS_BIT_SET(dirtyState, PlayerController::RSTF_STATS);
-    op.write(stats);
-    if (stats)
+    bool RSTF_STATS = IS_BIT_SET(dirtyState, PlayerController::RSTF_STATS);
+    ombs.write(RSTF_STATS);
+    if (RSTF_STATS)
     {
-        op.write(c._stats._health);
-        op.write(c._stats._dir);
+        ombs.write(c->_stats._health);
+        ombs.write(c->_stats._dir);
         
         writtenState |= PlayerController::RSTF_STATS;
-    }
-    
-    bool encounter = IS_BIT_SET(dirtyState, PlayerController::RSTF_ENCOUNTER);
-    op.write(encounter);
-    if (encounter)
-    {
-        op.write(c._encounter._isInCounter);
-        op.write(c._encounter._stateTime);
-        op.write(c._encounter._state);
-        
-        writtenState |= PlayerController::RSTF_ENCOUNTER;
     }
     
     return writtenState;
 }
 
-void PlayerNetworkController::recallNetworkCache()
+void PlayerNetworkController::recallCache()
 {
-    EntityNetworkController::recallNetworkCache();
+    EntityNetworkController::recallCache();
     
-    PlayerController& c = *_controller;
+    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
     
-    c._playerInfo = c._playerInfoNetworkCache;
-    c._stats = c._statsNetworkCache;
-    c._encounter = c._encounterNetworkCache;
+    c->_playerInfo = c->_playerInfoCache;
+    c->_stats = c->_statsCache;
 }
 
-uint16_t PlayerNetworkController::getDirtyState()
+uint16_t PlayerNetworkController::refreshDirtyState()
 {
-    uint16_t ret = EntityNetworkController::getDirtyState();
+    uint16_t ret = EntityNetworkController::refreshDirtyState();
     
-    PlayerController& c = *_controller;
+    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
     
-    if (c._playerInfoNetworkCache != c._playerInfo)
+    if (c->_playerInfoCache != c->_playerInfo)
     {
-        c._playerInfoNetworkCache = c._playerInfo;
+        c->_playerInfoCache = c->_playerInfo;
         ret |= PlayerController::RSTF_PLAYER_INFO;
     }
     
-    if (c._statsNetworkCache != c._stats)
+    if (c->_statsCache != c->_stats)
     {
-        c._statsNetworkCache = c._stats;
+        c->_statsCache = c->_stats;
         ret |= PlayerController::RSTF_STATS;
     }
     
-    if (c._encounterNetworkCache != c._encounter)
-    {
-        c._encounterNetworkCache = c._encounter;
-        ret |= PlayerController::RSTF_ENCOUNTER;
-    }
-    
     return ret;
-}
-
-bool PlayerNetworkController::isLocalPlayer()
-{
-    return _isLocalPlayer;
 }

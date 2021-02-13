@@ -37,9 +37,10 @@ public:
     public:
         PlayerInputState();
         
-        void write(OutputMemoryBitStream& inOutputStream) const;
-        void read(InputMemoryBitStream& inInputStream);
-        uint8_t getInputState();
+        void write(OutputMemoryBitStream& ombs) const;
+        void read(InputMemoryBitStream& imbs);
+        uint8_t playerID();
+        uint8_t inputState();
         
     private:
         uint8_t _playerID;
@@ -48,8 +49,8 @@ public:
     
     GameInputState();
     
-    virtual void write(OutputMemoryBitStream& inOutputStream) const;
-    virtual void read(InputMemoryBitStream& inInputStream);
+    virtual void write(OutputMemoryBitStream& ombs) const;
+    virtual void read(InputMemoryBitStream& imbs);
     virtual void reset();
     virtual bool isEqual(InputState* inputState) const;
     virtual void copyTo(InputState* inputState) const;
@@ -57,9 +58,8 @@ public:
     void activateNextPlayer(uint8_t playerID);
     PlayerInputState* getPlayerInputStateForID(uint8_t playerID);
     bool isRequestingToAddLocalPlayer() const;
+    PlayerInputState& getPlayerInputState(int index);
     
 private:
     std::vector<PlayerInputState> _playerInputStates;
-    
-    PlayerInputState& getPlayerInputState(int index);
 };

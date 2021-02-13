@@ -12,5 +12,5 @@
 int main(void)
 {
     MainEngineController controller;
-    return GlfwMain::exec(controller, "GGJ21-macOS");
+    return GlfwMain::exec(controller, "Lost Between Woods");
 }

@@ -28,8 +28,7 @@ public:
     virtual ~MonsterController() {}
     
     virtual void update();
-    virtual void receiveMessage(uint16_t message, void* data = NULL);
-    virtual std::string getTextureMapping(uint8_t state);
+    virtual std::string getTextureMapping();
     virtual void onCollision(Entity* e);
     
     std::string getTextureMappingForEncounter();
@@ -70,7 +69,7 @@ private:
         }
     };
     Stats _stats;
-    Stats _statsNetworkCache;
+    Stats _statsCache;
 };
 
 #include "EntityNetworkController.hpp"
@@ -80,15 +79,11 @@ class MonsterNetworkController : public EntityNetworkController
     DECL_EntityNetworkController_create;
     
 public:
-    MonsterNetworkController(Entity* e, bool isServer);
+    MonsterNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer) {}
     virtual ~MonsterNetworkController() {}
     
-    virtual void read(InputMemoryBitStream& ip);
-    virtual uint16_t write(OutputMemoryBitStream& op, uint16_t dirtyState);
-    
-    virtual void recallNetworkCache();
-    virtual uint16_t getDirtyState();
-    
-private:
-    MonsterController* _controller;
+    virtual void read(InputMemoryBitStream& imbs);
+    virtual uint16_t write(OutputMemoryBitStream& ombs, uint16_t dirtyState);
+    virtual void recallCache();
+    virtual uint16_t refreshDirtyState();
 };

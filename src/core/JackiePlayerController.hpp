@@ -11,28 +11,14 @@
 #include "PlayerController.hpp"
 
 class JackiePlayerController : public PlayerController
-{
-    friend class JackiePlayerNetworkController;
-    
+{    
     DECL_RTTI;
     DECL_EntityController_create;
     
 public:
-    JackiePlayerController(Entity* e);
+    JackiePlayerController(Entity* e) : PlayerController(e) {}
     virtual ~JackiePlayerController() {}
     
-    virtual std::string getTextureMapping(uint8_t state);
+    virtual std::string getTextureMapping();
     virtual void onCollision(Entity* e);
-};
-
-class JackiePlayerNetworkController : public PlayerNetworkController
-{
-    DECL_EntityNetworkController_create;
-    
-public:
-    JackiePlayerNetworkController(Entity* e, bool isServer);
-    virtual ~JackiePlayerNetworkController() {}
-    
-private:
-    JackiePlayerController* _controller;
 };

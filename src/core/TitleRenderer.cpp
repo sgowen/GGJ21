@@ -24,7 +24,7 @@
 #include <assert.h>
 
 TitleRenderer::TitleRenderer() :
-_fontRenderer(128, 0, 0, 16, 64, 75, 1024, 1024),
+_fontRenderer(256, 0, 0, 16, 16, 16, 256, 256),
 _framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
 _screenRenderer(),
 _shaderManager(),

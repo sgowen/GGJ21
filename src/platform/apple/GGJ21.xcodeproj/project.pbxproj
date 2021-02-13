@@ -86,6 +86,12 @@
 		BB9E472725CB469E0031FE3A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E472525CB469E0031FE3A /* assets */; };
 		BB9E473225CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
 		BB9E473325CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
+		BB9E475225CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */; };
+		BB9E475325CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */; };
+		BB9E476825CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */; };
+		BB9E476925CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */; };
+		BB9E476A25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */; };
+		BB9E476B25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */; };
 		BBBA467A25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467B25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467C25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */; };
@@ -180,16 +186,12 @@
 		BBBA577825BB175A00C8207D /* InputMemoryBitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA573B25BB175800C8207D /* InputMemoryBitStream.cpp */; };
 		BBBA577925BB175A00C8207D /* ReplicationManagerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA573C25BB175800C8207D /* ReplicationManagerServer.cpp */; };
 		BBBA577A25BB175A00C8207D /* ReplicationManagerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA573C25BB175800C8207D /* ReplicationManagerServer.cpp */; };
-		BBBA577B25BB175A00C8207D /* ClientHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574125BB175800C8207D /* ClientHelper.cpp */; };
-		BBBA577C25BB175A00C8207D /* ClientHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574125BB175800C8207D /* ClientHelper.cpp */; };
 		BBBA577D25BB175A00C8207D /* ReplicationCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574225BB175800C8207D /* ReplicationCommand.cpp */; };
 		BBBA577E25BB175A00C8207D /* ReplicationCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574225BB175800C8207D /* ReplicationCommand.cpp */; };
 		BBBA577F25BB175A00C8207D /* NetworkManagerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574525BB175800C8207D /* NetworkManagerServer.cpp */; };
 		BBBA578025BB175A00C8207D /* NetworkManagerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574525BB175800C8207D /* NetworkManagerServer.cpp */; };
 		BBBA578125BB175A00C8207D /* AckRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574625BB175800C8207D /* AckRange.cpp */; };
 		BBBA578225BB175A00C8207D /* AckRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574625BB175800C8207D /* AckRange.cpp */; };
-		BBBA578325BB175A00C8207D /* SocketClientHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574725BB175800C8207D /* SocketClientHelper.cpp */; };
-		BBBA578425BB175A00C8207D /* SocketClientHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574725BB175800C8207D /* SocketClientHelper.cpp */; };
 		BBBA578525BB175A00C8207D /* OutputMemoryBitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574925BB175800C8207D /* OutputMemoryBitStream.cpp */; };
 		BBBA578625BB175A00C8207D /* OutputMemoryBitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574925BB175800C8207D /* OutputMemoryBitStream.cpp */; };
 		BBBA578725BB175A00C8207D /* NetworkManagerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA574D25BB175800C8207D /* NetworkManagerClient.cpp */; };
@@ -202,8 +204,6 @@
 		BBBA578E25BB175A00C8207D /* SocketAddressFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA575525BB175900C8207D /* SocketAddressFactory.cpp */; };
 		BBBA578F25BB175A00C8207D /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA575625BB175900C8207D /* Move.cpp */; };
 		BBBA579025BB175A00C8207D /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA575625BB175900C8207D /* Move.cpp */; };
-		BBBA579125BB175A00C8207D /* ServerHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA575725BB175900C8207D /* ServerHelper.cpp */; };
-		BBBA579225BB175A00C8207D /* ServerHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA575725BB175900C8207D /* ServerHelper.cpp */; };
 		BBBA579725BB175A00C8207D /* DeliveryNotificationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576025BB175900C8207D /* DeliveryNotificationManager.cpp */; };
 		BBBA579825BB175A00C8207D /* DeliveryNotificationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576025BB175900C8207D /* DeliveryNotificationManager.cpp */; };
 		BBBA579925BB175A00C8207D /* InFlightPacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576125BB175900C8207D /* InFlightPacket.cpp */; };
@@ -218,26 +218,20 @@
 		BBBA57A225BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */; };
 		BBBA57A325BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */; };
 		BBBA57A425BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */; };
-		BBBA57A525BB175A00C8207D /* SocketPacketHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576B25BB175A00C8207D /* SocketPacketHandler.cpp */; };
-		BBBA57A625BB175A00C8207D /* SocketPacketHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576B25BB175A00C8207D /* SocketPacketHandler.cpp */; };
-		BBBA57A725BB175A00C8207D /* SocketServerHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576D25BB175A00C8207D /* SocketServerHelper.cpp */; };
-		BBBA57A825BB175A00C8207D /* SocketServerHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576D25BB175A00C8207D /* SocketServerHelper.cpp */; };
 		BBBA57A925BB175A00C8207D /* SocketUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577125BB175A00C8207D /* SocketUtil.cpp */; };
 		BBBA57AA25BB175A00C8207D /* SocketUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577125BB175A00C8207D /* SocketUtil.cpp */; };
 		BBBA57AD25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */; };
 		BBBA57AE25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */; };
-		BBBA57AF25BB175A00C8207D /* NetworkHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577525BB175A00C8207D /* NetworkHelper.cpp */; };
-		BBBA57B025BB175A00C8207D /* NetworkHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577525BB175A00C8207D /* NetworkHelper.cpp */; };
 		BBBA57DE25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */; };
 		BBBA57DF25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */; };
-		BBBA57F025BB58CA00C8207D /* EntityLayoutMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E425BB58C900C8207D /* EntityLayoutMapper.cpp */; };
-		BBBA57F125BB58CA00C8207D /* EntityLayoutMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E425BB58C900C8207D /* EntityLayoutMapper.cpp */; };
-		BBBA57F225BB58CA00C8207D /* EntityMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E625BB58CA00C8207D /* EntityMapper.cpp */; };
-		BBBA57F325BB58CA00C8207D /* EntityMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E625BB58CA00C8207D /* EntityMapper.cpp */; };
+		BBBA57F025BB58CA00C8207D /* EntityLayoutManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E425BB58C900C8207D /* EntityLayoutManager.cpp */; };
+		BBBA57F125BB58CA00C8207D /* EntityLayoutManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E425BB58C900C8207D /* EntityLayoutManager.cpp */; };
+		BBBA57F225BB58CA00C8207D /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E625BB58CA00C8207D /* EntityManager.cpp */; };
+		BBBA57F325BB58CA00C8207D /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E625BB58CA00C8207D /* EntityManager.cpp */; };
 		BBBA57F425BB58CA00C8207D /* EntityController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E725BB58CA00C8207D /* EntityController.cpp */; };
 		BBBA57F525BB58CA00C8207D /* EntityController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E725BB58CA00C8207D /* EntityController.cpp */; };
-		BBBA57F625BB58CA00C8207D /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E825BB58CA00C8207D /* EntityManager.cpp */; };
-		BBBA57F725BB58CA00C8207D /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E825BB58CA00C8207D /* EntityManager.cpp */; };
+		BBBA57F625BB58CA00C8207D /* EntityRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E825BB58CA00C8207D /* EntityRegistry.cpp */; };
+		BBBA57F725BB58CA00C8207D /* EntityRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57E825BB58CA00C8207D /* EntityRegistry.cpp */; };
 		BBBA57F825BB58CA00C8207D /* EntityIDManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57EA25BB58CA00C8207D /* EntityIDManager.cpp */; };
 		BBBA57F925BB58CA00C8207D /* EntityIDManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57EA25BB58CA00C8207D /* EntityIDManager.cpp */; };
 		BBBA57FA25BB58CA00C8207D /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA57EB25BB58CA00C8207D /* Entity.cpp */; };
@@ -338,8 +332,6 @@
 		BBBA5B3D25BB953400C8207D /* OverlapTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B3425BB953300C8207D /* OverlapTester.cpp */; };
 		BBBA5B8425BE019E00C8207D /* FontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */; };
 		BBBA5B8525BE019E00C8207D /* FontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */; };
-		BBBA5B9425BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */; };
-		BBBA5B9525BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */; };
 		BBBA5B9625BE1E3400C8207D /* PolygonBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8F25BE1E3400C8207D /* PolygonBatcher.cpp */; };
 		BBBA5B9725BE1E3400C8207D /* PolygonBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B8F25BE1E3400C8207D /* PolygonBatcher.cpp */; };
 		BBBA5B9825BE1E3400C8207D /* CircleBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5B9125BE1E3400C8207D /* CircleBatcher.cpp */; };
@@ -509,6 +501,12 @@
 		BB9E472525CB469E0031FE3A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 		BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityPhysicsController.hpp; sourceTree = "<group>"; };
 		BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityPhysicsController.cpp; sourceTree = "<group>"; };
+		BB9E475025CE6AAD0031FE3A /* EntityTopDownPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityTopDownPhysicsController.hpp; sourceTree = "<group>"; };
+		BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityTopDownPhysicsController.cpp; sourceTree = "<group>"; };
+		BB9E476425CE6AFD0031FE3A /* EntityBox2DPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityBox2DPhysicsController.hpp; sourceTree = "<group>"; };
+		BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DDebugRenderer.cpp; sourceTree = "<group>"; };
+		BB9E476625CE6AFD0031FE3A /* Box2DDebugRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DDebugRenderer.hpp; sourceTree = "<group>"; };
+		BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBox2DPhysicsController.cpp; sourceTree = "<group>"; };
 		BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardEvent.hpp; sourceTree = "<group>"; };
 		BBBA452F25B8822C00C8207D /* GamepadEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GamepadEvent.hpp; sourceTree = "<group>"; };
 		BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAudioEngineHelper.cpp; sourceTree = "<group>"; };
@@ -856,37 +854,27 @@
 		BBBA573B25BB175800C8207D /* InputMemoryBitStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputMemoryBitStream.cpp; sourceTree = "<group>"; };
 		BBBA573C25BB175800C8207D /* ReplicationManagerServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationManagerServer.cpp; sourceTree = "<group>"; };
 		BBBA573D25BB175800C8207D /* PacketHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PacketHandler.hpp; sourceTree = "<group>"; };
-		BBBA573E25BB175800C8207D /* ClientHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClientHelper.hpp; sourceTree = "<group>"; };
 		BBBA573F25BB175800C8207D /* ReplicationManagerClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerClient.hpp; sourceTree = "<group>"; };
 		BBBA574025BB175800C8207D /* ClientProxy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClientProxy.hpp; sourceTree = "<group>"; };
-		BBBA574125BB175800C8207D /* ClientHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientHelper.cpp; sourceTree = "<group>"; };
 		BBBA574225BB175800C8207D /* ReplicationCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationCommand.cpp; sourceTree = "<group>"; };
-		BBBA574325BB175800C8207D /* SocketPacketHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketPacketHandler.hpp; sourceTree = "<group>"; };
 		BBBA574425BB175800C8207D /* SocketUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketUtil.hpp; sourceTree = "<group>"; };
 		BBBA574525BB175800C8207D /* NetworkManagerServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkManagerServer.cpp; sourceTree = "<group>"; };
 		BBBA574625BB175800C8207D /* AckRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AckRange.cpp; sourceTree = "<group>"; };
-		BBBA574725BB175800C8207D /* SocketClientHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketClientHelper.cpp; sourceTree = "<group>"; };
-		BBBA574825BB175800C8207D /* MachineAddress.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MachineAddress.hpp; sourceTree = "<group>"; };
 		BBBA574925BB175800C8207D /* OutputMemoryBitStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OutputMemoryBitStream.cpp; sourceTree = "<group>"; };
 		BBBA574A25BB175800C8207D /* OutputMemoryBitStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OutputMemoryBitStream.hpp; sourceTree = "<group>"; };
-		BBBA574B25BB175800C8207D /* SocketServerHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketServerHelper.hpp; sourceTree = "<group>"; };
 		BBBA574C25BB175800C8207D /* InFlightPacket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InFlightPacket.hpp; sourceTree = "<group>"; };
 		BBBA574D25BB175800C8207D /* NetworkManagerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkManagerClient.cpp; sourceTree = "<group>"; };
 		BBBA574E25BB175900C8207D /* AckRange.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AckRange.hpp; sourceTree = "<group>"; };
 		BBBA574F25BB175900C8207D /* DeliveryNotificationManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeliveryNotificationManager.hpp; sourceTree = "<group>"; };
 		BBBA575025BB175900C8207D /* TransmissionData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransmissionData.hpp; sourceTree = "<group>"; };
 		BBBA575125BB175900C8207D /* UDPSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDPSocket.cpp; sourceTree = "<group>"; };
-		BBBA575225BB175900C8207D /* SocketClientHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketClientHelper.hpp; sourceTree = "<group>"; };
 		BBBA575325BB175900C8207D /* ClientProxy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientProxy.cpp; sourceTree = "<group>"; };
 		BBBA575425BB175900C8207D /* InputMemoryBitStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputMemoryBitStream.hpp; sourceTree = "<group>"; };
 		BBBA575525BB175900C8207D /* SocketAddressFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketAddressFactory.cpp; sourceTree = "<group>"; };
 		BBBA575625BB175900C8207D /* Move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Move.cpp; sourceTree = "<group>"; };
-		BBBA575725BB175900C8207D /* ServerHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerHelper.cpp; sourceTree = "<group>"; };
 		BBBA575825BB175900C8207D /* ReplicationManagerTransmissionData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerTransmissionData.hpp; sourceTree = "<group>"; };
 		BBBA575925BB175900C8207D /* UDPSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UDPSocket.hpp; sourceTree = "<group>"; };
-		BBBA575A25BB175900C8207D /* ServerHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerHelper.hpp; sourceTree = "<group>"; };
 		BBBA575B25BB175900C8207D /* NetworkManagerClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkManagerClient.hpp; sourceTree = "<group>"; };
-		BBBA575C25BB175900C8207D /* NetworkHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkHelper.hpp; sourceTree = "<group>"; };
 		BBBA575E25BB175900C8207D /* SocketAddressFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketAddressFactory.hpp; sourceTree = "<group>"; };
 		BBBA576025BB175900C8207D /* DeliveryNotificationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeliveryNotificationManager.cpp; sourceTree = "<group>"; };
 		BBBA576125BB175900C8207D /* InFlightPacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InFlightPacket.cpp; sourceTree = "<group>"; };
@@ -899,35 +887,32 @@
 		BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationManagerTransmissionData.cpp; sourceTree = "<group>"; };
 		BBBA576925BB175900C8207D /* InputState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputState.hpp; sourceTree = "<group>"; };
 		BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryBitStreamUtil.cpp; sourceTree = "<group>"; };
-		BBBA576B25BB175A00C8207D /* SocketPacketHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketPacketHandler.cpp; sourceTree = "<group>"; };
 		BBBA576C25BB175A00C8207D /* MoveList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MoveList.hpp; sourceTree = "<group>"; };
-		BBBA576D25BB175A00C8207D /* SocketServerHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketServerHelper.cpp; sourceTree = "<group>"; };
 		BBBA576E25BB175A00C8207D /* ReplicationManagerServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerServer.hpp; sourceTree = "<group>"; };
 		BBBA576F25BB175A00C8207D /* SocketAddress.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketAddress.hpp; sourceTree = "<group>"; };
 		BBBA577125BB175A00C8207D /* SocketUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketUtil.cpp; sourceTree = "<group>"; };
 		BBBA577325BB175A00C8207D /* ReplicationAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationAction.hpp; sourceTree = "<group>"; };
 		BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationManagerClient.cpp; sourceTree = "<group>"; };
-		BBBA577525BB175A00C8207D /* NetworkHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkHelper.cpp; sourceTree = "<group>"; };
 		BBBA577625BB175A00C8207D /* MemoryBitStreamUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemoryBitStreamUtil.hpp; sourceTree = "<group>"; };
 		BBBA57C525BB44FF00C8207D /* StringUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtil.hpp; sourceTree = "<group>"; };
 		BBBA57CF25BB54D400C8207D /* Pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pool.hpp; sourceTree = "<group>"; };
-		BBBA57D325BB566100C8207D /* InstanceManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstanceManager.hpp; sourceTree = "<group>"; };
+		BBBA57D325BB566100C8207D /* InstanceRegistry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InstanceRegistry.hpp; sourceTree = "<group>"; };
 		BBBA57D825BB567300C8207D /* TimeTracker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeTracker.hpp; sourceTree = "<group>"; };
 		BBBA57DA25BB567300C8207D /* WeightedTimedMovingAverage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WeightedTimedMovingAverage.hpp; sourceTree = "<group>"; };
 		BBBA57DB25BB567300C8207D /* WeightedTimedMovingAverage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WeightedTimedMovingAverage.cpp; sourceTree = "<group>"; };
-		BBBA57E225BB58C900C8207D /* EntityMapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityMapper.hpp; sourceTree = "<group>"; };
-		BBBA57E325BB58C900C8207D /* EntityManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityManager.hpp; sourceTree = "<group>"; };
-		BBBA57E425BB58C900C8207D /* EntityLayoutMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityLayoutMapper.cpp; sourceTree = "<group>"; };
+		BBBA57E225BB58C900C8207D /* EntityManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityManager.hpp; sourceTree = "<group>"; };
+		BBBA57E325BB58C900C8207D /* EntityRegistry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityRegistry.hpp; sourceTree = "<group>"; };
+		BBBA57E425BB58C900C8207D /* EntityLayoutManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityLayoutManager.cpp; sourceTree = "<group>"; };
 		BBBA57E525BB58C900C8207D /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
-		BBBA57E625BB58CA00C8207D /* EntityMapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityMapper.cpp; sourceTree = "<group>"; };
+		BBBA57E625BB58CA00C8207D /* EntityManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityManager.cpp; sourceTree = "<group>"; };
 		BBBA57E725BB58CA00C8207D /* EntityController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityController.cpp; sourceTree = "<group>"; };
-		BBBA57E825BB58CA00C8207D /* EntityManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityManager.cpp; sourceTree = "<group>"; };
+		BBBA57E825BB58CA00C8207D /* EntityRegistry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityRegistry.cpp; sourceTree = "<group>"; };
 		BBBA57E925BB58CA00C8207D /* EntityController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityController.hpp; sourceTree = "<group>"; };
 		BBBA57EA25BB58CA00C8207D /* EntityIDManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityIDManager.cpp; sourceTree = "<group>"; };
 		BBBA57EB25BB58CA00C8207D /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		BBBA57EC25BB58CA00C8207D /* EntityNetworkController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityNetworkController.hpp; sourceTree = "<group>"; };
 		BBBA57ED25BB58CA00C8207D /* EntityIDManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityIDManager.hpp; sourceTree = "<group>"; };
-		BBBA57EE25BB58CA00C8207D /* EntityLayoutMapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityLayoutMapper.hpp; sourceTree = "<group>"; };
+		BBBA57EE25BB58CA00C8207D /* EntityLayoutManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityLayoutManager.hpp; sourceTree = "<group>"; };
 		BBBA57EF25BB58CA00C8207D /* EntityNetworkController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityNetworkController.cpp; sourceTree = "<group>"; };
 		BBBA585125BB5D1900C8207D /* b2_joint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2_joint.h; sourceTree = "<group>"; };
 		BBBA585225BB5D1900C8207D /* b2_shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2_shape.h; sourceTree = "<group>"; };
@@ -1031,11 +1016,9 @@
 		BBBA5B3825BB953300C8207D /* Line.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Line.hpp; sourceTree = "<group>"; };
 		BBBA5B8225BE019E00C8207D /* FontRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FontRenderer.hpp; sourceTree = "<group>"; };
 		BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontRenderer.cpp; sourceTree = "<group>"; };
-		BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DDebugRenderer.cpp; sourceTree = "<group>"; };
 		BBBA5B8B25BE1E3400C8207D /* PolygonBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PolygonBatcher.hpp; sourceTree = "<group>"; };
 		BBBA5B8C25BE1E3400C8207D /* CircleBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CircleBatcher.hpp; sourceTree = "<group>"; };
 		BBBA5B8D25BE1E3400C8207D /* LineBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LineBatcher.hpp; sourceTree = "<group>"; };
-		BBBA5B8E25BE1E3400C8207D /* Box2DDebugRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DDebugRenderer.hpp; sourceTree = "<group>"; };
 		BBBA5B8F25BE1E3400C8207D /* PolygonBatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonBatcher.cpp; sourceTree = "<group>"; };
 		BBBA5B9025BE1E3400C8207D /* LightRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightRenderer.hpp; sourceTree = "<group>"; };
 		BBBA5B9125BE1E3400C8207D /* CircleBatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleBatcher.cpp; sourceTree = "<group>"; };
@@ -1280,13 +1263,10 @@
 				BB7B07D325B646BA0021E545 /* Assets.hpp */,
 				BBBA471025B914FF00C8207D /* AudioEngineHelper.hpp */,
 				BBBA471525B914FF00C8207D /* AudioEngineHelperFactory.hpp */,
-				BBBA5B8A25BE1E3400C8207D /* Box2DDebugRenderer.cpp */,
-				BBBA5B8E25BE1E3400C8207D /* Box2DDebugRenderer.hpp */,
+				BB9E476325CE6AFD0031FE3A /* box2d */,
 				BBBA5B3025BB953300C8207D /* Circle.hpp */,
 				BBBA5B9125BE1E3400C8207D /* CircleBatcher.cpp */,
 				BBBA5B8C25BE1E3400C8207D /* CircleBatcher.hpp */,
-				BBBA574125BB175800C8207D /* ClientHelper.cpp */,
-				BBBA573E25BB175800C8207D /* ClientHelper.hpp */,
 				BBBA575325BB175900C8207D /* ClientProxy.cpp */,
 				BBBA574025BB175800C8207D /* ClientProxy.hpp */,
 				BB9C779A25CA2C610021ADD2 /* ClipboardUtil.hpp */,
@@ -1303,20 +1283,22 @@
 				BB7B090F25B652D80021E545 /* EngineController.hpp */,
 				BBBA57EB25BB58CA00C8207D /* Entity.cpp */,
 				BBBA57E525BB58C900C8207D /* Entity.hpp */,
-				BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */,
-				BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */,
 				BBBA57E725BB58CA00C8207D /* EntityController.cpp */,
 				BBBA57E925BB58CA00C8207D /* EntityController.hpp */,
 				BBBA57EA25BB58CA00C8207D /* EntityIDManager.cpp */,
 				BBBA57ED25BB58CA00C8207D /* EntityIDManager.hpp */,
-				BBBA57E425BB58C900C8207D /* EntityLayoutMapper.cpp */,
-				BBBA57EE25BB58CA00C8207D /* EntityLayoutMapper.hpp */,
-				BBBA57E825BB58CA00C8207D /* EntityManager.cpp */,
-				BBBA57E325BB58C900C8207D /* EntityManager.hpp */,
-				BBBA57E625BB58CA00C8207D /* EntityMapper.cpp */,
-				BBBA57E225BB58C900C8207D /* EntityMapper.hpp */,
+				BBBA57E425BB58C900C8207D /* EntityLayoutManager.cpp */,
+				BBBA57EE25BB58CA00C8207D /* EntityLayoutManager.hpp */,
+				BBBA57E625BB58CA00C8207D /* EntityManager.cpp */,
+				BBBA57E225BB58C900C8207D /* EntityManager.hpp */,
 				BBBA57EF25BB58CA00C8207D /* EntityNetworkController.cpp */,
 				BBBA57EC25BB58CA00C8207D /* EntityNetworkController.hpp */,
+				BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */,
+				BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */,
+				BBBA57E825BB58CA00C8207D /* EntityRegistry.cpp */,
+				BBBA57E325BB58C900C8207D /* EntityRegistry.hpp */,
+				BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */,
+				BB9E475025CE6AAD0031FE3A /* EntityTopDownPhysicsController.hpp */,
 				BB7B07B425B646BA0021E545 /* FileData.hpp */,
 				BB7B07DB25B646BA0021E545 /* FixedSizePool.hpp */,
 				BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */,
@@ -1336,7 +1318,7 @@
 				BBBA573B25BB175800C8207D /* InputMemoryBitStream.cpp */,
 				BBBA575425BB175900C8207D /* InputMemoryBitStream.hpp */,
 				BBBA576925BB175900C8207D /* InputState.hpp */,
-				BBBA57D325BB566100C8207D /* InstanceManager.hpp */,
+				BBBA57D325BB566100C8207D /* InstanceRegistry.hpp */,
 				BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */,
 				BBBA5B9325BE1E3400C8207D /* LightRenderer.cpp */,
 				BBBA5B9025BE1E3400C8207D /* LightRenderer.hpp */,
@@ -1344,7 +1326,6 @@
 				BBBA5B9225BE1E3400C8207D /* LineBatcher.cpp */,
 				BBBA5B8D25BE1E3400C8207D /* LineBatcher.hpp */,
 				BB16D1FA25B75F5100C340C1 /* linux */,
-				BBBA574825BB175800C8207D /* MachineAddress.hpp */,
 				BB7B07A925B646BA0021E545 /* Macros.hpp */,
 				BB7B07C025B646BA0021E545 /* MathUtil.hpp */,
 				BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */,
@@ -1354,8 +1335,6 @@
 				BBBA576425BB175900C8207D /* MoveList.cpp */,
 				BBBA576C25BB175A00C8207D /* MoveList.hpp */,
 				BBBA573A25BB175800C8207D /* Network.hpp */,
-				BBBA577525BB175A00C8207D /* NetworkHelper.cpp */,
-				BBBA575C25BB175900C8207D /* NetworkHelper.hpp */,
 				BBBA574D25BB175800C8207D /* NetworkManagerClient.cpp */,
 				BBBA575B25BB175900C8207D /* NetworkManagerClient.hpp */,
 				BBBA574525BB175800C8207D /* NetworkManagerServer.cpp */,
@@ -1395,8 +1374,6 @@
 				BBBA5C8825C332F000C8207D /* RTTI.hpp */,
 				BB7B07DC25B646BA0021E545 /* ScreenRenderer.cpp */,
 				BB7B07A525B646BA0021E545 /* ScreenRenderer.hpp */,
-				BBBA575725BB175900C8207D /* ServerHelper.cpp */,
-				BBBA575A25BB175900C8207D /* ServerHelper.hpp */,
 				BB7B07CA25B646BA0021E545 /* Shader.hpp */,
 				BB7B07B725B646BA0021E545 /* ShaderAttribute.hpp */,
 				BB7B07D725B646BA0021E545 /* ShaderDescriptor.cpp */,
@@ -1411,12 +1388,6 @@
 				BBBA576F25BB175A00C8207D /* SocketAddress.hpp */,
 				BBBA575525BB175900C8207D /* SocketAddressFactory.cpp */,
 				BBBA575E25BB175900C8207D /* SocketAddressFactory.hpp */,
-				BBBA574725BB175800C8207D /* SocketClientHelper.cpp */,
-				BBBA575225BB175900C8207D /* SocketClientHelper.hpp */,
-				BBBA576B25BB175A00C8207D /* SocketPacketHandler.cpp */,
-				BBBA574325BB175800C8207D /* SocketPacketHandler.hpp */,
-				BBBA576D25BB175A00C8207D /* SocketServerHelper.cpp */,
-				BBBA574B25BB175800C8207D /* SocketServerHelper.hpp */,
 				BBBA577125BB175A00C8207D /* SocketUtil.cpp */,
 				BBBA574425BB175800C8207D /* SocketUtil.hpp */,
 				BBBA470925B914FF00C8207D /* Sound.cpp */,
@@ -1569,6 +1540,17 @@
 				BB8BCCED25B682E8005F57B8 /* ViewController.swift */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		BB9E476325CE6AFD0031FE3A /* box2d */ = {
+			isa = PBXGroup;
+			children = (
+				BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */,
+				BB9E476625CE6AFD0031FE3A /* Box2DDebugRenderer.hpp */,
+				BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */,
+				BB9E476425CE6AFD0031FE3A /* EntityBox2DPhysicsController.hpp */,
+			);
+			path = box2d;
 			sourceTree = "<group>";
 		};
 		BBBA454425B89DF700C8207D /* ObjectAL-for-iPhone */ = {
@@ -2458,7 +2440,6 @@
 				BBBA5AEA25BB5D1A00C8207D /* b2_stack_allocator.cpp in Sources */,
 				BBBA56F325BA453A00C8207D /* cocoa_window.m in Sources */,
 				BB2CD6C325C518B3007B8775 /* GameRenderer.cpp in Sources */,
-				BBBA578325BB175A00C8207D /* SocketClientHelper.cpp in Sources */,
 				BB21814C25C5282E004398D5 /* World.cpp in Sources */,
 				BB7B08B625B64A620021E545 /* Assets.cpp in Sources */,
 				BBBA57FA25BB58CA00C8207D /* Entity.cpp in Sources */,
@@ -2468,10 +2449,11 @@
 				BBBA578525BB175A00C8207D /* OutputMemoryBitStream.cpp in Sources */,
 				BBBA56FE25BA453A00C8207D /* cocoa_monitor.m in Sources */,
 				BBBA474325B92E5C00C8207D /* NullAssetHandler.cpp in Sources */,
+				BB9E476825CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */,
 				BBBA578725BB175A00C8207D /* NetworkManagerClient.cpp in Sources */,
 				BBBA5AC425BB5D1A00C8207D /* b2_contact_manager.cpp in Sources */,
 				BBBA5AAE25BB5D1A00C8207D /* b2_chain_circle_contact.cpp in Sources */,
-				BBBA57F225BB58CA00C8207D /* EntityMapper.cpp in Sources */,
+				BBBA57F225BB58CA00C8207D /* EntityManager.cpp in Sources */,
 				BB7B08B825B64A620021E545 /* InputManager.cpp in Sources */,
 				BBBA56F625BA453A00C8207D /* context.c in Sources */,
 				BBBA577725BB175A00C8207D /* InputMemoryBitStream.cpp in Sources */,
@@ -2479,7 +2461,6 @@
 				BBBA5B3C25BB953400C8207D /* OverlapTester.cpp in Sources */,
 				BBBA5AE825BB5D1A00C8207D /* b2_block_allocator.cpp in Sources */,
 				BB7B08BC25B64A620021E545 /* FPSUtil.cpp in Sources */,
-				BBBA57A725BB175A00C8207D /* SocketServerHelper.cpp in Sources */,
 				BBBA5AE225BB5D1A00C8207D /* b2_rope.cpp in Sources */,
 				BB21817425C7591D004398D5 /* CrystalController.cpp in Sources */,
 				BBBA56F725BA453A00C8207D /* cocoa_time.c in Sources */,
@@ -2493,14 +2474,13 @@
 				BBBA46D025B913D900C8207D /* ALDevice.m in Sources */,
 				BB7B091925B659280021E545 /* MainEngineController.cpp in Sources */,
 				BBBA5AF425BB5D1A00C8207D /* b2_collision.cpp in Sources */,
-				BBBA57F025BB58CA00C8207D /* EntityLayoutMapper.cpp in Sources */,
+				BBBA57F025BB58CA00C8207D /* EntityLayoutManager.cpp in Sources */,
 				BBBA5AC225BB5D1A00C8207D /* b2_distance_joint.cpp in Sources */,
 				BBBA577925BB175A00C8207D /* ReplicationManagerServer.cpp in Sources */,
-				BBBA5B9425BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */,
 				BBBA471D25B9150000C8207D /* GowAudioEngine.cpp in Sources */,
 				BB7B08BF25B64A620021E545 /* OpenGLWrapper.cpp in Sources */,
 				BBBA5AD025BB5D1A00C8207D /* b2_wheel_joint.cpp in Sources */,
-				BBBA57F625BB58CA00C8207D /* EntityManager.cpp in Sources */,
+				BBBA57F625BB58CA00C8207D /* EntityRegistry.cpp in Sources */,
 				BB2CD6C525C518B3007B8775 /* GameInputManager.cpp in Sources */,
 				BB7B08C225B64A620021E545 /* ScreenRenderer.cpp in Sources */,
 				BB7B08C325B64A620021E545 /* ShaderDescriptor.cpp in Sources */,
@@ -2510,6 +2490,7 @@
 				BBBA46CA25B913D900C8207D /* OALAudioTracks.m in Sources */,
 				BBBA5AC025BB5D1A00C8207D /* b2_polygon_circle_contact.cpp in Sources */,
 				BB7B08C525B64A620021E545 /* ShaderManager.cpp in Sources */,
+				BB9E475225CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */,
 				BBBA577D25BB175A00C8207D /* ReplicationCommand.cpp in Sources */,
 				BBBA5C6A25C31B1400C8207D /* Color.cpp in Sources */,
 				BBBA56EF25BA453A00C8207D /* posix_thread.c in Sources */,
@@ -2517,6 +2498,7 @@
 				BB7B08C625B64A620021E545 /* SpriteBatcher.cpp in Sources */,
 				BBBA56EE25BA453A00C8207D /* input.c in Sources */,
 				BBBA5AB225BB5D1A00C8207D /* b2_chain_polygon_contact.cpp in Sources */,
+				BB9E476A25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */,
 				BB7B08C725B64A620021E545 /* TextureDescriptor.cpp in Sources */,
 				BBBA46FC25B913D900C8207D /* OALSuspendHandler.m in Sources */,
 				BB7B08C825B64A620021E545 /* TextureLoader.cpp in Sources */,
@@ -2548,11 +2530,9 @@
 				BBBA5ADE25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
 				BBBA57AD25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */,
 				BBBA56F825BA453A00C8207D /* nsgl_context.m in Sources */,
-				BBBA57A525BB175A00C8207D /* SocketPacketHandler.cpp in Sources */,
 				BBBA46F225B913D900C8207D /* OALAction.m in Sources */,
 				BBBA46D825B913D900C8207D /* ALSource.m in Sources */,
 				BBBA5B9A25BE1E3400C8207D /* LineBatcher.cpp in Sources */,
-				BBBA57AF25BB175A00C8207D /* NetworkHelper.cpp in Sources */,
 				BBBA46FA25B913D900C8207D /* OALAudioSession.m in Sources */,
 				BBBA5AF825BB5D1A00C8207D /* b2_chain_shape.cpp in Sources */,
 				BBBA5C2125C2002300C8207D /* TitleInputManager.cpp in Sources */,
@@ -2582,9 +2562,7 @@
 				BB2CD6CF25C52269007B8775 /* Server.cpp in Sources */,
 				BBBA46D625B913D900C8207D /* OpenALManager.m in Sources */,
 				BBBA46E625B913D900C8207D /* OALAudioFile.m in Sources */,
-				BBBA577B25BB175A00C8207D /* ClientHelper.cpp in Sources */,
 				BBBA5B0625BB5D1A00C8207D /* b2_distance.cpp in Sources */,
-				BBBA579125BB175A00C8207D /* ServerHelper.cpp in Sources */,
 				BBBA579725BB175A00C8207D /* DeliveryNotificationManager.cpp in Sources */,
 				BBBA56DB25BA453A00C8207D /* cocoa_init.m in Sources */,
 			);
@@ -2605,10 +2583,8 @@
 				BBBA57AA25BB175A00C8207D /* SocketUtil.cpp in Sources */,
 				BBBA5AC725BB5D1A00C8207D /* b2_polygon_contact.cpp in Sources */,
 				BBBA5AF725BB5D1A00C8207D /* b2_collide_edge.cpp in Sources */,
-				BBBA578425BB175A00C8207D /* SocketClientHelper.cpp in Sources */,
 				BB8BCCEA25B682E8005F57B8 /* AppDelegate.swift in Sources */,
 				BBBA46E525B913D900C8207D /* OALSimpleAudio.m in Sources */,
-				BBBA57A625BB175A00C8207D /* SocketPacketHandler.cpp in Sources */,
 				BBBA46FB25B913D900C8207D /* OALAudioSession.m in Sources */,
 				BB8BCCEC25B682E8005F57B8 /* SceneDelegate.swift in Sources */,
 				BBBA46D525B913D900C8207D /* ALChannelSource.m in Sources */,
@@ -2649,7 +2625,7 @@
 				BBBA5AF325BB5D1A00C8207D /* b2_circle_shape.cpp in Sources */,
 				BB2CD6D625C522B0007B8775 /* GameInputState.cpp in Sources */,
 				BBBA5ADF25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
-				BBBA579225BB175A00C8207D /* ServerHelper.cpp in Sources */,
+				BB9E475325CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */,
 				BBBA5AB725BB5D1A00C8207D /* b2_contact.cpp in Sources */,
 				BBBA57A225BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */,
 				BB2CD6C625C518B3007B8775 /* GameInputManager.cpp in Sources */,
@@ -2671,7 +2647,7 @@
 				BBBA5AE325BB5D1A00C8207D /* b2_rope.cpp in Sources */,
 				BB16D20225B7623C00C340C1 /* LinuxAssetHandler.cpp in Sources */,
 				BB21817B25C75AB5004398D5 /* OvenController.cpp in Sources */,
-				BBBA57F725BB58CA00C8207D /* EntityManager.cpp in Sources */,
+				BBBA57F725BB58CA00C8207D /* EntityRegistry.cpp in Sources */,
 				BBBA579C25BB175A00C8207D /* PacketHandler.cpp in Sources */,
 				BBBA578625BB175A00C8207D /* OutputMemoryBitStream.cpp in Sources */,
 				BBBA5AED25BB5D1A00C8207D /* b2_settings.cpp in Sources */,
@@ -2689,7 +2665,7 @@
 				BB8BCD2125B68490005F57B8 /* FPSUtil.cpp in Sources */,
 				BB8BCD2425B68490005F57B8 /* OpenGLWrapper.cpp in Sources */,
 				BBBA5ADB25BB5D1A00C8207D /* b2_circle_contact.cpp in Sources */,
-				BBBA57F125BB58CA00C8207D /* EntityLayoutMapper.cpp in Sources */,
+				BBBA57F125BB58CA00C8207D /* EntityLayoutManager.cpp in Sources */,
 				BBBA46EB25B913D900C8207D /* NSMutableArray+WeakReferences.m in Sources */,
 				BBBA5ABD25BB5D1A00C8207D /* b2_world_callbacks.cpp in Sources */,
 				BBBA5AAF25BB5D1A00C8207D /* b2_chain_circle_contact.cpp in Sources */,
@@ -2708,9 +2684,7 @@
 				BBBA5AB925BB5D1A00C8207D /* b2_revolute_joint.cpp in Sources */,
 				BBBA472225B9150000C8207D /* NullSound.cpp in Sources */,
 				BB21816725C65B9E004398D5 /* HidePlayerController.cpp in Sources */,
-				BBBA57A825BB175A00C8207D /* SocketServerHelper.cpp in Sources */,
 				BBBA5AD925BB5D1A00C8207D /* b2_mouse_joint.cpp in Sources */,
-				BBBA5B9525BE1E3400C8207D /* Box2DDebugRenderer.cpp in Sources */,
 				BBBA5B9925BE1E3400C8207D /* CircleBatcher.cpp in Sources */,
 				BBBA5AD325BB5D1A00C8207D /* b2_motor_joint.cpp in Sources */,
 				BBBA46F125B913D900C8207D /* OALActionManager.m in Sources */,
@@ -2724,7 +2698,7 @@
 				BBBA46CD25B913D900C8207D /* OALAudioTrack.m in Sources */,
 				BBBA578225BB175A00C8207D /* AckRange.cpp in Sources */,
 				BBBA46ED25B913D900C8207D /* OALTools.m in Sources */,
-				BBBA57F325BB58CA00C8207D /* EntityMapper.cpp in Sources */,
+				BBBA57F325BB58CA00C8207D /* EntityManager.cpp in Sources */,
 				BBBA5AC525BB5D1A00C8207D /* b2_contact_manager.cpp in Sources */,
 				BBBA46E925B913D900C8207D /* NSMutableDictionary+WeakReferences.m in Sources */,
 				BBBA579A25BB175A00C8207D /* InFlightPacket.cpp in Sources */,
@@ -2734,6 +2708,7 @@
 				BBBA5ACF25BB5D1A00C8207D /* b2_friction_joint.cpp in Sources */,
 				BB8BCD2A25B68490005F57B8 /* ShaderManager.cpp in Sources */,
 				BBBA57A425BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */,
+				BB9E476B25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */,
 				BBBA5C2225C2002300C8207D /* TitleInputManager.cpp in Sources */,
 				BBBA57FD25BB58CA00C8207D /* EntityNetworkController.cpp in Sources */,
 				BBBA5AE725BB5D1A00C8207D /* b2_timer.cpp in Sources */,
@@ -2748,14 +2723,13 @@
 				BB8BCD2D25B68490005F57B8 /* TextureLoader.cpp in Sources */,
 				BBBA5AD725BB5D1A00C8207D /* b2_island.cpp in Sources */,
 				BBBA5AC325BB5D1A00C8207D /* b2_distance_joint.cpp in Sources */,
-				BBBA577C25BB175A00C8207D /* ClientHelper.cpp in Sources */,
 				BB8BCD2E25B68490005F57B8 /* TextureManager.cpp in Sources */,
 				BBBA5AEF25BB5D1A00C8207D /* b2_math.cpp in Sources */,
-				BBBA57B025BB175A00C8207D /* NetworkHelper.cpp in Sources */,
 				BBBA46DF25B913D900C8207D /* ALCaptureDevice.m in Sources */,
 				BBBA57DF25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */,
 				BB2CD6C825C518B3007B8775 /* GameEngineState.cpp in Sources */,
 				BBBA46D725B913D900C8207D /* OpenALManager.m in Sources */,
+				BB9E476925CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */,
 				BBBA57F525BB58CA00C8207D /* EntityController.cpp in Sources */,
 				BBBA578C25BB175A00C8207D /* ClientProxy.cpp in Sources */,
 				BB9E473325CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */,

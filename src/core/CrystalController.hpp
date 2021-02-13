@@ -11,20 +11,17 @@
 #include "EntityController.hpp"
 
 class CrystalController : public EntityController
-{
-    friend class CrystalNetworkController;
-    
+{    
     DECL_RTTI;
     DECL_EntityController_create;
     
 public:
-    CrystalController(Entity* e);
+    CrystalController(Entity* e) : EntityController(e) {}
     virtual ~CrystalController() {}
     
     virtual void update();
     virtual void onMessage(uint16_t message, void* data = NULL);
     
-    float getWidthForRender();
     void push(int dir);
     
 private:

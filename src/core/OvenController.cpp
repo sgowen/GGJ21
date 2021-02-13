@@ -9,7 +9,6 @@
 #include "OvenController.hpp"
 
 #include "Entity.hpp"
-#include <box2d/b2_math.h>
 
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
@@ -32,18 +31,13 @@
 #include "PlayerController.hpp"
 #include "CrystalController.hpp"
 
-IMPL_RTTI(OvenController, EntityController);
-IMPL_EntityController_create(OvenController);
+IMPL_RTTI(OvenController, EntityController)
+IMPL_EntityController_create(OvenController)
 
 void OvenController::onCollision(Entity* e)
 {
-    if (!_entity->getNetworkController()->isServer())
+    if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        return;
-    }
-    
-    if (e->getController()->getRTTI().derivesFrom(CrystalController::rtti))
-    {
-        e->getController()->onMessage(MSG_ENCOUNTER);
+        e->controller()->onMessage(MSG_ENCOUNTER);
     }
 }

@@ -13,10 +13,10 @@
 #include "TimeTracker.hpp"
 #include "Rektangle.hpp"
 
-#include "EntityMapper.hpp"
-#include "EntityLayoutMapper.hpp"
+#include "EntityManager.hpp"
+#include "EntityLayoutManager.hpp"
 #include "EntityNetworkController.hpp"
-#include "InstanceManager.hpp"
+#include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"
 #include "StringUtil.hpp"
 #include "GowUtil.hpp"
@@ -24,50 +24,187 @@
 #include "Macros.hpp"
 #include "PlayerController.hpp"
 #include "OverlapTester.hpp"
+#include "EntityTopDownPhysicsController.hpp"
 
-World::World(TimeTracker* t, EntityIDManager* eidm, uint32_t flags) :
-_timeTracker(t),
-_entityIDManager(eidm),
-_map(),
-_flags(flags)
+World::World() :
+_entityLayout()
 {
     // Empty
 }
 
 World::~World()
 {
-    clear();
+    clearLayout();
+    clearNetwork();
 }
 
-void World::loadMap(uint32_t map)
+void World::populateFromEntityLayout(EntityLayoutDef& eld, bool isServer)
 {
-    assert(map > 0);
+    clearLayout();
     
-    clear(IS_BIT_SET(_flags, WorldFlag_Client));
+    _entityLayout = eld;
     
-    _map._key = map;
-    _map._name = StringUtil::stringFromFourChar(map);
-    _map._fileName = ENTITY_LAYOUT_MAPPER.getJsonConfigFilePath(map);
-    
-    ENTITY_LAYOUT_MAPPER.loadEntityLayout(_map._key, _entityIDManager);
-    
-    EntityLayoutDef& eld = ENTITY_LAYOUT_MAPPER.getEntityLayoutDef();
-    for (EntityInstanceDef eid : eld._entities)
+    for (auto& eid : _entityLayout._entities)
     {
-        EntityDef* ed = ENTITY_MAPPER.getEntityDef(eid._key);
-        if (IS_BIT_SET(_flags, WorldFlag_Client) && IS_BIT_SET(ed->_bodyFlags, BODF_DYNAMIC))
-        {
-            // On the client, Dynamic Entities must arrive via network
-            continue;
-        }
-        
-        Entity* e = ENTITY_MAPPER.createEntity(&eid, IS_BIT_SET(_flags, WorldFlag_Server));
-        addEntity(e);
+        addEntity(ENTITY_MGR.createEntity(eid, isServer));
     }
+}
+
+void World::addNetworkEntity(Entity* e)
+{
+    assert(!isLayer(e) && !isStatic(e));
+    
+    if (isDynamic(e))
+    {
+        _networkEntities.push_back(e);
+    }
+    else if (isPlayer(e))
+    {
+        _players.push_back(e);
+    }
+}
+
+void World::removeNetworkEntity(Entity* e)
+{
+    assert(!isLayer(e) && !isStatic(e));
+    
+    if (isDynamic(e))
+    {
+        removeEntity(e, _networkEntities);
+    }
+    else if (isPlayer(e))
+    {
+        removeEntity(e, _players);
+    }
+}
+
+void World::stepPhysics(TimeTracker* tt)
+{
+    for (Entity* e : _players)
+    {
+        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        c->processPhysics(tt);
+        c->processCollisions(tt, _networkEntities);
+    }
+    
+    for (Entity* e : _networkEntities)
+    {
+        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        c->processPhysics(tt);
+        c->processCollisions(tt, _players);
+        c->processCollisions(tt, _networkEntities);
+    }
+    
+    for (Entity* e : _players)
+    {
+        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        c->processCollisions(tt, _staticEntities);
+    }
+    
+    for (Entity* e : _networkEntities)
+    {
+        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        c->processCollisions(tt, _staticEntities);
+    }
+    
+    // Enforce split screen bounds
+    for (Entity* e : _players)
+    {
+        EntityTopDownPhysicsController* phys = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        uint8_t playerID = c->getPlayerID();
+        if (playerID == 1)
+        {
+            Rektangle player1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
+            phys->enforceBounds(player1ScreenBounds);
+        }
+        else if (playerID == 2)
+        {
+            Rektangle player2ScreenBounds(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
+            phys->enforceBounds(player2ScreenBounds);
+        }
+    }
+}
+
+void World::clearLayout()
+{
+    _entityLayout = EntityLayoutDef();
+    
+    GowUtil::cleanUpVectorOfPointers(_layers);
+    GowUtil::cleanUpVectorOfPointers(_staticEntities);
+}
+
+void World::clearNetwork()
+{
+    GowUtil::cleanUpVectorOfPointers(_networkEntities);
+    GowUtil::cleanUpVectorOfPointers(_players);
+}
+
+bool World::isEntityLayoutLoaded()
+{
+    return _entityLayout._key > 0;
+}
+
+uint32_t World::getEntityLayoutKey()
+{
+    return _entityLayout._key;
+}
+
+std::string& World::getEntityLayoutName()
+{
+    return _entityLayout._name;
+}
+
+std::string& World::getEntityLayoutFilePath()
+{
+    return _entityLayout._filePath;
+}
+
+std::vector<Entity*>& World::getLayers()
+{
+    return _layers;
+}
+
+std::vector<Entity*>& World::getStaticEntities()
+{
+    return _staticEntities;
+}
+
+std::vector<Entity*>& World::getNetworkEntities()
+{
+    return _networkEntities;
+}
+
+std::vector<Entity*>& World::getPlayers()
+{
+    return _players;
+}
+
+bool World::isLayer(Entity* e)
+{
+    return e->entityDef()._bodyFlags == 0;
+}
+
+bool World::isStatic(Entity* e)
+{
+    return IS_BIT_SET(e->entityDef()._bodyFlags, BODF_STATIC);
+}
+
+bool World::isDynamic(Entity* e)
+{
+    return IS_BIT_SET(e->entityDef()._bodyFlags, BODF_DYNAMIC) &&
+    !e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti);
+}
+
+bool World::isPlayer(Entity* e)
+{
+    return e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti);
 }
 
 void World::addEntity(Entity *e)
 {
+    assert(!isDynamic(e) && !isPlayer(e));
+    
     if (isLayer(e))
     {
         _layers.push_back(e);
@@ -76,16 +213,12 @@ void World::addEntity(Entity *e)
     {
         _staticEntities.push_back(e);
     }
-    else if (isDynamic(e))
-    {
-        _dynamicEntities.push_back(e);
-        
-        refreshPlayers();
-    }
 }
 
 void World::removeEntity(Entity* e)
 {
+    assert(!isDynamic(e) && !isPlayer(e));
+    
     if (isLayer(e))
     {
         removeEntity(e, _layers);
@@ -93,122 +226,6 @@ void World::removeEntity(Entity* e)
     else if (isStatic(e))
     {
         removeEntity(e, _staticEntities);
-    }
-    else if (isDynamic(e))
-    {
-        removeEntity(e, _dynamicEntities);
-        
-        refreshPlayers();
-    }
-}
-
-void World::stepPhysics()
-{
-    for (Entity* e : _dynamicEntities)
-    {
-        processPhysics(e);
-        processCollisions(e, _staticEntities);
-        processCollisions(e, _players);
-        processCollisions(e, _dynamicEntities);
-    }
-    
-    for (Entity* e : _players)
-    {
-        processPhysics(e);
-        processCollisions(e, _staticEntities);
-        processCollisions(e, _dynamicEntities);
-    }
-    
-    for (Entity* e : _players)
-    {
-        // Enforce split screen bounds
-        PlayerController* pc = static_cast<PlayerController*>(e->getController());
-        uint8_t playerID = pc->getPlayerID();
-        if (playerID == 1)
-        {
-            Rektangle play1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            enforceBounds(e, play1ScreenBounds);
-        }
-        else if (playerID == 2)
-        {
-            Rektangle play2ScreenBounds(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            enforceBounds(e, play2ScreenBounds);
-        }
-    }
-}
-
-void World::clear(bool skipDynamicEntities)
-{
-    GowUtil::cleanUpVectorOfPointers(_layers);
-    GowUtil::cleanUpVectorOfPointers(_staticEntities);
-    
-    if (!skipDynamicEntities)
-    {
-        GowUtil::cleanUpVectorOfPointers(_dynamicEntities);
-        refreshPlayers();
-    }
-}
-
-bool World::isMapLoaded()
-{
-    return _map._key > 0;
-}
-
-std::string& World::getMapName()
-{
-    return _map._name;
-}
-
-std::string& World::getMapFileName()
-{
-    return _map._fileName;
-}
-
-std::vector<Entity*>& World::getPlayers()
-{
-    return _players;
-}
-
-std::vector<Entity*>& World::getDynamicEntities()
-{
-    return _dynamicEntities;
-}
-
-std::vector<Entity*>& World::getStaticEntities()
-{
-    return _staticEntities;
-}
-
-std::vector<Entity*>& World::getLayers()
-{
-    return _layers;
-}
-
-bool World::isLayer(Entity* e)
-{
-    return e->getEntityDef()._bodyFlags == 0;
-}
-
-bool World::isStatic(Entity* e)
-{
-    return IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_STATIC);
-}
-
-bool World::isDynamic(Entity* e)
-{
-    return IS_BIT_SET(e->getEntityDef()._bodyFlags, BODF_DYNAMIC);
-}
-
-void World::refreshPlayers()
-{
-    _players.clear();
-    
-    for (Entity* e : _dynamicEntities)
-    {
-        if (e->getController()->getRTTI().derivesFrom(PlayerController::rtti))
-        {
-            _players.push_back(e);
-        }
     }
 }
 
@@ -226,78 +243,5 @@ void World::removeEntity(Entity* e, std::vector<Entity*>& entities)
             entities.erase(i);
             return;
         }
-    }
-}
-
-void World::processPhysics(Entity* e)
-{
-    Vector2 vel = e->pose()._velocity;
-    vel *= _timeTracker->_frameRate;
-    e->pose()._position += vel;
-}
-
-void World::processCollisions(Entity* target, std::vector<Entity*>& entities)
-{
-    float x = target->getPosition()._x;
-    float y = target->getPosition()._y;
-    float w = target->getWidth();
-    float h = target->getHeight();
-    Rektangle bounds(x - w / 2, y - h / 2, w, h);
-    
-    for (Entity* e : entities)
-    {
-        if (target == e)
-        {
-            continue;
-        }
-        
-        float x = e->getPosition()._x;
-        float y = e->getPosition()._y;
-        float w = e->getWidth();
-        float h = e->getHeight();
-        Rektangle boundsToTest(x - w / 2, y - h / 2, w, h);
-        
-        if (OverlapTester::doRektanglesOverlap(bounds, boundsToTest))
-        {
-            if (bounds.right() >= boundsToTest.left() ||
-                bounds.left() <= boundsToTest.right() ||
-                bounds.top() >= boundsToTest.bottom() ||
-                bounds.bottom() <= boundsToTest.top())
-            {
-                Vector2 vel = target->getVelocity();
-                vel *= _timeTracker->_frameRate;
-                Vector2 pos = target->getPosition();
-                pos -= vel;
-                target->setPosition(pos);
-            }
-            
-            target->getController()->onCollision(e);
-            break;
-        }
-    }
-}
-
-void World::enforceBounds(Entity* e, Rektangle& bounds)
-{
-    float x = e->getPosition()._x;
-    float y = e->getPosition()._y;
-    
-    if (x > bounds.right())
-    {
-        e->setPosition(bounds.right(), y);
-    }
-    else if (x < bounds.left())
-    {
-        e->setPosition(bounds.left(), y);
-    }
-    
-    x = e->getPosition()._x;
-    if (y > bounds.top())
-    {
-        e->setPosition(x, bounds.top());
-    }
-    else if (y < bounds.bottom())
-    {
-        e->setPosition(x, bounds.bottom());
     }
 }

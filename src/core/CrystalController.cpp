@@ -9,7 +9,6 @@
 #include "CrystalController.hpp"
 
 #include "Entity.hpp"
-#include <box2d/b2_math.h>
 
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
@@ -31,20 +30,12 @@
 #include "Server.hpp"
 #include "PlayerController.hpp"
 
-IMPL_RTTI(CrystalController, EntityController);
-IMPL_EntityController_create(CrystalController);
-
-CrystalController::CrystalController(Entity* e) : EntityController(e)
-{
-    // Empty
-}
+IMPL_RTTI(CrystalController, EntityController)
+IMPL_EntityController_create(CrystalController)
 
 void CrystalController::update()
 {
-    if (!_entity->getNetworkController()->isServer())
-    {
-        return;
-    }
+    _entity->pose()._velocity.mul(0.99f);
     
     if (_entity->state()._state == STAT_EXPLODING)
     {
@@ -57,8 +48,6 @@ void CrystalController::update()
 
 void CrystalController::onMessage(uint16_t message, void* data)
 {
-    // TODO
-    
     switch (message)
     {
         case MSG_ENCOUNTER:
@@ -67,6 +56,11 @@ void CrystalController::onMessage(uint16_t message, void* data)
             {
                 _entity->state()._state = STAT_EXPLODING;
                 _entity->state()._stateTime = 0;
+                _entity->pose()._velocity.set(VECTOR2_ZERO);
+                
+                // Explosion animation frames are twice the size of the crystal
+                _entity->pose()._width *= 2;
+                _entity->pose()._height *= 2;
             }
             break;
         }
@@ -75,43 +69,30 @@ void CrystalController::onMessage(uint16_t message, void* data)
     }
 }
 
-float CrystalController::getWidthForRender()
-{
-    return _entity->state()._state == STAT_IDLE ? 4 : 8;
-}
-
-enum PushDirection
-{
-    PUIR_UP      = 0,
-    PUIR_DOWN    = 1,
-    PUIR_LEFT    = 2,
-    PUIR_RIGHT   = 3
-};
-
 void CrystalController::push(int dir)
 {
-    if (dir == PUIR_UP)
+    if (_entity->state()._state == STAT_EXPLODING)
     {
-        _entity->pose()._velocity._x = 0;
-        _entity->pose()._velocity._y = 1 * (rand() % 12);
-        _entity->pose()._position._y += 0.5f;
+        return;
     }
-    else if (dir == PUIR_DOWN)
+    
+    static float pushSpeed = 6;
+    
+    switch (dir)
     {
-        _entity->pose()._velocity._x = 0;
-        _entity->pose()._velocity._y = -1 * (rand() % 12);
-        _entity->pose()._position._y -= 0.5f;
-    }
-    else if (dir == PUIR_LEFT)
-    {
-        _entity->pose()._position._x -= 0.5f;
-        _entity->pose()._velocity._x = -1 * (rand() % 12);
-        _entity->pose()._velocity._y = 0;
-    }
-    else if (dir == PUIR_RIGHT)
-    {
-        _entity->pose()._position._x += 0.5f;
-        _entity->pose()._velocity._x = 1 * (rand() % 12);
-        _entity->pose()._velocity._y = 0;
+        case PDIR_UP:
+            _entity->pose()._velocity._y = pushSpeed;
+            break;
+        case PDIR_DOWN:
+            _entity->pose()._velocity._y = -pushSpeed;
+            break;
+        case PDIR_LEFT:
+            _entity->pose()._velocity._x = -pushSpeed;
+            break;
+        case PDIR_RIGHT:
+            _entity->pose()._velocity._x = pushSpeed;
+            break;
+        default:
+            break;
     }
 }

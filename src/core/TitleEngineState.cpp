@@ -30,7 +30,7 @@ void TitleEngineState::enter(Engine* e)
 
 void TitleEngineState::execute(Engine* e)
 {
-    switch (e->state())
+    switch (e->requestedStateAction())
     {
         case ERSA_CREATE_RESOURCES:
             createDeviceDependentResources();
@@ -70,7 +70,7 @@ void TitleEngineState::exit(Engine* e)
 
 void TitleEngineState::createDeviceDependentResources()
 {
-    ASSETS.initWithJSONFile("assets/json/assets_main.json");
+    ASSETS.initWithJSONFile("assets/json/assets_title.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
     GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
@@ -128,10 +128,10 @@ void TitleEngineState::updateDefault(Engine* e)
         case MIMS_EXIT:
             e->setRequestedHostAction(ERHA_EXIT);
             break;
-        case MIMS_START_SERVER:
+        case MIMS_START_SRVR:
             _state = MESS_INPUT_HOST_NAME;
             break;
-        case MIMS_JOIN_SERVER:
+        case MIMS_JOIN_SRVR:
             _state = MESS_INPUT_IP;
             break;
         default:
@@ -166,8 +166,12 @@ void TitleEngineState::updateInputHostName(Engine* e)
             _state = MESS_DEFAULT;
             break;
         case MIMS_TEXT_INPUT_READY:
-            GameEngineState::sHandleHostServer(e, INPUT_MAIN.getTextInput());
+        {
+            Config args;
+            args.getMap().insert({GameEngineState::ARG_USERNAME, INPUT_MAIN.getTextInput()});
+            e->changeState(&ENGINE_STATE_GAME, args);
             break;
+        }
         default:
             break;
     }
@@ -183,8 +187,13 @@ void TitleEngineState::updateInputJoinName(Engine* e)
             INPUT_MAIN.setTextInput(_userEnteredIPAddress);
             break;
         case MIMS_TEXT_INPUT_READY:
-            GameEngineState::sHandleJoinServer(e, StringUtil::format("%s:%d", _userEnteredIPAddress.c_str(), CFG_MAIN._serverPort), INPUT_MAIN.getTextInput());
+        {
+            Config args;
+            args.getMap().insert({GameEngineState::ARG_IP_ADDRESS, _userEnteredIPAddress});
+            args.getMap().insert({GameEngineState::ARG_USERNAME, INPUT_MAIN.getTextInput()});
+            e->changeState(&ENGINE_STATE_GAME, args);
             break;
+        }
         default:
             break;
     }
