@@ -160,8 +160,13 @@ GameInputManagerState GameInputManager::update()
                 SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_MOVING_RIGHT, e->isPressed());
                 continue;
             case GOW_KEY_PERIOD:
-                drop2ndPlayer();
+            {
+                if (e->isDown())
+                {
+                    drop2ndPlayer();
+                }
                 continue;
+            }
             default:
                 continue;
         }
@@ -226,11 +231,6 @@ const Move& GameInputManager::sampleInputAsMove()
 void GameInputManager::drop2ndPlayer()
 {
     GameInputState::PlayerInputState& pis = _inputState->getPlayerInputState(1);
-    if (pis._playerID == NW_INPUT_UNASSIGNED)
-    {
-        return;
-    }
-    
     pis._playerID = NW_INPUT_UNASSIGNED;
     NW_MGR_CLNT->requestToDropLocalPlayer(1);
 }

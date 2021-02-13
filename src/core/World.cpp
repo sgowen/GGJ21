@@ -24,7 +24,7 @@
 #include "Macros.hpp"
 #include "PlayerController.hpp"
 #include "OverlapTester.hpp"
-#include "EntityTopDownPhysicsController.hpp"
+#include "TopDownEntityPhysicsController.hpp"
 
 World::World() :
 _entityLayout()
@@ -82,14 +82,14 @@ void World::stepPhysics(TimeTracker* tt)
 {
     for (Entity* e : _players)
     {
-        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         c->processPhysics(tt);
         c->processCollisions(tt, _networkEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
-        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         c->processPhysics(tt);
         c->processCollisions(tt, _players);
         c->processCollisions(tt, _networkEntities);
@@ -97,20 +97,20 @@ void World::stepPhysics(TimeTracker* tt)
     
     for (Entity* e : _players)
     {
-        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         c->processCollisions(tt, _staticEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
-        EntityTopDownPhysicsController* c = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         c->processCollisions(tt, _staticEntities);
     }
     
     // Enforce split screen bounds
     for (Entity* e : _players)
     {
-        EntityTopDownPhysicsController* phys = static_cast<EntityTopDownPhysicsController*>(e->physicsController());
+        TopDownEntityPhysicsController* phys = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         PlayerController* c = static_cast<PlayerController*>(e->controller());
         uint8_t playerID = c->getPlayerID();
         if (playerID == 1)

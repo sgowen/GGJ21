@@ -86,12 +86,12 @@
 		BB9E472725CB469E0031FE3A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E472525CB469E0031FE3A /* assets */; };
 		BB9E473225CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
 		BB9E473325CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
-		BB9E475225CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */; };
-		BB9E475325CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */; };
+		BB9E475225CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp */; };
+		BB9E475325CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp */; };
 		BB9E476825CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */; };
 		BB9E476925CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */; };
-		BB9E476A25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */; };
-		BB9E476B25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */; };
+		BB9E476A25CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */; };
+		BB9E476B25CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */; };
 		BBBA467A25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467B25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467C25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */; };
@@ -501,12 +501,12 @@
 		BB9E472525CB469E0031FE3A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 		BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityPhysicsController.hpp; sourceTree = "<group>"; };
 		BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityPhysicsController.cpp; sourceTree = "<group>"; };
-		BB9E475025CE6AAD0031FE3A /* EntityTopDownPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityTopDownPhysicsController.hpp; sourceTree = "<group>"; };
-		BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityTopDownPhysicsController.cpp; sourceTree = "<group>"; };
-		BB9E476425CE6AFD0031FE3A /* EntityBox2DPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityBox2DPhysicsController.hpp; sourceTree = "<group>"; };
+		BB9E475025CE6AAD0031FE3A /* TopDownEntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TopDownEntityPhysicsController.hpp; sourceTree = "<group>"; };
+		BB9E475125CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TopDownEntityPhysicsController.cpp; sourceTree = "<group>"; };
+		BB9E476425CE6AFD0031FE3A /* Box2DEntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DEntityPhysicsController.hpp; sourceTree = "<group>"; };
 		BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DDebugRenderer.cpp; sourceTree = "<group>"; };
 		BB9E476625CE6AFD0031FE3A /* Box2DDebugRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DDebugRenderer.hpp; sourceTree = "<group>"; };
-		BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBox2DPhysicsController.cpp; sourceTree = "<group>"; };
+		BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DEntityPhysicsController.cpp; sourceTree = "<group>"; };
 		BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardEvent.hpp; sourceTree = "<group>"; };
 		BBBA452F25B8822C00C8207D /* GamepadEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GamepadEvent.hpp; sourceTree = "<group>"; };
 		BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAudioEngineHelper.cpp; sourceTree = "<group>"; };
@@ -1297,8 +1297,8 @@
 				BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */,
 				BBBA57E825BB58CA00C8207D /* EntityRegistry.cpp */,
 				BBBA57E325BB58C900C8207D /* EntityRegistry.hpp */,
-				BB9E475125CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp */,
-				BB9E475025CE6AAD0031FE3A /* EntityTopDownPhysicsController.hpp */,
+				BB9E475125CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp */,
+				BB9E475025CE6AAD0031FE3A /* TopDownEntityPhysicsController.hpp */,
 				BB7B07B425B646BA0021E545 /* FileData.hpp */,
 				BB7B07DB25B646BA0021E545 /* FixedSizePool.hpp */,
 				BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */,
@@ -1547,8 +1547,8 @@
 			children = (
 				BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */,
 				BB9E476625CE6AFD0031FE3A /* Box2DDebugRenderer.hpp */,
-				BB9E476725CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp */,
-				BB9E476425CE6AFD0031FE3A /* EntityBox2DPhysicsController.hpp */,
+				BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */,
+				BB9E476425CE6AFD0031FE3A /* Box2DEntityPhysicsController.hpp */,
 			);
 			path = box2d;
 			sourceTree = "<group>";
@@ -2490,7 +2490,7 @@
 				BBBA46CA25B913D900C8207D /* OALAudioTracks.m in Sources */,
 				BBBA5AC025BB5D1A00C8207D /* b2_polygon_circle_contact.cpp in Sources */,
 				BB7B08C525B64A620021E545 /* ShaderManager.cpp in Sources */,
-				BB9E475225CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */,
+				BB9E475225CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp in Sources */,
 				BBBA577D25BB175A00C8207D /* ReplicationCommand.cpp in Sources */,
 				BBBA5C6A25C31B1400C8207D /* Color.cpp in Sources */,
 				BBBA56EF25BA453A00C8207D /* posix_thread.c in Sources */,
@@ -2498,7 +2498,7 @@
 				BB7B08C625B64A620021E545 /* SpriteBatcher.cpp in Sources */,
 				BBBA56EE25BA453A00C8207D /* input.c in Sources */,
 				BBBA5AB225BB5D1A00C8207D /* b2_chain_polygon_contact.cpp in Sources */,
-				BB9E476A25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */,
+				BB9E476A25CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp in Sources */,
 				BB7B08C725B64A620021E545 /* TextureDescriptor.cpp in Sources */,
 				BBBA46FC25B913D900C8207D /* OALSuspendHandler.m in Sources */,
 				BB7B08C825B64A620021E545 /* TextureLoader.cpp in Sources */,
@@ -2625,7 +2625,7 @@
 				BBBA5AF325BB5D1A00C8207D /* b2_circle_shape.cpp in Sources */,
 				BB2CD6D625C522B0007B8775 /* GameInputState.cpp in Sources */,
 				BBBA5ADF25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
-				BB9E475325CE6AAD0031FE3A /* EntityTopDownPhysicsController.cpp in Sources */,
+				BB9E475325CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp in Sources */,
 				BBBA5AB725BB5D1A00C8207D /* b2_contact.cpp in Sources */,
 				BBBA57A225BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */,
 				BB2CD6C625C518B3007B8775 /* GameInputManager.cpp in Sources */,
@@ -2708,7 +2708,7 @@
 				BBBA5ACF25BB5D1A00C8207D /* b2_friction_joint.cpp in Sources */,
 				BB8BCD2A25B68490005F57B8 /* ShaderManager.cpp in Sources */,
 				BBBA57A425BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */,
-				BB9E476B25CE6AFD0031FE3A /* EntityBox2DPhysicsController.cpp in Sources */,
+				BB9E476B25CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp in Sources */,
 				BBBA5C2225C2002300C8207D /* TitleInputManager.cpp in Sources */,
 				BBBA57FD25BB58CA00C8207D /* EntityNetworkController.cpp in Sources */,
 				BBBA5AE725BB5D1A00C8207D /* b2_timer.cpp in Sources */,
