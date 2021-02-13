@@ -70,8 +70,7 @@ void HidePlayerController::onMessage(uint16_t message, void* data)
     {
         case MSG_ENCOUNTER:
         {
-//            _encounter._isInCounter = true;
-            _stats._health = 0;
+            _encounter._isInCounter = true;
             _entity->state()._state = STAT_IDLE;
             _entity->pose()._velocity._x = 0;
             _entity->pose()._velocity._y = 0;

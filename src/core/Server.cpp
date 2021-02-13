@@ -23,7 +23,6 @@
 #include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"
 #include "Network.hpp"
-#include "StringUtil.hpp"
 
 #include <ctime>
 #include <assert.h>
@@ -118,7 +117,6 @@ void Server::restart()
     {
         Entity* e = players.front();
         NW_MGR_SRVR->deregisterEntity(e);
-        LOG("NW_MGR_SRVR->deregisterEntity %d", e->getID());
     }
     _isRestarting = false;
     
@@ -187,12 +185,9 @@ void Server::update()
         for (Entity* e : toDelete)
         {
             NW_MGR_SRVR->deregisterEntity(e);
-            LOG("Deregister");
         }
         
-        LOG("Player Entities");
         handleDirtyStates(_world.getPlayers());
-        LOG("Network Entities");
         handleDirtyStates(_world.getNetworkEntities());
     }
     
@@ -261,7 +256,6 @@ void Server::handleDirtyStates(std::vector<Entity*>& entities)
         uint16_t dirtyState = e->networkController()->refreshDirtyState();
         if (dirtyState > 0)
         {
-            LOG("dirtyState > 0");
             NW_MGR_SRVR->setStateDirty(e->getID(), dirtyState);
         }
     }
