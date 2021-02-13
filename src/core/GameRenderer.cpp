@@ -46,6 +46,10 @@ _textViews{
     TextView(TEXA_CENTER, "She needs to connect", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "a controller or", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "join me via IP.", TEXV_HIDDEN),
+    TextView(TEXA_CENTER, "Though I suppose", TEXV_HIDDEN),
+    TextView(TEXA_CENTER, "I could imagine her", TEXV_HIDDEN),
+    TextView(TEXA_CENTER, "with the arrow keys...", TEXV_HIDDEN),
+    TextView(TEXA_CENTER, "and unimagine her with .", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "", TEXV_HIDDEN),
@@ -54,12 +58,16 @@ _textViews{
 {
     _fontRenderer.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
     _fontRenderer.configure(_textViews[0], 0.5f, 0.12f, 0.02f);
-    _fontRenderer.configure(_textViews[1], 0.25f, 0.7f, 0.018f);
-    _fontRenderer.configure(_textViews[2], 0.25f, 0.6f, 0.018f);
-    _fontRenderer.configure(_textViews[3], 0.25f, 0.56f, 0.018f);
-    _fontRenderer.configure(_textViews[4], 0.25f, 0.52f, 0.018f);
-    _fontRenderer.configure(_textViews[5], 0.24f, 0.025f, 0.02f);
-    _fontRenderer.configure(_textViews[6], 0.76f, 0.025f, 0.02f);
+    _fontRenderer.configure(_textViews[1], 0.75f, 0.7f, 0.018f);
+    _fontRenderer.configure(_textViews[2], 0.75f, 0.6f, 0.018f);
+    _fontRenderer.configure(_textViews[3], 0.75f, 0.56f, 0.018f);
+    _fontRenderer.configure(_textViews[4], 0.75f, 0.52f, 0.018f);
+    _fontRenderer.configure(_textViews[5], 0.75f, 0.40f, 0.018f);
+    _fontRenderer.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
+    _fontRenderer.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
+    _fontRenderer.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
+    _fontRenderer.configure(_textViews[9], 0.24f, 0.025f, 0.02f);
+    _fontRenderer.configure(_textViews[10], 0.76f, 0.025f, 0.02f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -170,13 +178,10 @@ void GameRenderer::renderUI()
     
     updateMatrix(0, CFG_MAIN._camWidth, 0, CFG_MAIN._camHeight);
     
-    _textViews[0]._visibility = TEXV_HIDDEN;
-    _textViews[1]._visibility = TEXV_HIDDEN;
-    _textViews[2]._visibility = TEXV_HIDDEN;
-    _textViews[3]._visibility = TEXV_HIDDEN;
-    _textViews[4]._visibility = TEXV_HIDDEN;
-    _textViews[5]._visibility = TEXV_HIDDEN;
-    _textViews[6]._visibility = TEXV_HIDDEN;
+    for (auto& tv : _textViews)
+    {
+        tv._visibility = TEXV_HIDDEN;
+    }
     
     World& w = ENGINE_STATE_GAME._world;
     for (Entity* e : w.getPlayers())
@@ -184,8 +189,8 @@ void GameRenderer::renderUI()
         PlayerController* c = static_cast<PlayerController*>(e->controller());
         
         int playerID = c->getPlayerID();
-        _textViews[playerID + 4]._text = StringUtil::format("%i|%s", playerID, c->getPlayerName().c_str()).c_str();
-        _textViews[playerID + 4]._visibility = TEXV_VISIBLE;
+        _textViews[playerID + 8]._text = StringUtil::format("%i|%s", playerID, c->getPlayerName().c_str()).c_str();
+        _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
     }
     
     if (NW_MGR_CLNT != NULL &&
@@ -193,10 +198,17 @@ void GameRenderer::renderUI()
     {
         if (w.getPlayers().size() == 1)
         {
-            _textViews[1]._visibility = TEXV_VISIBLE;
-            _textViews[2]._visibility = TEXV_VISIBLE;
-            _textViews[3]._visibility = TEXV_VISIBLE;
-            _textViews[4]._visibility = TEXV_VISIBLE;
+            _polygonBatcher.begin();
+            _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
+                                         CFG_MAIN._splitScreenBarY,
+                                         CFG_MAIN._camWidth,
+                                         CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
+            _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
+            
+            for (int i = 1; i <= 8; ++i)
+            {
+                _textViews[i]._visibility = TEXV_VISIBLE;
+            }
         }
     }
     else

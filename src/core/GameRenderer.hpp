@@ -18,7 +18,7 @@
 #include "TextureManager.hpp"
 #include "TextView.hpp"
 
-#define NUM_TEXT_VIEWS 9
+#define NUM_TEXT_VIEWS 13
 
 class Entity;
 
