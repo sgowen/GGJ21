@@ -1,5 +1,5 @@
 //
-//  TitleRenderer.h
+//  TitleRenderer.hpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
