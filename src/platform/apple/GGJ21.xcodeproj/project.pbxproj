@@ -350,6 +350,8 @@
 		BBBA5C6B25C31B1400C8207D /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C6925C31B1400C8207D /* Color.cpp */; };
 		BBBA5C8A25C332F000C8207D /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C8925C332F000C8207D /* RTTI.cpp */; };
 		BBBA5C8B25C332F000C8207D /* RTTI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA5C8925C332F000C8207D /* RTTI.cpp */; };
+		BBDE2F7325D9A07A00341B9D /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBDE2F7125D9A07A00341B9D /* Renderer.cpp */; };
+		BBDE2F7425D9A07A00341B9D /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBDE2F7125D9A07A00341B9D /* Renderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1036,6 +1038,8 @@
 		BBBA5C8825C332F000C8207D /* RTTI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RTTI.hpp; sourceTree = "<group>"; };
 		BBBA5C8925C332F000C8207D /* RTTI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTTI.cpp; sourceTree = "<group>"; };
 		BBBA5CEB25C3CFC000C8207D /* TextView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextView.hpp; sourceTree = "<group>"; };
+		BBDE2F7125D9A07A00341B9D /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		BBDE2F7225D9A07A00341B9D /* Renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1297,8 +1301,6 @@
 				BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */,
 				BBBA57E825BB58CA00C8207D /* EntityRegistry.cpp */,
 				BBBA57E325BB58C900C8207D /* EntityRegistry.hpp */,
-				BB9E475125CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp */,
-				BB9E475025CE6AAD0031FE3A /* TopDownEntityPhysicsController.hpp */,
 				BB7B07B425B646BA0021E545 /* FileData.hpp */,
 				BB7B07DB25B646BA0021E545 /* FixedSizePool.hpp */,
 				BBBA5B8325BE019E00C8207D /* FontRenderer.cpp */,
@@ -1361,6 +1363,8 @@
 				BBBA57CF25BB54D400C8207D /* Pool.hpp */,
 				BBBA5C1625C0F26400C8207D /* RapidJSONUtil.hpp */,
 				BBBA5B3125BB953300C8207D /* Rektangle.hpp */,
+				BBDE2F7125D9A07A00341B9D /* Renderer.cpp */,
+				BBDE2F7225D9A07A00341B9D /* Renderer.hpp */,
 				BBBA577325BB175A00C8207D /* ReplicationAction.hpp */,
 				BBBA574225BB175800C8207D /* ReplicationCommand.cpp */,
 				BBBA576625BB175900C8207D /* ReplicationCommand.hpp */,
@@ -1409,6 +1413,8 @@
 				BB7B07CE25B646BA0021E545 /* TextureRegion.hpp */,
 				BBBA5CEB25C3CFC000C8207D /* TextView.hpp */,
 				BBBA57D825BB567300C8207D /* TimeTracker.hpp */,
+				BB9E475125CE6AAD0031FE3A /* TopDownEntityPhysicsController.cpp */,
+				BB9E475025CE6AAD0031FE3A /* TopDownEntityPhysicsController.hpp */,
 				BBBA575025BB175900C8207D /* TransmissionData.hpp */,
 				BBBA5B3725BB953300C8207D /* Triangle.hpp */,
 				BBBA575125BB175900C8207D /* UDPSocket.cpp */,
@@ -2394,6 +2400,7 @@
 				BBBA5AFE25BB5D1A00C8207D /* b2_polygon_shape.cpp in Sources */,
 				BBBA56E925BA453A00C8207D /* osmesa_context.c in Sources */,
 				BBBA579F25BB175A00C8207D /* SocketAddress.cpp in Sources */,
+				BBDE2F7325D9A07A00341B9D /* Renderer.cpp in Sources */,
 				BBBA57DE25BB567300C8207D /* WeightedTimedMovingAverage.cpp in Sources */,
 				BBBA5ACC25BB5D1A00C8207D /* b2_gear_joint.cpp in Sources */,
 				BBBA578B25BB175A00C8207D /* ClientProxy.cpp in Sources */,
@@ -2698,6 +2705,7 @@
 				BBBA46CD25B913D900C8207D /* OALAudioTrack.m in Sources */,
 				BBBA578225BB175A00C8207D /* AckRange.cpp in Sources */,
 				BBBA46ED25B913D900C8207D /* OALTools.m in Sources */,
+				BBDE2F7425D9A07A00341B9D /* Renderer.cpp in Sources */,
 				BBBA57F325BB58CA00C8207D /* EntityManager.cpp in Sources */,
 				BBBA5AC525BB5D1A00C8207D /* b2_contact_manager.cpp in Sources */,
 				BBBA46E925B913D900C8207D /* NSMutableDictionary+WeakReferences.m in Sources */,
