@@ -35,7 +35,7 @@ IMPL_EntityController_create(CrystalController)
 
 void CrystalController::update()
 {
-    _entity->pose()._velocity.mul(0.99f);
+    _entity->pose()._velocity.mul(0.86f);
     
     if (_entity->state()._state == STAT_EXPLODING)
     {
