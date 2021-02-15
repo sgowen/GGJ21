@@ -49,22 +49,22 @@ protected:
     struct Encounter
     {
         bool _isInCounter;
-        uint16_t _stateTime;
         uint8_t _state;
+        uint16_t _stateTime;
         
         Encounter()
         {
             _isInCounter = false;
-            _stateTime = 0;
             _state = ESTA_IDLE;
+            _stateTime = 0;
         }
         
         friend bool operator==(Encounter& a, Encounter& b)
         {
             return
             a._isInCounter == b._isInCounter &&
-            a._stateTime == b._stateTime &&
-            a._state == b._state;
+            a._state == b._state &&
+            a._stateTime == b._stateTime;
         }
         
         friend bool operator!=(Encounter& a, Encounter& b)
@@ -107,7 +107,7 @@ public:
     virtual ~HidePlayerNetworkController() {}
     
     virtual void read(InputMemoryBitStream& imbs);
-    virtual uint16_t write(OutputMemoryBitStream& ombs, uint16_t dirtyState);
+    virtual uint8_t write(OutputMemoryBitStream& ombs, uint8_t dirtyState);
     virtual void recallCache();
-    virtual uint16_t refreshDirtyState();
+    virtual uint8_t refreshDirtyState();
 };

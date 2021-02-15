@@ -149,9 +149,9 @@ void MonsterNetworkController::read(InputMemoryBitStream& imbs)
     SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
 }
 
-uint16_t MonsterNetworkController::write(OutputMemoryBitStream& ombs, uint16_t dirtyState)
+uint8_t MonsterNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirtyState)
 {
-    uint16_t writtenState = EntityNetworkController::write(ombs, dirtyState);
+    uint8_t ret = EntityNetworkController::write(ombs, dirtyState);
     
     MonsterController* c = static_cast<MonsterController*>(_entity->controller());
     
@@ -162,10 +162,10 @@ uint16_t MonsterNetworkController::write(OutputMemoryBitStream& ombs, uint16_t d
         ombs.write(c->_stats._health);
         ombs.write(c->_stats._dir);
         
-        writtenState |= MonsterController::RSTF_STATS;
+        ret |= MonsterController::RSTF_STATS;
     }
     
-    return writtenState;
+    return ret;
 }
 
 void MonsterNetworkController::recallCache()
@@ -177,9 +177,9 @@ void MonsterNetworkController::recallCache()
     c->_stats = c->_statsCache;
 }
 
-uint16_t MonsterNetworkController::refreshDirtyState()
+uint8_t MonsterNetworkController::refreshDirtyState()
 {
-    uint16_t ret = EntityNetworkController::refreshDirtyState();
+    uint8_t ret = EntityNetworkController::refreshDirtyState();
     
     MonsterController* c = static_cast<MonsterController*>(_entity->controller());
     

@@ -252,7 +252,7 @@ void Server::handleDirtyStates(std::vector<Entity*>& entities)
 {
     for (Entity* e : entities)
     {
-        uint16_t dirtyState = e->networkController()->refreshDirtyState();
+        uint8_t dirtyState = e->networkController()->refreshDirtyState();
         if (dirtyState > 0)
         {
             NW_MGR_SRVR->setStateDirty(e->getID(), dirtyState);

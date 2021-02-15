@@ -200,8 +200,8 @@ void HidePlayerNetworkController::read(InputMemoryBitStream& imbs)
     if (stateBit)
     {
         imbs.read(c->_encounter._isInCounter);
-        imbs.read(c->_encounter._stateTime);
         imbs.read(c->_encounter._state);
+        imbs.read(c->_encounter._stateTime);
         
         if (!c->_encounterCache._isInCounter && c->_encounter._isInCounter)
         {
@@ -224,9 +224,9 @@ void HidePlayerNetworkController::read(InputMemoryBitStream& imbs)
     }
 }
 
-uint16_t HidePlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_t dirtyState)
+uint8_t HidePlayerNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirtyState)
 {
-    uint16_t writtenState = PlayerNetworkController::write(ombs, dirtyState);
+    uint8_t ret = PlayerNetworkController::write(ombs, dirtyState);
     
     HidePlayerController* c = static_cast<HidePlayerController*>(_entity->controller());
     
@@ -235,10 +235,10 @@ uint16_t HidePlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_
     if (RSTF_ENCOUNTER)
     {
         ombs.write(c->_encounter._isInCounter);
-        ombs.write(c->_encounter._stateTime);
         ombs.write(c->_encounter._state);
+        ombs.write(c->_encounter._stateTime);
         
-        writtenState |= HidePlayerController::RSTF_ENCOUNTER;
+        ret |= HidePlayerController::RSTF_ENCOUNTER;
     }
     
     bool RSTF_ENTITY_LAYOUT_INFO = IS_BIT_SET(dirtyState, HidePlayerController::RSTF_ENTITY_LAYOUT_INFO);
@@ -247,10 +247,10 @@ uint16_t HidePlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_
     {
         ombs.write(c->_entityLayoutInfo._key);
         
-        writtenState |= HidePlayerController::RSTF_ENTITY_LAYOUT_INFO;
+        ret |= HidePlayerController::RSTF_ENTITY_LAYOUT_INFO;
     }
     
-    return writtenState;
+    return ret;
 }
 
 void HidePlayerNetworkController::recallCache()
@@ -263,9 +263,9 @@ void HidePlayerNetworkController::recallCache()
     c->_entityLayoutInfo = c->_entityLayoutInfoCache;
 }
 
-uint16_t HidePlayerNetworkController::refreshDirtyState()
+uint8_t HidePlayerNetworkController::refreshDirtyState()
 {
-    uint16_t ret = PlayerNetworkController::refreshDirtyState();
+    uint8_t ret = PlayerNetworkController::refreshDirtyState();
     
     HidePlayerController* c = static_cast<HidePlayerController*>(_entity->controller());
     

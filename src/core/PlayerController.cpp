@@ -185,9 +185,9 @@ void PlayerNetworkController::read(InputMemoryBitStream& imbs)
     }
 }
 
-uint16_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_t dirtyState)
+uint8_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirtyState)
 {
-    uint16_t writtenState = EntityNetworkController::write(ombs, dirtyState);
+    uint8_t ret = EntityNetworkController::write(ombs, dirtyState);
     
     PlayerController* c = static_cast<PlayerController*>(_entity->controller());
     
@@ -199,7 +199,7 @@ uint16_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_t di
         ombs.write<uint8_t, 3>(c->_playerInfo._playerID);
         ombs.writeSmall(c->_playerInfo._playerName);
         
-        writtenState |= PlayerController::RSTF_PLAYER_INFO;
+        ret |= PlayerController::RSTF_PLAYER_INFO;
     }
     
     bool RSTF_STATS = IS_BIT_SET(dirtyState, PlayerController::RSTF_STATS);
@@ -209,10 +209,10 @@ uint16_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint16_t di
         ombs.write(c->_stats._health);
         ombs.write(c->_stats._dir);
         
-        writtenState |= PlayerController::RSTF_STATS;
+        ret |= PlayerController::RSTF_STATS;
     }
     
-    return writtenState;
+    return ret;
 }
 
 void PlayerNetworkController::recallCache()
@@ -225,9 +225,9 @@ void PlayerNetworkController::recallCache()
     c->_stats = c->_statsCache;
 }
 
-uint16_t PlayerNetworkController::refreshDirtyState()
+uint8_t PlayerNetworkController::refreshDirtyState()
 {
-    uint16_t ret = EntityNetworkController::refreshDirtyState();
+    uint8_t ret = EntityNetworkController::refreshDirtyState();
     
     PlayerController* c = static_cast<PlayerController*>(_entity->controller());
     
