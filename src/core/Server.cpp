@@ -206,7 +206,7 @@ void Server::registerPlayer(uint8_t playerID, std::string playerName)
     assert(cp != NULL);
     
     float spawnX = playerID == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
-    float spawnY = playerID == 1 ? rand() % 16 + 6 : rand() % 8 + 6;
+    float spawnY = playerID == 1 ? rand() % 16 + 6 : rand() % 6 + 6;
     
     uint32_t key = playerID == 1 ? 'HIDE' : 'JCKE';
     uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextPlayerEntityID();
