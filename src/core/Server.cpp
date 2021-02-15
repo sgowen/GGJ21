@@ -136,10 +136,9 @@ void Server::update()
     
     NW_MGR_SRVR->processIncomingPackets();
     
-    // TODO, this attempts to figure out an average
-    // really, what we need to do is lockstep
-    // process moves that correspond to the same server timestamp
-    int moveCount = NW_MGR_SRVR->getMoveCount();
+    int hostMoveCount = NW_MGR_SRVR->getHostMoveCount();
+    int moveCount = hostMoveCount; // FIXME
+    
     for (int i = 0; i < moveCount; ++i)
     {
         for (Entity* e : _world.getPlayers())
@@ -332,8 +331,8 @@ void Server::removeProcessedMoves()
         ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
         assert(cp != NULL);
         
-        MoveList& moveList = cp->getUnprocessedMoveList();
-        moveList.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
+        MoveList& ml = cp->getUnprocessedMoveList();
+        ml.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
     }
 }
 
