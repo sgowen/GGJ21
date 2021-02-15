@@ -148,7 +148,7 @@ void Server::update()
             assert(c != NULL);
             
             ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
-            assert (cp != NULL);
+            assert(cp != NULL);
             
             MoveList& ml = cp->getUnprocessedMoveList();
             Move* m = ml.getMoveAtIndex(i);
