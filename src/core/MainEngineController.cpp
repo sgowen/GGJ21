@@ -19,6 +19,7 @@
 #include "OvenController.hpp"
 #include "MainConfig.hpp"
 #include "TopDownEntityPhysicsController.hpp"
+#include "ExplosionController.hpp"
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
@@ -30,6 +31,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     config.emplace("Monster", MonsterController::create);
     config.emplace("Crystal", CrystalController::create);
     config.emplace("Oven", OvenController::create);
+    config.emplace("Explosion", ExplosionController::create);
     registerControllers(config);
     
     std::map<std::string, EntityNetworkControllerCreationFunc> configNW;

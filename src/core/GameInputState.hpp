@@ -8,10 +8,10 @@
 
 #pragma once
 
+#include "InputState.hpp"
+
 #include <stdint.h>
 #include <vector>
-
-#include "InputState.hpp"
 
 enum GameInputStateFlags
 {

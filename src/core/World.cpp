@@ -12,7 +12,6 @@
 #include "EntityIDManager.hpp"
 #include "TimeTracker.hpp"
 #include "Rektangle.hpp"
-
 #include "EntityManager.hpp"
 #include "EntityLayoutManager.hpp"
 #include "EntityNetworkController.hpp"

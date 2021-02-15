@@ -9,10 +9,8 @@
 #include "MonsterController.hpp"
 
 #include "Entity.hpp"
-
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
-
 #include "World.hpp"
 #include "Macros.hpp"
 #include "TimeTracker.hpp"
@@ -29,6 +27,7 @@
 #include "Macros.hpp"
 #include "Server.hpp"
 #include "HidePlayerController.hpp"
+#include "MathUtil.hpp"
 
 IMPL_RTTI(MonsterController, EntityController)
 IMPL_EntityController_create(MonsterController)
@@ -93,6 +92,7 @@ void MonsterController::update()
     {
         stateTime = 0;
         _entity->pose()._velocity *= 0.86f;
+        sanitizeCloseToZeroVector(_entity->pose()._velocity._x, _entity->pose()._velocity._y, 0.01f);
     }
 }
 
@@ -113,8 +113,7 @@ void MonsterController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
     {
-        HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
-        c->onMessage(MSG_ENCOUNTER);
+        e->message(MSG_ENCOUNTER);
     }
 }
 

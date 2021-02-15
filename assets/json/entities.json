@@ -93,8 +93,7 @@
     "name": "CRYSTAL_BLUE",
     "controller": "Crystal",
     "textureMappings": {
-      "0": "CRYSTAL_BLUE",
-      "1": "EXPLOSION"
+      "0": "CRYSTAL_BLUE"
     },
     "bodyFlags": 6,
     "width": 4,
@@ -104,8 +103,7 @@
     "name": "CRYSTAL_RED",
     "controller": "Crystal",
     "textureMappings": {
-      "0": "CRYSTAL_RED",
-      "1": "EXPLOSION"
+      "0": "CRYSTAL_RED"
     },
     "bodyFlags": 6,
     "width": 4,
@@ -115,12 +113,21 @@
     "name": "CRYSTAL_GREEN",
     "controller": "Crystal",
     "textureMappings": {
-      "0": "CRYSTAL_GREEN",
-      "1": "EXPLOSION"
+      "0": "CRYSTAL_GREEN"
     },
     "bodyFlags": 6,
     "width": 4,
     "height": 4
+  },
+  "EXPL": {
+    "name": "EXPLOSION",
+    "controller": "Explosion",
+    "textureMappings": {
+      "0": "EXPLOSION"
+    },
+    "bodyFlags": 6,
+    "width": 8,
+    "height": 8
   },
   "OVEN": {
     "name": "OVEN",

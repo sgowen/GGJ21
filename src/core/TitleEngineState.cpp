@@ -9,7 +9,6 @@
 #include "TitleEngineState.hpp"
 
 #include "Engine.hpp"
-
 #include "Assets.hpp"
 #include "TitleInputManager.hpp"
 #include "GowAudioEngine.hpp"

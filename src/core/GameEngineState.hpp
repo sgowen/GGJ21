@@ -9,12 +9,10 @@
 #pragma once
 
 #include "StateMachine.hpp"
-
-#include "GameRenderer.hpp"
 #include "World.hpp"
+#include "GameRenderer.hpp"
 
 class Engine;
-class World;
 class TimeTracker;
 class Server;
 class Move;

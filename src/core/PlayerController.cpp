@@ -9,10 +9,8 @@
 #include "PlayerController.hpp"
 
 #include "Entity.hpp"
-
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
-
 #include "World.hpp"
 #include "Macros.hpp"
 #include "TimeTracker.hpp"
@@ -96,6 +94,10 @@ void PlayerController::processInput(InputState* inputState, bool isLocal)
     
     _entity->pose()._velocity._x = desiredVel[0];
     _entity->pose()._velocity._y = desiredVel[1];
+    sanitizeCloseToZeroVector(_entity->pose()._velocity._x, _entity->pose()._velocity._y, 0.01f);
+    
+    // I know... but look at the sprite sheet
+    _entity->pose()._isFacingLeft = _stats._dir == PDIR_RIGHT;
     
     if (isLocal)
     {

@@ -92,6 +92,8 @@
 		BB9E476925CE6AFD0031FE3A /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */; };
 		BB9E476A25CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */; };
 		BB9E476B25CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */; };
+		BBA2D26F25DADD000012D7AB /* ExplosionController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D26D25DADD000012D7AB /* ExplosionController.cpp */; };
+		BBA2D27025DADD000012D7AB /* ExplosionController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBA2D26D25DADD000012D7AB /* ExplosionController.cpp */; };
 		BBBA467A25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467B25B9121600C8207D /* AppleAudioEngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */; };
 		BBBA467C25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */; };
@@ -509,6 +511,8 @@
 		BB9E476525CE6AFD0031FE3A /* Box2DDebugRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DDebugRenderer.cpp; sourceTree = "<group>"; };
 		BB9E476625CE6AFD0031FE3A /* Box2DDebugRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DDebugRenderer.hpp; sourceTree = "<group>"; };
 		BB9E476725CE6AFD0031FE3A /* Box2DEntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box2DEntityPhysicsController.cpp; sourceTree = "<group>"; };
+		BBA2D26D25DADD000012D7AB /* ExplosionController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExplosionController.cpp; sourceTree = "<group>"; };
+		BBA2D26E25DADD000012D7AB /* ExplosionController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExplosionController.hpp; sourceTree = "<group>"; };
 		BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardEvent.hpp; sourceTree = "<group>"; };
 		BBBA452F25B8822C00C8207D /* GamepadEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GamepadEvent.hpp; sourceTree = "<group>"; };
 		BBBA467225B9121600C8207D /* AppleAudioEngineHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAudioEngineHelper.cpp; sourceTree = "<group>"; };
@@ -893,7 +897,6 @@
 		BBBA576E25BB175A00C8207D /* ReplicationManagerServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerServer.hpp; sourceTree = "<group>"; };
 		BBBA576F25BB175A00C8207D /* SocketAddress.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketAddress.hpp; sourceTree = "<group>"; };
 		BBBA577125BB175A00C8207D /* SocketUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketUtil.cpp; sourceTree = "<group>"; };
-		BBBA577325BB175A00C8207D /* ReplicationAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationAction.hpp; sourceTree = "<group>"; };
 		BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationManagerClient.cpp; sourceTree = "<group>"; };
 		BBBA577625BB175A00C8207D /* MemoryBitStreamUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MemoryBitStreamUtil.hpp; sourceTree = "<group>"; };
 		BBBA57C525BB44FF00C8207D /* StringUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StringUtil.hpp; sourceTree = "<group>"; };
@@ -1365,7 +1368,6 @@
 				BBBA5B3125BB953300C8207D /* Rektangle.hpp */,
 				BBDE2F7125D9A07A00341B9D /* Renderer.cpp */,
 				BBDE2F7225D9A07A00341B9D /* Renderer.hpp */,
-				BBBA577325BB175A00C8207D /* ReplicationAction.hpp */,
 				BBBA574225BB175800C8207D /* ReplicationCommand.cpp */,
 				BBBA576625BB175900C8207D /* ReplicationCommand.hpp */,
 				BBBA577425BB175A00C8207D /* ReplicationManagerClient.cpp */,
@@ -1494,6 +1496,8 @@
 			children = (
 				BB21817225C7591D004398D5 /* CrystalController.cpp */,
 				BB21817325C7591D004398D5 /* CrystalController.hpp */,
+				BBA2D26D25DADD000012D7AB /* ExplosionController.cpp */,
+				BBA2D26E25DADD000012D7AB /* ExplosionController.hpp */,
 				BB2CD6C025C518B3007B8775 /* GameEngineState.cpp */,
 				BB2CD6BD25C518B2007B8775 /* GameEngineState.hpp */,
 				BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */,
@@ -2416,6 +2420,7 @@
 				BBBA56EC25BA453A00C8207D /* vulkan.c in Sources */,
 				BB7B08B225B64A620021E545 /* AppleAssetHandler.cpp in Sources */,
 				BB7B08B325B64A620021E545 /* NSAppleAssetHandler.mm in Sources */,
+				BBA2D26F25DADD000012D7AB /* ExplosionController.cpp in Sources */,
 				BBBA5AD225BB5D1A00C8207D /* b2_motor_joint.cpp in Sources */,
 				BBBA5B9C25BE1E3400C8207D /* LightRenderer.cpp in Sources */,
 				BBBA5AEC25BB5D1A00C8207D /* b2_settings.cpp in Sources */,
@@ -2594,6 +2599,7 @@
 				BBBA46E525B913D900C8207D /* OALSimpleAudio.m in Sources */,
 				BBBA46FB25B913D900C8207D /* OALAudioSession.m in Sources */,
 				BB8BCCEC25B682E8005F57B8 /* SceneDelegate.swift in Sources */,
+				BBA2D27025DADD000012D7AB /* ExplosionController.cpp in Sources */,
 				BBBA46D525B913D900C8207D /* ALChannelSource.m in Sources */,
 				BB8BCD1325B68490005F57B8 /* MainEngineController.cpp in Sources */,
 				BB21814D25C5282E004398D5 /* World.cpp in Sources */,

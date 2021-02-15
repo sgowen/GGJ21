@@ -1,5 +1,5 @@
 //
-//  CrystalController.hpp
+//  ExplosionController.hpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/30/21.
@@ -10,17 +10,14 @@
 
 #include "EntityController.hpp"
 
-class CrystalController : public EntityController
+class ExplosionController : public EntityController
 {    
     DECL_RTTI;
     DECL_EntityController_create;
     
 public:
-    CrystalController(Entity* e) : EntityController(e) {}
-    virtual ~CrystalController() {}
+    ExplosionController(Entity* e) : EntityController(e) {}
+    virtual ~ExplosionController() {}
     
     virtual void update();
-    virtual void onMessage(uint16_t message, void* data = NULL);
-    
-    void push(int dir);
 };

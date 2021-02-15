@@ -9,10 +9,8 @@
 #include "OvenController.hpp"
 
 #include "Entity.hpp"
-
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
-
 #include "World.hpp"
 #include "Macros.hpp"
 #include "TimeTracker.hpp"
@@ -38,6 +36,6 @@ void OvenController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        e->controller()->onMessage(MSG_ENCOUNTER);
+        e->message(MSG_ENCOUNTER);
     }
 }

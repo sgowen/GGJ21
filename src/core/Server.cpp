@@ -12,7 +12,6 @@
 #include "Entity.hpp"
 #include "TimeTracker.hpp"
 #include "EntityIDManager.hpp"
-
 #include "NetworkManagerServer.hpp"
 #include "EntityRegistry.hpp"
 #include "SocketAddress.hpp"

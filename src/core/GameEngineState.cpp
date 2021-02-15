@@ -12,7 +12,6 @@
 #include "TimeTracker.hpp"
 #include "Server.hpp"
 #include "Move.hpp"
-
 #include "Assets.hpp"
 #include "GameInputManager.hpp"
 #include "GowAudioEngine.hpp"

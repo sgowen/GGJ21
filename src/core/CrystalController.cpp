@@ -9,10 +9,8 @@
 #include "CrystalController.hpp"
 
 #include "Entity.hpp"
-
 #include "GameInputState.hpp"
 #include "Rektangle.hpp"
-
 #include "World.hpp"
 #include "Macros.hpp"
 #include "TimeTracker.hpp"
@@ -29,6 +27,11 @@
 #include "Macros.hpp"
 #include "Server.hpp"
 #include "PlayerController.hpp"
+#include "MathUtil.hpp"
+#include "InstanceRegistry.hpp"
+#include "EntityIDManager.hpp"
+#include "Network.hpp"
+#include "EntityManager.hpp"
 
 IMPL_RTTI(CrystalController, EntityController)
 IMPL_EntityController_create(CrystalController)
@@ -36,14 +39,7 @@ IMPL_EntityController_create(CrystalController)
 void CrystalController::update()
 {
     _entity->pose()._velocity.mul(0.86f);
-    
-    if (_entity->state()._state == STAT_EXPLODING)
-    {
-        if (_entity->state()._stateTime >= 42)
-        {
-            _entity->requestDeletion();
-        }
-    }
+    sanitizeCloseToZeroVector(_entity->pose()._velocity._x, _entity->pose()._velocity._y, 0.01f);
 }
 
 void CrystalController::onMessage(uint16_t message, void* data)
@@ -52,15 +48,12 @@ void CrystalController::onMessage(uint16_t message, void* data)
     {
         case MSG_ENCOUNTER:
         {
-            if (_entity->state()._state != STAT_EXPLODING)
+            if (_entity->networkController()->isServer())
             {
-                _entity->state()._state = STAT_EXPLODING;
-                _entity->state()._stateTime = 0;
-                _entity->pose()._velocity.set(VECTOR2_ZERO);
-                
-                // Explosion animation frames are twice the size of the crystal
-                _entity->pose()._width *= 2;
-                _entity->pose()._height *= 2;
+                uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID();
+                EntityInstanceDef eid(networkID, 'EXPL', _entity->getPosition()._x, _entity->getPosition()._y);
+                NW_MGR_SRVR->registerEntity(ENTITY_MGR.createEntity(eid, true));
+                _entity->requestDeletion();
             }
             break;
         }
@@ -71,11 +64,6 @@ void CrystalController::onMessage(uint16_t message, void* data)
 
 void CrystalController::push(int dir)
 {
-    if (_entity->state()._state == STAT_EXPLODING)
-    {
-        return;
-    }
-    
     static float pushSpeed = 6;
     
     switch (dir)

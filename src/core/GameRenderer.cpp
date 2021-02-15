@@ -9,7 +9,6 @@
 #include "GameRenderer.hpp"
 
 #include "Entity.hpp"
-
 #include "GameEngineState.hpp"
 #include "OpenGLWrapper.hpp"
 #include "Macros.hpp"
@@ -146,26 +145,11 @@ void GameRenderer::renderWorld()
     _spriteBatcher.begin();
     addSpritesToBatcher(w.getLayers());
     addSpritesToBatcher(w.getStaticEntities());
+    addSpritesToBatcher(w.getNetworkEntities());
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
     
     _spriteBatcher.begin();
-    for (Entity* e : w.getNetworkEntities())
-    {
-        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->stateTime());
-        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->width(), e->height(), e->getAngle(), e->isFacingLeft());
-    }
-    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
-    
-    _spriteBatcher.begin();
-    for (Entity* e : w.getPlayers())
-    {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        
-        // I know... but look at the sprite sheet
-        bool flipX = c->getPlayerDirection() == PDIR_RIGHT;
-        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->stateTime());
-        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->width(), e->height(), e->getAngle(), flipX);
-    }
+    addSpritesToBatcher(w.getPlayers());
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
 }
 

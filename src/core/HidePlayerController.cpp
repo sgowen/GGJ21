@@ -32,7 +32,10 @@ _entityLayoutInfoCache(_entityLayoutInfo)
 
 void HidePlayerController::update()
 {
-    ++_encounter._stateTime;
+    if (_encounter._isInCounter)
+    {
+        ++_encounter._stateTime;
+    }
     
     if (!_entity->networkController()->isServer())
     {
@@ -70,10 +73,14 @@ void HidePlayerController::onMessage(uint16_t message, void* data)
     {
         case MSG_ENCOUNTER:
         {
-            _encounter._isInCounter = true;
-            _entity->state()._state = STAT_IDLE;
-            _entity->pose()._velocity._x = 0;
-            _entity->pose()._velocity._y = 0;
+            if (!_encounter._isInCounter)
+            {
+                _encounter._isInCounter = true;
+                _encounter._stateTime = 0;
+                _entity->state()._state = STAT_IDLE;
+                _entity->pose()._velocity._x = 0;
+                _entity->pose()._velocity._y = 0;
+            }
             break;
         }
         default:

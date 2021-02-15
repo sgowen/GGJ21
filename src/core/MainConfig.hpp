@@ -8,11 +8,11 @@
 
 #pragma once
 
+#include "Config.hpp"
+
 #define CFG_MAIN MainConfig::getInstance()
 
 #define MSG_ENCOUNTER 0x01u
-
-#include "Config.hpp"
 
 class MainConfig
 {
