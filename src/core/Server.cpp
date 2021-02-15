@@ -48,11 +48,11 @@ void Server::destroy()
     s_instance = NULL;
 }
 
-void Server::handleNewClient(uint8_t playerID, std::string playerName)
+void Server::handleNewClient(std::string username, uint8_t playerID)
 {
-    _players.emplace_back(playerID, playerName);
+    _players.emplace_back(username, playerID);
     
-    registerPlayer(playerID, playerName);
+    registerPlayer(username, playerID);
 }
 
 void Server::handleLostClient(ClientProxy& cp, uint8_t index)
@@ -121,7 +121,7 @@ void Server::restart()
     
     for (int i = 0; i < _players.size(); ++i)
     {
-        registerPlayer(_players[i]._playerID, _players[i]._playerName);
+        registerPlayer(_players[i]._username, _players[i]._playerID);
     }
 }
 
@@ -200,7 +200,7 @@ World& Server::getWorld()
     return _world;
 }
 
-void Server::registerPlayer(uint8_t playerID, std::string playerName)
+void Server::registerPlayer(std::string username, uint8_t playerID)
 {
     ClientProxy* cp = NW_MGR_SRVR->getClientProxy(playerID);
     assert(cp != NULL);
@@ -213,8 +213,8 @@ void Server::registerPlayer(uint8_t playerID, std::string playerName)
     EntityInstanceDef eid(networkID, key, spawnX, spawnY);
     Entity* e = ENTITY_MGR.createEntity(eid, true);
     PlayerController* c = static_cast<PlayerController*>(e->controller());
-    c->setAddressHash(cp->getSocketAddress()->getHash());
-    c->setPlayerName(playerName);
+    c->setUsername(username);
+    c->setUserAddress(cp->getSocketAddress()->toString());
     c->setPlayerID(playerID);
     if (c->getRTTI().isExactly(HidePlayerController::rtti))
     {
@@ -302,9 +302,9 @@ void cb_server_onEntityDeregistered(Entity* e)
     }
 }
 
-void cb_server_handleNewClient(uint8_t playerID, std::string playerName)
+void cb_server_handleNewClient(std::string username, uint8_t playerID)
 {
-    Server::getInstance()->handleNewClient(playerID, playerName);
+    Server::getInstance()->handleNewClient(username, playerID);
 }
 
 void cb_server_handleLostClient(ClientProxy& cp, uint8_t index)

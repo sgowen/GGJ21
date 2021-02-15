@@ -21,12 +21,12 @@ struct MapDef;
 
 struct PlayerDef
 {
+    std::string _username;
     uint8_t _playerID;
-    std::string _playerName;
     
-    PlayerDef(uint8_t playerID, std::string playerName) :
-    _playerID(playerID),
-    _playerName(playerName)
+    PlayerDef(std::string username, uint8_t playerID) :
+    _username(username),
+    _playerID(playerID)
     {
         // Empty
     }
@@ -39,7 +39,7 @@ public:
     static Server* getInstance();
     static void destroy();
     
-    void handleNewClient(uint8_t playerID, std::string playerName);
+    void handleNewClient(std::string username, uint8_t playerID);
     void handleLostClient(ClientProxy& cp, uint8_t index);
     InputState* handleInputStateCreation();
     void handleInputStateRelease(InputState* inputState);
@@ -57,7 +57,7 @@ private:
     bool _isRestarting;
     std::vector<PlayerDef> _players;
     
-    void registerPlayer(uint8_t playerID, std::string playerName);
+    void registerPlayer(std::string username, uint8_t playerID);
     void removePlayer(uint8_t playerID);
     void handleDirtyStates(std::vector<Entity*>& entities);
     void removeProcessedMoves();

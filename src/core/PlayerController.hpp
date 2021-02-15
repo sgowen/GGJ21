@@ -36,12 +36,12 @@ public:
     
     virtual void processInput(InputState* inputState, bool isLocal = false);
     
-    void setAddressHash(uint64_t value);
-    uint64_t getAddressHash() const;
+    void setUsername(std::string value);
+    std::string getUsername() const;
+    void setUserAddress(std::string value);
+    std::string getUserAddress() const;
     void setPlayerID(uint8_t value);
     uint8_t getPlayerID() const;
-    void setPlayerName(std::string value);
-    std::string& getPlayerName();
     PlayerDirection getPlayerDirection();
     uint16_t getHealth();
     
@@ -60,23 +60,23 @@ protected:
     
     struct PlayerInfo
     {
-        uint64_t _addressHash;
+        std::string _username;
+        std::string _userAddress;
         uint8_t _playerID;
-        std::string _playerName;
         
         PlayerInfo()
         {
-            _addressHash = 0;
+            _username = "Unknown";
+            _userAddress = "1.3.3.7";
             _playerID = 0;
-            _playerName = "Unknown";
         }
         
         friend bool operator==(PlayerInfo& a, PlayerInfo& b)
         {
             return
-            a._addressHash == b._addressHash &&
-            a._playerID    == b._playerID &&
-            a._playerName  == b._playerName;
+            a._username    == b._username &&
+            a._userAddress == b._userAddress &&
+            a._playerID    == b._playerID;
         }
         
         friend bool operator!=(PlayerInfo& a, PlayerInfo& b)

@@ -155,11 +155,6 @@ void GameRenderer::renderWorld()
 
 void GameRenderer::renderUI()
 {
-    if (!CFG_MAIN._showDebug)
-    {
-        return;
-    }
-    
     updateMatrix(0, CFG_MAIN._camWidth, 0, CFG_MAIN._camHeight);
     
     for (auto& tv : _textViews)
@@ -168,13 +163,16 @@ void GameRenderer::renderUI()
     }
     
     World& w = ENGINE_STATE_GAME._world;
-    for (Entity* e : w.getPlayers())
+    if (CFG_MAIN._showDebug)
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        
-        int playerID = c->getPlayerID();
-        _textViews[playerID + 8]._text = StringUtil::format("%i|%s", playerID, c->getPlayerName().c_str()).c_str();
-        _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
+        for (Entity* e : w.getPlayers())
+        {
+            PlayerController* c = static_cast<PlayerController*>(e->controller());
+            
+            int playerID = c->getPlayerID();
+            _textViews[playerID + 8]._text = StringUtil::format("%s %s", c->getUsername().c_str(), c->getUserAddress().c_str());
+            _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
+        }
     }
     
     if (NW_MGR_CLNT != NULL &&

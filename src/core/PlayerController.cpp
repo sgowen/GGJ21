@@ -105,14 +105,24 @@ void PlayerController::processInput(InputState* inputState, bool isLocal)
     }
 }
 
-void PlayerController::setAddressHash(uint64_t value)
+void PlayerController::setUsername(std::string value)
 {
-    _playerInfo._addressHash = value;
+    _playerInfo._username = value;
 }
 
-uint64_t PlayerController::getAddressHash() const
+std::string PlayerController::getUsername() const
 {
-    return _playerInfo._addressHash;
+    return _playerInfo._username;
+}
+
+void PlayerController::setUserAddress(std::string value)
+{
+    _playerInfo._userAddress = value;
+}
+
+std::string PlayerController::getUserAddress() const
+{
+    return _playerInfo._userAddress;
 }
 
 void PlayerController::setPlayerID(uint8_t value)
@@ -123,16 +133,6 @@ void PlayerController::setPlayerID(uint8_t value)
 uint8_t PlayerController::getPlayerID() const
 {
     return _playerInfo._playerID;
-}
-
-void PlayerController::setPlayerName(std::string value)
-{
-    _playerInfo._playerName = value;
-}
-
-std::string& PlayerController::getPlayerName()
-{
-    return _playerInfo._playerName;
 }
 
 PlayerDirection PlayerController::getPlayerDirection()
@@ -163,9 +163,9 @@ void PlayerNetworkController::read(InputMemoryBitStream& imbs)
     imbs.read(stateBit);
     if (stateBit)
     {
-        imbs.read(c->_playerInfo._addressHash);
+        imbs.readSmall(c->_playerInfo._username);
+        imbs.readSmall(c->_playerInfo._userAddress);
         imbs.read<uint8_t, 3>(c->_playerInfo._playerID);
-        imbs.readSmall(c->_playerInfo._playerName);
         
         c->_playerInfoCache = c->_playerInfo;
     }
@@ -195,9 +195,9 @@ uint8_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirt
     ombs.write(RSTF_PLAYER_INFO);
     if (RSTF_PLAYER_INFO)
     {
-        ombs.write(c->_playerInfo._addressHash);
+        ombs.writeSmall(c->_playerInfo._username);
+        ombs.writeSmall(c->_playerInfo._userAddress);
         ombs.write<uint8_t, 3>(c->_playerInfo._playerID);
-        ombs.writeSmall(c->_playerInfo._playerName);
         
         ret |= PlayerController::RSTF_PLAYER_INFO;
     }
