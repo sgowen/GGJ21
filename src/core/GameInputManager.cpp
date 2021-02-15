@@ -177,14 +177,16 @@ GameInputManagerState GameInputManager::update()
         NW_MGR_CLNT->requestToAddLocalPlayer();
     }
     
-    _pendingMove = &sampleInputAsMove();
-    
     return _state;
 }
 
-const Move* GameInputManager::getPendingMove()
+const Move& GameInputManager::sampleInputAsNewMove()
 {
-    return _pendingMove;
+    GameInputState* inputState = _poolGameInputState.obtain();
+    _inputState->copyTo(inputState);
+    
+    TimeTracker* tt = INST_REG.get<TimeTracker>(INSK_TIME_CLNT);
+    return _moveList.addMove(inputState, tt->_time);
 }
 
 GameInputState* GameInputManager::inputState()
@@ -192,7 +194,7 @@ GameInputState* GameInputManager::inputState()
     return _inputState;
 }
 
-MoveList& GameInputManager::getMoveList()
+MoveList& GameInputManager::moveList()
 {
     return _moveList;
 }
@@ -214,18 +216,8 @@ void GameInputManager::reset()
     _inputState = _poolGameInputState.obtain();
     _inputState->reset();
     
-    _pendingMove = NULL;
     _state = GIMS_DEFAULT;
     _moveList.clear();
-}
-
-const Move& GameInputManager::sampleInputAsMove()
-{
-    GameInputState* inputState = _poolGameInputState.obtain();
-    _inputState->copyTo(inputState);
-    
-    TimeTracker* tt = INST_REG.get<TimeTracker>(INSK_TIME_CLNT);
-    return _moveList.addMove(inputState, tt->_time);
 }
 
 void GameInputManager::drop2ndPlayer()
@@ -237,7 +229,6 @@ void GameInputManager::drop2ndPlayer()
 
 GameInputManager::GameInputManager() :
 _inputState(NULL),
-_pendingMove(NULL),
 _state(GIMS_DEFAULT)
 {
     reset();
@@ -245,5 +236,5 @@ _state(GIMS_DEFAULT)
 
 GameInputManager::~GameInputManager()
 {
-    _poolGameInputState.free(_inputState);
+    free(_inputState);
 }

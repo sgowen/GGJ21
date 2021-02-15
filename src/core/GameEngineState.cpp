@@ -67,12 +67,12 @@ void cb_client_handleInputStateRelease(InputState* inputState)
 
 void cb_client_removeProcessedMoves(float inLastMoveProcessedOnServerTimestamp)
 {
-    INPUT_GAME.getMoveList().removeProcessedMoves(inLastMoveProcessedOnServerTimestamp, cb_client_handleInputStateRelease);
+    INPUT_GAME.moveList().removeProcessedMoves(inLastMoveProcessedOnServerTimestamp, cb_client_handleInputStateRelease);
 }
 
 MoveList& cb_client_getMoveList()
 {
-    return INPUT_GAME.getMoveList();
+    return INPUT_GAME.moveList();
 }
 
 void cb_client_onPlayerWelcomed(uint8_t playerID)
@@ -233,6 +233,11 @@ void GameEngineState::pause()
 
 void GameEngineState::update(Engine* e)
 {
+    if (isHost())
+    {
+        Server::getInstance()->update();
+    }
+    
     INST_REG.get<TimeTracker>(INSK_TIME_CLNT)->onFrame();
     
     NW_MGR_CLNT->processIncomingPackets();
@@ -241,6 +246,8 @@ void GameEngineState::update(Engine* e)
         e->revertToPreviousState();
         return;
     }
+    
+    MoveList& ml = INPUT_GAME.moveList();
     
     if (NW_MGR_CLNT->hasReceivedNewState())
     {
@@ -254,9 +261,10 @@ void GameEngineState::update(Engine* e)
             e->networkController()->recallCache();
         }
         
-        for (const Move& move : INPUT_GAME.getMoveList())
+        LOG("Client reprocessing %d moves", ml.getMoveCount());
+        for (const Move& m : ml)
         {
-            updateWorld(&move, false);
+            updateWorld(m, false);
         }
     }
     
@@ -267,14 +275,12 @@ void GameEngineState::update(Engine* e)
         return;
     }
     
-    updateWorld(INPUT_GAME.getPendingMove(), true);
+    if (ml.getMoveCount() < NW_ACK_TIMEOUT)
+    {
+        updateWorld(INPUT_GAME.sampleInputAsNewMove(), true);
+    }
     
     NW_MGR_CLNT->sendOutgoingPackets();
-    
-    if (isHost())
-    {
-        Server::getInstance()->update();
-    }
 }
 
 void GameEngineState::render()
@@ -283,14 +289,12 @@ void GameEngineState::render()
     GOW_AUDIO.render();
 }
 
-void GameEngineState::updateWorld(const Move* move, bool isLocal)
+void GameEngineState::updateWorld(const Move& move, bool isLocal)
 {
-    assert(move != NULL);
-    
     for (Entity* e : _world.getPlayers())
     {
         PlayerController* c = static_cast<PlayerController*>(e->controller());
-        c->processInput(move->inputState(), isLocal);
+        c->processInput(move.inputState(), isLocal);
     }
     
     _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_CLNT));

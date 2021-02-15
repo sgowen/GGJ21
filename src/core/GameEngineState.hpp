@@ -55,7 +55,7 @@ private:
     void update(Engine* e);
     void render();
     
-    void updateWorld(const Move* move, bool isLocal);
+    void updateWorld(const Move& move, bool isLocal);
     
     GameEngineState();
     ~GameEngineState() {}

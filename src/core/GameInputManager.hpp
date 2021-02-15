@@ -32,9 +32,9 @@ public:
     }
     
     GameInputManagerState update();
-    const Move* getPendingMove();
+    const Move& sampleInputAsNewMove();
     GameInputState* inputState();
-    MoveList& getMoveList();
+    MoveList& moveList();
     void free(GameInputState* gis);
     void reset();
     
@@ -44,9 +44,7 @@ private:
     Pool<GameInputState> _poolGameInputState;
     GameInputState* _inputState;
     MoveList _moveList;
-    const Move* _pendingMove;
     
-    const Move& sampleInputAsMove();
     void drop2ndPlayer();
     
     GameInputManager();
