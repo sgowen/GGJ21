@@ -343,10 +343,6 @@ Server::Server() :
 _world(),
 _isRestarting(false)
 {
-    INST_REG.get<TimeTracker>(INSK_TIME_SRVR)->reset();
-    INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->resetNextNetworkEntityID();
-    INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->resetNextPlayerEntityID();
-    
     NetworkManagerServer::create(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, SERVER_CBS);
     assert(NW_MGR_SRVR != NULL);
 }

@@ -108,7 +108,6 @@ void GameEngineState::enter(Engine* e)
         port = CFG_MAIN._clientPortJoin;
     }
     
-    INST_REG.get<TimeTracker>(INSK_TIME_CLNT)->reset();
     NetworkManagerClient::create(serverIPAddress, _args.getString(ARG_USERNAME), port, GAME_ENGINE_CBS);
     assert(NW_MGR_CLNT != NULL);
     
