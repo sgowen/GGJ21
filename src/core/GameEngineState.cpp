@@ -91,16 +91,16 @@ void GameEngineState::enter(Engine* e)
     uint16_t port;
     if (isHost())
     {
+        serverIPAddress = StringUtil::format("%s:%d", "localhost", CFG_MAIN._serverPort);
+        port = CFG_MAIN._clientPortHost;
+        
         Server::create();
         
-        if (!NW_MGR_SRVR->isConnected())
+        if (!NW_MGR_SRVR->connect())
         {
             e->revertToPreviousState();
             return;
         }
-        
-        serverIPAddress = StringUtil::format("%s:%d", "localhost", CFG_MAIN._serverPort);
-        port = CFG_MAIN._clientPortHost;
     }
     else
     {
@@ -111,7 +111,7 @@ void GameEngineState::enter(Engine* e)
     NetworkManagerClient::create(serverIPAddress, _args.getString(ARG_USERNAME), port, GAME_ENGINE_CBS);
     assert(NW_MGR_CLNT != NULL);
     
-    if (!NW_MGR_CLNT->isConnected())
+    if (!NW_MGR_CLNT->connect())
     {
         e->revertToPreviousState();
         return;
@@ -159,7 +159,10 @@ void GameEngineState::exit(Engine* e)
     _world.clearNetwork();
     INPUT_GAME.reset();
     
-    NetworkManagerClient::destroy();
+    if (NW_MGR_CLNT != NULL)
+    {
+        NetworkManagerClient::destroy();
+    }
     
     if (isHost())
     {
@@ -261,7 +264,11 @@ void GameEngineState::update(Engine* e)
             e->networkController()->recallCache();
         }
         
-        LOG("Client reprocessing %d moves", ml.getMoveCount());
+        if (CFG_MAIN._networkLoggingEnabled)
+        {
+            LOG("Client side prediction reprocessing %d moves", ml.getMoveCount());
+        }
+        
         for (const Move& m : ml)
         {
             updateWorld(m, false);
@@ -276,7 +283,7 @@ void GameEngineState::update(Engine* e)
     }
     
     if (getControlledPlayer() != NULL &&
-        ml.getMoveCount() < NW_ACK_TIMEOUT)
+        ml.getMoveCount() < NW_CLNT_MAX_NUM_MOVES)
     {
         updateWorld(INPUT_GAME.sampleInputAsNewMove(), true);
     }

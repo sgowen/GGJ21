@@ -24,9 +24,9 @@ void GameInputState::write(OutputMemoryBitStream& ombs) const
 {
     for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
     {
-        bool playerID = _playerInputStates[i]._playerID != NW_INPUT_UNASSIGNED;
-        ombs.write(playerID);
-        if (playerID)
+        bool isInputAssigned = _playerInputStates[i]._playerID != NW_INPUT_UNASSIGNED;
+        ombs.write(isInputAssigned);
+        if (isInputAssigned)
         {
             _playerInputStates[i].write(ombs);
         }
@@ -37,9 +37,9 @@ void GameInputState::read(InputMemoryBitStream& imbs)
 {
     for (uint8_t i = 0; i < CFG_MAIN._maxNumPlayers; ++i)
     {
-        bool isInputAssignedBit;
-        imbs.read(isInputAssignedBit);
-        if (isInputAssignedBit)
+        bool isInputAssigned;
+        imbs.read(isInputAssigned);
+        if (isInputAssigned)
         {
             _playerInputStates[i].read(imbs);
         }

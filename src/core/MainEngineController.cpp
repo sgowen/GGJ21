@@ -20,10 +20,15 @@
 #include "MainConfig.hpp"
 #include "TopDownEntityPhysicsController.hpp"
 #include "ExplosionController.hpp"
+#include "InputManager.hpp"
+#include "SocketUtil.hpp"
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
     CFG_MAIN.init();
+    
+    SOCKET_UTIL.setLoggingEnabled(CFG_MAIN._networkLoggingEnabled);
+    INPUT_MGR.setLoggingEnabled(CFG_MAIN._inputLoggingEnabled);
     
     std::map<std::string, EntityControllerCreationFunc> config;
     config.emplace("Hide", HidePlayerController::create);

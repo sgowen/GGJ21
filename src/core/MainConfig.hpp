@@ -51,6 +51,8 @@ public:
     float _monsterBattleHeight;
     bool _sfxDisabled;
     bool _musicDisabled;
+    bool _inputLoggingEnabled;
+    bool _networkLoggingEnabled;
 
     void init()
     {
@@ -85,6 +87,8 @@ public:
         _monsterBattleHeight = c.getFloat("monsterBattleHeight");
         _sfxDisabled = c.getBool("sfxDisabled");
         _musicDisabled = c.getBool("musicDisabled");
+        _inputLoggingEnabled = c.getBool("inputLoggingEnabled");
+        _networkLoggingEnabled = c.getBool("networkLoggingEnabled");
     }
     
 private:

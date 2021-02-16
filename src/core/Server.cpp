@@ -168,7 +168,7 @@ void Server::update()
         }
     }
     
-    LOG("Server moveCount: %d, validMoveCount: %d", moveCount, validMoveCount);
+    assert(moveCount == validMoveCount);
     for (int i = 0; i < validMoveCount; ++i)
     {
         updateWorld(i);
