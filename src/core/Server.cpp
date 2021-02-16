@@ -22,6 +22,7 @@
 #include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"
 #include "Network.hpp"
+#include "StringUtil.hpp"
 
 #include <ctime>
 #include <assert.h>
@@ -136,83 +137,41 @@ void Server::update()
     
     NW_MGR_SRVR->processIncomingPackets();
     int moveCount = NW_MGR_SRVR->getMoveCount();
-//    uint32_t expectedMoveIndex = NW_MGR_SRVR->getNumMovesProcessed();
-//    int validMoveCount = 0;
-//    for (int i = 0; i < moveCount; ++i)
-//    {
-//        bool isMoveValidForAllPlayers = true;
-//        for (Entity* e : _world.getPlayers())
-//        {
-//            PlayerController* c = static_cast<PlayerController*>(e->controller());
-//            assert(c != NULL);
-//
-//            ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
-//            assert(cp != NULL);
-//
-//            MoveList& ml = cp->getUnprocessedMoveList();
-//            Move* m = ml.getMoveAtIndex(i);
-//            assert(m != NULL);
-//
-//            if (expectedMoveIndex != m->getIndex())
-//            {
-//                isMoveValidForAllPlayers = false;
-//                break;
-//            }
-//        }
-//
-//        if (isMoveValidForAllPlayers)
-//        {
-//            ++validMoveCount;
-//        }
-//    }
-    
+    uint32_t expectedMoveIndex = NW_MGR_SRVR->getNumMovesProcessed();
+    int validMoveCount = 0;
     for (int i = 0; i < moveCount; ++i)
     {
+        bool isMoveValid = true;
         for (Entity* e : _world.getPlayers())
         {
             PlayerController* c = static_cast<PlayerController*>(e->controller());
             assert(c != NULL);
-            
+
             ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
             assert(cp != NULL);
-            
+
             MoveList& ml = cp->getUnprocessedMoveList();
             Move* m = ml.getMoveAtIndex(i);
             assert(m != NULL);
-            
-            c->processInput(m->inputState());
-            ml.markMoveAsProcessed(m);
-            cp->setLastMoveTimestampDirty(true);
-        }
-        
-        _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
-        
-        std::vector<Entity*> toDelete;
-        for (Entity* e : _world.getPlayers())
-        {
-            e->update();
-            if (e->isRequestingDeletion())
+
+            if (expectedMoveIndex != m->getIndex())
             {
-                toDelete.push_back(e);
+                isMoveValid = false;
+                break;
             }
         }
-        for (Entity* e : _world.getNetworkEntities())
+
+        if (isMoveValid)
         {
-            e->update();
-            if (e->isRequestingDeletion())
-            {
-                toDelete.push_back(e);
-            }
+            ++validMoveCount;
+            ++expectedMoveIndex;
         }
-        for (Entity* e : toDelete)
-        {
-            NW_MGR_SRVR->deregisterEntity(e);
-        }
-        
-        handleDirtyStates(_world.getPlayers());
-        handleDirtyStates(_world.getNetworkEntities());
-        
-        NW_MGR_SRVR->onMoveProcessed();
+    }
+    
+    LOG("Server moveCount: %d, validMoveCount: %d", moveCount, validMoveCount);
+    for (int i = 0; i < validMoveCount; ++i)
+    {
+        updateWorld(i);
     }
     
     removeProcessedMoves();
@@ -223,6 +182,55 @@ void Server::update()
 World& Server::getWorld()
 {
     return _world;
+}
+
+void Server::updateWorld(int moveIndex)
+{
+    for (Entity* e : _world.getPlayers())
+    {
+        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        assert(c != NULL);
+        
+        ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
+        assert(cp != NULL);
+        
+        MoveList& ml = cp->getUnprocessedMoveList();
+        Move* m = ml.getMoveAtIndex(moveIndex);
+        assert(m != NULL);
+        
+        c->processInput(m->inputState());
+        ml.markMoveAsProcessed(m);
+        cp->setLastMoveTimestampDirty(true);
+    }
+    
+    _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
+    
+    std::vector<Entity*> toDelete;
+    for (Entity* e : _world.getPlayers())
+    {
+        e->update();
+        if (e->isRequestingDeletion())
+        {
+            toDelete.push_back(e);
+        }
+    }
+    for (Entity* e : _world.getNetworkEntities())
+    {
+        e->update();
+        if (e->isRequestingDeletion())
+        {
+            toDelete.push_back(e);
+        }
+    }
+    for (Entity* e : toDelete)
+    {
+        NW_MGR_SRVR->deregisterEntity(e);
+    }
+    
+    handleDirtyStates(_world.getPlayers());
+    handleDirtyStates(_world.getNetworkEntities());
+    
+    NW_MGR_SRVR->onMoveProcessed();
 }
 
 void Server::registerPlayer(std::string username, uint8_t playerID)

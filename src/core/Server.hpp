@@ -57,6 +57,7 @@ private:
     bool _isRestarting;
     std::vector<PlayerDef> _players;
     
+    void updateWorld(int moveIndex);
     void registerPlayer(std::string username, uint8_t playerID);
     void removePlayer(uint8_t playerID);
     void handleDirtyStates(std::vector<Entity*>& entities);
