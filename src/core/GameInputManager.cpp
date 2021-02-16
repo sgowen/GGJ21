@@ -49,6 +49,7 @@ GameInputManagerState GameInputManager::update()
         switch (e->_button)
         {
             case GPEB_BUTTON_SELECT:
+            case GPEB_BUTTON_SNES_SELECT:
                 _state = e->isDown() ? GIMS_EXIT : _state;
                 continue;
             case GPEB_BUMPER_LEFT:

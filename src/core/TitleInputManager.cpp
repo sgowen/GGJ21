@@ -71,13 +71,12 @@ void TitleInputManager::updateDefault()
         
         switch (e->_button)
         {
-            case GPEB_BUTTON_A:
+            case GPEB_BUTTON_START:
+            case GPEB_BUTTON_SNES_START:
                 _state = MIMS_START_SRVR;
                 continue;
-            case GPEB_BUTTON_X:
-                _state = MIMS_JOIN_SRVR;
-                continue;
             case GPEB_BUTTON_SELECT:
+            case GPEB_BUTTON_SNES_SELECT:
                 _state = MIMS_EXIT;
                 continue;
             default:
@@ -134,11 +133,13 @@ void TitleInputManager::updateReadText()
         
         switch (e->_button)
         {
-            case GPEB_BUTTON_A:
+            case GPEB_BUTTON_START:
+            case GPEB_BUTTON_SNES_START:
                 _state = MIMS_TEXT_INPUT_READY;
                 _textInput = "gamer";
                 continue;
             case GPEB_BUTTON_SELECT:
+            case GPEB_BUTTON_SNES_SELECT:
                 _state = MIMS_EXIT;
                 clearTextInput();
                 continue;
