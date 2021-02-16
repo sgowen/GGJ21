@@ -166,8 +166,7 @@ void Server::update()
 //        }
 //    }
     
-    int validMoveCount = moveCount; // temporary
-    for (int i = 0; i < validMoveCount; ++i)
+    for (int i = 0; i < moveCount; ++i)
     {
         for (Entity* e : _world.getPlayers())
         {

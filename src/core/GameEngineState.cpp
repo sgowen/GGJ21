@@ -275,7 +275,8 @@ void GameEngineState::update(Engine* e)
         return;
     }
     
-    if (ml.getMoveCount() < NW_ACK_TIMEOUT)
+    if (getControlledPlayer() != NULL &&
+        ml.getMoveCount() < NW_ACK_TIMEOUT)
     {
         updateWorld(INPUT_GAME.sampleInputAsNewMove(), true);
     }
