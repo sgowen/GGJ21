@@ -135,11 +135,39 @@ void Server::update()
     INST_REG.get<TimeTracker>(INSK_TIME_SRVR)->onFrame();
     
     NW_MGR_SRVR->processIncomingPackets();
+    int moveCount = NW_MGR_SRVR->getMoveCount();
+//    uint32_t expectedMoveIndex = NW_MGR_SRVR->getNumMovesProcessed();
+//    int validMoveCount = 0;
+//    for (int i = 0; i < moveCount; ++i)
+//    {
+//        bool isMoveValidForAllPlayers = true;
+//        for (Entity* e : _world.getPlayers())
+//        {
+//            PlayerController* c = static_cast<PlayerController*>(e->controller());
+//            assert(c != NULL);
+//
+//            ClientProxy* cp = NW_MGR_SRVR->getClientProxy(c->getPlayerID());
+//            assert(cp != NULL);
+//
+//            MoveList& ml = cp->getUnprocessedMoveList();
+//            Move* m = ml.getMoveAtIndex(i);
+//            assert(m != NULL);
+//
+//            if (expectedMoveIndex != m->getIndex())
+//            {
+//                isMoveValidForAllPlayers = false;
+//                break;
+//            }
+//        }
+//
+//        if (isMoveValidForAllPlayers)
+//        {
+//            ++validMoveCount;
+//        }
+//    }
     
-    int hostMoveCount = NW_MGR_SRVR->getHostMoveCount();
-    int moveCount = hostMoveCount; // FIXME
-    
-    for (int i = 0; i < moveCount; ++i)
+    int validMoveCount = moveCount; // temporary
+    for (int i = 0; i < validMoveCount; ++i)
     {
         for (Entity* e : _world.getPlayers())
         {
@@ -151,10 +179,7 @@ void Server::update()
             
             MoveList& ml = cp->getUnprocessedMoveList();
             Move* m = ml.getMoveAtIndex(i);
-            if (m == NULL)
-            {
-                continue;
-            }
+            assert(m != NULL);
             
             c->processInput(m->inputState());
             ml.markMoveAsProcessed(m);
@@ -187,6 +212,8 @@ void Server::update()
         
         handleDirtyStates(_world.getPlayers());
         handleDirtyStates(_world.getNetworkEntities());
+        
+        NW_MGR_SRVR->onMoveProcessed();
     }
     
     removeProcessedMoves();

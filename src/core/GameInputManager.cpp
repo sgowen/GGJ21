@@ -186,7 +186,7 @@ const Move& GameInputManager::sampleInputAsNewMove()
     _inputState->copyTo(inputState);
     
     TimeTracker* tt = INST_REG.get<TimeTracker>(INSK_TIME_CLNT);
-    return _moveList.addMove(inputState, tt->_time);
+    return _moveList.addMove(inputState, tt->_time, NW_MGR_CLNT->getNumMovesProcessed());
 }
 
 GameInputState* GameInputManager::inputState()

@@ -32,6 +32,8 @@ _entityLayoutInfoCache(_entityLayoutInfo)
 
 void HidePlayerController::update()
 {
+    PlayerController::update();
+    
     if (_encounter._isInCounter)
     {
         ++_encounter._stateTime;

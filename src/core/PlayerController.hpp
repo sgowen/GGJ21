@@ -34,6 +34,7 @@ public:
     PlayerController(Entity* e);
     virtual ~PlayerController() {}
     
+    virtual void update();
     virtual void processInput(InputState* inputState, bool isLocal = false);
     
     void setUsername(std::string value);

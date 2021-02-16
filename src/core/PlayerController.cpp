@@ -40,6 +40,15 @@ _statsCache(_stats)
     // Empty
 }
 
+void PlayerController::update()
+{
+    if (_entity->state()._state == STAT_IDLE)
+    {
+        // 2nd frame is more appropriate for idle
+        _entity->state()._stateTime = 6;
+    }
+}
+
 void PlayerController::processInput(InputState* inputState, bool isLocal)
 {
     GameInputState* is = static_cast<GameInputState*>(inputState);
@@ -52,7 +61,6 @@ void PlayerController::processInput(InputState* inputState, bool isLocal)
     
     uint8_t fromState = _entity->state()._state;
     uint8_t& state = _entity->state()._state;
-    uint16_t& stateTime = _entity->state()._stateTime;
     uint8_t inpt = playerInputState->inputState();
     
     state = STAT_IDLE;
@@ -87,7 +95,6 @@ void PlayerController::processInput(InputState* inputState, bool isLocal)
     
     if (state == STAT_IDLE)
     {
-        stateTime = 6; // 2nd frame is more appropriate for idle
         desiredVel[0] = vel._x * 0.86f;
         desiredVel[1] = vel._y * 0.86f;
     }

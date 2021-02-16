@@ -308,6 +308,8 @@ void GameEngineState::updateWorld(const Move& move, bool isLocal)
     {
         e->update();
     }
+    
+    NW_MGR_CLNT->onMoveProcessed();
 }
 
 GameEngineState::GameEngineState() : State<Engine>(),
