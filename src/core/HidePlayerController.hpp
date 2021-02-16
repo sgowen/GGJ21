@@ -24,7 +24,7 @@ public:
     virtual void update();
     virtual void onMessage(uint16_t message, void* data = NULL);
     virtual std::string getTextureMapping();
-    virtual void processInput(InputState* inputState, bool isLocal = false);
+    virtual void processInput(InputState* inputState, bool isLive);
     virtual bool isInEncounter();
     virtual uint16_t encounterStateTime();
 

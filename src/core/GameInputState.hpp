@@ -18,7 +18,9 @@ enum GameInputStateFlags
     GISF_MOVING_RIGHT = 1 << 0,
     GISF_MOVING_LEFT =  1 << 1,
     GISF_MOVING_UP =    1 << 2,
-    GISF_MOVING_DOWN =  1 << 3
+    GISF_MOVING_DOWN =  1 << 3,
+    GISF_CONFIRM     =  1 << 4,
+    GISF_CANCEL      =  1 << 5
 };
 
 class OutputMemoryBitStream;

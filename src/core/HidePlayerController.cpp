@@ -106,36 +106,43 @@ std::string HidePlayerController::getTextureMapping()
     }
 }
 
-void HidePlayerController::processInput(InputState* inputState, bool isLocal)
+void HidePlayerController::processInput(InputState* inputState, bool isLive)
 {
     GameInputState* is = static_cast<GameInputState*>(inputState);
-    uint8_t playerID = getPlayerID();
-    GameInputState::PlayerInputState* playerInputState = is->getPlayerInputStateForID(playerID);
-    if (playerInputState == NULL)
+    GameInputState::PlayerInputState* pis = is->getPlayerInputStateForID(getPlayerID());
+    if (pis == NULL)
     {
         return;
     }
     
     if (_encounter._isInCounter)
     {
+        uint8_t piss = pis->inputState();
         if (_encounter._state == ESTA_IDLE)
         {
-            uint8_t inpt = playerInputState->inputState();
-            if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
+            if (IS_BIT_SET(piss, GISF_CONFIRM))
             {
                 _encounter._state = ESTA_SWING;
                 _encounter._stateTime = 0;
                 
-                if (isLocal)
+                if (isLive)
                 {
                     GOW_AUDIO.playSound(_entity->getSoundMapping(4));
                 }
             }
         }
+        else
+        {
+            if (IS_BIT_SET(piss, GISF_CANCEL))
+            {
+                _encounter._state = ESTA_IDLE;
+                _encounter._stateTime = 0;
+            }
+        }
     }
     else
     {
-        PlayerController::processInput(inputState, isLocal);
+        PlayerController::processInput(inputState, isLive);
     }
 }
 

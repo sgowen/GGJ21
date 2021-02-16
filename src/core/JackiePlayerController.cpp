@@ -10,6 +10,10 @@
 
 #include "Entity.hpp"
 #include "CrystalController.hpp"
+#include "GameInputState.hpp"
+#include "Macros.hpp"
+#include "GowAudioEngine.hpp"
+#include "StringUtil.hpp"
 
 IMPL_RTTI(JackiePlayerController, PlayerController)
 IMPL_EntityController_create(JackiePlayerController)
@@ -37,5 +41,38 @@ void JackiePlayerController::onCollision(Entity* e)
         CrystalController* ec = static_cast<CrystalController*>(e->controller());
         
         ec->push(_stats._dir);
+    }
+}
+
+bool ugh = false;
+void JackiePlayerController::processInput(InputState* inputState, bool isLive)
+{
+    PlayerController::processInput(inputState, isLive);
+    
+    GameInputState* is = static_cast<GameInputState*>(inputState);
+    GameInputState::PlayerInputState* pis = is->getPlayerInputStateForID(getPlayerID());
+    if (pis == NULL)
+    {
+        return;
+    }
+    
+    uint8_t piss = pis->inputState();
+    if (IS_BIT_SET(piss, GISF_CONFIRM) && !ugh)
+    {
+        if (isLive)
+        {
+            ugh = true;
+            LOG("play sound 1");
+            GOW_AUDIO.playSound(_entity->getSoundMapping(1));
+        }
+    }
+    else if (IS_BIT_SET(piss, GISF_CANCEL) && ugh)
+    {
+        if (isLive)
+        {
+            ugh = false;
+            LOG("play sound 2");
+            GOW_AUDIO.playSound(_entity->getSoundMapping(1));
+        }
     }
 }

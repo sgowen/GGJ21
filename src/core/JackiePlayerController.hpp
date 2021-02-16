@@ -21,4 +21,5 @@ public:
     
     virtual std::string getTextureMapping();
     virtual void onCollision(Entity* e);
+    virtual void processInput(InputState* inputState, bool isLive);
 };

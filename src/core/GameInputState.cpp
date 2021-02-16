@@ -133,13 +133,13 @@ GameInputState::PlayerInputState& GameInputState::getPlayerInputState(int index)
 void GameInputState::PlayerInputState::write(OutputMemoryBitStream& ombs) const
 {
     ombs.write<uint8_t, 3>(_playerID);
-    ombs.write<uint8_t, 5>(_inputState);
+    ombs.write(_inputState);
 }
 
 void GameInputState::PlayerInputState::read(InputMemoryBitStream& imbs)
 {
     imbs.read<uint8_t, 3>(_playerID);
-    imbs.read<uint8_t, 5>(_inputState);
+    imbs.read(_inputState);
 }
 
 uint8_t GameInputState::PlayerInputState::playerID()

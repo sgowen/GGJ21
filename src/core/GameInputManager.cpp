@@ -61,6 +61,12 @@ GameInputManagerState GameInputManager::update()
                 }
                 continue;
             }
+            case GPEB_BUTTON_A:
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_CONFIRM, e->isPressed());
+                continue;
+            case GPEB_BUTTON_B:
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_CANCEL, e->isPressed());
+                continue;
             case GPEB_D_PAD_UP:
             {
                 if (!isMovingUp[e->_index])
@@ -136,6 +142,13 @@ GameInputManagerState GameInputManager::update()
             case GOW_KEY_ESCAPE:
                 _state = GIMS_EXIT;
                 continue;
+            case GOW_KEY_SPACE_BAR: // Player 1
+                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CONFIRM, e->isPressed());
+                continue;
+            case GOW_KEY_DELETE:
+            case GOW_KEY_BACK_SPACE: // Player 1
+                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CANCEL, e->isPressed());
+                continue;
             case GOW_KEY_W: // Player 1
                 SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed());
                 continue;
@@ -147,6 +160,12 @@ GameInputManagerState GameInputManager::update()
                 continue;
             case GOW_KEY_D: // Player 1
                 SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed());
+                continue;
+            case GOW_KEY_CARRIAGE_RETURN: // Player 2
+                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_CONFIRM, e->isPressed());
+                continue;
+            case GOW_KEY_COMMA: // Player 2
+                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_CANCEL, e->isPressed());
                 continue;
             case GOW_KEY_ARROW_UP: // Player 2
                 SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_MOVING_UP, e->isPressed());

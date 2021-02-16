@@ -297,12 +297,12 @@ void GameEngineState::render()
     GOW_AUDIO.render();
 }
 
-void GameEngineState::updateWorld(const Move& move, bool isLocal)
+void GameEngineState::updateWorld(const Move& move, bool isLive)
 {
     for (Entity* e : _world.getPlayers())
     {
         PlayerController* c = static_cast<PlayerController*>(e->controller());
-        c->processInput(move.inputState(), isLocal);
+        c->processInput(move.inputState(), isLive);
     }
     
     _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_CLNT));

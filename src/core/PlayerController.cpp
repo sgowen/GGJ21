@@ -49,44 +49,43 @@ void PlayerController::update()
     }
 }
 
-void PlayerController::processInput(InputState* inputState, bool isLocal)
+void PlayerController::processInput(InputState* inputState, bool isLive)
 {
     GameInputState* is = static_cast<GameInputState*>(inputState);
-    uint8_t playerID = getPlayerID();
-    GameInputState::PlayerInputState* playerInputState = is->getPlayerInputStateForID(playerID);
-    if (playerInputState == NULL)
+    GameInputState::PlayerInputState* pis = is->getPlayerInputStateForID(getPlayerID());
+    if (pis == NULL)
     {
         return;
     }
     
     uint8_t fromState = _entity->state()._state;
     uint8_t& state = _entity->state()._state;
-    uint8_t inpt = playerInputState->inputState();
+    uint8_t piss = pis->inputState();
     
     state = STAT_IDLE;
     const Vector2& vel = _entity->getVelocity();
     float desiredVel[2] = { 0.0f, 0.0f };
     float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
     float maxSpeedHalved = maxSpeed / 2;
-    if (IS_BIT_SET(inpt, GISF_MOVING_UP))
+    if (IS_BIT_SET(piss, GISF_MOVING_UP))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_UP;
         desiredVel[1] = MIN(vel._y + maxSpeedHalved, maxSpeed);
     }
-    if (IS_BIT_SET(inpt, GISF_MOVING_LEFT))
+    if (IS_BIT_SET(piss, GISF_MOVING_LEFT))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_LEFT;
         desiredVel[0] = MAX(vel._x - maxSpeedHalved, -maxSpeed);
     }
-    if (IS_BIT_SET(inpt, GISF_MOVING_DOWN))
+    if (IS_BIT_SET(piss, GISF_MOVING_DOWN))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_DOWN;
         desiredVel[1] = MAX(vel._y - maxSpeedHalved, -maxSpeed);
     }
-    if (IS_BIT_SET(inpt, GISF_MOVING_RIGHT))
+    if (IS_BIT_SET(piss, GISF_MOVING_RIGHT))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_RIGHT;
@@ -106,7 +105,7 @@ void PlayerController::processInput(InputState* inputState, bool isLocal)
     // I know... but look at the sprite sheet
     _entity->pose()._isFacingLeft = _stats._dir == PDIR_RIGHT;
     
-    if (isLocal)
+    if (isLive)
     {
         SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
     }

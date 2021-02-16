@@ -198,7 +198,7 @@ void Server::updateWorld(int moveIndex)
         Move* m = ml.getMoveAtIndex(moveIndex);
         assert(m != NULL);
         
-        c->processInput(m->inputState());
+        c->processInput(m->inputState(), false);
         ml.markMoveAsProcessed(m);
         cp->setLastMoveTimestampDirty(true);
     }
