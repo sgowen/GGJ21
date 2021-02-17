@@ -12,11 +12,11 @@
 #include "TimeTracker.hpp"
 #include "InstanceRegistry.hpp"
 #include "Network.hpp"
-#include "NetworkManagerClient.hpp"
+#include "NetworkClient.hpp"
 #include "Macros.hpp"
 #include "MathUtil.hpp"
 #include "MainConfig.hpp"
-#include "GameEngineState.hpp"
+#include "GameClientEngineState.hpp"
 #include "PlayerController.hpp"
 #include "World.hpp"
 #include "Entity.hpp"
@@ -25,7 +25,7 @@ GameInputManagerState GameInputManager::update()
 {
     _state = GIMS_DEFAULT;
     
-    Entity* controlledPlayer = ENGINE_STATE_GAME.getControlledPlayer();
+    Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
     if (controlledPlayer != NULL)
     {
         float playerX = controlledPlayer == NULL ? 0 : controlledPlayer->getPosition()._x;
@@ -194,7 +194,7 @@ GameInputManagerState GameInputManager::update()
     
     if (_inputState->isRequestingToAddLocalPlayer())
     {
-        NW_MGR_CLNT->requestToAddLocalPlayer();
+        NW_CLNT->requestToAddLocalPlayer();
     }
     
     return _state;
@@ -206,7 +206,7 @@ const Move& GameInputManager::sampleInputAsNewMove()
     _inputState->copyTo(inputState);
     
     TimeTracker* tt = INST_REG.get<TimeTracker>(INSK_TIME_CLNT);
-    return _moveList.addMove(inputState, tt->_time, NW_MGR_CLNT->getNumMovesProcessed());
+    return _moveList.addMove(inputState, tt->_time, NW_CLNT->getNumMovesProcessed());
 }
 
 GameInputState* GameInputManager::inputState()
@@ -244,7 +244,7 @@ void GameInputManager::drop2ndPlayer()
 {
     GameInputState::PlayerInputState& pis = _inputState->getPlayerInputState(1);
     pis._playerID = NW_INPUT_UNASSIGNED;
-    NW_MGR_CLNT->requestToDropLocalPlayer(1);
+    NW_CLNT->requestToDropLocalPlayer(1);
 }
 
 GameInputManager::GameInputManager() :

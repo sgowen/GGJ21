@@ -14,7 +14,7 @@
 #include "GowAudioEngine.hpp"
 #include "World.hpp"
 #include "MonsterController.hpp"
-#include "Server.hpp"
+#include "GameServerEngineState.hpp"
 
 #include <assert.h>
 
@@ -50,7 +50,7 @@ void HidePlayerController::update()
         {
             _encounter._state = ESTA_IDLE;
             
-            World& w = Server::getInstance()->getWorld();
+            World& w = ENGINE_STATE_GAME_SRVR.getWorld();
             for (Entity* e : w.getNetworkEntities())
             {
                 if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti))

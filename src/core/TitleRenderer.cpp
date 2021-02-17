@@ -31,10 +31,10 @@ _shaderManager(),
 _spriteBatcher(128),
 _textureManager(),
 _textViews{
+    TextView(TEXA_CENTER, "Dedicated Server Mode", TEXV_HIDDEN),
     TextView(TEXA_CENTER, ""),
     TextView(TEXA_CENTER, ""),
-    TextView(TEXA_CENTER, ""),
-    TextView(TEXA_CENTER, "[S]tart Server"),
+    TextView(TEXA_CENTER, "[H]ost Server"),
     TextView(TEXA_CENTER, "[J]oin Server"),
     TextView(TEXA_CENTER, "Enter IP address", TEXV_HIDDEN),
     TextView(TEXA_CENTER, "Enter name", TEXV_HIDDEN),
@@ -43,7 +43,7 @@ _textViews{
 }
 {
     _fontRenderer.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
-    _fontRenderer.configure(_textViews[0], 0.5f, 0.70f, 0.05f);
+    _fontRenderer.configure(_textViews[0], 0.5f, 0.50f, 0.025f);
     _fontRenderer.configure(_textViews[1], 0.5f, 0.62f, 0.05f);
     _fontRenderer.configure(_textViews[2], 0.5f, 0.54f, 0.05f);
     _fontRenderer.configure(_textViews[3], 0.5f, 0.12f, 0.025f);
@@ -87,12 +87,14 @@ void TitleRenderer::render()
 {
     TitleEngineStateState mess = ENGINE_STATE_TITLE._state;
     
+    _textViews[0]._visibility = mess == MESS_START_DEDICATED_SERVER ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[3]._visibility = mess == MESS_DEFAULT ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[4]._visibility = mess == MESS_DEFAULT ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[5]._visibility = mess == MESS_INPUT_IP ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[6]._visibility = mess == MESS_INPUT_HOST_NAME || mess == MESS_INPUT_JOIN_NAME ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[7]._visibility = mess == MESS_INPUT_IP || mess == MESS_INPUT_HOST_NAME || mess == MESS_INPUT_JOIN_NAME ? TEXV_VISIBLE : TEXV_HIDDEN;
     _textViews[7]._text = INPUT_MAIN.getTextInput();
+    _textViews[8]._visibility = mess == MESS_START_DEDICATED_SERVER ? TEXV_HIDDEN : TEXV_VISIBLE;
     
     int camWidth = CFG_MAIN._camWidth;
     int camHeight = CFG_MAIN._camHeight;
@@ -102,10 +104,17 @@ void TitleRenderer::render()
     OGL.bindFramebuffer(_framebuffer);
     OGL.enableBlending(true);
     
-    _spriteBatcher.begin();
-    TextureRegion demo(0, 480, 1366, 619, 2048, 2048);
-    _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2 + (camHeight * 0.1f), camWidth, camHeight * 0.8f);
-    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
+    if (mess == MESS_START_DEDICATED_SERVER)
+    {
+        OGL.clearFramebuffer(COLOR_BLACK);
+    }
+    else
+    {
+        _spriteBatcher.begin();
+        TextureRegion demo(0, 480, 1366, 619, 2048, 2048);
+        _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2 + (camHeight * 0.1f), camWidth, camHeight * 0.8f);
+        _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
+    }
     
     for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
     {

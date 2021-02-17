@@ -12,7 +12,9 @@
 #include "Assets.hpp"
 #include "TitleInputManager.hpp"
 #include "GowAudioEngine.hpp"
-#include "GameEngineState.hpp"
+#include "GameClientEngineState.hpp"
+#include "GameHostEngineState.hpp"
+#include "GameServerEngineState.hpp"
 #include "StringUtil.hpp"
 #include "MainConfig.hpp"
 
@@ -23,8 +25,6 @@ void TitleEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
-    
-    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
 void TitleEngineState::execute(Engine* e)
@@ -63,6 +63,7 @@ void TitleEngineState::exit(Engine* e)
     releaseDeviceDependentResources();
     
     _state = MESS_DEFAULT;
+    _stateTime = 0;
     _userEnteredIPAddress.clear();
     INPUT_MAIN.clearTextInput();
 }
@@ -74,6 +75,8 @@ void TitleEngineState::createDeviceDependentResources()
     GOW_AUDIO.createDeviceDependentResources();
     GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
     GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
+    
+    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
 void TitleEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
@@ -114,6 +117,9 @@ void TitleEngineState::update(Engine* e)
         case MESS_INPUT_JOIN_NAME:
             updateInputJoinName(e);
             break;
+        case MESS_START_DEDICATED_SERVER:
+            updateStartDedicatedServer(e);
+            break;
         default:
             break;
     }
@@ -128,6 +134,9 @@ void TitleEngineState::updateDefault(Engine* e)
             e->setRequestedHostAction(ERHA_EXIT);
             break;
         case MIMS_START_SRVR:
+            _state = MESS_START_DEDICATED_SERVER;
+            break;
+        case MIMS_HOST_SRVR:
             _state = MESS_INPUT_HOST_NAME;
             break;
         case MIMS_JOIN_SRVR:
@@ -167,8 +176,8 @@ void TitleEngineState::updateInputHostName(Engine* e)
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().insert({GameEngineState::ARG_USERNAME, INPUT_MAIN.getTextInput()});
-            e->changeState(&ENGINE_STATE_GAME, args);
+            args.getMap().insert({ARG_USERNAME, INPUT_MAIN.getTextInput()});
+            e->changeState(&ENGINE_STATE_GAME_HOST, args);
             break;
         }
         default:
@@ -188,13 +197,22 @@ void TitleEngineState::updateInputJoinName(Engine* e)
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().insert({GameEngineState::ARG_IP_ADDRESS, _userEnteredIPAddress});
-            args.getMap().insert({GameEngineState::ARG_USERNAME, INPUT_MAIN.getTextInput()});
-            e->changeState(&ENGINE_STATE_GAME, args);
+            args.getMap().insert({ARG_IP_ADDRESS, _userEnteredIPAddress});
+            args.getMap().insert({ARG_USERNAME, INPUT_MAIN.getTextInput()});
+            e->changeState(&ENGINE_STATE_GAME_CLNT, args);
             break;
         }
         default:
             break;
+    }
+}
+
+void TitleEngineState::updateStartDedicatedServer(Engine* e)
+{
+    ++_stateTime;
+    if (_stateTime > 10)
+    {
+        e->changeState(&ENGINE_STATE_GAME_SRVR);
     }
 }
 
@@ -206,7 +224,8 @@ void TitleEngineState::render()
 
 TitleEngineState::TitleEngineState() : State<Engine>(),
 _renderer(),
-_state(MESS_DEFAULT)
+_state(MESS_DEFAULT),
+_stateTime(0)
 {
     // Empty
 }

@@ -57,7 +57,7 @@ void TitleInputManager::updateDefault()
             continue;
         }
         
-        _state = MIMS_START_SRVR;
+        _state = MIMS_HOST_SRVR;
         break;
     }
 #endif
@@ -73,7 +73,7 @@ void TitleInputManager::updateDefault()
         {
             case GPEB_BUTTON_START:
             case GPEB_BUTTON_SNES_START:
-                _state = MIMS_START_SRVR;
+                _state = MIMS_HOST_SRVR;
                 continue;
             case GPEB_BUTTON_SELECT:
             case GPEB_BUTTON_SNES_SELECT:
@@ -95,6 +95,9 @@ void TitleInputManager::updateDefault()
         {
             case GOW_KEY_S:
                 _state = MIMS_START_SRVR;
+                continue;
+            case GOW_KEY_H:
+                _state = MIMS_HOST_SRVR;
                 continue;
             case GOW_KEY_J:
                 _state = MIMS_JOIN_SRVR;

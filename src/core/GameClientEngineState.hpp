@@ -1,5 +1,5 @@
 //
-//  GameEngineState.hpp
+//  GameClientEngineState.hpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
@@ -18,20 +18,17 @@ class Server;
 class Move;
 class Entity;
 
-#define ENGINE_STATE_GAME GameEngineState::getInstance()
+#define ENGINE_STATE_GAME_CLNT GameClientEngineState::getInstance()
 
-class GameEngineState : public State<Engine>
+class GameClientEngineState : public State<Engine>
 {
     friend class GameInputManager;
     friend class GameRenderer;
     
-public:
-    static const std::string ARG_IP_ADDRESS;
-    static const std::string ARG_USERNAME;
-    
-    static GameEngineState& getInstance()
+public:    
+    static GameClientEngineState& getInstance()
     {
-        static GameEngineState ret = GameEngineState();
+        static GameClientEngineState ret = GameClientEngineState();
         return ret;
     }
     
@@ -41,7 +38,6 @@ public:
     
     Entity* getControlledPlayer();
     World& getWorld();
-    bool isHost();
     
 private:
     World _world;
@@ -57,8 +53,8 @@ private:
     
     void updateWorld(const Move& move, bool isLive);
     
-    GameEngineState();
-    ~GameEngineState() {}
-    GameEngineState(const GameEngineState&);
-    GameEngineState& operator=(const GameEngineState&);
+    GameClientEngineState();
+    ~GameClientEngineState() {}
+    GameClientEngineState(const GameClientEngineState&);
+    GameClientEngineState& operator=(const GameClientEngineState&);
 };

@@ -16,17 +16,15 @@
 #include "TimeTracker.hpp"
 #include "StringUtil.hpp"
 #include "MathUtil.hpp"
-#include "NetworkManagerServer.hpp"
-#include "NetworkManagerClient.hpp"
+#include "NetworkServer.hpp"
+#include "NetworkClient.hpp"
 #include "GameInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "SoundUtil.hpp"
 #include "Config.hpp"
 #include "MainConfig.hpp"
-#include "GameEngineState.hpp"
 #include "Macros.hpp"
 #include "MonsterController.hpp"
-#include "Server.hpp"
 
 IMPL_RTTI(PlayerController, EntityController)
 IMPL_EntityController_create(PlayerController)
@@ -185,7 +183,7 @@ void PlayerNetworkController::read(InputMemoryBitStream& imbs)
         c->_statsCache = c->_stats;
     }
     
-    if (!NW_MGR_CLNT->isPlayerIDLocal(c->_playerInfo._playerID))
+    if (!NW_CLNT->isPlayerIDLocal(c->_playerInfo._playerID))
     {
         SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
     }

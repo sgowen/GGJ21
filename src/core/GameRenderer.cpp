@@ -9,7 +9,7 @@
 #include "GameRenderer.hpp"
 
 #include "Entity.hpp"
-#include "GameEngineState.hpp"
+#include "GameClientEngineState.hpp"
 #include "OpenGLWrapper.hpp"
 #include "Macros.hpp"
 #include "Color.hpp"
@@ -21,7 +21,7 @@
 #include "Assets.hpp"
 #include "World.hpp"
 #include "Network.hpp"
-#include "NetworkManagerClient.hpp"
+#include "NetworkClient.hpp"
 #include "HidePlayerController.hpp"
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
@@ -34,7 +34,7 @@
 GameRenderer::GameRenderer() :
 _fontRenderer(256, 0, 0, 16, 16, 16, 256, 256),
 _framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
-_polygonBatcher(1, true),
+_polygonBatcher(2, true),
 _screenRenderer(),
 _shaderManager(),
 _spriteBatcher(4096),
@@ -108,9 +108,9 @@ void GameRenderer::render()
     OGL.enableBlending(true);
     
     renderWorld();
-    renderSplitScreen();
-    renderUI();
     renderEncounter();
+    renderUI();
+    renderSplitScreen();
 
     _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
 }
@@ -136,7 +136,7 @@ void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
 
 void GameRenderer::renderWorld()
 {
-    World& w = ENGINE_STATE_GAME._world;
+    World& w = ENGINE_STATE_GAME_CLNT._world;
     if (!w.isEntityLayoutLoaded())
     {
         return;
@@ -153,61 +153,10 @@ void GameRenderer::renderWorld()
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
 }
 
-void GameRenderer::renderUI()
-{
-    updateMatrix(0, CFG_MAIN._camWidth, 0, CFG_MAIN._camHeight);
-    
-    for (auto& tv : _textViews)
-    {
-        tv._visibility = TEXV_HIDDEN;
-    }
-    
-    World& w = ENGINE_STATE_GAME._world;
-    if (CFG_MAIN._showDebug)
-    {
-        for (Entity* e : w.getPlayers())
-        {
-            PlayerController* c = static_cast<PlayerController*>(e->controller());
-            
-            int playerID = c->getPlayerID();
-            _textViews[playerID + 8]._text = StringUtil::format("%s %s", c->getUsername().c_str(), c->getUserAddress().c_str());
-            _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
-        }
-    }
-    
-    if (NW_MGR_CLNT != NULL &&
-        NW_MGR_CLNT->state() == NWCS_WELCOMED)
-    {
-        if (w.getPlayers().size() == 1)
-        {
-            _polygonBatcher.begin();
-            _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
-                                         CFG_MAIN._splitScreenBarY,
-                                         CFG_MAIN._camWidth,
-                                         CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
-            _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
-            
-            for (int i = 1; i <= 8; ++i)
-            {
-                _textViews[i]._visibility = TEXV_VISIBLE;
-            }
-        }
-    }
-    else
-    {
-        _textViews[0]._visibility = TEXV_VISIBLE;
-    }
-    
-    for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
-    {
-        _fontRenderer.renderText(_shaderManager.shader("texture"), _textureManager.texture("texture_font"), _textViews[i]);
-    }
-}
-
 void GameRenderer::renderEncounter()
 {
     bool isInEncounter = false;
-    World& w = ENGINE_STATE_GAME._world;
+    World& w = ENGINE_STATE_GAME_CLNT._world;
     for (Entity* e : w.getPlayers())
     {
         if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
@@ -251,6 +200,74 @@ void GameRenderer::renderEncounter()
         }
     }
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("big_sprites"));
+}
+
+void GameRenderer::renderUI()
+{
+    updateMatrix(0, CFG_MAIN._camWidth, 0, CFG_MAIN._camHeight);
+    
+    for (auto& tv : _textViews)
+    {
+        tv._visibility = TEXV_HIDDEN;
+    }
+    
+    World& w = ENGINE_STATE_GAME_CLNT._world;
+    if (CFG_MAIN._showDebug)
+    {
+        _polygonBatcher.begin();
+        for (Entity* e : w.getPlayers())
+        {
+            PlayerController* c = static_cast<PlayerController*>(e->controller());
+            
+            int playerID = c->getPlayerID();
+            _textViews[playerID + 8]._text = StringUtil::format("%s %s", c->getUsername().c_str(), c->getUserAddress().c_str());
+            _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
+            
+            if (playerID == 1)
+            {
+                _polygonBatcher.addRektangle(0,
+                                             0,
+                                             CFG_MAIN._splitScreenBarX,
+                                             3);
+            }
+            else if (playerID == 2)
+            {
+                _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
+                                             0,
+                                             CFG_MAIN._camWidth,
+                                             3);
+            }
+        }
+        _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
+    }
+    
+    if (NW_CLNT != NULL &&
+        NW_CLNT->state() == NWCS_WELCOMED)
+    {
+        if (w.getPlayers().size() == 1)
+        {
+            _polygonBatcher.begin();
+            _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
+                                         CFG_MAIN._splitScreenBarY,
+                                         CFG_MAIN._camWidth,
+                                         CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
+            _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
+            
+            for (int i = 1; i <= 8; ++i)
+            {
+                _textViews[i]._visibility = TEXV_VISIBLE;
+            }
+        }
+    }
+    else
+    {
+        _textViews[0]._visibility = TEXV_VISIBLE;
+    }
+    
+    for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
+    {
+        _fontRenderer.renderText(_shaderManager.shader("texture"), _textureManager.texture("texture_font"), _textViews[i]);
+    }
 }
 
 void GameRenderer::renderSplitScreen()

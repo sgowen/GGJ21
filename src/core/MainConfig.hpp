@@ -14,6 +14,9 @@
 
 #define MSG_ENCOUNTER 0x01u
 
+#define ARG_IP_ADDRESS "ARG_IP_ADDRESS"
+#define ARG_USERNAME "ARG_USERNAME"
+
 class MainConfig
 {
 public:

@@ -16,16 +16,14 @@
 #include "TimeTracker.hpp"
 #include "StringUtil.hpp"
 #include "MathUtil.hpp"
-#include "NetworkManagerServer.hpp"
-#include "NetworkManagerClient.hpp"
+#include "NetworkServer.hpp"
+#include "NetworkClient.hpp"
 #include "GameInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "SoundUtil.hpp"
 #include "Config.hpp"
 #include "MainConfig.hpp"
-#include "GameEngineState.hpp"
 #include "Macros.hpp"
-#include "Server.hpp"
 #include "PlayerController.hpp"
 #include "MathUtil.hpp"
 #include "InstanceRegistry.hpp"
@@ -52,7 +50,7 @@ void CrystalController::onMessage(uint16_t message, void* data)
             {
                 uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID();
                 EntityInstanceDef eid(networkID, 'EXPL', _entity->getPosition()._x, _entity->getPosition()._y);
-                NW_MGR_SRVR->registerEntity(ENTITY_MGR.createEntity(eid, true));
+                NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid, true));
                 _entity->requestDeletion();
             }
             break;

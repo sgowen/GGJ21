@@ -16,16 +16,15 @@
 #include "TimeTracker.hpp"
 #include "StringUtil.hpp"
 #include "MathUtil.hpp"
-#include "NetworkManagerServer.hpp"
-#include "NetworkManagerClient.hpp"
+#include "NetworkServer.hpp"
+#include "NetworkClient.hpp"
 #include "GameInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "SoundUtil.hpp"
 #include "Config.hpp"
 #include "MainConfig.hpp"
-#include "GameEngineState.hpp"
 #include "Macros.hpp"
-#include "Server.hpp"
+#include "GameServerEngineState.hpp"
 #include "HidePlayerController.hpp"
 #include "MathUtil.hpp"
 
@@ -46,7 +45,7 @@ void MonsterController::update()
         return;
     }
     
-    World& w = Server::getInstance()->getWorld();
+    World& w = ENGINE_STATE_GAME_SRVR.getWorld();
     
     bool hasTarget = false;
     Vector2 playerPosition;

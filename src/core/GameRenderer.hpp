@@ -48,7 +48,7 @@ private:
     void addSpritesToBatcher(std::vector<Entity*>& entities);
     
     void renderWorld();
+    void renderEncounter();
     void renderUI();
     void renderSplitScreen();
-    void renderEncounter();
 };

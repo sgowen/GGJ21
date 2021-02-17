@@ -1,16 +1,15 @@
 //
-//  GameEngineState.cpp
+//  GameClientEngineState.cpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/27/21.
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "GameEngineState.hpp"
+#include "GameClientEngineState.hpp"
 
 #include "Engine.hpp"
 #include "TimeTracker.hpp"
-#include "Server.hpp"
 #include "Move.hpp"
 #include "Assets.hpp"
 #include "GameInputManager.hpp"
@@ -19,8 +18,7 @@
 #include "Entity.hpp"
 #include "StringUtil.hpp"
 #include "MathUtil.hpp"
-#include "NetworkManagerClient.hpp"
-#include "NetworkManagerServer.hpp"
+#include "NetworkClient.hpp"
 #include "GameInputState.hpp"
 #include "EntityRegistry.hpp"
 #include "GowAudioEngine.hpp"
@@ -37,12 +35,9 @@
 #include <stdlib.h>
 #include <assert.h>
 
-const std::string GameEngineState::ARG_IP_ADDRESS = "ARG_IP_ADDRESS";
-const std::string GameEngineState::ARG_USERNAME = "ARG_USERNAME";
-
 void cb_client_onEntityRegistered(Entity* e)
 {
-    ENGINE_STATE_GAME.getWorld().addNetworkEntity(e);
+    ENGINE_STATE_GAME_CLNT.getWorld().addNetworkEntity(e);
     
     if (e->controller()->getRTTI().isExactly(HidePlayerController::rtti))
     {
@@ -50,13 +45,13 @@ void cb_client_onEntityRegistered(Entity* e)
         uint32_t key = c->getEntityLayoutKey();
         EntityLayoutDef& eld = ENTITY_LAYOUT_MGR.findEntityLayoutDef(key);
         ENTITY_LAYOUT_MGR.loadEntityLayout(eld, INST_REG.get<EntityIDManager>(INSK_EID_CLNT));
-        ENGINE_STATE_GAME.getWorld().populateFromEntityLayout(eld, false);
+        ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld, false);
     }
 }
 
 void cb_client_onEntityDeregistered(Entity* e)
 {
-    ENGINE_STATE_GAME.getWorld().removeNetworkEntity(e);
+    ENGINE_STATE_GAME_CLNT.getWorld().removeNetworkEntity(e);
 }
 
 void cb_client_handleInputStateRelease(InputState* inputState)
@@ -80,38 +75,30 @@ void cb_client_onPlayerWelcomed(uint8_t playerID)
     INPUT_GAME.inputState()->activateNextPlayer(playerID);
 }
 
-#define GAME_ENGINE_CBS cb_client_onEntityRegistered, cb_client_onEntityDeregistered, cb_client_removeProcessedMoves, cb_client_getMoveList, cb_client_onPlayerWelcomed
+#define GAME_ENGINE_CLIENT_CBS cb_client_onEntityRegistered, cb_client_onEntityDeregistered, cb_client_removeProcessedMoves, cb_client_getMoveList, cb_client_onPlayerWelcomed
 
-void GameEngineState::enter(Engine* e)
+void GameClientEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
     
     std::string serverIPAddress;
     uint16_t port;
-    if (isHost())
+    if (_args.hasValue(ARG_IP_ADDRESS))
     {
-        serverIPAddress = StringUtil::format("%s:%d", "localhost", CFG_MAIN._serverPort);
-        port = CFG_MAIN._clientPortHost;
-        
-        Server::create();
-        
-        if (!NW_MGR_SRVR->connect())
-        {
-            e->revertToPreviousState();
-            return;
-        }
+        serverIPAddress = _args.getString(ARG_IP_ADDRESS);
+        port = CFG_MAIN._clientPortJoin;
     }
     else
     {
-        serverIPAddress = StringUtil::format("%s:%d", _args.getString(ARG_IP_ADDRESS).c_str(), CFG_MAIN._serverPort);
-        port = CFG_MAIN._clientPortJoin;
+        serverIPAddress = "localhost";
+        port = CFG_MAIN._clientPortHost;
     }
     
-    NetworkManagerClient::create(serverIPAddress, _args.getString(ARG_USERNAME), port, GAME_ENGINE_CBS);
-    assert(NW_MGR_CLNT != NULL);
+    NetworkClient::create(StringUtil::format("%s:%d", serverIPAddress.c_str(), CFG_MAIN._serverPort), _args.getString(ARG_USERNAME), port, GAME_ENGINE_CLIENT_CBS);
+    assert(NW_CLNT != NULL);
     
-    if (!NW_MGR_CLNT->connect())
+    if (!NW_CLNT->connect())
     {
         e->revertToPreviousState();
         return;
@@ -120,7 +107,7 @@ void GameEngineState::enter(Engine* e)
     GOW_AUDIO.playMusic(true, 0.1f);
 }
 
-void GameEngineState::execute(Engine* e)
+void GameClientEngineState::execute(Engine* e)
 {
     switch (e->requestedStateAction())
     {
@@ -151,7 +138,7 @@ void GameEngineState::execute(Engine* e)
     }
 }
 
-void GameEngineState::exit(Engine* e)
+void GameClientEngineState::exit(Engine* e)
 {
     releaseDeviceDependentResources();
     
@@ -159,23 +146,18 @@ void GameEngineState::exit(Engine* e)
     _world.clearNetwork();
     INPUT_GAME.reset();
     
-    if (NW_MGR_CLNT != NULL)
+    if (NW_CLNT != NULL)
     {
-        NetworkManagerClient::destroy();
-    }
-    
-    if (isHost())
-    {
-        Server::destroy();
+        NetworkClient::destroy();
     }
 }
 
-Entity* GameEngineState::getControlledPlayer()
+Entity* GameClientEngineState::getControlledPlayer()
 {
     uint8_t playerID = INPUT_GAME.inputState()->getPlayerInputState(0).playerID();
     Entity* ret = NULL;
     
-    for (Entity* e : ENGINE_STATE_GAME._world.getPlayers())
+    for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
     {
         PlayerController* c = static_cast<PlayerController*>(e->controller());
         
@@ -189,17 +171,12 @@ Entity* GameEngineState::getControlledPlayer()
     return ret;
 }
 
-World& GameEngineState::getWorld()
+World& GameClientEngineState::getWorld()
 {
     return _world;
 }
 
-bool GameEngineState::isHost()
-{
-    return !_args.hasValue(ARG_IP_ADDRESS);
-}
-
-void GameEngineState::createDeviceDependentResources()
+void GameClientEngineState::createDeviceDependentResources()
 {
     ENTITY_MGR.initWithJSONFile("assets/json/entities.json");
     ENTITY_LAYOUT_MGR.initWithJSONFile("assets/json/layouts.json");
@@ -210,12 +187,12 @@ void GameEngineState::createDeviceDependentResources()
     GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
-void GameEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
+void GameClientEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
 {
     _renderer.onWindowSizeChanged(screenWidth, screenHeight);
 }
 
-void GameEngineState::releaseDeviceDependentResources()
+void GameClientEngineState::releaseDeviceDependentResources()
 {
     ENTITY_MGR.clear();
     ENTITY_LAYOUT_MGR.clear();
@@ -224,27 +201,22 @@ void GameEngineState::releaseDeviceDependentResources()
     GOW_AUDIO.releaseDeviceDependentResources();
 }
 
-void GameEngineState::resume()
+void GameClientEngineState::resume()
 {
     GOW_AUDIO.resume();
 }
 
-void GameEngineState::pause()
+void GameClientEngineState::pause()
 {
     GOW_AUDIO.pause();
 }
 
-void GameEngineState::update(Engine* e)
+void GameClientEngineState::update(Engine* e)
 {
-    if (isHost())
-    {
-        Server::getInstance()->update();
-    }
-    
     INST_REG.get<TimeTracker>(INSK_TIME_CLNT)->onFrame();
     
-    NW_MGR_CLNT->processIncomingPackets();
-    if (NW_MGR_CLNT->state() == NWCS_DISCONNECTED)
+    NW_CLNT->processIncomingPackets();
+    if (NW_CLNT->state() == NWCS_DISCONNECTED)
     {
         e->revertToPreviousState();
         return;
@@ -252,7 +224,7 @@ void GameEngineState::update(Engine* e)
     
     MoveList& ml = INPUT_GAME.moveList();
     
-    if (NW_MGR_CLNT->hasReceivedNewState())
+    if (NW_CLNT->hasReceivedNewState())
     {
         for (Entity* e : _world.getPlayers())
         {
@@ -288,16 +260,16 @@ void GameEngineState::update(Engine* e)
         updateWorld(INPUT_GAME.sampleInputAsNewMove(), true);
     }
     
-    NW_MGR_CLNT->sendOutgoingPackets();
+    NW_CLNT->sendOutgoingPackets();
 }
 
-void GameEngineState::render()
+void GameClientEngineState::render()
 {
     _renderer.render();
     GOW_AUDIO.render();
 }
 
-void GameEngineState::updateWorld(const Move& move, bool isLive)
+void GameClientEngineState::updateWorld(const Move& move, bool isLive)
 {
     for (Entity* e : _world.getPlayers())
     {
@@ -317,10 +289,10 @@ void GameEngineState::updateWorld(const Move& move, bool isLive)
         e->update();
     }
     
-    NW_MGR_CLNT->onMoveProcessed();
+    NW_CLNT->onMoveProcessed();
 }
 
-GameEngineState::GameEngineState() : State<Engine>(),
+GameClientEngineState::GameClientEngineState() : State<Engine>(),
 _world(),
 _renderer()
 {

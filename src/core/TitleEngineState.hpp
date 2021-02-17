@@ -17,7 +17,8 @@ enum TitleEngineStateState
     MESS_DEFAULT,
     MESS_INPUT_IP,
     MESS_INPUT_HOST_NAME,
-    MESS_INPUT_JOIN_NAME
+    MESS_INPUT_JOIN_NAME,
+    MESS_START_DEDICATED_SERVER,
 };
 
 class Engine;
@@ -43,6 +44,7 @@ private:
     TitleRenderer _renderer;
     TitleEngineStateState _state;
     std::string _userEnteredIPAddress;
+    int _stateTime;
     
     void createDeviceDependentResources();
     void onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight);
@@ -54,6 +56,7 @@ private:
     void updateInputIP(Engine* e);
     void updateInputHostName(Engine* e);
     void updateInputJoinName(Engine* e);
+    void updateStartDedicatedServer(Engine* e);
     void render();
     
     TitleEngineState();
