@@ -22,9 +22,10 @@
 #include "World.hpp"
 #include "Network.hpp"
 #include "NetworkClient.hpp"
-#include "HidePlayerController.hpp"
+#include "HideController.hpp"
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
+#include "EntityRenderController.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -32,7 +33,7 @@
 #include <assert.h>
 
 GameRenderer::GameRenderer() :
-_fontRenderer(256, 0, 0, 16, 16, 16, 256, 256),
+_fontBatcher(256, 0, 0, 16, 16, 16, 256, 256),
 _framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
 _polygonBatcher(2, true),
 _screenRenderer(),
@@ -55,23 +56,23 @@ _textViews{
     TextView(TEXA_CENTER, "", TEXV_HIDDEN)
 }
 {
-    _fontRenderer.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
-    _fontRenderer.configure(_textViews[0], 0.5f, 0.12f, 0.02f);
-    _fontRenderer.configure(_textViews[1], 0.75f, 0.7f, 0.018f);
-    _fontRenderer.configure(_textViews[2], 0.75f, 0.6f, 0.018f);
-    _fontRenderer.configure(_textViews[3], 0.75f, 0.56f, 0.018f);
-    _fontRenderer.configure(_textViews[4], 0.75f, 0.52f, 0.018f);
-    _fontRenderer.configure(_textViews[5], 0.75f, 0.40f, 0.018f);
-    _fontRenderer.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
-    _fontRenderer.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
-    _fontRenderer.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
-    _fontRenderer.configure(_textViews[9], 0.24f, 0.025f, 0.02f);
-    _fontRenderer.configure(_textViews[10], 0.76f, 0.025f, 0.02f);
+    _fontBatcher.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+    _fontBatcher.configure(_textViews[0], 0.5f, 0.12f, 0.02f);
+    _fontBatcher.configure(_textViews[1], 0.75f, 0.7f, 0.018f);
+    _fontBatcher.configure(_textViews[2], 0.75f, 0.6f, 0.018f);
+    _fontBatcher.configure(_textViews[3], 0.75f, 0.56f, 0.018f);
+    _fontBatcher.configure(_textViews[4], 0.75f, 0.52f, 0.018f);
+    _fontBatcher.configure(_textViews[5], 0.75f, 0.40f, 0.018f);
+    _fontBatcher.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
+    _fontBatcher.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
+    _fontBatcher.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
+    _fontBatcher.configure(_textViews[9], 0.24f, 0.025f, 0.02f);
+    _fontBatcher.configure(_textViews[10], 0.76f, 0.025f, 0.02f);
 }
 
 void GameRenderer::createDeviceDependentResources()
 {
-    _fontRenderer.createDeviceDependentResources();
+    _fontBatcher.createDeviceDependentResources();
     
     OGL.loadFramebuffer(_framebuffer);
     
@@ -89,7 +90,7 @@ void GameRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
 
 void GameRenderer::releaseDeviceDependentResources()
 {
-    _fontRenderer.releaseDeviceDependentResources();
+    _fontBatcher.releaseDeviceDependentResources();
     
     OGL.unloadFramebuffer(_framebuffer);
     
@@ -128,9 +129,7 @@ void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
 {
     for (Entity* e : entities)
     {
-        TextureRegion tr = ASSETS.findTextureRegion(e->getTextureMapping(), e->stateTime());
-        
-        _spriteBatcher.addSprite(tr, e->getPosition()._x, e->getPosition()._y, e->width(), e->height(), e->getAngle(), e->isFacingLeft());
+        e->renderController()->addSprite(_spriteBatcher);
     }
 }
 
@@ -157,12 +156,13 @@ void GameRenderer::renderEncounter()
 {
     bool isInEncounter = false;
     World& w = ENGINE_STATE_GAME_CLNT._world;
+    Entity* hide = NULL;
     for (Entity* e : w.getPlayers())
     {
-        if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
+        if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
         {
-            HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
-            isInEncounter = c->isInEncounter();
+            hide = e;
+            isInEncounter = e->controller<HideController>()->isInEncounter();
         }
     }
     
@@ -183,22 +183,12 @@ void GameRenderer::renderEncounter()
     {
         if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti))
         {
-            MonsterController* ec = static_cast<MonsterController*>(e->controller());
-            TextureRegion tr = ASSETS.findTextureRegion(ec->getTextureMappingForEncounter(), 0);
-            _spriteBatcher.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
-            break;
+            e->renderController<MonsterRenderController>()->addSpriteForEncounter(_spriteBatcher);
         }
     }
-    for (Entity* e : w.getPlayers())
-    {
-        if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
-        {
-            HidePlayerController* ec = static_cast<HidePlayerController*>(e->controller());
-            TextureRegion tr = ASSETS.findTextureRegion(ec->getTextureMappingForEncounter(), ec->encounterStateTime());
-            _spriteBatcher.addSprite(tr, CFG_MAIN._playerBattleX, CFG_MAIN._playerBattleY, ec->getWidthForEncounter(), CFG_MAIN._playerBattleHeight, 0);
-            break;
-        }
-    }
+    
+    hide->renderController<HideRenderController>()->addSpriteForEncounter(_spriteBatcher);
+    
     _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("big_sprites"));
 }
 
@@ -217,10 +207,10 @@ void GameRenderer::renderUI()
         _polygonBatcher.begin();
         for (Entity* e : w.getPlayers())
         {
-            PlayerController* c = static_cast<PlayerController*>(e->controller());
+            PlayerController* ec = e->controller<PlayerController>();
             
-            int playerID = c->getPlayerID();
-            _textViews[playerID + 8]._text = StringUtil::format("%s %s", c->getUsername().c_str(), c->getUserAddress().c_str());
+            int playerID = ec->getPlayerID();
+            _textViews[playerID + 8]._text = StringUtil::format("%s %s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
             _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
             
             if (playerID == 1)
@@ -264,10 +254,12 @@ void GameRenderer::renderUI()
         _textViews[0]._visibility = TEXV_VISIBLE;
     }
     
+    _fontBatcher.begin();
     for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
     {
-        _fontRenderer.renderText(_shaderManager.shader("texture"), _textureManager.texture("texture_font"), _textViews[i]);
+        _fontBatcher.addText(_textViews[i]);
     }
+    _fontBatcher.end(_shaderManager.shader("texture"), _textureManager.texture("texture_font"));
 }
 
 void GameRenderer::renderSplitScreen()

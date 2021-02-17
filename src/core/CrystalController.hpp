@@ -13,14 +13,13 @@
 class CrystalController : public EntityController
 {    
     DECL_RTTI;
-    DECL_EntityController_create;
+    DECL_EntityController_create(EntityController);
     
 public:
     CrystalController(Entity* e) : EntityController(e) {}
     virtual ~CrystalController() {}
     
-    virtual void update();
-    virtual void onMessage(uint16_t message, void* data = NULL);
+    virtual void onMessage(uint16_t message, void* data = NULL) override;
     
     void push(int dir);
 };

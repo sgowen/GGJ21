@@ -28,5 +28,7 @@
   "sfxDisabled": "true",
   "musicDisabled": "true",
   "inputLoggingEnabled": "false",
-  "networkLoggingEnabled": "false"
+  "networkLoggingEnabled": "false",
+  "entityManagerFilePath": "assets/json/entities.json",
+  "entityLayoutManagerFilePath": "assets/json/layouts.json"
 }

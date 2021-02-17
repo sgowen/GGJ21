@@ -28,13 +28,13 @@ class PlayerController : public EntityController
     friend class PlayerNetworkController;
     
     DECL_RTTI;
-    DECL_EntityController_create;
+    DECL_EntityController_create(EntityController);
     
 public:
     PlayerController(Entity* e);
     virtual ~PlayerController() {}
     
-    virtual void update();
+    virtual void update() override;
     virtual void processInput(InputState* inputState, bool isLive);
     
     void setUsername(std::string value);
@@ -120,9 +120,9 @@ protected:
 class PlayerNetworkController : public EntityNetworkController
 {
 public:
-    DECL_EntityNetworkController_create;
+    DECL_EntityController_create(EntityNetworkController);
     
-    PlayerNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer) {}
+    PlayerNetworkController(Entity* e) : EntityNetworkController(e) {}
     virtual ~PlayerNetworkController() {}
     
     virtual void read(InputMemoryBitStream& imbs);

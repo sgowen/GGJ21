@@ -3,9 +3,8 @@
     "name": "Monster",
     "controller": "Monster",
     "networkController": "Monster",
-    "textureMappings": {
-      "99": "GENERIC_MONSTER_DOWN"
-    },
+    "physicsController": "Monster",
+    "renderController": "Monster",
     "soundMappings": {
       "0": 18,
       "1": 21
@@ -18,9 +17,7 @@
     "name": "Hide",
     "controller": "Hide",
     "networkController": "Hide",
-    "textureMappings": {
-      "99": "HIDE_DOWN"
-    },
+    "renderController": "Hide",
     "soundMappings": {
       "99": 0
     },
@@ -64,12 +61,8 @@
     "name": "Jackie",
     "controller": "Jackie",
     "networkController": "Jackie",
-    "textureMappings": {
-      "99": "JACKIE_DOWN"
-    },
-    "soundMappings": {
-      "99": 0
-    },
+    "physicsController": "Jackie",
+    "renderController": "Jackie",
     "soundRandomMappings": {
       "1": [
         33,
@@ -92,9 +85,7 @@
   "CRYB": {
     "name": "CRYSTAL_BLUE",
     "controller": "Crystal",
-    "textureMappings": {
-      "0": "CRYSTAL_BLUE"
-    },
+    "textureMapping": "CRYSTAL_BLUE",
     "bodyFlags": 6,
     "width": 4,
     "height": 4
@@ -102,9 +93,7 @@
   "CRYR": {
     "name": "CRYSTAL_RED",
     "controller": "Crystal",
-    "textureMappings": {
-      "0": "CRYSTAL_RED"
-    },
+    "textureMapping": "CRYSTAL_RED",
     "bodyFlags": 6,
     "width": 4,
     "height": 4
@@ -112,9 +101,7 @@
   "CRYG": {
     "name": "CRYSTAL_GREEN",
     "controller": "Crystal",
-    "textureMappings": {
-      "0": "CRYSTAL_GREEN"
-    },
+    "textureMapping": "CRYSTAL_GREEN",
     "bodyFlags": 6,
     "width": 4,
     "height": 4
@@ -122,16 +109,14 @@
   "EXPL": {
     "name": "EXPLOSION",
     "controller": "Explosion",
-    "textureMappings": {
-      "0": "EXPLOSION"
-    },
+    "textureMapping": "EXPLOSION",
     "bodyFlags": 6,
     "width": 8,
     "height": 8
   },
   "OVEN": {
     "name": "OVEN",
-    "controller": "Oven",
+    "physicsController": "Oven",
     "textureMapping": "OVEN",
     "width": 4,
     "height": 4,

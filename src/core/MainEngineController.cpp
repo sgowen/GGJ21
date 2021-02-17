@@ -12,8 +12,8 @@
 #include "InstanceRegistry.hpp"
 #include "TitleEngineState.hpp"
 #include "EntityManager.hpp"
-#include "HidePlayerController.hpp"
-#include "JackiePlayerController.hpp"
+#include "HideController.hpp"
+#include "JackieController.hpp"
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
 #include "OvenController.hpp"
@@ -30,17 +30,18 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     SOCKET_UTIL.setLoggingEnabled(CFG_MAIN._networkLoggingEnabled);
     INPUT_MGR.setLoggingEnabled(CFG_MAIN._inputLoggingEnabled);
     
+    ENTITY_MGR.initWithJSONFile(CFG_MAIN._entityManagerFilePath.c_str());
+    
     std::map<std::string, EntityControllerCreationFunc> config;
-    config.emplace("Hide", HidePlayerController::create);
-    config.emplace("Jackie", JackiePlayerController::create);
+    config.emplace("Hide", HideController::create);
+    config.emplace("Jackie", JackieController::create);
     config.emplace("Monster", MonsterController::create);
     config.emplace("Crystal", CrystalController::create);
-    config.emplace("Oven", OvenController::create);
     config.emplace("Explosion", ExplosionController::create);
     registerControllers(config);
     
     std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
-    configNW.emplace("Hide", HidePlayerNetworkController::create);
+    configNW.emplace("Hide", HideNetworkController::create);
     configNW.emplace("Jackie", PlayerNetworkController::create);
     configNW.emplace("Monster", MonsterNetworkController::create);
     configureForNetwork(configNW);
@@ -48,7 +49,16 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     // TODO, don't like, should be able to set globally
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
     configPhysics.emplace("Entity", TopDownEntityPhysicsController::create);
+    configPhysics.emplace("Jackie", JackiePhysicsController::create);
+    configPhysics.emplace("Monster", MonsterPhysicsController::create);
+    configPhysics.emplace("Oven", OvenPhysicsController::create);
     registerPhysicsControllers(configPhysics);
+    
+    std::map<std::string, EntityRenderControllerCreationFunc> configRender;
+    configRender.emplace("Monster", MonsterRenderController::create);
+    configRender.emplace("Hide", HideRenderController::create);
+    configRender.emplace("Jackie", JackieRenderController::create);
+    registerRenderControllers(configRender);
 }
 
 State<Engine>* MainEngineController::getInitialState()

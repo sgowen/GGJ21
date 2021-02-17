@@ -30,7 +30,7 @@
 #include "Config.hpp"
 #include "Macros.hpp"
 #include "Network.hpp"
-#include "HidePlayerController.hpp"
+#include "HideController.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -39,13 +39,14 @@ void cb_client_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_CLNT.getWorld().addNetworkEntity(e);
     
-    if (e->controller()->getRTTI().isExactly(HidePlayerController::rtti))
+    if (e->controller()->getRTTI().isExactly(HideController::rtti))
     {
-        HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
-        uint32_t key = c->getEntityLayoutKey();
-        EntityLayoutDef& eld = ENTITY_LAYOUT_MGR.findEntityLayoutDef(key);
-        ENTITY_LAYOUT_MGR.loadEntityLayout(eld, INST_REG.get<EntityIDManager>(INSK_EID_CLNT));
-        ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld, false);
+        HideController* ec = e->controller<HideController>();
+        uint32_t key = ec->getEntityLayoutKey();
+        EntityLayoutManager* elm = INST_REG.get<EntityLayoutManager>(INSK_ELM_CLNT);
+        EntityLayoutDef& eld = elm->findEntityLayoutDef(key);
+        elm->loadEntityLayout(eld);
+        ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld);
     }
 }
 
@@ -79,6 +80,8 @@ void cb_client_onPlayerWelcomed(uint8_t playerID)
 
 void GameClientEngineState::enter(Engine* e)
 {
+    INST_REG.get<EntityLayoutManager>(INSK_ELM_CLNT)->initWithJSONFile(CFG_MAIN._entityLayoutManagerFilePath.c_str());
+    
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
     
@@ -142,14 +145,15 @@ void GameClientEngineState::exit(Engine* e)
 {
     releaseDeviceDependentResources();
     
-    _world.clearLayout();
-    _world.clearNetwork();
-    INPUT_GAME.reset();
-    
     if (NW_CLNT != NULL)
     {
         NetworkClient::destroy();
     }
+    
+    INPUT_GAME.reset();
+    
+    _world.clearLayout();
+    _world.clearNetwork();
 }
 
 Entity* GameClientEngineState::getControlledPlayer()
@@ -159,9 +163,9 @@ Entity* GameClientEngineState::getControlledPlayer()
     
     for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
+        PlayerController* ec = e->controller<PlayerController>();
         
-        if (playerID == c->getPlayerID())
+        if (playerID == ec->getPlayerID())
         {
             ret = e;
             break;
@@ -178,9 +182,8 @@ World& GameClientEngineState::getWorld()
 
 void GameClientEngineState::createDeviceDependentResources()
 {
-    ENTITY_MGR.initWithJSONFile("assets/json/entities.json");
-    ENTITY_LAYOUT_MGR.initWithJSONFile("assets/json/layouts.json");
     ASSETS.initWithJSONFile("assets/json/assets_game.json");
+    
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
     GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
@@ -194,9 +197,6 @@ void GameClientEngineState::onWindowSizeChanged(int screenWidth, int screenHeigh
 
 void GameClientEngineState::releaseDeviceDependentResources()
 {
-    ENTITY_MGR.clear();
-    ENTITY_LAYOUT_MGR.clear();
-    ASSETS.clear();
     _renderer.releaseDeviceDependentResources();
     GOW_AUDIO.releaseDeviceDependentResources();
 }
@@ -273,8 +273,8 @@ void GameClientEngineState::updateWorld(const Move& move, bool isLive)
 {
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        c->processInput(move.inputState(), isLive);
+        PlayerController* ec = e->controller<PlayerController>();
+        ec->processInput(move.inputState(), isLive);
     }
     
     _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_CLNT));

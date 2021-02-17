@@ -8,18 +8,17 @@
 
 #pragma once
 
-#include "EntityController.hpp"
+#include "TopDownEntityPhysicsController.hpp"
 
-class OvenController : public EntityController
+class OvenPhysicsController : public TopDownEntityPhysicsController
 {
-    friend class OvenNetworkController;
-    
     DECL_RTTI;
-    DECL_EntityController_create;
+    DECL_EntityController_create(EntityPhysicsController);
     
 public:
-    OvenController(Entity* e) : EntityController(e) {}
-    virtual ~OvenController() {}
+    OvenPhysicsController(Entity* e) : TopDownEntityPhysicsController(e) {}
+    virtual ~OvenPhysicsController() {}
     
-    virtual void onCollision(Entity* e);
+protected:
+    virtual void onCollision(Entity* e) override;
 };

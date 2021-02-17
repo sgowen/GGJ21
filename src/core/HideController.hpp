@@ -1,5 +1,5 @@
 //
-//  HidePlayerController.hpp
+//  HideController.hpp
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/30/21.
@@ -10,26 +10,23 @@
 
 #include "PlayerController.hpp"
 
-class HidePlayerController : public PlayerController
+class HideController : public PlayerController
 {
-    friend class HidePlayerNetworkController;
+    friend class HideNetworkController;
+    friend class HideRenderController;
     
     DECL_RTTI;
-    DECL_EntityController_create;
+    DECL_EntityController_create(EntityController);
     
 public:
-    HidePlayerController(Entity* e);
-    virtual ~HidePlayerController() {}
+    HideController(Entity* e);
+    virtual ~HideController() {}
     
-    virtual void update();
-    virtual void onMessage(uint16_t message, void* data = NULL);
-    virtual std::string getTextureMapping();
-    virtual void processInput(InputState* inputState, bool isLive);
-    virtual bool isInEncounter();
-    virtual uint16_t encounterStateTime();
-
-    std::string getTextureMappingForEncounter();
-    float getWidthForEncounter();
+    virtual void update() override;
+    virtual void onMessage(uint16_t message, void* data = NULL) override;
+    virtual void processInput(InputState* inputState, bool isLive) override;
+    bool isInEncounter();
+    uint16_t encounterStateTime();
     void setEntityLayoutKey(uint32_t value);
     uint32_t getEntityLayoutKey();
     
@@ -98,16 +95,36 @@ protected:
     EntityLayoutInfo _entityLayoutInfoCache;
 };
 
-class HidePlayerNetworkController : public PlayerNetworkController
+class HideNetworkController : public PlayerNetworkController
 {
 public:
-    DECL_EntityNetworkController_create;
+    DECL_EntityController_create(EntityNetworkController);
     
-    HidePlayerNetworkController(Entity* e, bool isServer) : PlayerNetworkController(e, isServer) {}
-    virtual ~HidePlayerNetworkController() {}
+    HideNetworkController(Entity* e) : PlayerNetworkController(e) {}
+    virtual ~HideNetworkController() {}
     
     virtual void read(InputMemoryBitStream& imbs);
     virtual uint8_t write(OutputMemoryBitStream& ombs, uint8_t dirtyState);
     virtual void recallCache();
     virtual uint8_t refreshDirtyState();
+};
+
+#include "EntityRenderController.hpp"
+
+class HideRenderController : public EntityRenderController
+{
+    DECL_RTTI;
+    DECL_EntityController_create(EntityRenderController);
+    
+public:
+    HideRenderController(Entity* e) : EntityRenderController(e) {}
+    virtual ~HideRenderController() {}
+    
+    virtual std::string getTextureMapping() override;
+    
+    void addSpriteForEncounter(SpriteBatcher& sb);
+
+private:
+    std::string getTextureMappingForEncounter();
+    float getWidthForEncounter();
 };

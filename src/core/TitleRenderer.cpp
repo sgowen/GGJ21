@@ -24,7 +24,7 @@
 #include <assert.h>
 
 TitleRenderer::TitleRenderer() :
-_fontRenderer(256, 0, 0, 16, 16, 16, 256, 256),
+_fontBatcher(256, 0, 0, 16, 16, 16, 256, 256),
 _framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
 _screenRenderer(),
 _shaderManager(),
@@ -42,21 +42,21 @@ _textViews{
     TextView(TEXA_RIGHT,   "[ESC] to exit")
 }
 {
-    _fontRenderer.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
-    _fontRenderer.configure(_textViews[0], 0.5f, 0.50f, 0.025f);
-    _fontRenderer.configure(_textViews[1], 0.5f, 0.62f, 0.05f);
-    _fontRenderer.configure(_textViews[2], 0.5f, 0.54f, 0.05f);
-    _fontRenderer.configure(_textViews[3], 0.5f, 0.12f, 0.025f);
-    _fontRenderer.configure(_textViews[4], 0.5f, 0.06f, 0.025f);
-    _fontRenderer.configure(_textViews[5], 0.5f, 0.12f, 0.025f);
-    _fontRenderer.configure(_textViews[6], 0.5f, 0.12f, 0.025f);
-    _fontRenderer.configure(_textViews[7], 0.5f, 0.06f, 0.025f);
-    _fontRenderer.configure(_textViews[8], 0.98f, 0.02f, 0.012f);
+    _fontBatcher.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+    _fontBatcher.configure(_textViews[0], 0.5f, 0.50f, 0.025f);
+    _fontBatcher.configure(_textViews[1], 0.5f, 0.62f, 0.05f);
+    _fontBatcher.configure(_textViews[2], 0.5f, 0.54f, 0.05f);
+    _fontBatcher.configure(_textViews[3], 0.5f, 0.12f, 0.025f);
+    _fontBatcher.configure(_textViews[4], 0.5f, 0.06f, 0.025f);
+    _fontBatcher.configure(_textViews[5], 0.5f, 0.12f, 0.025f);
+    _fontBatcher.configure(_textViews[6], 0.5f, 0.12f, 0.025f);
+    _fontBatcher.configure(_textViews[7], 0.5f, 0.06f, 0.025f);
+    _fontBatcher.configure(_textViews[8], 0.98f, 0.02f, 0.012f);
 }
 
 void TitleRenderer::createDeviceDependentResources()
 {
-    _fontRenderer.createDeviceDependentResources();
+    _fontBatcher.createDeviceDependentResources();
     
     OGL.loadFramebuffer(_framebuffer);
     
@@ -73,7 +73,7 @@ void TitleRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
 
 void TitleRenderer::releaseDeviceDependentResources()
 {
-    _fontRenderer.releaseDeviceDependentResources();
+    _fontBatcher.releaseDeviceDependentResources();
     
     OGL.unloadFramebuffer(_framebuffer);
     
@@ -116,10 +116,12 @@ void TitleRenderer::render()
         _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
     }
     
+    _fontBatcher.begin();
     for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
     {
-        _fontRenderer.renderText(_shaderManager.shader("texture"), _textureManager.texture("texture_font"), _textViews[i]);
+        _fontBatcher.addText(_textViews[i]);
     }
+    _fontBatcher.end(_shaderManager.shader("texture"), _textureManager.texture("texture_font"));
 
     _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
 }

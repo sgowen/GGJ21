@@ -37,7 +37,7 @@ World::~World()
     clearNetwork();
 }
 
-void World::populateFromEntityLayout(EntityLayoutDef& eld, bool isServer)
+void World::populateFromEntityLayout(EntityLayoutDef& eld)
 {
     clearLayout();
     
@@ -45,7 +45,7 @@ void World::populateFromEntityLayout(EntityLayoutDef& eld, bool isServer)
     
     for (auto& eid : _entityLayout._entities)
     {
-        addEntity(ENTITY_MGR.createEntity(eid, isServer));
+        addEntity(ENTITY_MGR.createEntity(eid));
     }
 }
 
@@ -83,35 +83,35 @@ void World::stepPhysics(TimeTracker* tt)
     {
         TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         c->processPhysics(tt);
-        c->processCollisions(tt, _networkEntities);
+        c->processCollisions(_networkEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
         TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
         c->processPhysics(tt);
-        c->processCollisions(tt, _players);
-        c->processCollisions(tt, _networkEntities);
+        c->processCollisions(_players);
+        c->processCollisions(_networkEntities);
     }
     
     for (Entity* e : _players)
     {
         TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
-        c->processCollisions(tt, _staticEntities);
+        c->processCollisions(_staticEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
         TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
-        c->processCollisions(tt, _staticEntities);
+        c->processCollisions(_staticEntities);
     }
     
     // Enforce split screen bounds
     for (Entity* e : _players)
     {
         TopDownEntityPhysicsController* phys = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        uint8_t playerID = c->getPlayerID();
+        PlayerController* ec = e->controller<PlayerController>();
+        uint8_t playerID = ec->getPlayerID();
         if (playerID == 1)
         {
             Rektangle player1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);

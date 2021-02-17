@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "FontRenderer.hpp"
+#include "FontBatcher.hpp"
 #include "Framebuffer.hpp"
 #include "ShaderInput.hpp"
 #include "ScreenRenderer.hpp"
@@ -31,7 +31,7 @@ public:
     void render();
     
 private:
-    FontRenderer _fontRenderer;
+    FontBatcher _fontBatcher;
     Framebuffer _framebuffer;
     mat4 _matrix;
     ScreenRenderer _screenRenderer;

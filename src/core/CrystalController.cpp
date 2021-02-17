@@ -32,13 +32,7 @@
 #include "EntityManager.hpp"
 
 IMPL_RTTI(CrystalController, EntityController)
-IMPL_EntityController_create(CrystalController)
-
-void CrystalController::update()
-{
-    _entity->pose()._velocity.mul(0.86f);
-    sanitizeCloseToZeroVector(_entity->pose()._velocity._x, _entity->pose()._velocity._y, 0.01f);
-}
+IMPL_EntityController_create(CrystalController, EntityController)
 
 void CrystalController::onMessage(uint16_t message, void* data)
 {
@@ -46,11 +40,14 @@ void CrystalController::onMessage(uint16_t message, void* data)
     {
         case MSG_ENCOUNTER:
         {
-            if (_entity->networkController()->isServer())
+            // TODO, client should be able to create entities locally
+            // and have everything line up correctly on the registry side
+            // Only way to do that though... is to sync _nextNetworkEntityID
+            if (_entity->isServer())
             {
                 uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID();
-                EntityInstanceDef eid(networkID, 'EXPL', _entity->getPosition()._x, _entity->getPosition()._y);
-                NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid, true));
+                EntityInstanceDef eid(networkID, 'EXPL', _entity->getPosition()._x, _entity->getPosition()._y, true);
+                NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid));
                 _entity->requestDeletion();
             }
             break;
@@ -67,16 +64,16 @@ void CrystalController::push(int dir)
     switch (dir)
     {
         case PDIR_UP:
-            _entity->pose()._velocity._y = pushSpeed;
+            _entity->getVelocity()._y = pushSpeed;
             break;
         case PDIR_DOWN:
-            _entity->pose()._velocity._y = -pushSpeed;
+            _entity->getVelocity()._y = -pushSpeed;
             break;
         case PDIR_LEFT:
-            _entity->pose()._velocity._x = -pushSpeed;
+            _entity->getVelocity()._x = -pushSpeed;
             break;
         case PDIR_RIGHT:
-            _entity->pose()._velocity._x = pushSpeed;
+            _entity->getVelocity()._x = pushSpeed;
             break;
         default:
             break;

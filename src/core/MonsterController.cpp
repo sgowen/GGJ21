@@ -25,11 +25,12 @@
 #include "MainConfig.hpp"
 #include "Macros.hpp"
 #include "GameServerEngineState.hpp"
-#include "HidePlayerController.hpp"
+#include "GameClientEngineState.hpp"
+#include "HideController.hpp"
 #include "MathUtil.hpp"
 
 IMPL_RTTI(MonsterController, EntityController)
-IMPL_EntityController_create(MonsterController)
+IMPL_EntityController_create(MonsterController, EntityController)
 
 MonsterController::MonsterController(Entity* e) : EntityController(e),
 _stats(),
@@ -40,20 +41,15 @@ _statsCache(_stats)
 
 void MonsterController::update()
 {
-    if (!_entity->networkController()->isServer())
-    {
-        return;
-    }
-    
-    World& w = ENGINE_STATE_GAME_SRVR.getWorld();
+    World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
     
     bool hasTarget = false;
     Vector2 playerPosition;
     std::vector<Entity*>& players = w.getPlayers();
     for (Entity* e : players)
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        uint8_t playerID = c->getPlayerID();
+        PlayerController* ec = e->controller<PlayerController>();
+        uint8_t playerID = ec->getPlayerID();
         if (playerID == 1)
         {
             float distance = e->getPosition().dist(_entity->getPosition());
@@ -90,41 +86,13 @@ void MonsterController::update()
     else
     {
         stateTime = 0;
-        _entity->pose()._velocity *= 0.86f;
-        sanitizeCloseToZeroVector(_entity->pose()._velocity._x, _entity->pose()._velocity._y, 0.01f);
     }
-}
-
-std::string MonsterController::getTextureMapping()
-{
-    switch (_stats._dir)
-    {
-        case MDIR_UP:
-            return "GENERIC_MONSTER_UP";
-        case MDIR_DOWN:
-            return "GENERIC_MONSTER_DOWN";
-        default:
-            assert(false);
-    }
-}
-
-void MonsterController::onCollision(Entity* e)
-{
-    if (e->controller()->getRTTI().isDerivedFrom(HidePlayerController::rtti))
-    {
-        e->message(MSG_ENCOUNTER);
-    }
-}
-
-std::string MonsterController::getTextureMappingForEncounter()
-{
-    return "BIG_WITCH_PRETTY";
 }
 
 #include "InputMemoryBitStream.hpp"
 #include "OutputMemoryBitStream.hpp"
 
-IMPL_EntityNetworkController_create(MonsterNetworkController)
+IMPL_EntityController_create(MonsterNetworkController, EntityNetworkController)
 
 void MonsterNetworkController::read(InputMemoryBitStream& imbs)
 {
@@ -132,7 +100,7 @@ void MonsterNetworkController::read(InputMemoryBitStream& imbs)
     
     EntityNetworkController::read(imbs);
     
-    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
+    MonsterController* c = _entity->controller<MonsterController>();
     
     bool stateBit;
     
@@ -152,7 +120,7 @@ uint8_t MonsterNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dir
 {
     uint8_t ret = EntityNetworkController::write(ombs, dirtyState);
     
-    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
+    MonsterController* c = _entity->controller<MonsterController>();
     
     bool stats = IS_BIT_SET(dirtyState, MonsterController::RSTF_STATS);
     ombs.write(stats);
@@ -171,7 +139,7 @@ void MonsterNetworkController::recallCache()
 {
     EntityNetworkController::recallCache();
     
-    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
+    MonsterController* c = _entity->controller<MonsterController>();
     
     c->_stats = c->_statsCache;
 }
@@ -180,7 +148,7 @@ uint8_t MonsterNetworkController::refreshDirtyState()
 {
     uint8_t ret = EntityNetworkController::refreshDirtyState();
     
-    MonsterController* c = static_cast<MonsterController*>(_entity->controller());
+    MonsterController* c = _entity->controller<MonsterController>();
     
     if (c->_statsCache != c->_stats)
     {
@@ -189,4 +157,47 @@ uint8_t MonsterNetworkController::refreshDirtyState()
     }
     
     return ret;
+}
+
+IMPL_RTTI(MonsterPhysicsController, TopDownEntityPhysicsController)
+IMPL_EntityController_create(MonsterPhysicsController, EntityPhysicsController)
+
+void MonsterPhysicsController::onCollision(Entity* e)
+{
+    if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
+    {
+        e->message(MSG_ENCOUNTER);
+    }
+}
+
+#include "Assets.hpp"
+#include "SpriteBatcher.hpp"
+
+IMPL_RTTI(MonsterRenderController, EntityRenderController)
+IMPL_EntityController_create(MonsterRenderController, EntityRenderController)
+
+std::string MonsterRenderController::getTextureMapping()
+{
+    MonsterController* ec = _entity->controller<MonsterController>();
+    
+    switch (ec->_stats._dir)
+    {
+        case MDIR_UP:
+            return "GENERIC_MONSTER_UP";
+        case MDIR_DOWN:
+            return "GENERIC_MONSTER_DOWN";
+    }
+    
+    return EntityRenderController::getTextureMapping();
+}
+
+void MonsterRenderController::addSpriteForEncounter(SpriteBatcher& sb)
+{
+    TextureRegion tr = ASSETS.findTextureRegion(getTextureMappingForEncounter(), 0);
+    sb.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
+}
+
+std::string MonsterRenderController::getTextureMappingForEncounter()
+{
+    return "BIG_WITCH_PRETTY";
 }

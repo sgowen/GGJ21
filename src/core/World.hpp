@@ -25,7 +25,7 @@ public:
     World();
     ~World();
     
-    void populateFromEntityLayout(EntityLayoutDef& eld, bool isServer);
+    void populateFromEntityLayout(EntityLayoutDef& eld);
     void addNetworkEntity(Entity* e);
     void removeNetworkEntity(Entity* e);
     void stepPhysics(TimeTracker* tt);

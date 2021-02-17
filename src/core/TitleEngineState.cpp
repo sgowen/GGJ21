@@ -71,6 +71,7 @@ void TitleEngineState::exit(Engine* e)
 void TitleEngineState::createDeviceDependentResources()
 {
     ASSETS.initWithJSONFile("assets/json/assets_title.json");
+    
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
     GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
@@ -86,7 +87,6 @@ void TitleEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, in
 
 void TitleEngineState::releaseDeviceDependentResources()
 {
-    ASSETS.clear();
     _renderer.releaseDeviceDependentResources();
     GOW_AUDIO.releaseDeviceDependentResources();
 }

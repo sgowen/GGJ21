@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include "FontRenderer.hpp"
+#include "FontBatcher.hpp"
 #include "Framebuffer.hpp"
 #include "ShaderInput.hpp"
-#include "PolygonBatcher.hpp"
+#include "RektangleBatcher.hpp"
 #include "ScreenRenderer.hpp"
 #include "ShaderManager.hpp"
 #include "SpriteBatcher.hpp"
@@ -34,10 +34,10 @@ public:
     void render();
     
 private:
-    FontRenderer _fontRenderer;
+    FontBatcher _fontBatcher;
     Framebuffer _framebuffer;
     mat4 _matrix;
-    PolygonBatcher _polygonBatcher;
+    RektangleBatcher _polygonBatcher;
     ScreenRenderer _screenRenderer;
     ShaderManager _shaderManager;
     SpriteBatcher _spriteBatcher;

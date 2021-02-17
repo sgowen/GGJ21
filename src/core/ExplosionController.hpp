@@ -13,11 +13,11 @@
 class ExplosionController : public EntityController
 {    
     DECL_RTTI;
-    DECL_EntityController_create;
+    DECL_EntityController_create(EntityController);
     
 public:
     ExplosionController(Entity* e) : EntityController(e) {}
     virtual ~ExplosionController() {}
     
-    virtual void update();
+    virtual void update() override;
 };

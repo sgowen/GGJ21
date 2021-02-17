@@ -56,11 +56,13 @@ public:
     bool _musicDisabled;
     bool _inputLoggingEnabled;
     bool _networkLoggingEnabled;
+    std::string _entityManagerFilePath;
+    std::string _entityLayoutManagerFilePath;
 
     void init()
     {
         Config c;
-        c.initWithJSONFile("assets/json/config.json");
+        c.initWithJSONFile("assets/json/config_main.json");
         
         _framesPerSecond = c.getInt("framesPerSecond");
         _clientPortHost = c.getInt("clientPortHost");
@@ -92,6 +94,8 @@ public:
         _musicDisabled = c.getBool("musicDisabled");
         _inputLoggingEnabled = c.getBool("inputLoggingEnabled");
         _networkLoggingEnabled = c.getBool("networkLoggingEnabled");
+        _entityManagerFilePath = c.getString("entityManagerFilePath");
+        _entityLayoutManagerFilePath = c.getString("entityLayoutManagerFilePath");
     }
     
 private:

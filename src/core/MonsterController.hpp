@@ -19,19 +19,16 @@ enum MonsterDirection
 class MonsterController : public EntityController
 {
     friend class MonsterNetworkController;
+    friend class MonsterRenderController;
     
     DECL_RTTI;
-    DECL_EntityController_create;
+    DECL_EntityController_create(EntityController);
     
 public:
     MonsterController(Entity* e);
     virtual ~MonsterController() {}
     
-    virtual void update();
-    virtual std::string getTextureMapping();
-    virtual void onCollision(Entity* e);
-    
-    std::string getTextureMappingForEncounter();
+    virtual void update() override;
     
 private:
     enum State
@@ -76,14 +73,48 @@ private:
 
 class MonsterNetworkController : public EntityNetworkController
 {
-    DECL_EntityNetworkController_create;
+    DECL_EntityController_create(EntityNetworkController);
     
 public:
-    MonsterNetworkController(Entity* e, bool isServer) : EntityNetworkController(e, isServer) {}
+    MonsterNetworkController(Entity* e) : EntityNetworkController(e) {}
     virtual ~MonsterNetworkController() {}
     
     virtual void read(InputMemoryBitStream& imbs);
     virtual uint8_t write(OutputMemoryBitStream& ombs, uint8_t dirtyState);
     virtual void recallCache();
     virtual uint8_t refreshDirtyState();
+};
+
+#include "TopDownEntityPhysicsController.hpp"
+
+class MonsterPhysicsController : public TopDownEntityPhysicsController
+{
+    DECL_RTTI;
+    DECL_EntityController_create(EntityPhysicsController);
+    
+public:
+    MonsterPhysicsController(Entity* e) : TopDownEntityPhysicsController(e) {}
+    virtual ~MonsterPhysicsController() {}
+    
+protected:
+    virtual void onCollision(Entity* e) override;
+};
+
+#include "EntityRenderController.hpp"
+
+class MonsterRenderController : public EntityRenderController
+{
+    DECL_RTTI;
+    DECL_EntityController_create(EntityRenderController);
+    
+public:
+    MonsterRenderController(Entity* e) : EntityRenderController(e) {}
+    virtual ~MonsterRenderController() {}
+    
+    virtual std::string getTextureMapping() override;
+    
+    void addSpriteForEncounter(SpriteBatcher& sb);
+
+private:
+    std::string getTextureMappingForEncounter();
 };

@@ -27,7 +27,7 @@
 #include "MonsterController.hpp"
 
 IMPL_RTTI(PlayerController, EntityController)
-IMPL_EntityController_create(PlayerController)
+IMPL_EntityController_create(PlayerController, EntityController)
 
 PlayerController::PlayerController(Entity* e) : EntityController(e),
 _playerInfo(),
@@ -61,44 +61,33 @@ void PlayerController::processInput(InputState* inputState, bool isLive)
     uint8_t piss = pis->inputState();
     
     state = STAT_IDLE;
-    const Vector2& vel = _entity->getVelocity();
-    float desiredVel[2] = { 0.0f, 0.0f };
+    Vector2& vel = _entity->getVelocity();
     float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
     float maxSpeedHalved = maxSpeed / 2;
     if (IS_BIT_SET(piss, GISF_MOVING_UP))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_UP;
-        desiredVel[1] = MIN(vel._y + maxSpeedHalved, maxSpeed);
+        vel._y = MIN(vel._y + maxSpeedHalved, maxSpeed);
     }
     if (IS_BIT_SET(piss, GISF_MOVING_LEFT))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_LEFT;
-        desiredVel[0] = MAX(vel._x - maxSpeedHalved, -maxSpeed);
+        vel._x = MAX(vel._x - maxSpeedHalved, -maxSpeed);
     }
     if (IS_BIT_SET(piss, GISF_MOVING_DOWN))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_DOWN;
-        desiredVel[1] = MAX(vel._y - maxSpeedHalved, -maxSpeed);
+        vel._y = MAX(vel._y - maxSpeedHalved, -maxSpeed);
     }
     if (IS_BIT_SET(piss, GISF_MOVING_RIGHT))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_RIGHT;
-        desiredVel[0] = MIN(vel._x + maxSpeedHalved, maxSpeed);
+        vel._x = MIN(vel._x + maxSpeedHalved, maxSpeed);
     }
-    
-    if (state == STAT_IDLE)
-    {
-        desiredVel[0] = vel._x * 0.86f;
-        desiredVel[1] = vel._y * 0.86f;
-    }
-    
-    _entity->pose()._velocity._x = desiredVel[0];
-    _entity->pose()._velocity._y = desiredVel[1];
-    sanitizeCloseToZeroVector(_entity->pose()._velocity._x, _entity->pose()._velocity._y, 0.01f);
     
     // I know... but look at the sprite sheet
     _entity->pose()._isFacingLeft = _stats._dir == PDIR_RIGHT;
@@ -152,7 +141,7 @@ uint16_t PlayerController::getHealth()
 #include "InputMemoryBitStream.hpp"
 #include "OutputMemoryBitStream.hpp"
 
-IMPL_EntityNetworkController_create(PlayerNetworkController)
+IMPL_EntityController_create(PlayerNetworkController, EntityNetworkController)
 
 void PlayerNetworkController::read(InputMemoryBitStream& imbs)
 {
@@ -160,7 +149,7 @@ void PlayerNetworkController::read(InputMemoryBitStream& imbs)
     
     EntityNetworkController::read(imbs);
     
-    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
+    PlayerController* c = _entity->controller<PlayerController>();
     
     bool stateBit;
     
@@ -193,7 +182,7 @@ uint8_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirt
 {
     uint8_t ret = EntityNetworkController::write(ombs, dirtyState);
     
-    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
+    PlayerController* c = _entity->controller<PlayerController>();
     
     bool RSTF_PLAYER_INFO = IS_BIT_SET(dirtyState, PlayerController::RSTF_PLAYER_INFO);
     ombs.write(RSTF_PLAYER_INFO);
@@ -223,7 +212,7 @@ void PlayerNetworkController::recallCache()
 {
     EntityNetworkController::recallCache();
     
-    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
+    PlayerController* c = _entity->controller<PlayerController>();
     
     c->_playerInfo = c->_playerInfoCache;
     c->_stats = c->_statsCache;
@@ -233,7 +222,7 @@ uint8_t PlayerNetworkController::refreshDirtyState()
 {
     uint8_t ret = EntityNetworkController::refreshDirtyState();
     
-    PlayerController* c = static_cast<PlayerController*>(_entity->controller());
+    PlayerController* c = _entity->controller<PlayerController>();
     
     if (c->_playerInfoCache != c->_playerInfo)
     {

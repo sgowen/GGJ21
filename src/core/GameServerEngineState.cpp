@@ -17,7 +17,7 @@
 #include "EntityRegistry.hpp"
 #include "SocketAddress.hpp"
 #include "PlayerController.hpp"
-#include "HidePlayerController.hpp"
+#include "HideController.hpp"
 #include "EntityManager.hpp"
 #include "EntityLayoutManager.hpp"
 #include "InstanceRegistry.hpp"
@@ -32,11 +32,14 @@ void cb_server_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_SRVR.getWorld().addNetworkEntity(e);
     
-    if (e->controller()->getRTTI().isExactly(HidePlayerController::rtti))
+    if (e->controller()->getRTTI().isExactly(HideController::rtti))
     {
-        HidePlayerController* c = static_cast<HidePlayerController*>(e->controller());
-        uint32_t key = c->getEntityLayoutKey();
-        EntityLayoutDef& eld = ENTITY_LAYOUT_MGR.findEntityLayoutDef(key);
+        HideController* ec = e->controller<HideController>();
+        uint32_t key = ec->getEntityLayoutKey();
+        EntityLayoutManager* elm = INST_REG.get<EntityLayoutManager>(INSK_ELM_SRVR);
+        EntityLayoutDef& eld = elm->findEntityLayoutDef(key);
+        elm->loadEntityLayout(eld);
+        
         ENGINE_STATE_GAME_SRVR.loadEntityLayout(eld);
     }
 }
@@ -47,14 +50,14 @@ void cb_server_onEntityDeregistered(Entity* e)
     
     if (e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti))
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        assert(c != NULL);
+        PlayerController* ec = e->controller<PlayerController>();
+        assert(ec != NULL);
         
         std::vector<PlayerDef>& players = ENGINE_STATE_GAME_SRVR.getPlayers();
         for (std::vector<PlayerDef>::iterator i = players.begin(); i != players.end(); ++i)
         {
             PlayerDef& pd = *i;
-            if (pd._playerID == c->getPlayerID())
+            if (pd._playerID == ec->getPlayerID())
             {
                 needsRestart = true;
                 break;
@@ -94,6 +97,8 @@ void cb_server_handleInputStateRelease(InputState* inputState)
 
 void GameServerEngineState::enter(Engine* e)
 {
+    INST_REG.get<EntityLayoutManager>(INSK_ELM_SRVR)->initWithJSONFile(CFG_MAIN._entityLayoutManagerFilePath.c_str());
+    
     NetworkServer::create(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, GAME_ENGINE_SERVER_CBS);
     assert(NW_SRVR != NULL);
     
@@ -101,12 +106,6 @@ void GameServerEngineState::enter(Engine* e)
     {
         e->revertToPreviousState();
         return;
-    }
-    
-    if (!_args.hasValues())
-    {
-        ENTITY_MGR.initWithJSONFile("assets/json/entities.json");
-        ENTITY_LAYOUT_MGR.initWithJSONFile("assets/json/layouts.json");
     }
 }
 
@@ -124,16 +123,10 @@ void GameServerEngineState::execute(Engine* e)
 
 void GameServerEngineState::exit(Engine* e)
 {
-    _world.clearLayout();
-    _world.clearNetwork();
-    
     NetworkServer::destroy();
     
-    if (!_args.hasValues())
-    {
-        ENTITY_MGR.clear();
-        ENTITY_LAYOUT_MGR.clear();
-    }
+    _world.clearLayout();
+    _world.clearNetwork();
 }
 
 void GameServerEngineState::handleNewClient(std::string username, uint8_t playerID)
@@ -194,12 +187,11 @@ void GameServerEngineState::loadEntityLayout(EntityLayoutDef& eld)
 {
     resetWorld();
     
-    ENTITY_LAYOUT_MGR.loadEntityLayout(eld, INST_REG.get<EntityIDManager>(INSK_EID_SRVR));
-    _world.populateFromEntityLayout(eld, true);
+    _world.populateFromEntityLayout(eld);
     
     for (auto& eid : eld._entitiesNetwork)
     {
-        NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid, true));
+        NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid));
     }
 }
 
@@ -248,10 +240,10 @@ void GameServerEngineState::update(Engine* e)
         bool isMoveValid = true;
         for (Entity* e : _world.getPlayers())
         {
-            PlayerController* c = static_cast<PlayerController*>(e->controller());
-            assert(c != NULL);
+            PlayerController* ec = e->controller<PlayerController>();
+            assert(ec != NULL);
 
-            ClientProxy* cp = NW_SRVR->getClientProxy(c->getPlayerID());
+            ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
             assert(cp != NULL);
 
             MoveList& ml = cp->getUnprocessedMoveList();
@@ -280,10 +272,10 @@ void GameServerEngineState::update(Engine* e)
     
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        assert(c != NULL);
+        PlayerController* ec = e->controller<PlayerController>();
+        assert(ec != NULL);
         
-        ClientProxy* cp = NW_SRVR->getClientProxy(c->getPlayerID());
+        ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
         assert(cp != NULL);
         
         MoveList& ml = cp->getUnprocessedMoveList();
@@ -297,17 +289,17 @@ void GameServerEngineState::updateWorld(int moveIndex)
 {
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        assert(c != NULL);
+        PlayerController* ec = e->controller<PlayerController>();
+        assert(ec != NULL);
         
-        ClientProxy* cp = NW_SRVR->getClientProxy(c->getPlayerID());
+        ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
         assert(cp != NULL);
         
         MoveList& ml = cp->getUnprocessedMoveList();
         Move* m = ml.getMoveAtIndex(moveIndex);
         assert(m != NULL);
         
-        c->processInput(m->inputState(), false);
+        ec->processInput(m->inputState(), false);
         ml.markMoveAsProcessed(m);
         cp->setLastMoveTimestampDirty(true);
     }
@@ -352,16 +344,15 @@ void GameServerEngineState::registerPlayer(std::string username, uint8_t playerI
     
     uint32_t key = playerID == 1 ? 'HIDE' : 'JCKE';
     uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextPlayerEntityID();
-    EntityInstanceDef eid(networkID, key, spawnX, spawnY);
-    Entity* e = ENTITY_MGR.createEntity(eid, true);
-    PlayerController* c = static_cast<PlayerController*>(e->controller());
-    c->setUsername(username);
-    c->setUserAddress(cp->getSocketAddress()->toString());
-    c->setPlayerID(playerID);
-    if (c->getRTTI().isExactly(HidePlayerController::rtti))
+    EntityInstanceDef eid(networkID, key, spawnX, spawnY, true);
+    Entity* e = ENTITY_MGR.createEntity(eid);
+    PlayerController* ec = e->controller<PlayerController>();
+    ec->setUsername(username);
+    ec->setUserAddress(cp->getSocketAddress()->toString());
+    ec->setPlayerID(playerID);
+    if (ec->getRTTI().isExactly(HideController::rtti))
     {
-        HidePlayerController* hpc = static_cast<HidePlayerController*>(c);
-        hpc->setEntityLayoutKey('LO01');
+        static_cast<HideController*>(ec)->setEntityLayoutKey('LO01');
     }
     
     NW_SRVR->registerEntity(e);
@@ -381,8 +372,8 @@ void GameServerEngineState::removePlayer(uint8_t playerID)
     
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* c = static_cast<PlayerController*>(e->controller());
-        if (c->getPlayerID() == playerID)
+        PlayerController* ec = e->controller<PlayerController>();
+        if (ec->getPlayerID() == playerID)
         {
             NW_SRVR->deregisterEntity(e);
             break;
