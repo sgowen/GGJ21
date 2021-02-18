@@ -11,7 +11,7 @@
     },
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 6,
@@ -60,7 +60,7 @@
     },
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 6,
@@ -90,7 +90,7 @@
     },
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 6,
@@ -103,7 +103,7 @@
     "textureMapping": "CRYSTAL_BLUE",
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 6,
@@ -116,7 +116,7 @@
     "textureMapping": "CRYSTAL_RED",
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 6,
@@ -129,7 +129,7 @@
     "textureMapping": "CRYSTAL_GREEN",
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 6,
@@ -152,7 +152,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -308,7 +308,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
