@@ -183,7 +183,10 @@ void GameRenderer::renderEncounter()
     {
         if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti))
         {
-            e->renderController<MonsterRenderController>()->addSpriteForEncounter(_spriteBatcher);
+            if (e->controller<MonsterController>()->isInEncounter())
+            {
+                e->renderController<MonsterRenderController>()->addSpriteForEncounter(_spriteBatcher);
+            }
         }
     }
     

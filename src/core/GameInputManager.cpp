@@ -28,8 +28,8 @@ GameInputManagerState GameInputManager::update()
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
     if (controlledPlayer != NULL)
     {
-        float playerX = controlledPlayer == NULL ? 0 : controlledPlayer->getPosition()._x;
-        float playerY = controlledPlayer == NULL ? 0 : controlledPlayer->getPosition()._y;
+        float playerX = controlledPlayer == NULL ? 0 : controlledPlayer->position()._x;
+        float playerY = controlledPlayer == NULL ? 0 : controlledPlayer->position()._y;
         for (CursorEvent* e : INPUT_MGR.getCursorEvents())
         {
             Vector2& v = INPUT_MGR.convert(e);

@@ -61,7 +61,7 @@ void PlayerController::processInput(InputState* inputState, bool isLive)
     uint8_t piss = pis->inputState();
     
     state = STAT_IDLE;
-    Vector2& vel = _entity->getVelocity();
+    Vector2& vel = _entity->velocity();
     float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
     float maxSpeedHalved = maxSpeed / 2;
     if (IS_BIT_SET(piss, GISF_MOVING_UP))
@@ -250,5 +250,5 @@ void PlayerRenderController::addSprite(SpriteBatcher& sb)
     // I know... but look at the sprite sheet
     PlayerController* ec = e.controller<PlayerController>();
     bool flipX = ec->_stats._dir == PDIR_RIGHT;
-    sb.addSprite(tr, e.getPosition()._x, e.getPosition()._y, e.width(), e.height(), e.getAngle(), flipX);
+    sb.addSprite(tr, e.position()._x, e.position()._y, e.width(), e.height(), e.angle(), flipX);
 }

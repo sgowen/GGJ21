@@ -19,6 +19,7 @@ enum MonsterDirection
 class MonsterController : public EntityController
 {
     friend class MonsterNetworkController;
+    friend class MonsterPhysicsController;
     friend class MonsterRenderController;
     
     DECL_RTTI;
@@ -30,6 +31,8 @@ public:
     
     virtual void update() override;
     
+    bool isInEncounter();
+    
 private:
     enum State
     {
@@ -39,7 +42,8 @@ private:
     
     enum ReadStateFlag
     {
-        RSTF_STATS = 1 << 2
+        RSTF_STATS =     1 << 2,
+        RSTF_ENCOUNTER = 1 << 3
     };
     
     struct Stats
@@ -67,6 +71,41 @@ private:
     };
     Stats _stats;
     Stats _statsCache;
+    
+    enum EncounterState
+    {
+        ESTA_IDLE = 0,
+        ESTA_SWING = 1
+    };
+    
+    struct Encounter
+    {
+        bool _isInCounter;
+        uint8_t _state;
+        uint16_t _stateTime;
+        
+        Encounter()
+        {
+            _isInCounter = false;
+            _state = ESTA_IDLE;
+            _stateTime = 0;
+        }
+        
+        friend bool operator==(Encounter& a, Encounter& b)
+        {
+            return
+            a._isInCounter == b._isInCounter &&
+            a._state == b._state &&
+            a._stateTime == b._stateTime;
+        }
+        
+        friend bool operator!=(Encounter& a, Encounter& b)
+        {
+            return !(a == b);
+        }
+    };
+    Encounter _encounter;
+    Encounter _encounterCache;
 };
 
 #include "EntityNetworkController.hpp"

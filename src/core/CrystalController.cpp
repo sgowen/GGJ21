@@ -30,6 +30,7 @@
 #include "EntityIDManager.hpp"
 #include "Network.hpp"
 #include "EntityManager.hpp"
+#include "TopDownPhysicsController.hpp"
 
 IMPL_RTTI(CrystalController, EntityController)
 IMPL_EntityController_create(CrystalController, EntityController)
@@ -45,8 +46,9 @@ void CrystalController::onMessage(uint16_t message, void* data)
             // Only way to do that though... is to sync _nextNetworkEntityID
             if (_entity->isServer())
             {
+                _entity->physicsController<TopDownPhysicsController>()->updatePoseFromBody();
                 uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID();
-                EntityInstanceDef eid(networkID, 'EXPL', _entity->getPosition()._x, _entity->getPosition()._y, true);
+                EntityInstanceDef eid(networkID, 'EXPL', _entity->position()._x, _entity->position()._y, true);
                 NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid));
                 _entity->requestDeletion();
             }
@@ -64,16 +66,16 @@ void CrystalController::push(int dir)
     switch (dir)
     {
         case PDIR_UP:
-            _entity->getVelocity()._y = pushSpeed;
+            _entity->velocity()._y = pushSpeed;
             break;
         case PDIR_DOWN:
-            _entity->getVelocity()._y = -pushSpeed;
+            _entity->velocity()._y = -pushSpeed;
             break;
         case PDIR_LEFT:
-            _entity->getVelocity()._x = -pushSpeed;
+            _entity->velocity()._x = -pushSpeed;
             break;
         case PDIR_RIGHT:
-            _entity->getVelocity()._x = pushSpeed;
+            _entity->velocity()._x = pushSpeed;
             break;
         default:
             break;

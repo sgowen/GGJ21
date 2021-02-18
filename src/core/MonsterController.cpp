@@ -34,41 +34,48 @@ IMPL_EntityController_create(MonsterController, EntityController)
 
 MonsterController::MonsterController(Entity* e) : EntityController(e),
 _stats(),
-_statsCache(_stats)
+_statsCache(_stats),
+_encounter(),
+_encounterCache(_encounter)
 {
     // Empty
 }
 
 void MonsterController::update()
 {
-    World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
-    
     bool hasTarget = false;
     Vector2 playerPosition;
-    std::vector<Entity*>& players = w.getPlayers();
-    for (Entity* e : players)
+    uint8_t& state = _entity->state()._state;
+    uint16_t& stateTime = _entity->state()._stateTime;
+    state = STAT_IDLE;
+    
+    if (_encounter._isInCounter)
     {
-        PlayerController* ec = e->controller<PlayerController>();
-        uint8_t playerID = ec->getPlayerID();
-        if (playerID == 1)
+        ++_encounter._stateTime;
+    }
+    else
+    {
+        World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
+        std::vector<Entity*>& players = w.getPlayers();
+        for (Entity* e : players)
         {
-            float distance = e->getPosition().dist(_entity->getPosition());
-            if (distance < CFG_MAIN._monsterLineOfSight)
+            PlayerController* ec = e->controller<PlayerController>();
+            uint8_t playerID = ec->getPlayerID();
+            if (playerID == 1)
             {
-                hasTarget = true;
-                playerPosition.set(e->getPosition()._x, e->getPosition()._y);
+                float distance = e->position().dist(_entity->position());
+                if (distance < CFG_MAIN._monsterLineOfSight)
+                {
+                    hasTarget = true;
+                    playerPosition.set(e->position()._x, e->position()._y);
+                }
             }
         }
     }
     
-    uint8_t& state = _entity->state()._state;
-    uint16_t& stateTime = _entity->state()._stateTime;
-    
-    state = STAT_IDLE;
-    
     if (hasTarget)
     {
-        float angle = playerPosition.sub(_entity->getPosition()._x, _entity->getPosition()._y).angle();
+        float angle = playerPosition.sub(_entity->position()._x, _entity->position()._y).angle();
         float radians = DEGREES_TO_RADIANS(angle);
         _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN._monsterMaxTopDownSpeed, sinf(radians) * CFG_MAIN._monsterMaxTopDownSpeed);
         
@@ -89,6 +96,11 @@ void MonsterController::update()
     }
 }
 
+bool MonsterController::isInEncounter()
+{
+    return _encounter._isInCounter;
+}
+
 #include "InputMemoryBitStream.hpp"
 #include "OutputMemoryBitStream.hpp"
 
@@ -100,17 +112,27 @@ void MonsterNetworkController::read(InputMemoryBitStream& imbs)
     
     EntityNetworkController::read(imbs);
     
-    MonsterController* c = _entity->controller<MonsterController>();
+    MonsterController* ec = _entity->controller<MonsterController>();
     
     bool stateBit;
     
     imbs.read(stateBit);
     if (stateBit)
     {
-        imbs.read(c->_stats._health);
-        imbs.read(c->_stats._dir);
+        imbs.read(ec->_stats._health);
+        imbs.read(ec->_stats._dir);
         
-        c->_statsCache = c->_stats;
+        ec->_statsCache = ec->_stats;
+    }
+    
+    imbs.read(stateBit);
+    if (stateBit)
+    {
+        imbs.read(ec->_encounter._isInCounter);
+        imbs.read(ec->_encounter._state);
+        imbs.read(ec->_encounter._stateTime);
+        
+        ec->_encounterCache = ec->_encounter;
     }
     
     SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
@@ -120,16 +142,27 @@ uint8_t MonsterNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dir
 {
     uint8_t ret = EntityNetworkController::write(ombs, dirtyState);
     
-    MonsterController* c = _entity->controller<MonsterController>();
+    MonsterController* ec = _entity->controller<MonsterController>();
     
     bool stats = IS_BIT_SET(dirtyState, MonsterController::RSTF_STATS);
     ombs.write(stats);
     if (stats)
     {
-        ombs.write(c->_stats._health);
-        ombs.write(c->_stats._dir);
+        ombs.write(ec->_stats._health);
+        ombs.write(ec->_stats._dir);
         
         ret |= MonsterController::RSTF_STATS;
+    }
+    
+    bool RSTF_ENCOUNTER = IS_BIT_SET(dirtyState, MonsterController::RSTF_ENCOUNTER);
+    ombs.write(RSTF_ENCOUNTER);
+    if (RSTF_ENCOUNTER)
+    {
+        ombs.write(ec->_encounter._isInCounter);
+        ombs.write(ec->_encounter._state);
+        ombs.write(ec->_encounter._stateTime);
+        
+        ret |= MonsterController::RSTF_ENCOUNTER;
     }
     
     return ret;
@@ -142,6 +175,7 @@ void MonsterNetworkController::recallCache()
     MonsterController* c = _entity->controller<MonsterController>();
     
     c->_stats = c->_statsCache;
+    c->_encounter = c->_encounterCache;
 }
 
 uint8_t MonsterNetworkController::refreshDirtyState()
@@ -156,6 +190,12 @@ uint8_t MonsterNetworkController::refreshDirtyState()
         ret |= MonsterController::RSTF_STATS;
     }
     
+    if (c->_encounterCache != c->_encounter)
+    {
+        c->_encounterCache = c->_encounter;
+        ret |= MonsterController::RSTF_ENCOUNTER;
+    }
+    
     return ret;
 }
 
@@ -167,6 +207,13 @@ void MonsterPhysicsController::onCollision(Entity* e)
     if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
     {
         e->message(MSG_ENCOUNTER);
+        
+        MonsterController* ec = _entity->controller<MonsterController>();
+        ec->_encounter._isInCounter = true;
+        ec->_encounter._stateTime = 0;
+        _entity->state()._state = MonsterController::STAT_IDLE;
+        _entity->pose()._velocity._x = 0;
+        _entity->pose()._velocity._y = 0;
     }
 }
 

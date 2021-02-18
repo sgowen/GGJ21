@@ -53,6 +53,9 @@ void World::addNetworkEntity(Entity* e)
 {
     assert(!isLayer(e) && !isStatic(e));
     
+    TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
+    epc->initPhysics();
+    
     if (isDynamic(e))
     {
         _networkEntities.push_back(e);
@@ -94,46 +97,46 @@ void World::stepPhysics(TimeTracker* tt)
 {
     for (Entity* e : _players)
     {
-        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
-        c->processPhysics(tt);
-        c->processCollisions(_networkEntities);
+        TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
+        epc->processPhysics(tt);
     }
     
     for (Entity* e : _networkEntities)
     {
-        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
-        c->processPhysics(tt);
-        c->processCollisions(_players);
-        c->processCollisions(_networkEntities);
+        TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
+        epc->processPhysics(tt);
     }
     
     for (Entity* e : _players)
     {
-        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
-        c->processCollisions(_staticEntities);
+        TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
+        epc->processCollisions(_networkEntities);
+        epc->processCollisions(_staticEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
-        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
-        c->processCollisions(_staticEntities);
+        TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
+        epc->processCollisions(_networkEntities);
+        epc->processCollisions(_staticEntities);
     }
     
-    // Enforce split screen bounds
+    // TODO, should be same call to both players, since there won't be a shared matrix
+    // so we just need to make sure each player can't leave the bounds of the world he is in
     for (Entity* e : _players)
     {
-        TopDownPhysicsController* phys = static_cast<TopDownPhysicsController*>(e->physicsController());
+        TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
         PlayerController* ec = e->controller<PlayerController>();
         uint8_t playerID = ec->getPlayerID();
         if (playerID == 1)
         {
             Rektangle player1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            phys->enforceBounds(player1ScreenBounds);
+            epc->enforceBounds(player1ScreenBounds);
         }
         else if (playerID == 2)
         {
             Rektangle player2ScreenBounds(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            phys->enforceBounds(player2ScreenBounds);
+            epc->enforceBounds(player2ScreenBounds);
         }
     }
 }
@@ -240,6 +243,9 @@ bool World::isPlayer(Entity* e)
 void World::addEntity(Entity *e)
 {
     assert(!isDynamic(e) && !isPlayer(e));
+    
+    TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
+    epc->initPhysics();
     
     if (isLayer(e))
     {
