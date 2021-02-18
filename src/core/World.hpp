@@ -28,7 +28,9 @@ public:
     void populateFromEntityLayout(EntityLayoutDef& eld);
     void addNetworkEntity(Entity* e);
     void removeNetworkEntity(Entity* e);
+    void recallCache();
     void stepPhysics(TimeTracker* tt);
+    std::vector<Entity*> update();
     void clearLayout();
     void clearNetwork();
     

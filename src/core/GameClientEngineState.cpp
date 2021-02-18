@@ -215,49 +215,34 @@ void GameClientEngineState::update(Engine* e)
 {
     INST_REG.get<TimeTracker>(INSK_TIME_CLNT)->onFrame();
     
-    NW_CLNT->processIncomingPackets();
-    if (NW_CLNT->state() == NWCS_DISCONNECTED)
+    if (INPUT_GAME.update() == GIMS_EXIT ||
+        NW_CLNT->processIncomingPackets() == NWCS_DISCONNECTED)
     {
         e->revertToPreviousState();
         return;
     }
     
-    MoveList& ml = INPUT_GAME.moveList();
-    
-    if (NW_CLNT->hasReceivedNewState())
+    if (getControlledPlayer() != NULL)
     {
-        for (Entity* e : _world.getPlayers())
+        MoveList& ml = INPUT_GAME.moveList();
+        if (NW_CLNT->hasReceivedNewState())
         {
-            e->networkController()->recallCache();
+            _world.recallCache();
+            
+            if (CFG_MAIN._networkLoggingEnabled)
+            {
+                LOG("Client side prediction reprocessing %d moves", ml.getMoveCount());
+            }
+            
+            for (const Move& m : ml)
+            {
+                updateWorld(m, false);
+            }
         }
-        
-        for (Entity* e : _world.getNetworkEntities())
+        if (ml.getMoveCount() < NW_CLNT_MAX_NUM_MOVES)
         {
-            e->networkController()->recallCache();
+            updateWorld(INPUT_GAME.sampleInputAsNewMove(), true);
         }
-        
-        if (CFG_MAIN._networkLoggingEnabled)
-        {
-            LOG("Client side prediction reprocessing %d moves", ml.getMoveCount());
-        }
-        
-        for (const Move& m : ml)
-        {
-            updateWorld(m, false);
-        }
-    }
-    
-    GameInputManagerState gims = INPUT_GAME.update();
-    if (gims == GIMS_EXIT)
-    {
-        e->revertToPreviousState();
-        return;
-    }
-    
-    if (getControlledPlayer() != NULL &&
-        ml.getMoveCount() < NW_CLNT_MAX_NUM_MOVES)
-    {
-        updateWorld(INPUT_GAME.sampleInputAsNewMove(), true);
     }
     
     NW_CLNT->sendOutgoingPackets();
@@ -274,20 +259,12 @@ void GameClientEngineState::updateWorld(const Move& move, bool isLive)
     for (Entity* e : _world.getPlayers())
     {
         PlayerController* ec = e->controller<PlayerController>();
+        assert(ec != NULL);
         ec->processInput(move.inputState(), isLive);
     }
     
     _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_CLNT));
-    
-    for (Entity* e : _world.getPlayers())
-    {
-        e->update();
-    }
-    
-    for (Entity* e : _world.getNetworkEntities())
-    {
-        e->update();
-    }
+    _world.update();
     
     NW_CLNT->onMoveProcessed();
 }

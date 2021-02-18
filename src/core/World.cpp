@@ -77,6 +77,19 @@ void World::removeNetworkEntity(Entity* e)
     }
 }
 
+void World::recallCache()
+{
+    for (Entity* e : _players)
+    {
+        e->networkController()->recallCache();
+    }
+    
+    for (Entity* e : _networkEntities)
+    {
+        e->networkController()->recallCache();
+    }
+}
+
 void World::stepPhysics(TimeTracker* tt)
 {
     for (Entity* e : _players)
@@ -123,6 +136,30 @@ void World::stepPhysics(TimeTracker* tt)
             phys->enforceBounds(player2ScreenBounds);
         }
     }
+}
+
+std::vector<Entity*> World::update()
+{
+    std::vector<Entity*> toDelete;
+    for (Entity* e : _players)
+    {
+        e->update();
+        if (e->isRequestingDeletion())
+        {
+            toDelete.push_back(e);
+        }
+    }
+    
+    for (Entity* e : _networkEntities)
+    {
+        e->update();
+        if (e->isRequestingDeletion())
+        {
+            toDelete.push_back(e);
+        }
+    }
+    
+    return toDelete;
 }
 
 void World::clearLayout()

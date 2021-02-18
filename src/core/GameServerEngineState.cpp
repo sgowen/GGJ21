@@ -224,8 +224,8 @@ void GameServerEngineState::update(Engine* e)
     {
         updateWorld(i);
     }
-    
     removeProcessedMoves();
+    NW_SRVR->onMovesProcessed(moveCount);
     
     NW_SRVR->sendOutgoingPackets();
 }
@@ -250,42 +250,19 @@ void GameServerEngineState::updateWorld(int moveIndex)
     }
     
     _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
-    
-    Entity* toDeletePlayer = NULL;
-    for (Entity* e : _world.getPlayers())
+    std::vector<Entity*> toDelete = _world.update();
+    for (Entity* e : toDelete)
     {
-        e->update();
-        if (e->isRequestingDeletion())
+        bool exitImmediately = e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti);
+        NW_SRVR->deregisterEntity(e);
+        if (exitImmediately)
         {
-            toDeletePlayer = e;
+            return;
         }
-    }
-    if (toDeletePlayer != NULL)
-    {
-        NW_SRVR->deregisterEntity(toDeletePlayer);
-    }
-    else
-    {
-        std::vector<Entity*> toDeleteNetwork;
-        for (Entity* e : _world.getNetworkEntities())
-        {
-            e->update();
-            if (e->isRequestingDeletion())
-            {
-                toDeleteNetwork.push_back(e);
-            }
-        }
-        for (Entity* e : toDeleteNetwork)
-        {
-            NW_SRVR->deregisterEntity(e);
-        }
-        
-        handleDirtyStates(_world.getNetworkEntities());
     }
     
     handleDirtyStates(_world.getPlayers());
-    
-    NW_SRVR->onMoveProcessed();
+    handleDirtyStates(_world.getNetworkEntities());
 }
 
 void GameServerEngineState::handleDirtyStates(std::vector<Entity*>& entities)
@@ -309,7 +286,7 @@ void GameServerEngineState::removeProcessedMoves()
         
         ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
         assert(cp != NULL);
-        
+
         MoveList& ml = cp->getUnprocessedMoveList();
         ml.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
     }
