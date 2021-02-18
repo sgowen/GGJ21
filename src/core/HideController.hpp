@@ -109,15 +109,13 @@ public:
     virtual uint8_t refreshDirtyState();
 };
 
-#include "EntityRenderController.hpp"
-
-class HideRenderController : public EntityRenderController
+class HideRenderController : public PlayerRenderController
 {
     DECL_RTTI;
     DECL_EntityController_create(EntityRenderController);
     
 public:
-    HideRenderController(Entity* e) : EntityRenderController(e) {}
+    HideRenderController(Entity* e) : PlayerRenderController(e) {}
     virtual ~HideRenderController() {}
     
     virtual std::string getTextureMapping() override;

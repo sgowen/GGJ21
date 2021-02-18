@@ -18,7 +18,7 @@
 #include "CrystalController.hpp"
 #include "OvenController.hpp"
 #include "MainConfig.hpp"
-#include "TopDownEntityPhysicsController.hpp"
+#include "TopDownPhysicsController.hpp"
 #include "ExplosionController.hpp"
 #include "InputManager.hpp"
 #include "SocketUtil.hpp"
@@ -48,7 +48,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     
     // TODO, don't like, should be able to set globally
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
-    configPhysics.emplace("Entity", TopDownEntityPhysicsController::create);
+    configPhysics.emplace("Entity", TopDownPhysicsController::create);
     configPhysics.emplace("Jackie", JackiePhysicsController::create);
     configPhysics.emplace("Monster", MonsterPhysicsController::create);
     configPhysics.emplace("Oven", OvenPhysicsController::create);

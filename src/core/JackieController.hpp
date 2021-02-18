@@ -25,30 +25,28 @@ public:
     virtual void processInput(InputState* inputState, bool isLive) override;
 };
 
-#include "TopDownEntityPhysicsController.hpp"
+#include "TopDownPhysicsController.hpp"
 
-class JackiePhysicsController : public TopDownEntityPhysicsController
+class JackiePhysicsController : public TopDownPhysicsController
 {
     DECL_RTTI;
     DECL_EntityController_create(EntityPhysicsController);
     
 public:
-    JackiePhysicsController(Entity* e) : TopDownEntityPhysicsController(e) {}
+    JackiePhysicsController(Entity* e) : TopDownPhysicsController(e) {}
     virtual ~JackiePhysicsController() {}
     
 protected:
     virtual void onCollision(Entity* e) override;
 };
 
-#include "EntityRenderController.hpp"
-
-class JackieRenderController : public EntityRenderController
+class JackieRenderController : public PlayerRenderController
 {
     DECL_RTTI;
     DECL_EntityController_create(EntityRenderController);
     
 public:
-    JackieRenderController(Entity* e) : EntityRenderController(e) {}
+    JackieRenderController(Entity* e) : PlayerRenderController(e) {}
     virtual ~JackieRenderController() {}
     
     virtual std::string getTextureMapping() override;

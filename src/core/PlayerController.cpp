@@ -89,9 +89,6 @@ void PlayerController::processInput(InputState* inputState, bool isLive)
         vel._x = MIN(vel._x + maxSpeedHalved, maxSpeed);
     }
     
-    // I know... but look at the sprite sheet
-    _entity->pose()._isFacingLeft = _stats._dir == PDIR_RIGHT;
-    
     if (isLive)
     {
         SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
@@ -237,4 +234,21 @@ uint8_t PlayerNetworkController::refreshDirtyState()
     }
     
     return ret;
+}
+
+#include "Assets.hpp"
+#include "SpriteBatcher.hpp"
+
+IMPL_RTTI(PlayerRenderController, EntityRenderController)
+IMPL_EntityController_create(PlayerRenderController, EntityRenderController)
+
+void PlayerRenderController::addSprite(SpriteBatcher& sb)
+{
+    Entity& e = *_entity;
+    TextureRegion tr = ASSETS.findTextureRegion(getTextureMapping(), e.stateTime());
+    
+    // I know... but look at the sprite sheet
+    PlayerController* ec = e.controller<PlayerController>();
+    bool flipX = ec->_stats._dir == PDIR_RIGHT;
+    sb.addSprite(tr, e.getPosition()._x, e.getPosition()._y, e.width(), e.height(), e.getAngle(), flipX);
 }

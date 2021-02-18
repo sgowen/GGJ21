@@ -12,7 +12,7 @@
 #include "CrystalController.hpp"
 #include "MainConfig.hpp"
 
-IMPL_RTTI(OvenPhysicsController, TopDownEntityPhysicsController)
+IMPL_RTTI(OvenPhysicsController, TopDownPhysicsController)
 IMPL_EntityController_create(OvenPhysicsController, EntityPhysicsController)
 
 void OvenPhysicsController::onCollision(Entity* e)

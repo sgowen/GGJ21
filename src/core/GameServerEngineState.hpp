@@ -21,19 +21,6 @@ class Engine;
 class ClientProxy;
 class Entity;
 
-struct PlayerDef
-{
-    std::string _username;
-    uint8_t _playerID;
-    
-    PlayerDef(std::string username, uint8_t playerID) :
-    _username(username),
-    _playerID(playerID)
-    {
-        // Empty
-    }
-};
-
 #define ENGINE_STATE_GAME_SRVR GameServerEngineState::getInstance()
 
 class GameServerEngineState : public State<Engine>
@@ -56,21 +43,19 @@ public:
     void resetWorld();
     void loadEntityLayout(EntityLayoutDef& eld);
     void restart();
-    std::vector<PlayerDef>& getPlayers();
     World& getWorld();
     
 private:
     World _world;
     Pool<GameInputState> _poolGameInputState;
     bool _isRestarting;
-    std::vector<PlayerDef> _players;
     
     void update(Engine* e);
     void updateWorld(int moveIndex);
-    void registerPlayer(std::string username, uint8_t playerID);
-    void removePlayer(uint8_t playerID);
     void handleDirtyStates(std::vector<Entity*>& entities);
     void removeProcessedMoves();
+    void addPlayer(std::string username, uint8_t playerID);
+    void removePlayer(uint8_t playerID);
     
     GameServerEngineState();
     ~GameServerEngineState() {}

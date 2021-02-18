@@ -53,16 +53,7 @@ void cb_server_onEntityDeregistered(Entity* e)
         PlayerController* ec = e->controller<PlayerController>();
         assert(ec != NULL);
         
-        std::vector<PlayerDef>& players = ENGINE_STATE_GAME_SRVR.getPlayers();
-        for (std::vector<PlayerDef>::iterator i = players.begin(); i != players.end(); ++i)
-        {
-            PlayerDef& pd = *i;
-            if (pd._playerID == ec->getPlayerID())
-            {
-                needsRestart = true;
-                break;
-            }
-        }
+        needsRestart = NW_SRVR->getClientProxy(ec->getPlayerID()) != NULL;
     }
     
     ENGINE_STATE_GAME_SRVR.getWorld().removeNetworkEntity(e);
@@ -131,9 +122,7 @@ void GameServerEngineState::exit(Engine* e)
 
 void GameServerEngineState::handleNewClient(std::string username, uint8_t playerID)
 {
-    _players.emplace_back(username, playerID);
-    
-    registerPlayer(username, playerID);
+    addPlayer(username, playerID);
 }
 
 void GameServerEngineState::handleLostClient(ClientProxy& cp, uint8_t localPlayerIndex)
@@ -211,15 +200,13 @@ void GameServerEngineState::restart()
     }
     _isRestarting = false;
     
-    for (int i = 0; i < _players.size(); ++i)
+    const std::map<int, ClientProxy*>& playerIDToClientMap = NW_SRVR->playerIDToClientMap();
+    for (auto& pair : playerIDToClientMap)
     {
-        registerPlayer(_players[i]._username, _players[i]._playerID);
+        ClientProxy* cp = pair.second;
+        assert(cp != NULL);
+        addPlayer(cp->getUsername(), pair.first);
     }
-}
-
-std::vector<PlayerDef>& GameServerEngineState::getPlayers()
-{
-    return _players;
 }
 
 World& GameServerEngineState::getWorld()
@@ -233,54 +220,12 @@ void GameServerEngineState::update(Engine* e)
     
     NW_SRVR->processIncomingPackets();
     int moveCount = NW_SRVR->getMoveCount();
-    uint32_t expectedMoveIndex = NW_SRVR->getNumMovesProcessed();
-    int validMoveCount = 0;
     for (int i = 0; i < moveCount; ++i)
-    {
-        bool isMoveValid = true;
-        for (Entity* e : _world.getPlayers())
-        {
-            PlayerController* ec = e->controller<PlayerController>();
-            assert(ec != NULL);
-
-            ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
-            assert(cp != NULL);
-
-            MoveList& ml = cp->getUnprocessedMoveList();
-            Move* m = ml.getMoveAtIndex(i);
-            assert(m != NULL);
-
-            if (expectedMoveIndex != m->getIndex())
-            {
-                isMoveValid = false;
-                break;
-            }
-        }
-
-        if (isMoveValid)
-        {
-            ++validMoveCount;
-            ++expectedMoveIndex;
-        }
-    }
-    
-    assert(moveCount == validMoveCount);
-    for (int i = 0; i < validMoveCount; ++i)
     {
         updateWorld(i);
     }
     
-    for (Entity* e : _world.getPlayers())
-    {
-        PlayerController* ec = e->controller<PlayerController>();
-        assert(ec != NULL);
-        
-        ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
-        assert(cp != NULL);
-        
-        MoveList& ml = cp->getUnprocessedMoveList();
-        ml.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
-    }
+    removeProcessedMoves();
     
     NW_SRVR->sendOutgoingPackets();
 }
@@ -306,35 +251,71 @@ void GameServerEngineState::updateWorld(int moveIndex)
     
     _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
     
-    std::vector<Entity*> toDelete;
+    Entity* toDeletePlayer = NULL;
     for (Entity* e : _world.getPlayers())
     {
         e->update();
         if (e->isRequestingDeletion())
         {
-            toDelete.push_back(e);
+            toDeletePlayer = e;
         }
     }
-    for (Entity* e : _world.getNetworkEntities())
+    if (toDeletePlayer != NULL)
     {
-        e->update();
-        if (e->isRequestingDeletion())
+        NW_SRVR->deregisterEntity(toDeletePlayer);
+    }
+    else
+    {
+        std::vector<Entity*> toDeleteNetwork;
+        for (Entity* e : _world.getNetworkEntities())
         {
-            toDelete.push_back(e);
+            e->update();
+            if (e->isRequestingDeletion())
+            {
+                toDeleteNetwork.push_back(e);
+            }
         }
-    }
-    for (Entity* e : toDelete)
-    {
-        NW_SRVR->deregisterEntity(e);
+        for (Entity* e : toDeleteNetwork)
+        {
+            NW_SRVR->deregisterEntity(e);
+        }
+        
+        handleDirtyStates(_world.getNetworkEntities());
     }
     
     handleDirtyStates(_world.getPlayers());
-    handleDirtyStates(_world.getNetworkEntities());
     
     NW_SRVR->onMoveProcessed();
 }
 
-void GameServerEngineState::registerPlayer(std::string username, uint8_t playerID)
+void GameServerEngineState::handleDirtyStates(std::vector<Entity*>& entities)
+{
+    for (Entity* e : entities)
+    {
+        uint8_t dirtyState = e->networkController()->refreshDirtyState();
+        if (dirtyState > 0)
+        {
+            NW_SRVR->setStateDirty(e->getID(), dirtyState);
+        }
+    }
+}
+
+void GameServerEngineState::removeProcessedMoves()
+{
+    for (Entity* e : _world.getPlayers())
+    {
+        PlayerController* ec = e->controller<PlayerController>();
+        assert(ec != NULL);
+        
+        ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
+        assert(cp != NULL);
+        
+        MoveList& ml = cp->getUnprocessedMoveList();
+        ml.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
+    }
+}
+
+void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
 {
     ClientProxy* cp = NW_SRVR->getClientProxy(playerID);
     assert(cp != NULL);
@@ -360,16 +341,6 @@ void GameServerEngineState::registerPlayer(std::string username, uint8_t playerI
 
 void GameServerEngineState::removePlayer(uint8_t playerID)
 {
-    for (std::vector<PlayerDef>::iterator i = _players.begin(); i != _players.end(); ++i)
-    {
-        PlayerDef& pd = *i;
-        if (pd._playerID == playerID)
-        {
-            _players.erase(i);
-            break;
-        }
-    }
-    
     for (Entity* e : _world.getPlayers())
     {
         PlayerController* ec = e->controller<PlayerController>();
@@ -377,18 +348,6 @@ void GameServerEngineState::removePlayer(uint8_t playerID)
         {
             NW_SRVR->deregisterEntity(e);
             break;
-        }
-    }
-}
-
-void GameServerEngineState::handleDirtyStates(std::vector<Entity*>& entities)
-{
-    for (Entity* e : entities)
-    {
-        uint8_t dirtyState = e->networkController()->refreshDirtyState();
-        if (dirtyState > 0)
-        {
-            NW_SRVR->setStateDirty(e->getID(), dirtyState);
         }
     }
 }

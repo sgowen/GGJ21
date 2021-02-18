@@ -26,6 +26,7 @@ enum PlayerDirection
 class PlayerController : public EntityController
 {
     friend class PlayerNetworkController;
+    friend class PlayerRenderController;
     
     DECL_RTTI;
     DECL_EntityController_create(EntityController);
@@ -129,4 +130,18 @@ public:
     virtual uint8_t write(OutputMemoryBitStream& ombs, uint8_t dirtyState);
     virtual void recallCache();
     virtual uint8_t refreshDirtyState();
+};
+
+#include "EntityRenderController.hpp"
+
+class PlayerRenderController : public EntityRenderController
+{
+    DECL_RTTI;
+    DECL_EntityController_create(EntityRenderController);
+    
+public:
+    PlayerRenderController(Entity* e) : EntityRenderController(e) {}
+    virtual ~PlayerRenderController() {}
+    
+    virtual void addSprite(SpriteBatcher& sb) override;
 };

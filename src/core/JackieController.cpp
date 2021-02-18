@@ -52,7 +52,7 @@ void JackieController::processInput(InputState* inputState, bool isLive)
     }
 }
 
-IMPL_RTTI(JackiePhysicsController, TopDownEntityPhysicsController)
+IMPL_RTTI(JackiePhysicsController, TopDownPhysicsController)
 IMPL_EntityController_create(JackiePhysicsController, EntityPhysicsController)
 
 void JackiePhysicsController::onCollision(Entity* e)

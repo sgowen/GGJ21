@@ -23,7 +23,7 @@
 #include "Macros.hpp"
 #include "PlayerController.hpp"
 #include "OverlapTester.hpp"
-#include "TopDownEntityPhysicsController.hpp"
+#include "TopDownPhysicsController.hpp"
 
 World::World() :
 _entityLayout()
@@ -81,14 +81,14 @@ void World::stepPhysics(TimeTracker* tt)
 {
     for (Entity* e : _players)
     {
-        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
+        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
         c->processPhysics(tt);
         c->processCollisions(_networkEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
-        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
+        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
         c->processPhysics(tt);
         c->processCollisions(_players);
         c->processCollisions(_networkEntities);
@@ -96,20 +96,20 @@ void World::stepPhysics(TimeTracker* tt)
     
     for (Entity* e : _players)
     {
-        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
+        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
         c->processCollisions(_staticEntities);
     }
     
     for (Entity* e : _networkEntities)
     {
-        TopDownEntityPhysicsController* c = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
+        TopDownPhysicsController* c = static_cast<TopDownPhysicsController*>(e->physicsController());
         c->processCollisions(_staticEntities);
     }
     
     // Enforce split screen bounds
     for (Entity* e : _players)
     {
-        TopDownEntityPhysicsController* phys = static_cast<TopDownEntityPhysicsController*>(e->physicsController());
+        TopDownPhysicsController* phys = static_cast<TopDownPhysicsController*>(e->physicsController());
         PlayerController* ec = e->controller<PlayerController>();
         uint8_t playerID = ec->getPlayerID();
         if (playerID == 1)

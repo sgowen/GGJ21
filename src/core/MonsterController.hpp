@@ -85,15 +85,15 @@ public:
     virtual uint8_t refreshDirtyState();
 };
 
-#include "TopDownEntityPhysicsController.hpp"
+#include "TopDownPhysicsController.hpp"
 
-class MonsterPhysicsController : public TopDownEntityPhysicsController
+class MonsterPhysicsController : public TopDownPhysicsController
 {
     DECL_RTTI;
     DECL_EntityController_create(EntityPhysicsController);
     
 public:
-    MonsterPhysicsController(Entity* e) : TopDownEntityPhysicsController(e) {}
+    MonsterPhysicsController(Entity* e) : TopDownPhysicsController(e) {}
     virtual ~MonsterPhysicsController() {}
     
 protected:

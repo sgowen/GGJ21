@@ -159,7 +159,7 @@ uint8_t MonsterNetworkController::refreshDirtyState()
     return ret;
 }
 
-IMPL_RTTI(MonsterPhysicsController, TopDownEntityPhysicsController)
+IMPL_RTTI(MonsterPhysicsController, TopDownPhysicsController)
 IMPL_EntityController_create(MonsterPhysicsController, EntityPhysicsController)
 
 void MonsterPhysicsController::onCollision(Entity* e)

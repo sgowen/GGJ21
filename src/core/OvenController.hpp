@@ -8,15 +8,15 @@
 
 #pragma once
 
-#include "TopDownEntityPhysicsController.hpp"
+#include "TopDownPhysicsController.hpp"
 
-class OvenPhysicsController : public TopDownEntityPhysicsController
+class OvenPhysicsController : public TopDownPhysicsController
 {
     DECL_RTTI;
     DECL_EntityController_create(EntityPhysicsController);
     
 public:
-    OvenPhysicsController(Entity* e) : TopDownEntityPhysicsController(e) {}
+    OvenPhysicsController(Entity* e) : TopDownPhysicsController(e) {}
     virtual ~OvenPhysicsController() {}
     
 protected:
