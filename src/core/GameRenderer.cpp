@@ -66,8 +66,8 @@ _textViews{
     _fontBatcher.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
     _fontBatcher.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
     _fontBatcher.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
-    _fontBatcher.configure(_textViews[9], 0.24f, 0.025f, 0.02f);
-    _fontBatcher.configure(_textViews[10], 0.76f, 0.025f, 0.02f);
+    _fontBatcher.configure(_textViews[9], 0.24f, 0.025f, 0.012f);
+    _fontBatcher.configure(_textViews[10], 0.76f, 0.025f, 0.012f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -211,7 +211,7 @@ void GameRenderer::renderUI()
             PlayerController* ec = e->controller<PlayerController>();
             
             uint8_t playerID = ec->getPlayerID();
-            _textViews[playerID + 8]._text = StringUtil::format("%s %s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
+            _textViews[playerID + 8]._text = StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
             _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
             
             if (playerID == 1)
