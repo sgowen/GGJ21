@@ -48,7 +48,7 @@ void cb_server_onEntityDeregistered(Entity* e)
 {
     bool needsRestart = false;
     
-    if (e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti))
+    if (e->isPlayer())
     {
         PlayerController* ec = e->controller<PlayerController>();
         assert(ec != NULL);
@@ -253,7 +253,7 @@ void GameServerEngineState::updateWorld(int moveIndex)
     std::vector<Entity*> toDelete = _world.update();
     for (Entity* e : toDelete)
     {
-        bool exitImmediately = e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti);
+        bool exitImmediately = e->isPlayer();
         NW_SRVR->deregisterEntity(e);
         if (exitImmediately)
         {
