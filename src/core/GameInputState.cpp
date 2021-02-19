@@ -125,7 +125,7 @@ bool GameInputState::isRequestingToAddLocalPlayer() const
     return false;
 }
 
-GameInputState::PlayerInputState& GameInputState::getPlayerInputState(int index)
+GameInputState::PlayerInputState& GameInputState::getPlayerInputState(uint8_t index)
 {
     return _playerInputStates[index];
 }

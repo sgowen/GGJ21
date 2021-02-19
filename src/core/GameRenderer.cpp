@@ -210,7 +210,7 @@ void GameRenderer::renderUI()
         {
             PlayerController* ec = e->controller<PlayerController>();
             
-            int playerID = ec->getPlayerID();
+            uint8_t playerID = ec->getPlayerID();
             _textViews[playerID + 8]._text = StringUtil::format("%s %s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
             _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
             
@@ -244,7 +244,7 @@ void GameRenderer::renderUI()
                                          CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
             _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
             
-            for (int i = 1; i <= 8; ++i)
+            for (uint8_t i = 1; i <= 8; ++i)
             {
                 _textViews[i]._visibility = TEXV_VISIBLE;
             }
@@ -256,7 +256,7 @@ void GameRenderer::renderUI()
     }
     
     _fontBatcher.begin();
-    for (int i = 0; i < NUM_TEXT_VIEWS; ++i)
+    for (uint8_t i = 0; i < NUM_TEXT_VIEWS; ++i)
     {
         _fontBatcher.addText(_textViews[i]);
     }

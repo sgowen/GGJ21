@@ -51,32 +51,32 @@ void World::populateFromEntityLayout(EntityLayoutDef& eld)
 
 void World::addNetworkEntity(Entity* e)
 {
-    assert(!isLayer(e) && !isStatic(e));
+    assert(!e->isLayer() && !e->isStatic());
     
     TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
     epc->initPhysics();
     
-    if (isDynamic(e))
-    {
-        _networkEntities.push_back(e);
-    }
-    else if (isPlayer(e))
+    if (e->isPlayer())
     {
         _players.push_back(e);
+    }
+    else if (e->isDynamic())
+    {
+        _networkEntities.push_back(e);
     }
 }
 
 void World::removeNetworkEntity(Entity* e)
 {
-    assert(!isLayer(e) && !isStatic(e));
+    assert(!e->isLayer() && !e->isStatic());
     
-    if (isDynamic(e))
-    {
-        removeEntity(e, _networkEntities);
-    }
-    else if (isPlayer(e))
+    if (e->isPlayer())
     {
         removeEntity(e, _players);
+    }
+    else if (e->isDynamic())
+    {
+        removeEntity(e, _networkEntities);
     }
 }
 
@@ -184,19 +184,9 @@ bool World::isEntityLayoutLoaded()
     return _entityLayout._key > 0;
 }
 
-uint32_t World::getEntityLayoutKey()
+EntityLayoutDef& World::getEntityLayout()
 {
-    return _entityLayout._key;
-}
-
-std::string& World::getEntityLayoutName()
-{
-    return _entityLayout._name;
-}
-
-std::string& World::getEntityLayoutFilePath()
-{
-    return _entityLayout._filePath;
+    return _entityLayout;
 }
 
 std::vector<Entity*>& World::getLayers()
@@ -219,39 +209,18 @@ std::vector<Entity*>& World::getPlayers()
     return _players;
 }
 
-bool World::isLayer(Entity* e)
-{
-    return e->entityDef()._bodyFlags == 0;
-}
-
-bool World::isStatic(Entity* e)
-{
-    return IS_BIT_SET(e->entityDef()._bodyFlags, BODF_STATIC);
-}
-
-bool World::isDynamic(Entity* e)
-{
-    return IS_BIT_SET(e->entityDef()._bodyFlags, BODF_DYNAMIC) &&
-    !e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti);
-}
-
-bool World::isPlayer(Entity* e)
-{
-    return e->controller()->getRTTI().isDerivedFrom(PlayerController::rtti);
-}
-
 void World::addEntity(Entity *e)
 {
-    assert(!isDynamic(e) && !isPlayer(e));
+    assert(!e->isDynamic());
     
     TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
     epc->initPhysics();
     
-    if (isLayer(e))
+    if (e->isLayer())
     {
         _layers.push_back(e);
     }
-    else if (isStatic(e))
+    else if (e->isStatic())
     {
         _staticEntities.push_back(e);
     }
@@ -259,13 +228,13 @@ void World::addEntity(Entity *e)
 
 void World::removeEntity(Entity* e)
 {
-    assert(!isDynamic(e) && !isPlayer(e));
+    assert(!e->isDynamic());
     
-    if (isLayer(e))
+    if (e->isLayer())
     {
         removeEntity(e, _layers);
     }
-    else if (isStatic(e))
+    else if (e->isStatic())
     {
         removeEntity(e, _staticEntities);
     }

@@ -35,9 +35,7 @@ public:
     void clearNetwork();
     
     bool isEntityLayoutLoaded();
-    uint32_t getEntityLayoutKey();
-    std::string& getEntityLayoutName();
-    std::string& getEntityLayoutFilePath();
+    EntityLayoutDef& getEntityLayout();
     std::vector<Entity*>& getLayers();
     std::vector<Entity*>& getStaticEntities();
     std::vector<Entity*>& getNetworkEntities();
@@ -50,10 +48,6 @@ private:
     std::vector<Entity*> _networkEntities;
     std::vector<Entity*> _players;
     
-    bool isLayer(Entity* e);
-    bool isStatic(Entity* e);
-    bool isDynamic(Entity* e);
-    bool isPlayer(Entity* e);
     void addEntity(Entity* e);
     void removeEntity(Entity* e);
     void removeEntity(Entity* e, std::vector<Entity*>& entities);

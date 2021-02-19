@@ -60,7 +60,7 @@ public:
     void activateNextPlayer(uint8_t playerID);
     PlayerInputState* getPlayerInputStateForID(uint8_t playerID);
     bool isRequestingToAddLocalPlayer() const;
-    PlayerInputState& getPlayerInputState(int index);
+    PlayerInputState& getPlayerInputState(uint8_t index);
     
 private:
     std::vector<PlayerInputState> _playerInputStates;
