@@ -23,7 +23,7 @@ public:
     virtual ~HideController() {}
     
     virtual void update() override;
-    virtual void onMessage(uint16_t message, void* data = NULL) override;
+    virtual void onMessage(uint16_t message) override;
     virtual void processInput(InputState* inputState, bool isLive) override;
     
     bool isInEncounter();

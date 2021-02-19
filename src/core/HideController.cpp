@@ -67,7 +67,7 @@ void HideController::update()
     }
 }
 
-void HideController::onMessage(uint16_t message, void* data)
+void HideController::onMessage(uint16_t message)
 {
     switch (message)
     {

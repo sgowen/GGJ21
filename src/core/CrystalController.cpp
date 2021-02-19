@@ -35,7 +35,7 @@
 IMPL_RTTI(CrystalController, EntityController)
 IMPL_EntityController_create(CrystalController, EntityController)
 
-void CrystalController::onMessage(uint16_t message, void* data)
+void CrystalController::onMessage(uint16_t message)
 {
     switch (message)
     {

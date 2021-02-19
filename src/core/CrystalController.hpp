@@ -19,7 +19,7 @@ public:
     CrystalController(Entity* e) : EntityController(e) {}
     virtual ~CrystalController() {}
     
-    virtual void onMessage(uint16_t message, void* data = NULL) override;
+    virtual void onMessage(uint16_t message) override;
     
     void push(int dir);
 };

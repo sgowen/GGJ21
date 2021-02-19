@@ -19,7 +19,6 @@
 IMPL_RTTI(JackieController, PlayerController)
 IMPL_EntityController_create(JackieController, EntityController)
 
-bool ugh = false;
 void JackieController::processInput(InputState* inputState, bool isLive)
 {
     PlayerController::processInput(inputState, isLive);
@@ -32,23 +31,13 @@ void JackieController::processInput(InputState* inputState, bool isLive)
     }
     
     uint8_t piss = pis->inputState();
-    if (IS_BIT_SET(piss, GISF_CONFIRM) && !ugh)
+    if (IS_BIT_SET(piss, GISF_CONFIRM))
     {
-        if (isLive)
-        {
-            ugh = true;
-            LOG("play sound 1");
-            GOW_AUDIO.playSound(_entity->renderController()->getSoundMapping(1));
-        }
+        // TODO
     }
-    else if (IS_BIT_SET(piss, GISF_CANCEL) && ugh)
+    else if (IS_BIT_SET(piss, GISF_CANCEL))
     {
-        if (isLive)
-        {
-            ugh = false;
-            LOG("play sound 2");
-            GOW_AUDIO.playSound(_entity->renderController()->getSoundMapping(1));
-        }
+        // TODO
     }
 }
 
