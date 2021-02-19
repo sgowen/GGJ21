@@ -62,31 +62,29 @@ void PlayerController::processInput(InputState* inputState, bool isLive)
     
     state = STAT_IDLE;
     Vector2& vel = _entity->velocity();
-    float maxSpeed = CFG_MAIN._playerMaxTopDownSpeed;
-    float maxSpeedHalved = maxSpeed / 2;
     if (IS_BIT_SET(piss, GISF_MOVING_UP))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_UP;
-        vel._y = MIN(vel._y + maxSpeedHalved, maxSpeed);
+        vel._y = CFG_MAIN._playerMaxTopDownSpeed;
     }
     if (IS_BIT_SET(piss, GISF_MOVING_LEFT))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_LEFT;
-        vel._x = MAX(vel._x - maxSpeedHalved, -maxSpeed);
+        vel._x = -  CFG_MAIN._playerMaxTopDownSpeed;
     }
     if (IS_BIT_SET(piss, GISF_MOVING_DOWN))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_DOWN;
-        vel._y = MAX(vel._y - maxSpeedHalved, -maxSpeed);
+        vel._y = -CFG_MAIN._playerMaxTopDownSpeed;
     }
     if (IS_BIT_SET(piss, GISF_MOVING_RIGHT))
     {
         state = STAT_MOVING;
         _stats._dir = PDIR_RIGHT;
-        vel._x = MIN(vel._x + maxSpeedHalved, maxSpeed);
+        vel._x = CFG_MAIN._playerMaxTopDownSpeed;
     }
     
     if (isLive)
