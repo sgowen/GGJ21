@@ -47,9 +47,8 @@ void CrystalController::onMessage(uint16_t message, void* data)
             if (_entity->isServer())
             {
                 _entity->physicsController<TopDownPhysicsController>()->updatePoseFromBody();
-                uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID();
-                EntityInstanceDef eid(networkID, 'EXPL', _entity->position()._x, _entity->position()._y, true);
-                NW_SRVR->registerEntity(ENTITY_MGR.createEntity(eid));
+                NW_SRVR->registerEntity(ENTITY_MGR.createEntity(EntityInstanceDef(INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID(), 'EXPL', _entity->position()._x, _entity->position()._y, true)));
+                NW_SRVR->registerEntity(ENTITY_MGR.createEntity(EntityInstanceDef(INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID(), 'MON1', rand() % 24 + 6, rand() % 32 + 12, true)));
                 _entity->requestDeletion();
             }
             break;

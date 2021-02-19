@@ -181,12 +181,10 @@ void GameRenderer::renderEncounter()
     _spriteBatcher.begin();
     for (Entity* e : w.getNetworkEntities())
     {
-        if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti))
+        if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
+            e->controller<MonsterController>()->isInEncounter())
         {
-            if (e->controller<MonsterController>()->isInEncounter())
-            {
-                e->renderController<MonsterRenderController>()->addSpriteForEncounter(_spriteBatcher);
-            }
+            e->renderController<MonsterRenderController>()->addSpriteForEncounter(_spriteBatcher);
         }
     }
     

@@ -50,7 +50,8 @@ void HideController::update()
             World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
             for (Entity* e : w.getNetworkEntities())
             {
-                if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti))
+                if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
+                    e->controller<MonsterController>()->isInEncounter())
                 {
                     e->requestDeletion();
                     _encounter._isInCounter = false;
