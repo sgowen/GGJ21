@@ -211,11 +211,11 @@ void GameRenderer::renderUI()
             PlayerController* ec = e->controller<PlayerController>();
             
             uint8_t playerID = ec->getPlayerID();
-            _textViews[playerID + 8]._text = StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
             _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
             
             if (playerID == 1)
             {
+                _textViews[playerID + 8]._text = StringUtil::format("%s", ec->getUsername().c_str());
                 _polygonBatcher.addRektangle(0,
                                              0,
                                              CFG_MAIN._splitScreenBarX,
@@ -223,6 +223,7 @@ void GameRenderer::renderUI()
             }
             else if (playerID == 2)
             {
+                _textViews[playerID + 8]._text = StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
                 _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
                                              0,
                                              CFG_MAIN._camWidth,
