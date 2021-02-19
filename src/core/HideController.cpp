@@ -277,27 +277,29 @@ void HideRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 std::string HideRenderController::getTextureMappingForEncounter()
 {
     HideController* ec = _entity->controller<HideController>();
+    assert(ec->_encounter._state <= HideController::ESTA_SWING);
+    
     switch (ec->_encounter._state)
     {
         case HideController::ESTA_IDLE:
             return "BIG_HIDE_IDLE";
         case HideController::ESTA_SWING:
-            return ec->_encounter._stateTime >= 35 ? "BIG_HIDE_SWING_3" : ec->_encounter._stateTime >= 14 ? "BIG_HIDE_SWING_2" : "BIG_HIDE_SWING_1";
         default:
-            assert(false);
+            return ec->_encounter._stateTime >= 35 ? "BIG_HIDE_SWING_3" : ec->_encounter._stateTime >= 14 ? "BIG_HIDE_SWING_2" : "BIG_HIDE_SWING_1";
     }
 }
 
 float HideRenderController::getWidthForEncounter()
 {
     HideController* ec = _entity->controller<HideController>();
+    assert(ec->_encounter._state <= HideController::ESTA_SWING);
+    
     switch (ec->_encounter._state)
     {
         case HideController::ESTA_IDLE:
             return CFG_MAIN._playerBattleWidth;
         case HideController::ESTA_SWING:
-            return ec->_encounter._stateTime >= 35 ? CFG_MAIN._playerBattleWidth : ec->_encounter._stateTime >= 14 ? (CFG_MAIN._playerBattleWidth + 4) : CFG_MAIN._playerBattleWidth;
         default:
-            assert(false);
+            return ec->_encounter._stateTime >= 35 ? CFG_MAIN._playerBattleWidth : ec->_encounter._stateTime >= 14 ? (CFG_MAIN._playerBattleWidth + 4) : CFG_MAIN._playerBattleWidth;
     }
 }

@@ -202,6 +202,7 @@
     <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WAVFileReader.cpp" />
     <ClCompile Include="..\..\..\deps\GowEngine\src\*.cpp" />
     <ClCompile Include="..\..\..\deps\GowEngine\src\windows\*.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\src\box2d\*.cpp" />
     <ClCompile Include="..\..\..\deps\GowEngine\src\glfw\*.cpp" />
     <ClCompile Include="..\..\core\*.cpp" />
     <ClCompile Include="main.cpp" />
@@ -209,6 +210,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\deps\GowEngine\src\*.hpp" />
     <ClInclude Include="..\..\..\deps\GowEngine\src\windows\*.hpp" />
+    <ClInclude Include="..\..\..\deps\GowEngine\src\box2d\*.hpp" />
     <ClInclude Include="..\..\..\deps\GowEngine\src\glfw\*.hpp" />
     <ClInclude Include="..\..\core\*.hpp" />
   </ItemGroup>
