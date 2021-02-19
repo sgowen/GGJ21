@@ -16,6 +16,7 @@
     ],
     "bodyFlags": 6,
     "width": 4,
+    "height": 4
   },
   "HIDE": {
     "name": "Hide",
@@ -155,6 +156,25 @@
       }
     ],
     "bodyFlags": 5
+  },
+  "STRS": {
+    "name": "Stairs",
+    "textureMapping": "STAIRS",
+    "width": 4,
+    "height": 4,
+    "bodyFlags": 5
+  },
+  "BARR": {
+    "name": "Barrier",
+    "textureMapping": "BARRIER",
+    "width": 4,
+    "height": 4,
+    "fixtures": [
+      {
+        "flags": 1
+      }
+    ],
+    "bodyFlags": 6
   },
   "BT02": {
     "name": "BG_BASEMENT_TILE_2",

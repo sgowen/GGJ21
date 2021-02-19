@@ -120,25 +120,6 @@ void World::stepPhysics(TimeTracker* tt)
         epc->processCollisions(_networkEntities);
         epc->processCollisions(_staticEntities);
     }
-    
-    // TODO, should be same call to both players, since there won't be a shared matrix
-    // so we just need to make sure each player can't leave the bounds of the world he is in
-    for (Entity* e : _players)
-    {
-        TopDownPhysicsController* epc = e->physicsController<TopDownPhysicsController>();
-        PlayerController* ec = e->controller<PlayerController>();
-        uint8_t playerID = ec->getPlayerID();
-        if (playerID == 1)
-        {
-            Rektangle player1ScreenBounds(0, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            epc->enforceBounds(player1ScreenBounds);
-        }
-        else if (playerID == 2)
-        {
-            Rektangle player2ScreenBounds(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth, 0, CFG_MAIN._splitScreenBarX, CFG_MAIN._camHeight);
-            epc->enforceBounds(player2ScreenBounds);
-        }
-    }
 }
 
 std::vector<Entity*> World::update()

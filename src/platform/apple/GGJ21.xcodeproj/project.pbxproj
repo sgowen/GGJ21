@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0BC1B625E050A600276CEC /* data in Resources */ = {isa = PBXBuildFile; fileRef = BB0BC1B525E050A600276CEC /* data */; };
+		BB0BC1B725E050A600276CEC /* data in Resources */ = {isa = PBXBuildFile; fileRef = BB0BC1B525E050A600276CEC /* data */; };
 		BB16D1FF25B7623700C340C1 /* LinuxAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16D1FB25B75F5100C340C1 /* LinuxAssetHandler.cpp */; };
 		BB16D20225B7623C00C340C1 /* LinuxAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16D1FB25B75F5100C340C1 /* LinuxAssetHandler.cpp */; };
 		BB21814C25C5282E004398D5 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21814A25C5282D004398D5 /* World.cpp */; };
@@ -84,8 +86,6 @@
 		BB8BCD3325B6849A005F57B8 /* NSAppleAssetHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */; };
 		BB9E471725CB0C5D0031FE3A /* EngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E471625CB0C5D0031FE3A /* EngineController.cpp */; };
 		BB9E471825CB0C5D0031FE3A /* EngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E471625CB0C5D0031FE3A /* EngineController.cpp */; };
-		BB9E472625CB469E0031FE3A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E472525CB469E0031FE3A /* assets */; };
-		BB9E472725CB469E0031FE3A /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB9E472525CB469E0031FE3A /* assets */; };
 		BB9E473225CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
 		BB9E473325CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
 		BB9E475225CE6AAD0031FE3A /* TopDownPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E475125CE6AAD0031FE3A /* TopDownPhysicsController.cpp */; };
@@ -355,6 +355,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB0BC1B525E050A600276CEC /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		BB16D1F825B75F5100C340C1 /* WindowsAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WindowsAssetHandler.cpp; sourceTree = "<group>"; };
 		BB16D1F925B75F5100C340C1 /* WindowsAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WindowsAssetHandler.hpp; sourceTree = "<group>"; };
 		BB16D1FB25B75F5100C340C1 /* LinuxAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LinuxAssetHandler.cpp; sourceTree = "<group>"; };
@@ -502,7 +503,6 @@
 		BB8BCD0925B68446005F57B8 /* NSEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSEngine.mm; sourceTree = "<group>"; };
 		BB9C779A25CA2C610021ADD2 /* ClipboardUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ClipboardUtil.hpp; sourceTree = "<group>"; };
 		BB9E471625CB0C5D0031FE3A /* EngineController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineController.cpp; sourceTree = "<group>"; };
-		BB9E472525CB469E0031FE3A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
 		BB9E473025CCB75F0031FE3A /* EntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityPhysicsController.hpp; sourceTree = "<group>"; };
 		BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityPhysicsController.cpp; sourceTree = "<group>"; };
 		BB9E475025CE6AAD0031FE3A /* TopDownPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TopDownPhysicsController.hpp; sourceTree = "<group>"; };
@@ -1061,6 +1061,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB0BC0F025E0509700276CEC /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				BB0BC1B525E050A600276CEC /* data */,
+			);
+			name = assets;
+			path = ../../../assets;
+			sourceTree = "<group>";
+		};
 		BB16D1F725B75F5100C340C1 /* windows */ = {
 			isa = PBXGroup;
 			children = (
@@ -1095,7 +1104,7 @@
 			isa = PBXGroup;
 			children = (
 				BBBA4FCE25BA405000C8207D /* android */,
-				BB9E472525CB469E0031FE3A /* assets */,
+				BB0BC0F025E0509700276CEC /* assets */,
 				BB7B090825B651F20021E545 /* core */,
 				BB7B047925B646B90021E545 /* deps */,
 				BB7B08D025B64CF20021E545 /* Frameworks */,
@@ -2372,8 +2381,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0BC1B625E050A600276CEC /* data in Resources */,
 				BB7B046525B644E10021E545 /* Assets.xcassets in Resources */,
-				BB9E472625CB469E0031FE3A /* assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2381,8 +2390,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB9E472725CB469E0031FE3A /* assets in Resources */,
 				BB8BCCF625B682E9005F57B8 /* LaunchScreen.storyboard in Resources */,
+				BB0BC1B725E050A600276CEC /* data in Resources */,
 				BB8BCCF325B682E9005F57B8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

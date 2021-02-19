@@ -28,11 +28,25 @@ GameInputManagerState GameInputManager::update()
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
     if (controlledPlayer != NULL)
     {
+        uint8_t playerID = controlledPlayer->controller<PlayerController>()->getPlayerID();
         float playerX = controlledPlayer == NULL ? 0 : controlledPlayer->position()._x;
         float playerY = controlledPlayer == NULL ? 0 : controlledPlayer->position()._y;
         for (CursorEvent* e : INPUT_MGR.getCursorEvents())
         {
             Vector2& v = INPUT_MGR.convert(e);
+            if (playerID == 1 && v._x > (CFG_MAIN._camWidth / 2))
+            {
+                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
+                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
+                continue;
+            }
+            else if (playerID == 2 && v._x < (CFG_MAIN._camWidth / 2))
+            {
+                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
+                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
+                continue;
+            }
+            
             SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v._y > playerY + 4);
             SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v._x < playerX - 4);
             SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v._y < playerY - 4);

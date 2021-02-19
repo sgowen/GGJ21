@@ -1,0 +1,1218 @@
+{
+  "music": {
+    "filePath": "data/audio/music/music_game.wav"
+  },
+  "sounds": [
+    {
+      "soundID": 1,
+      "filePath": "data/audio/treant_lines/treant1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 2,
+      "filePath": "data/audio/treant_lines/treant2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 3,
+      "filePath": "data/audio/treant_lines/treant3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 4,
+      "filePath": "data/audio/treant_lines/treant4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 5,
+      "filePath": "data/audio/treant_lines/treant5.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 6,
+      "filePath": "data/audio/treant_lines/treant6.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 7,
+      "filePath": "data/audio/sfx/treant_hit.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 8,
+      "filePath": "data/audio/sfx/treant_ingrain.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 10,
+      "filePath": "data/audio/leafman_lines/leafman1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 11,
+      "filePath": "data/audio/leafman_lines/leafman2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 12,
+      "filePath": "data/audio/leafman_lines/leafman3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 13,
+      "filePath": "data/audio/leafman_lines/leafman4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 14,
+      "filePath": "data/audio/leafman_lines/leafman5.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 15,
+      "filePath": "data/audio/leafman_lines/leafman6.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 16,
+      "filePath": "data/audio/sfx/leafman_attack.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 18,
+      "filePath": "data/audio/witch_lines/hagwitch1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 19,
+      "filePath": "data/audio/witch_lines/hagwitch2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 20,
+      "filePath": "data/audio/witch_lines/hagwitch3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 21,
+      "filePath": "data/audio/witch_lines/hotwitch1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 22,
+      "filePath": "data/audio/witch_lines/hotwitch2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 23,
+      "filePath": "data/audio/witch_lines/hotwitch3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 24,
+      "filePath": "data/audio/sfx/witch_attack1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 25,
+      "filePath": "data/audio/sfx/witch_attack2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 26,
+      "filePath": "data/audio/sfx/witch_death.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 28,
+      "filePath": "data/audio/jackie_lines/jackie_betterdosomething.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 29,
+      "filePath": "data/audio/jackie_lines/jackie_easy1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 30,
+      "filePath": "data/audio/jackie_lines/jackie_gettingcold1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 31,
+      "filePath": "data/audio/jackie_lines/jackie_gladifoundyou.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 32,
+      "filePath": "data/audio/jackie_lines/jackie_hello1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 33,
+      "filePath": "data/audio/jackie_lines/jackie_hmm1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 34,
+      "filePath": "data/audio/jackie_lines/jackie_hmm2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 35,
+      "filePath": "data/audio/jackie_lines/jackie_hopehesalright1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 36,
+      "filePath": "data/audio/jackie_lines/jackie_howdoigetout1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 37,
+      "filePath": "data/audio/jackie_lines/jackie_intro1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 38,
+      "filePath": "data/audio/jackie_lines/jackie_itsmells1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 39,
+      "filePath": "data/audio/jackie_lines/jackie_leftorright1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 40,
+      "filePath": "data/audio/jackie_lines/jackie_leftorright2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 41,
+      "filePath": "data/audio/jackie_lines/jackie_nexttime.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 42,
+      "filePath": "data/audio/jackie_lines/jackie_nicetomeet1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 43,
+      "filePath": "data/audio/jackie_lines/jackie_notagain.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 44,
+      "filePath": "data/audio/jackie_lines/jackie_ohfudgeberries.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 45,
+      "filePath": "data/audio/jackie_lines/jackie_onemoretime.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 46,
+      "filePath": "data/audio/jackie_lines/jackie_placeisamaze.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 47,
+      "filePath": "data/audio/jackie_lines/jackie_seriously.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 48,
+      "filePath": "data/audio/jackie_lines/jackie_sigh1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 49,
+      "filePath": "data/audio/jackie_lines/jackie_sigh2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 50,
+      "filePath": "data/audio/jackie_lines/jackie_sigh3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 51,
+      "filePath": "data/audio/jackie_lines/jackie_sigh4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 52,
+      "filePath": "data/audio/jackie_lines/jackie_thisdoesn_tmakesense.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 53,
+      "filePath": "data/audio/jackie_lines/jackie_toohard1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 54,
+      "filePath": "data/audio/jackie_lines/jackie_toohard2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 55,
+      "filePath": "data/audio/jackie_lines/jackie_toohard3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 56,
+      "filePath": "data/audio/jackie_lines/jackie_toohard4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 57,
+      "filePath": "data/audio/jackie_lines/jackie_ugh.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 58,
+      "filePath": "data/audio/jackie_lines/jackie_what_swiththepuzzles.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 59,
+      "filePath": "data/audio/jackie_lines/jackie_wherehide1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 60,
+      "filePath": "data/audio/jackie_lines/jackie_wherehide2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 61,
+      "filePath": "data/audio/jackie_lines/jackie_wherehide3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 62,
+      "filePath": "data/audio/jackie_lines/jackie_wherehide4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 63,
+      "filePath": "data/audio/jackie_lines/jackie_wherehide5.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 64,
+      "filePath": "data/audio/jackie_lines/jackie_win1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 65,
+      "filePath": "data/audio/jackie_lines/jackie_win2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 66,
+      "filePath": "data/audio/jackie_lines/jackie_win3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 67,
+      "filePath": "data/audio/jackie_lines/jackie_wonderhide1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 68,
+      "filePath": "data/audio/sfx/crystal_break.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 69,
+      "filePath": "data/audio/sfx/wall_bump.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 80,
+      "filePath": "data/audio/hide_lines/hide_attack1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 81,
+      "filePath": "data/audio/hide_lines/hide_attack2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 82,
+      "filePath": "data/audio/hide_lines/hide_attack3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 83,
+      "filePath": "data/audio/hide_lines/hide_attack4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 84,
+      "filePath": "data/audio/hide_lines/hide_calmdown1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 85,
+      "filePath": "data/audio/hide_lines/hide_calmdown2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 86,
+      "filePath": "data/audio/hide_lines/hide_calmdown3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 87,
+      "filePath": "data/audio/hide_lines/hide_combatstart1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 88,
+      "filePath": "data/audio/hide_lines/hide_combatstart2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 89,
+      "filePath": "data/audio/hide_lines/hide_combatstart3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 90,
+      "filePath": "data/audio/hide_lines/hide_combatstart4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 91,
+      "filePath": "data/audio/hide_lines/hide_combatstart5.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 92,
+      "filePath": "data/audio/hide_lines/hide_dodge1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 93,
+      "filePath": "data/audio/hide_lines/hide_dodge2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 94,
+      "filePath": "data/audio/hide_lines/hide_flare1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 95,
+      "filePath": "data/audio/hide_lines/hide_flare2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 96,
+      "filePath": "data/audio/hide_lines/hide_flare3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 97,
+      "filePath": "data/audio/hide_lines/hide_flare4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 98,
+      "filePath": "data/audio/hide_lines/hide_flare5.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 99,
+      "filePath": "data/audio/hide_lines/hide_forward1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 100,
+      "filePath": "data/audio/hide_lines/hide_fullexplore1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 101,
+      "filePath": "data/audio/hide_lines/hide_hitshield1.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 102,
+      "filePath": "data/audio/hide_lines/hide_hitshield2.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 103,
+      "filePath": "data/audio/hide_lines/hide_hitshield3.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 104,
+      "filePath": "data/audio/hide_lines/hide_hitshield4.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 105,
+      "filePath": "data/audio/hide_lines/hide_hitshield5.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 106,
+      "filePath": "data/audio/hide_lines/hide_holdonjackie1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 107,
+      "filePath": "data/audio/hide_lines/hide_huh1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 108,
+      "filePath": "data/audio/hide_lines/hide_huh2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 110,
+      "filePath": "data/audio/hide_lines/hide_hurt1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 111,
+      "filePath": "data/audio/hide_lines/hide_hurt2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 112,
+      "filePath": "data/audio/hide_lines/hide_hurt3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 113,
+      "filePath": "data/audio/hide_lines/hide_imbibe1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 114,
+      "filePath": "data/audio/hide_lines/hide_imbibe2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 115,
+      "filePath": "data/audio/hide_lines/hide_intro1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 116,
+      "filePath": "data/audio/hide_lines/hide_intro2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 117,
+      "filePath": "data/audio/hide_lines/hide_it_sattacking1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 118,
+      "filePath": "data/audio/hide_lines/hide_laugh1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 119,
+      "filePath": "data/audio/hide_lines/hide_leftright1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 120,
+      "filePath": "data/audio/hide_lines/hide_leftright2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 121,
+      "filePath": "data/audio/hide_lines/hide_leftright3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 122,
+      "filePath": "data/audio/hide_lines/hide_leftright4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 123,
+      "filePath": "data/audio/hide_lines/hide_lowdamagehit1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 124,
+      "filePath": "data/audio/hide_lines/hide_lowfocus1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 125,
+      "filePath": "data/audio/hide_lines/hide_lowhealth1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 126,
+      "filePath": "data/audio/hide_lines/hide_lowhealth2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 127,
+      "filePath": "data/audio/hide_lines/hide_lowhealth3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 128,
+      "filePath": "data/audio/hide_lines/hide_lowhealth4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 129,
+      "filePath": "data/audio/hide_lines/hide_lowstam1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 130,
+      "filePath": "data/audio/hide_lines/hide_lowstam2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 131,
+      "filePath": "data/audio/hide_lines/hide_lowstam3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 132,
+      "filePath": "data/audio/hide_lines/hide_lowstam4.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 133,
+      "filePath": "data/audio/hide_lines/hide_magic1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 134,
+      "filePath": "data/audio/hide_lines/hide_miss1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 135,
+      "filePath": "data/audio/hide_lines/hide_miss2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 136,
+      "filePath": "data/audio/hide_lines/hide_miss3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 137,
+      "filePath": "data/audio/hide_lines/hide_pathblocked1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 138,
+      "filePath": "data/audio/hide_lines/hide_pathblocked2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 139,
+      "filePath": "data/audio/hide_lines/hide_pathblocked3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 140,
+      "filePath": "data/audio/hide_lines/hide_powerup1.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 141,
+      "filePath": "data/audio/hide_lines/hide_powerup2.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 142,
+      "filePath": "data/audio/hide_lines/hide_powerup3.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 143,
+      "filePath": "data/audio/hide_lines/hide_quicken1.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 144,
+      "filePath": "data/audio/hide_lines/hide_quicken2.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 145,
+      "filePath": "data/audio/hide_lines/hide_recover1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 146,
+      "filePath": "data/audio/hide_lines/hide_recover2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 147,
+      "filePath": "data/audio/hide_lines/hide_relax1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 148,
+      "filePath": "data/audio/hide_lines/hide_relax2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 149,
+      "filePath": "data/audio/hide_lines/hide_siphon1.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 150,
+      "filePath": "data/audio/hide_lines/hide_siphon2.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 151,
+      "filePath": "data/audio/hide_lines/hide_siphon3.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 152,
+      "filePath": "data/audio/hide_lines/hide_siphon4.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 153,
+      "filePath": "data/audio/hide_lines/hide_special1.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 154,
+      "filePath": "data/audio/hide_lines/hide_special2.wav",
+      "numInstances": 2
+    },
+    {
+      "soundID": 155,
+      "filePath": "data/audio/hide_lines/hide_thankslady.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 156,
+      "filePath": "data/audio/hide_lines/hide_wherejackie1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 157,
+      "filePath": "data/audio/hide_lines/hide_win1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 158,
+      "filePath": "data/audio/hide_lines/hide_win2.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 159,
+      "filePath": "data/audio/hide_lines/hide_win3.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 160,
+      "filePath": "data/audio/hide_lines/hide_witch1.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 161,
+      "filePath": "data/audio/hide_lines/hide_withyou.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 163,
+      "filePath": "data/audio/sfx/flare_hit.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 164,
+      "filePath": "data/audio/sfx/flash_striker.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 165,
+      "filePath": "data/audio/sfx/heavy_swing_hit.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 166,
+      "filePath": "data/audio/sfx/hide_death.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 167,
+      "filePath": "data/audio/sfx/mend_relax_calmdown.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 168,
+      "filePath": "data/audio/sfx/quicken_imbibe.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 169,
+      "filePath": "data/audio/sfx/siphon_hit.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 170,
+      "filePath": "data/audio/sfx/siphon_miss.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 171,
+      "filePath": "data/audio/sfx/sword_slash_hit.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 172,
+      "filePath": "data/audio/sfx/thunderblade.wav",
+      "numInstances": 1
+    },
+    {
+      "soundID": 180,
+      "filePath": "data/audio/sfx/mirror_image.wav",
+      "numInstances": 1
+    }
+  ],
+  "shaders": [
+    {
+      "name": "framebuffer",
+      "vertexShaderFilePath": "data/shaders/framebuffer.vsh",
+      "fragmentShaderFilePath": "data/shaders/framebuffer.fsh",
+      "uniforms": [
+        {
+          "name": "u_Texture",
+          "type": "sampler2D"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "a_Position",
+          "type": "vec2"
+        }
+      ]
+    },
+    {
+      "name": "texture",
+      "vertexShaderFilePath": "data/shaders/texture.vsh",
+      "fragmentShaderFilePath": "data/shaders/texture.fsh",
+      "uniforms": [
+        {
+          "name": "u_Matrix",
+          "type": "mat4"
+        },
+        {
+          "name": "u_ColorFactor",
+          "type": "vec4"
+        },
+        {
+          "name": "u_Texture",
+          "type": "sampler2D"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "a_Position",
+          "type": "vec2"
+        },
+        {
+          "name": "a_TexCoord",
+          "type": "vec2"
+        }
+      ]
+    },
+    {
+      "name": "geometry",
+      "vertexShaderFilePath": "data/shaders/geometry.vsh",
+      "fragmentShaderFilePath": "data/shaders/geometry.fsh",
+      "uniforms": [
+        {
+          "name": "u_Matrix",
+          "type": "mat4"
+        },
+        {
+          "name": "u_Color",
+          "type": "vec4"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "a_Position",
+          "type": "vec2"
+        }
+      ]
+    },
+    {
+      "name": "lights",
+      "vertexShaderFilePath": "data/shaders/lights.vsh",
+      "fragmentShaderFilePath": "data/shaders/lights.fsh",
+      "uniforms": [
+        {
+          "name": "u_Matrix",
+          "type": "mat4"
+        },
+        {
+          "name": "u_LightPositions",
+          "type": "vec4",
+          "count": 12
+        },
+        {
+          "name": "u_LightColors",
+          "type": "vec4",
+          "count": 12
+        },
+        {
+          "name": "u_AmbientColor",
+          "type": "vec4"
+        },
+        {
+          "name": "u_Falloff",
+          "type": "vec4"
+        },
+        {
+          "name": "u_NumLights",
+          "type": "ivec4"
+        },
+        {
+          "name": "u_Texture",
+          "type": "sampler2D"
+        },
+        {
+          "name": "u_NormalMap",
+          "type": "sampler2D"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "a_Position",
+          "type": "vec2"
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "background_tiles",
+      "filePath": "data/textures/background_tiles.png",
+      "textureWidth": 1024,
+      "textureHeight": 1024,
+      "mappings": {
+        "BG_BASEMENT_TILE_1": {
+          "x": 0,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_2": {
+          "x": 64,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_3": {
+          "x": 128,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_4": {
+          "x": 192,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_5": {
+          "x": 256,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_6": {
+          "x": 320,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_7": {
+          "x": 384,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_8": {
+          "x": 448,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_9": {
+          "x": 512,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_10": {
+          "x": 576,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_11": {
+          "x": 640,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_12": {
+          "x": 704,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_BASEMENT_TILE_13": {
+          "x": 768,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_FOREST_TILE_GRASS": {
+          "x": 0,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BG_FOREST_TILE_TREE": {
+          "x": 64,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "GENERIC_MONSTER_UP": {
+          "x": 128,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 8,
+          "numFrames": 2
+        },
+        "GENERIC_MONSTER_DOWN": {
+          "x": 0,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 8,
+          "numFrames": 2
+        },
+        "CRYSTAL_BLUE": {
+          "x": 0,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CRYSTAL_RED": {
+          "x": 64,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CRYSTAL_GREEN": {
+          "x": 128,
+          "y": 192,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "OVEN": {
+          "x": 0,
+          "y": 256,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CELLAR_DOOR": {
+          "x": 0,
+          "y": 320,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "WITCH_DOOR": {
+          "x": 64,
+          "y": 320,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "CRATE": {
+          "x": 0,
+          "y": 384,
+          "regionWidth": 128,
+          "regionHeight": 128
+        },
+        "EXPLOSION": {
+          "x": 128,
+          "y": 384,
+          "regionWidth": 128,
+          "regionHeight": 128,
+          "frameTime": 6,
+          "numFrames": 7,
+          "looping": false
+        },
+        "KEY": {
+          "x": 0,
+          "y": 512,
+          "regionWidth": 128,
+          "regionHeight": 64
+        },
+        "STAIRS": {
+          "x": 0,
+          "y": 576,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
+        "BARRIER": {
+          "x": 64,
+          "y": 576,
+          "regionWidth": 64,
+          "regionHeight": 64
+        }
+      }
+    },
+    {
+      "name": "demo",
+      "filePath": "data/textures/demo.png"
+    },
+    {
+      "name": "overworld_characters",
+      "filePath": "data/textures/overworld_characters.png",
+      "textureWidth": 1024,
+      "textureHeight": 1024,
+      "mappings": {
+        "HIDE_LEFT": {
+          "x": 0,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 6,
+          "numFrames": 3
+        },
+        "HIDE_UP": {
+          "x": 192,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 6,
+          "numFrames": 3
+        },
+        "HIDE_DOWN": {
+          "x": 384,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 6,
+          "numFrames": 3
+        },
+        "JACKIE_LEFT": {
+          "x": 0,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 6,
+          "numFrames": 3
+        },
+        "JACKIE_UP": {
+          "x": 192,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 6,
+          "numFrames": 3
+        },
+        "JACKIE_DOWN": {
+          "x": 384,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 6,
+          "numFrames": 3
+        }
+      }
+    },
+    {
+      "name": "big_sprites",
+      "filePath": "data/textures/big_sprites.png",
+      "mappings": {
+        "BIG_HIDE_IDLE": {
+          "x": 0,
+          "y": 0,
+          "regionWidth": 256,
+          "regionHeight": 256,
+          "frameTime": 24,
+          "numFrames": 5
+        },
+        "BIG_HIDE_SWING_1": {
+          "x": 0,
+          "y": 256,
+          "regionWidth": 256,
+          "regionHeight": 256,
+          "frameTime": 7,
+          "numFrames": 2,
+          "looping": false
+        },
+        "BIG_HIDE_SWING_2": {
+          "x": 512,
+          "y": 256,
+          "regionWidth": 320,
+          "regionHeight": 256,
+          "frameTime": 7,
+          "numFrames": 3,
+          "looping": false
+        },
+        "BIG_HIDE_SWING_3": {
+          "x": 1472,
+          "y": 256,
+          "regionWidth": 256,
+          "regionHeight": 256,
+          "frameTime": 7,
+          "numFrames": 1,
+          "looping": false
+        },
+        "BIG_ENT_IDLE": {
+          "x": 0,
+          "y": 512,
+          "regionWidth": 512,
+          "regionHeight": 512
+        },
+        "BIG_WITCH_PRETTY": {
+          "x": 0,
+          "y": 1280,
+          "regionWidth": 256,
+          "regionHeight": 320,
+          "frameTime": 24,
+          "numFrames": 4
+        }
+      }
+    },
+    {
+      "name": "texture_font",
+      "filePath": "data/textures/Cheepicus_16x16.png",
+      "mipMap": false
+    }
+  ]
+}

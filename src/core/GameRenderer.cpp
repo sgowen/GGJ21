@@ -66,8 +66,8 @@ _textViews{
     _fontBatcher.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
     _fontBatcher.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
     _fontBatcher.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
-    _fontBatcher.configure(_textViews[9], 0.24f, 0.025f, 0.012f);
-    _fontBatcher.configure(_textViews[10], 0.76f, 0.025f, 0.012f);
+    _fontBatcher.configure(_textViews[9], 0.25f, 0.025f, 0.012f);
+    _fontBatcher.configure(_textViews[10], 0.75f, 0.025f, 0.012f);
 }
 
 void GameRenderer::createDeviceDependentResources()
@@ -111,7 +111,6 @@ void GameRenderer::render()
     renderWorld();
     renderEncounter();
     renderUI();
-    renderSplitScreen();
 
     _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
 }
@@ -120,9 +119,6 @@ void GameRenderer::updateMatrix(float l, float r, float b, float t)
 {
     mat4_identity(_matrix);
     mat4_ortho(_matrix, l, r, b, t, -1, 1);
-    float w = r - l;
-    float h = t - b;
-    INPUT_MGR.setMatrixSize(w, h);
 }
 
 void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
@@ -174,7 +170,7 @@ void GameRenderer::renderEncounter()
     _polygonBatcher.begin();
     _polygonBatcher.addRektangle(0,
                                  0,
-                                 CFG_MAIN._splitScreenBarX,
+                                 CFG_MAIN._camWidth / 2,
                                  CFG_MAIN._camHeight);
     _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
     
@@ -218,13 +214,13 @@ void GameRenderer::renderUI()
                 _textViews[playerID + 8]._text = StringUtil::format("%s", ec->getUsername().c_str());
                 _polygonBatcher.addRektangle(0,
                                              0,
-                                             CFG_MAIN._splitScreenBarX,
+                                             CFG_MAIN._camWidth / 2,
                                              3);
             }
             else if (playerID == 2)
             {
                 _textViews[playerID + 8]._text = StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
-                _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
+                _polygonBatcher.addRektangle(CFG_MAIN._camWidth / 2,
                                              0,
                                              CFG_MAIN._camWidth,
                                              3);
@@ -239,10 +235,10 @@ void GameRenderer::renderUI()
         if (w.getPlayers().size() == 1)
         {
             _polygonBatcher.begin();
-            _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
-                                         CFG_MAIN._splitScreenBarY,
+            _polygonBatcher.addRektangle(CFG_MAIN._camWidth / 2,
+                                         0,
                                          CFG_MAIN._camWidth,
-                                         CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
+                                         CFG_MAIN._camHeight);
             _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
             
             for (uint8_t i = 1; i <= 8; ++i)
@@ -262,14 +258,4 @@ void GameRenderer::renderUI()
         _fontBatcher.addText(_textViews[i]);
     }
     _fontBatcher.end(_shaderManager.shader("texture"), _textureManager.texture("texture_font"));
-}
-
-void GameRenderer::renderSplitScreen()
-{
-    _polygonBatcher.begin();
-    _polygonBatcher.addRektangle(CFG_MAIN._splitScreenBarX,
-                                 CFG_MAIN._splitScreenBarY,
-                                 CFG_MAIN._splitScreenBarX + CFG_MAIN._splitScreenBarWidth,
-                                 CFG_MAIN._splitScreenBarY + CFG_MAIN._splitScreenBarHeight);
-    _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
 }

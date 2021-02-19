@@ -182,7 +182,7 @@ World& GameClientEngineState::getWorld()
 
 void GameClientEngineState::createDeviceDependentResources()
 {
-    ASSETS.initWithJSONFile("assets/json/assets_game.json");
+    ASSETS.initWithJSONFile("data/json/assets_game.json");
     
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();

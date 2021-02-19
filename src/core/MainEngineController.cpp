@@ -29,6 +29,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     
     SOCKET_UTIL.setLoggingEnabled(CFG_MAIN._networkLoggingEnabled);
     INPUT_MGR.setLoggingEnabled(CFG_MAIN._inputLoggingEnabled);
+    INPUT_MGR.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
     
     ENTITY_MGR.initWithJSONFile(CFG_MAIN._entityManagerFilePath.c_str());
     

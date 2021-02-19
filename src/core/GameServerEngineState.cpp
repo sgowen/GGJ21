@@ -310,7 +310,7 @@ void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
     ec->setPlayerID(playerID);
     if (ec->getRTTI().isExactly(HideController::rtti))
     {
-        static_cast<HideController*>(ec)->setEntityLayoutKey('LO01');
+        static_cast<HideController*>(ec)->setEntityLayoutKey('LYT1');
     }
     
     NW_SRVR->registerEntity(e);

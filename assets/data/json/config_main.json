@@ -5,12 +5,8 @@
   "serverPort": "9999",
   "framebufferWidth": "1600",
   "framebufferHeight": "960",
-  "camWidth": "100",
+  "camWidth": "96",
   "camHeight": "60",
-  "splitScreenBarX": "48",
-  "splitScreenBarY": "0",
-  "splitScreenBarWidth": "4",
-  "splitScreenBarHeight": "60",
   "maxTextInputLength": "16",
   "maxNumPlayers": "2",
   "playerMaxTopDownSpeed": "8.0",
@@ -29,6 +25,6 @@
   "musicDisabled": "true",
   "inputLoggingEnabled": "false",
   "networkLoggingEnabled": "false",
-  "entityManagerFilePath": "assets/json/entities.json",
-  "entityLayoutManagerFilePath": "assets/json/layouts.json"
+  "entityManagerFilePath": "data/json/entities.json",
+  "entityLayoutManagerFilePath": "data/json/layouts.json"
 }

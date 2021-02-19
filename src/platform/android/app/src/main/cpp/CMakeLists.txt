@@ -17,6 +17,7 @@ set(core_source_dir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../core)
 file(GLOB_RECURSE BOX2D_CPP_FILES "${engine_source_dir}/../deps/box2d/src/*.cpp")
 file(GLOB ENGINE_CPP_FILES "${engine_source_dir}/*.cpp")
 file(GLOB ENGINE_ANDROID_CPP_FILES "${engine_source_dir}/android/*.cpp")
+file(GLOB ENGINE_BOX2D_CPP_FILES "${engine_source_dir}/box2d/*.cpp")
 file(GLOB CORE_CPP_FILES "${core_source_dir}/*.cpp")
 
 include_directories(${engine_source_dir}/../deps/box2d/include)
@@ -41,6 +42,7 @@ add_library( # Sets the name of the library.
              ${BOX2D_CPP_FILES}
              ${ENGINE_CPP_FILES}
              ${ENGINE_ANDROID_CPP_FILES}
+             ${ENGINE_BOX2D_CPP_FILES}
              ${CORE_CPP_FILES}
 
              JNIEngine.cpp )

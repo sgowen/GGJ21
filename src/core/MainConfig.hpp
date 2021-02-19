@@ -34,10 +34,6 @@ public:
     uint32_t _framebufferHeight;
     uint32_t _camWidth;
     uint32_t _camHeight;
-    float _splitScreenBarX;
-    float _splitScreenBarY;
-    float _splitScreenBarWidth;
-    float _splitScreenBarHeight;
     uint32_t _maxTextInputLength;
     uint32_t _maxNumPlayers;
     float _playerMaxTopDownSpeed;
@@ -62,7 +58,7 @@ public:
     void init()
     {
         Config c;
-        c.initWithJSONFile("assets/json/config_main.json");
+        c.initWithJSONFile("data/json/config_main.json");
         
         _framesPerSecond = c.getUInt("framesPerSecond");
         _clientPortHost = c.getUInt("clientPortHost");
@@ -72,10 +68,6 @@ public:
         _framebufferHeight = c.getUInt("framebufferHeight");
         _camWidth = c.getUInt("camWidth");
         _camHeight = c.getUInt("camHeight");
-        _splitScreenBarX = c.getFloat("splitScreenBarX");
-        _splitScreenBarY = c.getFloat("splitScreenBarY");
-        _splitScreenBarWidth = c.getFloat("splitScreenBarWidth");
-        _splitScreenBarHeight = c.getFloat("splitScreenBarHeight");
         _maxTextInputLength = c.getUInt("maxTextInputLength");
         _maxNumPlayers = c.getUInt("maxNumPlayers");
         _playerMaxTopDownSpeed = c.getFloat("playerMaxTopDownSpeed");

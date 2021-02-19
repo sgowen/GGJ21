@@ -130,7 +130,4 @@ void TitleRenderer::updateMatrix(float l, float r, float b, float t)
 {
     mat4_identity(_matrix);
     mat4_ortho(_matrix, l, r, b, t, -1, 1);
-    float w = r - l;
-    float h = t - b;
-    INPUT_MGR.setMatrixSize(w, h);
 }

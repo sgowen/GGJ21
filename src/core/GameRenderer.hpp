@@ -50,5 +50,4 @@ private:
     void renderWorld();
     void renderEncounter();
     void renderUI();
-    void renderSplitScreen();
 };

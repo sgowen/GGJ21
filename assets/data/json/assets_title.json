@@ -1,12 +1,12 @@
 {
   "music": {
-    "filePath": "assets/audio/music/music_main.wav"
+    "filePath": "data/audio/music/music_main.wav"
   },
   "shaders": [
     {
       "name": "framebuffer",
-      "vertexShaderFilePath": "assets/shaders/framebuffer.vsh",
-      "fragmentShaderFilePath": "assets/shaders/framebuffer.fsh",
+      "vertexShaderFilePath": "data/shaders/framebuffer.vsh",
+      "fragmentShaderFilePath": "data/shaders/framebuffer.fsh",
       "uniforms": [
         {
           "name": "u_Texture",
@@ -22,8 +22,8 @@
     },
     {
       "name": "texture",
-      "vertexShaderFilePath": "assets/shaders/texture.vsh",
-      "fragmentShaderFilePath": "assets/shaders/texture.fsh",
+      "vertexShaderFilePath": "data/shaders/texture.vsh",
+      "fragmentShaderFilePath": "data/shaders/texture.fsh",
       "uniforms": [
         {
           "name": "u_Matrix",
@@ -53,13 +53,13 @@
   "textures": [
     {
       "name": "demo",
-      "filePath": "assets/textures/demo.png",
+      "filePath": "data/textures/demo.png",
       "filterMin": "SMOOTH",
       "filterMag": "SMOOTH"
     },
     {
       "name": "texture_font",
-      "filePath": "assets/textures/Cheepicus_16x16.png",
+      "filePath": "data/textures/Cheepicus_16x16.png",
       "mipMap": false
     }
   ]

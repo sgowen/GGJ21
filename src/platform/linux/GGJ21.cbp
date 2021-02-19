@@ -52,8 +52,8 @@
 			<Add option="-lalut" />
 		</Linker>
 		<ExtraCommands>
-			<Add before="if [ -d $(PROJECT_DIR)/assets ]; then rm -Rf $(PROJECT_DIR)/json; fi" />
-			<Add after="cp -r $(PROJECT_DIR)../../../assets $(PROJECT_DIR)" />
+			<Add before="if [ -d $(PROJECT_DIR)/data ]; then rm -Rf $(PROJECT_DIR)/data; fi" />
+			<Add after="cp -r $(PROJECT_DIR)../../../assets/data $(PROJECT_DIR)" />
 			<Add after="cp $(TARGET_OUTPUT_FILE) $(PROJECT_DIR)" />
 			<Mode after="always" />
 		</ExtraCommands>

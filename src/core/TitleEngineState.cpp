@@ -70,7 +70,7 @@ void TitleEngineState::exit(Engine* e)
 
 void TitleEngineState::createDeviceDependentResources()
 {
-    ASSETS.initWithJSONFile("assets/json/assets_title.json");
+    ASSETS.initWithJSONFile("data/json/assets_title.json");
     
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
