@@ -40,10 +40,6 @@ GameInputManagerState GameInputManager::update()
         }
     }
     
-    bool isMovingUp[4] = {false};
-    bool isMovingLeft[4] = {false};
-    bool isMovingDown[4] = {false};
-    bool isMovingRight[4] = {false};
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {
         switch (e->_button)
@@ -69,65 +65,30 @@ GameInputManagerState GameInputManager::update()
                 continue;
             case GPEB_D_PAD_UP:
             {
-                if (!isMovingUp[e->_index])
-                {
-                    isMovingUp[e->_index] = e->isPressed();
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, isMovingUp[e->_index]);
-                }
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, e->isPressed());
                 continue;
             }
             case GPEB_D_PAD_LEFT:
             {
-                if (!isMovingLeft[e->_index])
-                {
-                    isMovingLeft[e->_index] = e->isPressed();
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, isMovingLeft[e->_index]);
-                }
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, e->isPressed());
                 continue;
             }
             case GPEB_D_PAD_DOWN:
             {
-                if (!isMovingDown[e->_index])
-                {
-                    isMovingDown[e->_index] = e->isPressed();
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, isMovingDown[e->_index]);
-                }
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, e->isPressed());
                 continue;
             }
             case GPEB_D_PAD_RIGHT:
             {
-                if (!isMovingRight[e->_index])
-                {
-                    isMovingRight[e->_index] = e->isPressed();
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, isMovingRight[e->_index]);
-                }
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, e->isPressed());
                 continue;
             }
             case GPEB_STICK_LEFT:
             {
-                if (!isMovingUp[e->_index])
-                {
-                    isMovingUp[e->_index] = e->_y < 0;
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, isMovingUp[e->_index]);
-                }
-                
-                if (!isMovingLeft[e->_index])
-                {
-                    isMovingLeft[e->_index] = e->_x < 0;
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, isMovingLeft[e->_index]);
-                }
-                
-                if (!isMovingDown[e->_index])
-                {
-                    isMovingDown[e->_index] = e->_y > 0;
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, isMovingDown[e->_index]);
-                }
-                
-                if (!isMovingRight[e->_index])
-                {
-                    isMovingRight[e->_index] = e->_x > 0;
-                    SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, isMovingRight[e->_index]);
-                }
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, e->_y < 0);
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, e->_x < 0);
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, e->_y > 0);
+                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, e->_x > 0);
                 continue;
             }
             default:
