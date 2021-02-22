@@ -244,7 +244,7 @@ uint8_t HideNetworkController::refreshDirtyState()
     return ret;
 }
 
-#include "Assets.hpp"
+#include "ResourceManager.hpp"
 #include "SpriteBatcher.hpp"
 
 IMPL_RTTI(HideRenderController, EntityRenderController)
@@ -271,7 +271,7 @@ std::string HideRenderController::getTextureMapping()
 void HideRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 {
     HideController* ec = _entity->controller<HideController>();
-    TextureRegion tr = ASSETS.findTextureRegion(getTextureMappingForEncounter(), ec->_encounter._stateTime);
+    TextureRegion tr = RES_MGR.findTextureRegion(getTextureMappingForEncounter(), ec->_encounter._stateTime);
     sb.addSprite(tr, CFG_MAIN._playerBattleX, CFG_MAIN._playerBattleY, getWidthForEncounter(), CFG_MAIN._playerBattleHeight, 0);
 }
 

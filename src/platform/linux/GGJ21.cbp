@@ -37,6 +37,7 @@
 			<Add option="-D_GLFW_X11" />
 			<Add directory="../../../deps/GowEngine/deps/box2d/include" />
 			<Add directory="../../../deps/GowEngine/deps/box2d/src" />
+            <Add directory="../../../deps/GowEngine/deps/tinythreadpp/source" />
 			<Add directory="../../../deps/GowEngine/deps/glfw/include" />
 			<Add directory="../../../deps/GowEngine/deps/rapidjson/include" />
 			<Add directory="../../../deps/GowEngine/deps/stb" />
@@ -119,6 +120,7 @@
 		<Unit filename="../../../deps/GowEngine/deps/box2d/src/dynamics/b2_world.cpp" />
 		<Unit filename="../../../deps/GowEngine/deps/box2d/src/dynamics/b2_world_callbacks.cpp" />
 		<Unit filename="../../../deps/GowEngine/deps/box2d/src/rope/b2_rope.cpp" />
+        <Unit filename="../../../deps/GowEngine/deps/tinythreadpp/source/tinythread.cpp" />
 		<Unit filename="../../../deps/GowEngine/deps/glfw/src/context.c">
 			<Option compilerVar="CC" />
 		</Unit>

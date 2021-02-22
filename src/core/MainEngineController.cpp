@@ -31,23 +31,20 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     INPUT_MGR.setLoggingEnabled(CFG_MAIN._inputLoggingEnabled);
     INPUT_MGR.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
     
-    ENTITY_MGR.initWithJSONFile(CFG_MAIN._entityManagerFilePath.c_str());
-    
     std::map<std::string, EntityControllerCreationFunc> config;
     config.emplace("Hide", HideController::create);
     config.emplace("Jackie", JackieController::create);
     config.emplace("Monster", MonsterController::create);
     config.emplace("Crystal", CrystalController::create);
     config.emplace("Explosion", ExplosionController::create);
-    registerControllers(config);
+    registerControllers(config, CFG_MAIN._entityManagerFilePath);
     
     std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
     configNW.emplace("Hide", HideNetworkController::create);
     configNW.emplace("Jackie", PlayerNetworkController::create);
     configNW.emplace("Monster", MonsterNetworkController::create);
-    configureForNetwork(configNW);
+    configureForNetwork(configNW, CFG_MAIN._entityLayoutManagerFilePath);
     
-    // TODO, don't like, should be able to set globally
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
     configPhysics.emplace("Entity", TopDownPhysicsController::create);
     configPhysics.emplace("Jackie", JackiePhysicsController::create);

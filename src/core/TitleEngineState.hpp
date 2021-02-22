@@ -47,7 +47,7 @@ private:
     int _stateTime;
     
     void createDeviceDependentResources();
-    void onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight);
+    void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);
     void releaseDeviceDependentResources();
     void resume();
     void pause();

@@ -8,44 +8,20 @@
 
 #pragma once
 
-#include "FontBatcher.hpp"
-#include "Framebuffer.hpp"
-#include "ShaderInput.hpp"
-#include "RektangleBatcher.hpp"
-#include "ScreenRenderer.hpp"
-#include "ShaderManager.hpp"
-#include "SpriteBatcher.hpp"
-#include "TextureManager.hpp"
-#include "TextView.hpp"
-
-#define NUM_TEXT_VIEWS 13
-
-class Entity;
+#include "Renderer.hpp"
 
 class GameRenderer
 {
 public:
     GameRenderer();
-    ~GameRenderer() {}
     
     void createDeviceDependentResources();
-    void onWindowSizeChanged(int screenWidth, int screenHeight);
+    void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);
     void releaseDeviceDependentResources();
     void render();
     
 private:
-    FontBatcher _fontBatcher;
-    Framebuffer _framebuffer;
-    mat4 _matrix;
-    RektangleBatcher _polygonBatcher;
-    ScreenRenderer _screenRenderer;
-    ShaderManager _shaderManager;
-    SpriteBatcher _spriteBatcher;
-    TextureManager _textureManager;
-    TextView _textViews[NUM_TEXT_VIEWS];
-    
-    void updateMatrix(float l, float r, float b, float t);
-    void addSpritesToBatcher(std::vector<Entity*>& entities);
+    Renderer _renderer;
     
     void renderWorld();
     void renderEncounter();

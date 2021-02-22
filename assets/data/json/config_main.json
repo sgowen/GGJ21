@@ -3,8 +3,6 @@
   "clientPortHost": "1337",
   "clientPortJoin": "1338",
   "serverPort": "9999",
-  "framebufferWidth": "1600",
-  "framebufferHeight": "960",
   "camWidth": "96",
   "camHeight": "60",
   "maxTextInputLength": "16",

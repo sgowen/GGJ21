@@ -29,7 +29,7 @@ public:
     
 private:
     GameHostEngineState() : State<Engine>() {}
-    ~GameHostEngineState() {}
+    virtual ~GameHostEngineState() {}
     GameHostEngineState(const GameHostEngineState&);
     GameHostEngineState& operator=(const GameHostEngineState&);
 };

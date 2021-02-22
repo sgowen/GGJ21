@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BB0BC1B625E050A600276CEC /* data in Resources */ = {isa = PBXBuildFile; fileRef = BB0BC1B525E050A600276CEC /* data */; };
 		BB0BC1B725E050A600276CEC /* data in Resources */ = {isa = PBXBuildFile; fileRef = BB0BC1B525E050A600276CEC /* data */; };
+		BB0BC1C625E0743F00276CEC /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB0BC1C525E0743F00276CEC /* ResourceManager.cpp */; };
+		BB0BC1C725E0743F00276CEC /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB0BC1C525E0743F00276CEC /* ResourceManager.cpp */; };
 		BB16D1FF25B7623700C340C1 /* LinuxAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16D1FB25B75F5100C340C1 /* LinuxAssetHandler.cpp */; };
 		BB16D20225B7623C00C340C1 /* LinuxAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB16D1FB25B75F5100C340C1 /* LinuxAssetHandler.cpp */; };
 		BB21814C25C5282E004398D5 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21814A25C5282D004398D5 /* World.cpp */; };
@@ -352,10 +354,14 @@
 		BBC149D525DDA89B00B78385 /* EntityRenderController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBC149D325DDA89B00B78385 /* EntityRenderController.cpp */; };
 		BBDE2F7325D9A07A00341B9D /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBDE2F7125D9A07A00341B9D /* Renderer.cpp */; };
 		BBDE2F7425D9A07A00341B9D /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBDE2F7125D9A07A00341B9D /* Renderer.cpp */; };
+		BBF1D23525E3510900CABC9F /* tinythread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBF1D22225E3510900CABC9F /* tinythread.cpp */; };
+		BBF1D23625E3510900CABC9F /* tinythread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBF1D22225E3510900CABC9F /* tinythread.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB0BC1B525E050A600276CEC /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		BB0BC1C425E0743F00276CEC /* ResourceManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourceManager.hpp; sourceTree = "<group>"; };
+		BB0BC1C525E0743F00276CEC /* ResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
 		BB16D1F825B75F5100C340C1 /* WindowsAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WindowsAssetHandler.cpp; sourceTree = "<group>"; };
 		BB16D1F925B75F5100C340C1 /* WindowsAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WindowsAssetHandler.hpp; sourceTree = "<group>"; };
 		BB16D1FB25B75F5100C340C1 /* LinuxAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LinuxAssetHandler.cpp; sourceTree = "<group>"; };
@@ -1039,6 +1045,9 @@
 		BBC149D325DDA89B00B78385 /* EntityRenderController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityRenderController.cpp; sourceTree = "<group>"; };
 		BBDE2F7125D9A07A00341B9D /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		BBDE2F7225D9A07A00341B9D /* Renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
+		BBF1D22125E3510900CABC9F /* tinythread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinythread.h; sourceTree = "<group>"; };
+		BBF1D22225E3510900CABC9F /* tinythread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinythread.cpp; sourceTree = "<group>"; };
+		BBF1D22325E3510900CABC9F /* fast_mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fast_mutex.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1164,6 +1173,7 @@
 				BBBA483525BA036300C8207D /* oboe */,
 				BB7B062B25B646BA0021E545 /* rapidjson */,
 				BB7B047F25B646B90021E545 /* stb */,
+				BBF1D21825E3510900CABC9F /* tinythreadpp */,
 			);
 			path = deps;
 			sourceTree = "<group>";
@@ -1375,6 +1385,8 @@
 				BBBA576E25BB175A00C8207D /* ReplicationManagerServer.hpp */,
 				BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */,
 				BBBA575825BB175900C8207D /* ReplicationManagerTransmissionData.hpp */,
+				BB0BC1C525E0743F00276CEC /* ResourceManager.cpp */,
+				BB0BC1C425E0743F00276CEC /* ResourceManager.hpp */,
 				BBBA5C8925C332F000C8207D /* RTTI.cpp */,
 				BBBA5C8825C332F000C8207D /* RTTI.hpp */,
 				BB7B07DC25B646BA0021E545 /* ScreenRenderer.cpp */,
@@ -2301,6 +2313,24 @@
 			path = collision;
 			sourceTree = "<group>";
 		};
+		BBF1D21825E3510900CABC9F /* tinythreadpp */ = {
+			isa = PBXGroup;
+			children = (
+				BBF1D22025E3510900CABC9F /* source */,
+			);
+			path = tinythreadpp;
+			sourceTree = "<group>";
+		};
+		BBF1D22025E3510900CABC9F /* source */ = {
+			isa = PBXGroup;
+			children = (
+				BBF1D22125E3510900CABC9F /* tinythread.h */,
+				BBF1D22225E3510900CABC9F /* tinythread.cpp */,
+				BBF1D22325E3510900CABC9F /* fast_mutex.h */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2522,6 +2552,7 @@
 				BBBA5ABA25BB5D1A00C8207D /* b2_contact_solver.cpp in Sources */,
 				BBBA57FC25BB58CA00C8207D /* EntityNetworkController.cpp in Sources */,
 				BBBA46E025B913D900C8207D /* ALContext.m in Sources */,
+				BB0BC1C625E0743F00276CEC /* ResourceManager.cpp in Sources */,
 				BBBA56E225BA453A00C8207D /* init.c in Sources */,
 				BB21816625C65B9E004398D5 /* HideController.cpp in Sources */,
 				BBBA578925BB175A00C8207D /* UDPSocket.cpp in Sources */,
@@ -2544,6 +2575,7 @@
 				BBBA5ACE25BB5D1A00C8207D /* b2_friction_joint.cpp in Sources */,
 				BBBA5AC825BB5D1A00C8207D /* b2_edge_polygon_contact.cpp in Sources */,
 				BBBA471925B9150000C8207D /* Sound.cpp in Sources */,
+				BBF1D23525E3510900CABC9F /* tinythread.cpp in Sources */,
 				BBBA5ADE25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
 				BBBA57AD25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */,
 				BBBA56F825BA453A00C8207D /* nsgl_context.m in Sources */,
@@ -2624,6 +2656,7 @@
 				BBBA5AD125BB5D1A00C8207D /* b2_wheel_joint.cpp in Sources */,
 				BBBA46D325B913D900C8207D /* ALListener.m in Sources */,
 				BBBA5AFB25BB5D1A00C8207D /* b2_broad_phase.cpp in Sources */,
+				BB0BC1C725E0743F00276CEC /* ResourceManager.cpp in Sources */,
 				BBBA577A25BB175A00C8207D /* ReplicationManagerServer.cpp in Sources */,
 				BBBA5AC925BB5D1A00C8207D /* b2_edge_polygon_contact.cpp in Sources */,
 				BB8BCD1925B68490005F57B8 /* Assets.cpp in Sources */,
@@ -2659,6 +2692,7 @@
 				BBBA5B9B25BE1E3400C8207D /* LineBatcher.cpp in Sources */,
 				BBBA46D125B913D900C8207D /* ALDevice.m in Sources */,
 				BBBA46E725B913D900C8207D /* OALAudioFile.m in Sources */,
+				BBF1D23625E3510900CABC9F /* tinythread.cpp in Sources */,
 				BBBA5AE325BB5D1A00C8207D /* b2_rope.cpp in Sources */,
 				BB16D20225B7623C00C340C1 /* LinuxAssetHandler.cpp in Sources */,
 				BB21817B25C75AB5004398D5 /* OvenController.cpp in Sources */,
@@ -2905,6 +2939,7 @@
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/ObjectAL-for-iPhone/ObjectAL/ObjectAL\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/rapidjson/include\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/stb\"",
+					"\"$(SRCROOT)/../../../deps/GowEngine/deps/tinythreadpp/source\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/src\"",
 					"\"$(SRCROOT)/../../core\"",
 				);
@@ -2947,6 +2982,7 @@
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/ObjectAL-for-iPhone/ObjectAL/ObjectAL\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/rapidjson/include\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/stb\"",
+					"\"$(SRCROOT)/../../../deps/GowEngine/deps/tinythreadpp/source\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/src\"",
 					"\"$(SRCROOT)/../../core\"",
 				);
@@ -2984,6 +3020,7 @@
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/ObjectAL-for-iPhone/ObjectAL/ObjectAL\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/rapidjson/include\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/stb\"",
+					"\"$(SRCROOT)/../../../deps/GowEngine/deps/tinythreadpp/source\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/src\"",
 					"\"$(SRCROOT)/../../core\"",
 				);
@@ -3024,6 +3061,7 @@
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/ObjectAL-for-iPhone/ObjectAL/ObjectAL\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/rapidjson/include\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/deps/stb\"",
+					"\"$(SRCROOT)/../../../deps/GowEngine/deps/tinythreadpp/source\"",
 					"\"$(SRCROOT)/../../../deps/GowEngine/src\"",
 					"\"$(SRCROOT)/../../core\"",
 				);

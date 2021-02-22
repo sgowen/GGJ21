@@ -17,6 +17,7 @@
 #include "TitleInputManager.hpp"
 #include "StringUtil.hpp"
 #include "FPSUtil.hpp"
+#include "ResourceManager.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -24,63 +25,53 @@
 #include <assert.h>
 
 TitleRenderer::TitleRenderer() :
-_fontBatcher(256, 0, 0, 16, 16, 16, 256, 256),
-_framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
-_screenRenderer(),
-_shaderManager(),
-_spriteBatcher(128),
-_textureManager(),
-_textViews{
-    TextView(TEXA_CENTER, "Dedicated Server Mode", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, ""),
-    TextView(TEXA_CENTER, ""),
-    TextView(TEXA_CENTER, "[H]ost Server"),
-    TextView(TEXA_CENTER, "[J]oin Server"),
-    TextView(TEXA_CENTER, "Enter IP address", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "Enter name", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
-    TextView(TEXA_RIGHT,   "[ESC] to exit")
-}
+//_fontBatcher(256, 0, 0, 16, 16, 16, 256, 256),
+//_framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
+//_screenRenderer(),
+//_spriteBatcher(128),
+//_textViews{
+//    TextView(TEXA_CENTER, "Dedicated Server Mode", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "[H]ost Server"),
+//    TextView(TEXA_CENTER, "[J]oin Server"),
+//    TextView(TEXA_CENTER, "Enter IP address", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "Enter name", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
+//    TextView(TEXA_RIGHT,   "[ESC] to exit")
+//}
 {
-    _fontBatcher.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
-    _fontBatcher.configure(_textViews[0], 0.5f, 0.50f, 0.025f);
-    _fontBatcher.configure(_textViews[1], 0.5f, 0.62f, 0.05f);
-    _fontBatcher.configure(_textViews[2], 0.5f, 0.54f, 0.05f);
-    _fontBatcher.configure(_textViews[3], 0.5f, 0.12f, 0.025f);
-    _fontBatcher.configure(_textViews[4], 0.5f, 0.06f, 0.025f);
-    _fontBatcher.configure(_textViews[5], 0.5f, 0.12f, 0.025f);
-    _fontBatcher.configure(_textViews[6], 0.5f, 0.12f, 0.025f);
-    _fontBatcher.configure(_textViews[7], 0.5f, 0.06f, 0.025f);
-    _fontBatcher.configure(_textViews[8], 0.98f, 0.02f, 0.012f);
+//    _fontBatcher.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+//    _fontBatcher.configure(_textViews[0], 0.5f, 0.50f, 0.025f);
+//    _fontBatcher.configure(_textViews[3], 0.5f, 0.12f, 0.025f);
+//    _fontBatcher.configure(_textViews[4], 0.5f, 0.06f, 0.025f);
+//    _fontBatcher.configure(_textViews[5], 0.5f, 0.12f, 0.025f);
+//    _fontBatcher.configure(_textViews[6], 0.5f, 0.12f, 0.025f);
+//    _fontBatcher.configure(_textViews[7], 0.5f, 0.06f, 0.025f);
+//    _fontBatcher.configure(_textViews[8], 0.98f, 0.02f, 0.012f);
 }
 
 void TitleRenderer::createDeviceDependentResources()
 {
-    _fontBatcher.createDeviceDependentResources();
-    
-    OGL.loadFramebuffer(_framebuffer);
-    
-    _screenRenderer.createDeviceDependentResources();
-    _shaderManager.createDeviceDependentResources();
-    _spriteBatcher.createDeviceDependentResources();
-    _textureManager.createDeviceDependentResources();
+//    _fontBatcher.createDeviceDependentResources();
+//    
+//    OGL.loadFramebuffer(_framebuffer);
+//    
+//    _screenRenderer.createDeviceDependentResources();
+//    _spriteBatcher.createDeviceDependentResources();
 }
 
-void TitleRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
+void TitleRenderer::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
 {
-    _screenRenderer.onWindowSizeChanged(screenWidth, screenHeight);
+//    _screenRenderer.onWindowSizeChanged(screenWidth, screenHeight);
 }
 
 void TitleRenderer::releaseDeviceDependentResources()
 {
-    _fontBatcher.releaseDeviceDependentResources();
-    
-    OGL.unloadFramebuffer(_framebuffer);
-    
-    _screenRenderer.releaseDeviceDependentResources();
-    _shaderManager.releaseDeviceDependentResources();
-    _spriteBatcher.releaseDeviceDependentResources();
-    _textureManager.releaseDeviceDependentResources();
+//    _fontBatcher.releaseDeviceDependentResources();
+//
+//    OGL.unloadFramebuffer(_framebuffer);
+//
+//    _screenRenderer.releaseDeviceDependentResources();
+//    _spriteBatcher.releaseDeviceDependentResources();
 }
 
 void TitleRenderer::render()
@@ -99,8 +90,6 @@ void TitleRenderer::render()
     int camWidth = CFG_MAIN._camWidth;
     int camHeight = CFG_MAIN._camHeight;
     
-    updateMatrix(0, camWidth, 0, camHeight);
-    
     OGL.bindFramebuffer(_framebuffer);
     OGL.enableBlending(true);
     
@@ -113,7 +102,7 @@ void TitleRenderer::render()
         _spriteBatcher.begin();
         TextureRegion demo(0, 480, 1366, 619, 2048, 2048);
         _spriteBatcher.addSprite(demo, camWidth / 2, camHeight / 2 + (camHeight * 0.1f), camWidth, camHeight * 0.8f);
-        _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("demo"));
+        _spriteBatcher.end(RES_MGR.shader("texture"), _matrix, RES_MGR.texture("demo"));
     }
     
     _fontBatcher.begin();
@@ -121,13 +110,7 @@ void TitleRenderer::render()
     {
         _fontBatcher.addText(_textViews[i]);
     }
-    _fontBatcher.end(_shaderManager.shader("texture"), _textureManager.texture("texture_font"));
+    _fontBatcher.end(RES_MGR.shader("texture"), RES_MGR.texture("texture_font"));
 
-    _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
-}
-
-void TitleRenderer::updateMatrix(float l, float r, float b, float t)
-{
-    mat4_identity(_matrix);
-    mat4_ortho(_matrix, l, r, b, t, -1, 1);
+    _screenRenderer.renderToScreen(RES_MGR.shader("framebuffer"), _framebuffer);
 }

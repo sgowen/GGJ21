@@ -88,8 +88,6 @@ void cb_server_handleInputStateRelease(InputState* inputState)
 
 void GameServerEngineState::enter(Engine* e)
 {
-    INST_REG.get<EntityLayoutManager>(INSK_ELM_SRVR)->initWithJSONFile(CFG_MAIN._entityLayoutManagerFilePath.c_str());
-    
     NetworkServer::create(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, GAME_ENGINE_SERVER_CBS);
     assert(NW_SRVR != NULL);
     

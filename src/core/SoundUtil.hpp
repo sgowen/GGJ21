@@ -17,6 +17,7 @@ class SoundUtil
 public:
     static void playSoundForStateIfChanged(Entity* e, uint8_t fromState, uint8_t toState);
     
+private:
     SoundUtil() {}
     ~SoundUtil() {}
     SoundUtil(const SoundUtil&);

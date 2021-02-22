@@ -26,6 +26,7 @@
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
 #include "EntityRenderController.hpp"
+#include "ResourceManager.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -33,72 +34,55 @@
 #include <assert.h>
 
 GameRenderer::GameRenderer() :
-_fontBatcher(256, 0, 0, 16, 16, 16, 256, 256),
-_framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
-_polygonBatcher(2, true),
-_screenRenderer(),
-_shaderManager(),
-_spriteBatcher(4096),
-_textureManager(),
-_textViews{
-    TextView(TEXA_CENTER, "Joining Server... [ESC] to exit", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "Lost Jackie again...", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "She needs to connect", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "a controller or", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "join me via IP.", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "Though I suppose", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "I could imagine her", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "with the arrow keys...", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "and unimagine her with .", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
-    TextView(TEXA_CENTER, "", TEXV_HIDDEN)
-}
+_renderer()
+//_fontBatcher(256, 0, 0, 16, 16, 16, 256, 256),
+//_framebuffer(CFG_MAIN._framebufferWidth, CFG_MAIN._framebufferHeight),
+//_rektangleBatcher(2, true),
+//_screenRenderer(),
+//_spriteBatcher(4096),
+//_textViews{
+//    TextView(TEXA_CENTER, "Joining Server... [ESC] to exit", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "Lost Jackie again...", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "She needs to connect", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "a controller or", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "join me via IP.", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "Though I suppose", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "I could imagine her", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "with the arrow keys...", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "and unimagine her with .", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "", TEXV_HIDDEN),
+//    TextView(TEXA_CENTER, "", TEXV_HIDDEN)
+//}
 {
-    _fontBatcher.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
-    _fontBatcher.configure(_textViews[0], 0.5f, 0.12f, 0.02f);
-    _fontBatcher.configure(_textViews[1], 0.75f, 0.7f, 0.018f);
-    _fontBatcher.configure(_textViews[2], 0.75f, 0.6f, 0.018f);
-    _fontBatcher.configure(_textViews[3], 0.75f, 0.56f, 0.018f);
-    _fontBatcher.configure(_textViews[4], 0.75f, 0.52f, 0.018f);
-    _fontBatcher.configure(_textViews[5], 0.75f, 0.40f, 0.018f);
-    _fontBatcher.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
-    _fontBatcher.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
-    _fontBatcher.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
-    _fontBatcher.configure(_textViews[9], 0.25f, 0.025f, 0.012f);
-    _fontBatcher.configure(_textViews[10], 0.75f, 0.025f, 0.012f);
+//    _fontBatcher.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+//    _fontBatcher.configure(_textViews[0], 0.5f, 0.12f, 0.02f);
+//    _fontBatcher.configure(_textViews[1], 0.75f, 0.7f, 0.018f);
+//    _fontBatcher.configure(_textViews[2], 0.75f, 0.6f, 0.018f);
+//    _fontBatcher.configure(_textViews[3], 0.75f, 0.56f, 0.018f);
+//    _fontBatcher.configure(_textViews[4], 0.75f, 0.52f, 0.018f);
+//    _fontBatcher.configure(_textViews[5], 0.75f, 0.40f, 0.018f);
+//    _fontBatcher.configure(_textViews[6], 0.75f, 0.36f, 0.018f);
+//    _fontBatcher.configure(_textViews[7], 0.75f, 0.32f, 0.018f);
+//    _fontBatcher.configure(_textViews[8], 0.75f, 0.28f, 0.018f);
+//    _fontBatcher.configure(_textViews[9], 0.25f, 0.025f, 0.012f);
+//    _fontBatcher.configure(_textViews[10], 0.75f, 0.025f, 0.012f);
 }
 
 void GameRenderer::createDeviceDependentResources()
 {
-    _fontBatcher.createDeviceDependentResources();
-    
-    OGL.loadFramebuffer(_framebuffer);
-    
-    _polygonBatcher.createDeviceDependentResources();
-    _screenRenderer.createDeviceDependentResources();
-    _shaderManager.createDeviceDependentResources();
-    _spriteBatcher.createDeviceDependentResources();
-    _textureManager.createDeviceDependentResources();
+    // TODO
 }
 
-void GameRenderer::onWindowSizeChanged(int screenWidth, int screenHeight)
+void GameRenderer::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
 {
-    _screenRenderer.onWindowSizeChanged(screenWidth, screenHeight);
+    // TODO
 }
 
 void GameRenderer::releaseDeviceDependentResources()
 {
-    _fontBatcher.releaseDeviceDependentResources();
-    
-    OGL.unloadFramebuffer(_framebuffer);
-    
-    _polygonBatcher.releaseDeviceDependentResources();
-    _screenRenderer.releaseDeviceDependentResources();
-    _shaderManager.releaseDeviceDependentResources();
-    _spriteBatcher.releaseDeviceDependentResources();
-    _textureManager.releaseDeviceDependentResources();
+    // TODO
 }
 
 void GameRenderer::render()
@@ -111,22 +95,10 @@ void GameRenderer::render()
     renderWorld();
     renderEncounter();
     renderUI();
+    
+    renderToScreen("framebuffer", _framebuffer);
 
-    _screenRenderer.renderToScreen(_shaderManager.shader("framebuffer"), _framebuffer);
-}
-
-void GameRenderer::updateMatrix(float l, float r, float b, float t)
-{
-    mat4_identity(_matrix);
-    mat4_ortho(_matrix, l, r, b, t, -1, 1);
-}
-
-void GameRenderer::addSpritesToBatcher(std::vector<Entity*>& entities)
-{
-    for (Entity* e : entities)
-    {
-        e->renderController()->addSprite(_spriteBatcher);
-    }
+    _screenRenderer.renderToScreen(RES_MGR.shader("framebuffer"), _framebuffer);
 }
 
 void GameRenderer::renderWorld()
@@ -141,15 +113,21 @@ void GameRenderer::renderWorld()
     addSpritesToBatcher(w.getLayers());
     addSpritesToBatcher(w.getStaticEntities());
     addSpritesToBatcher(w.getNetworkEntities());
-    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("background_tiles"));
+    _spriteBatcher.end(RES_MGR.shader("texture"), _matrix, RES_MGR.texture("background_tiles"));
     
     _spriteBatcher.begin();
     addSpritesToBatcher(w.getPlayers());
-    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("overworld_characters"));
+    _spriteBatcher.end(RES_MGR.shader("texture"), _matrix, RES_MGR.texture("overworld_characters"));
 }
 
 void GameRenderer::renderEncounter()
 {
+    World& w = ENGINE_STATE_GAME_CLNT._world;
+    if (!w.isEntityLayoutLoaded())
+    {
+        return;
+    }
+    
     bool isInEncounter = false;
     World& w = ENGINE_STATE_GAME_CLNT._world;
     Entity* hide = NULL;
@@ -167,12 +145,12 @@ void GameRenderer::renderEncounter()
         return;
     }
     
-    _polygonBatcher.begin();
-    _polygonBatcher.addRektangle(0,
+    _rektangleBatcher.begin();
+    _rektangleBatcher.addRektangle(0,
                                  0,
                                  CFG_MAIN._camWidth / 2,
                                  CFG_MAIN._camHeight);
-    _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
+    _rektangleBatcher.end(RES_MGR.shader("geometry"), _matrix, Color::DIM);
     
     _spriteBatcher.begin();
     for (Entity* e : w.getNetworkEntities())
@@ -186,7 +164,7 @@ void GameRenderer::renderEncounter()
     
     hide->renderController<HideRenderController>()->addSpriteForEncounter(_spriteBatcher);
     
-    _spriteBatcher.end(_shaderManager.shader("texture"), _matrix, _textureManager.texture("big_sprites"));
+    _spriteBatcher.end(RES_MGR.shader("texture"), _matrix, RES_MGR.texture("big_sprites"));
 }
 
 void GameRenderer::renderUI()
@@ -201,7 +179,7 @@ void GameRenderer::renderUI()
     World& w = ENGINE_STATE_GAME_CLNT._world;
     if (CFG_MAIN._showDebug)
     {
-        _polygonBatcher.begin();
+        _rektangleBatcher.begin();
         for (Entity* e : w.getPlayers())
         {
             PlayerController* ec = e->controller<PlayerController>();
@@ -212,7 +190,7 @@ void GameRenderer::renderUI()
             if (playerID == 1)
             {
                 _textViews[playerID + 8]._text = StringUtil::format("%s", ec->getUsername().c_str());
-                _polygonBatcher.addRektangle(0,
+                _rektangleBatcher.addRektangle(0,
                                              0,
                                              CFG_MAIN._camWidth / 2,
                                              3);
@@ -220,26 +198,25 @@ void GameRenderer::renderUI()
             else if (playerID == 2)
             {
                 _textViews[playerID + 8]._text = StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
-                _polygonBatcher.addRektangle(CFG_MAIN._camWidth / 2,
+                _rektangleBatcher.addRektangle(CFG_MAIN._camWidth / 2,
                                              0,
                                              CFG_MAIN._camWidth,
                                              3);
             }
         }
-        _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::DIM);
+        _rektangleBatcher.end(RES_MGR.shader("geometry"), _matrix, Color::DIM);
     }
     
-    if (NW_CLNT != NULL &&
-        NW_CLNT->state() == NWCS_WELCOMED)
+    if (NW_CLNT->state() == NWCS_WELCOMED)
     {
         if (w.getPlayers().size() == 1)
         {
-            _polygonBatcher.begin();
-            _polygonBatcher.addRektangle(CFG_MAIN._camWidth / 2,
+            _rektangleBatcher.begin();
+            _rektangleBatcher.addRektangle(CFG_MAIN._camWidth / 2,
                                          0,
                                          CFG_MAIN._camWidth,
                                          CFG_MAIN._camHeight);
-            _polygonBatcher.end(_shaderManager.shader("geometry"), _matrix, Color::BLACK);
+            _rektangleBatcher.end(RES_MGR.shader("geometry"), _matrix, Color::BLACK);
             
             for (uint8_t i = 1; i <= 8; ++i)
             {
@@ -257,5 +234,5 @@ void GameRenderer::renderUI()
     {
         _fontBatcher.addText(_textViews[i]);
     }
-    _fontBatcher.end(_shaderManager.shader("texture"), _textureManager.texture("texture_font"));
+    _fontBatcher.end(RES_MGR.shader("texture"), RES_MGR.texture("texture_font"));
 }

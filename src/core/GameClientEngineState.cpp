@@ -11,7 +11,7 @@
 #include "Engine.hpp"
 #include "TimeTracker.hpp"
 #include "Move.hpp"
-#include "Assets.hpp"
+#include "ResourceManager.hpp"
 #include "GameInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "PlayerController.hpp"
@@ -80,10 +80,8 @@ void cb_client_onPlayerWelcomed(uint8_t playerID)
 
 void GameClientEngineState::enter(Engine* e)
 {
-    INST_REG.get<EntityLayoutManager>(INSK_ELM_CLNT)->initWithJSONFile(CFG_MAIN._entityLayoutManagerFilePath.c_str());
-    
     createDeviceDependentResources();
-    onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+    onWindowSizeChanged(e->screenWidth(), e->screenHeight());
     
     std::string serverIPAddress;
     uint16_t port;
@@ -118,7 +116,7 @@ void GameClientEngineState::execute(Engine* e)
             createDeviceDependentResources();
             break;
         case ERSA_WINDOW_SIZE_CHANGED:
-            onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+            onWindowSizeChanged(e->screenWidth(), e->screenHeight());
             break;
         case ERSA_RELEASE_RESOURCES:
             releaseDeviceDependentResources();
@@ -182,7 +180,8 @@ World& GameClientEngineState::getWorld()
 
 void GameClientEngineState::createDeviceDependentResources()
 {
-    ASSETS.initWithJSONFile("data/json/assets_game.json");
+    RES_MGR.registerAssets("data/json/assets_game.json");
+    RES_MGR.createDeviceDependentResources();
     
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
@@ -190,7 +189,7 @@ void GameClientEngineState::createDeviceDependentResources()
     GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
-void GameClientEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
+void GameClientEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
 {
     _renderer.onWindowSizeChanged(screenWidth, screenHeight);
 }

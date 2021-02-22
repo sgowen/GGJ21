@@ -58,7 +58,7 @@ private:
     void removePlayer(uint8_t playerID);
     
     GameServerEngineState();
-    ~GameServerEngineState() {}
+    virtual ~GameServerEngineState() {}
     GameServerEngineState(const GameServerEngineState&);
     GameServerEngineState& operator=(const GameServerEngineState&);
 };

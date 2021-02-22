@@ -17,6 +17,7 @@
 #include "GameServerEngineState.hpp"
 #include "StringUtil.hpp"
 #include "MainConfig.hpp"
+#include "ResourceManager.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -24,7 +25,9 @@
 void TitleEngineState::enter(Engine* e)
 {
     createDeviceDependentResources();
-    onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+    onWindowSizeChanged(e->screenWidth(), e->screenHeight());
+    
+    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
 void TitleEngineState::execute(Engine* e)
@@ -35,7 +38,7 @@ void TitleEngineState::execute(Engine* e)
             createDeviceDependentResources();
             break;
         case ERSA_WINDOW_SIZE_CHANGED:
-            onWindowSizeChanged(e->screenWidth(), e->screenHeight(), e->cursorWidth(), e->cursorHeight());
+            onWindowSizeChanged(e->screenWidth(), e->screenHeight());
             break;
         case ERSA_RELEASE_RESOURCES:
             releaseDeviceDependentResources();
@@ -70,17 +73,16 @@ void TitleEngineState::exit(Engine* e)
 
 void TitleEngineState::createDeviceDependentResources()
 {
-    ASSETS.initWithJSONFile("data/json/assets_title.json");
+    RES_MGR.registerAssets("data/json/assets_title.json");
+    RES_MGR.createDeviceDependentResources();
     
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
     GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
     GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
-    
-    GOW_AUDIO.playMusic(true, 0.1f);
 }
 
-void TitleEngineState::onWindowSizeChanged(int screenWidth, int screenHeight, int cursorWidth, int cursorHeight)
+void TitleEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
 {
     _renderer.onWindowSizeChanged(screenWidth, screenHeight);
 }
