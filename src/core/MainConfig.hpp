@@ -49,7 +49,7 @@ public:
     float _monsterBattleY;
     float _monsterBattleWidth;
     float _monsterBattleHeight;
-    bool _sfxDisabled;
+    bool _soundsDisabled;
     bool _musicDisabled;
     bool _inputLoggingEnabled;
     bool _networkLoggingEnabled;
@@ -84,7 +84,7 @@ public:
         _monsterBattleY = c.getFloat("monsterBattleY");
         _monsterBattleWidth = c.getFloat("monsterBattleWidth");
         _monsterBattleHeight = c.getFloat("monsterBattleHeight");
-        _sfxDisabled = c.getBool("sfxDisabled");
+        _soundsDisabled = c.getBool("sfxDisabled");
         _musicDisabled = c.getBool("musicDisabled");
         _inputLoggingEnabled = c.getBool("inputLoggingEnabled");
         _networkLoggingEnabled = c.getBool("networkLoggingEnabled");

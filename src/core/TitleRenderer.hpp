@@ -13,5 +13,11 @@ class Renderer;
 class TitleRenderer
 {
 public:
-    void render(Renderer& r);
+    static void render(Renderer& r);
+    
+private:
+    TitleRenderer() {}
+    ~TitleRenderer() {}
+    TitleRenderer(const TitleRenderer&);
+    TitleRenderer& operator=(const TitleRenderer&);
 };

@@ -10,7 +10,7 @@
 
 #include "StateMachine.hpp"
 #include "World.hpp"
-#include "GameRenderer.hpp"
+#include "Renderer.hpp"
 
 class Engine;
 class TimeTracker;
@@ -41,7 +41,7 @@ public:
     
 private:
     World _world;
-    GameRenderer _renderer;
+    Renderer _renderer;
     
     void createDeviceDependentResources();
     void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);

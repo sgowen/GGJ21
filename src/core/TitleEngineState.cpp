@@ -18,6 +18,7 @@
 #include "StringUtil.hpp"
 #include "MainConfig.hpp"
 #include "ResourceManager.hpp"
+#include "TitleRenderer.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -75,10 +76,10 @@ void TitleEngineState::createDeviceDependentResources()
 {
     RES_MGR.registerAssets("data/json/assets_title.json");
     RES_MGR.createDeviceDependentResources();
-    
+    _renderer.initWithJSONFile("data/json/renderer_title.json");
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
-    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
+    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._soundsDisabled);
     GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
@@ -89,6 +90,7 @@ void TitleEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screen
 
 void TitleEngineState::releaseDeviceDependentResources()
 {
+    RES_MGR.releaseDeviceDependentResources();
     _renderer.releaseDeviceDependentResources();
     GOW_AUDIO.releaseDeviceDependentResources();
 }
@@ -178,7 +180,7 @@ void TitleEngineState::updateInputHostName(Engine* e)
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().insert({ARG_USERNAME, INPUT_TITLE.getTextInput()});
+            args.getMap().emplace(ARG_USERNAME, INPUT_TITLE.getTextInput());
             e->changeState(&ENGINE_STATE_GAME_HOST, args);
             break;
         }
@@ -199,8 +201,8 @@ void TitleEngineState::updateInputJoinName(Engine* e)
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().insert({ARG_IP_ADDRESS, _userEnteredIPAddress});
-            args.getMap().insert({ARG_USERNAME, INPUT_TITLE.getTextInput()});
+            args.getMap().emplace(ARG_IP_ADDRESS, _userEnteredIPAddress);
+            args.getMap().emplace(ARG_USERNAME, INPUT_TITLE.getTextInput());
             e->changeState(&ENGINE_STATE_GAME_CLNT, args);
             break;
         }
@@ -220,13 +222,14 @@ void TitleEngineState::updateStartDedicatedServer(Engine* e)
 
 void TitleEngineState::render()
 {
-    _renderer.render();
+    TitleRenderer::render(_renderer);
     GOW_AUDIO.render();
 }
 
 TitleEngineState::TitleEngineState() : State<Engine>(),
 _renderer(),
 _state(TESS_DEFAULT),
+_userEnteredIPAddress(""),
 _stateTime(0)
 {
     // Empty

@@ -13,10 +13,15 @@ class Renderer;
 class GameRenderer
 {
 public:
-    void render(Renderer& r);
+    static void render(Renderer& r);
     
 private:
-    void renderWorld(Renderer& r);
-    void renderEncounter(Renderer& r);
-    void renderUI(Renderer& r);
+    static void renderWorld(Renderer& r);
+    static void renderEncounter(Renderer& r);
+    static void renderUI(Renderer& r);
+    
+    GameRenderer() {}
+    ~GameRenderer() {}
+    GameRenderer(const GameRenderer&);
+    GameRenderer& operator=(const GameRenderer&);
 };

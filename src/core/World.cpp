@@ -18,7 +18,7 @@
 #include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"
 #include "StringUtil.hpp"
-#include "GowUtil.hpp"
+#include "STLUtil.hpp"
 #include "Network.hpp"
 #include "Macros.hpp"
 #include "PlayerController.hpp"
@@ -149,8 +149,8 @@ void World::reset()
 {
     _entityLayout = EntityLayoutDef();
     
-    GowUtil::cleanUpVectorOfPointers(_layers);
-    GowUtil::cleanUpVectorOfPointers(_staticEntities);
+    STLUtil::cleanUpVectorOfPointers(_layers);
+    STLUtil::cleanUpVectorOfPointers(_staticEntities);
 }
 
 bool World::isEntityLayoutLoaded()

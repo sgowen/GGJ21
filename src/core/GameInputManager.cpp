@@ -25,43 +25,50 @@ GameInputManagerState GameInputManager::update()
 {
     _state = GIMS_DEFAULT;
     
+    uint8_t& inputStateP1 = _inputState->getPlayerInputState(0)._inputState;
+    uint8_t& inputStateP2 = _inputState->getPlayerInputState(1)._inputState;
+    
+#if IS_MOBILE
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
     if (controlledPlayer != NULL)
     {
         uint8_t playerID = controlledPlayer->controller<PlayerController>()->getPlayerID();
-        float playerX = controlledPlayer == NULL ? 0 : controlledPlayer->position()._x;
-        float playerY = controlledPlayer == NULL ? 0 : controlledPlayer->position()._y;
+        float playerX = controlledPlayer->position()._x;
+        float playerY = controlledPlayer->position()._y;
         for (CursorEvent* e : INPUT_MGR.getCursorEvents())
         {
             Vector2& v = INPUT_MGR.convert(e);
             if (playerID == 1 && v._x > (CFG_MAIN._camWidth / 2))
             {
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
+                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
+                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
                 continue;
             }
             else if (playerID == 2 && v._x < (CFG_MAIN._camWidth / 2))
             {
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
+                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
+                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
                 continue;
             }
             
-            SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed() && v._y > playerY + 4);
-            SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed() && v._x < playerX - 4);
-            SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed() && v._y < playerY - 4);
-            SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed() && v._x > playerX + 4);
+            SET_BIT(inputStateP1, GISF_MOVING_UP, e->isPressed() && v._y > playerY + 4);
+            SET_BIT(inputStateP1, GISF_MOVING_LEFT, e->isPressed() && v._x < playerX - 4);
+            SET_BIT(inputStateP1, GISF_MOVING_DOWN, e->isPressed() && v._y < playerY - 4);
+            SET_BIT(inputStateP1, GISF_MOVING_RIGHT, e->isPressed() && v._x > playerX + 4);
         }
     }
+#endif
     
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {
+        uint8_t& inputState = e->_index == 0 ? inputStateP1 : inputStateP2;
+        
         switch (e->_button)
         {
             case GPEB_BUTTON_SELECT:
             case GPEB_BUTTON_SNES_SELECT:
                 _state = e->isDown() ? GIMS_EXIT : _state;
-                continue;
+                break;
             case GPEB_BUMPER_LEFT:
             case GPEB_BUMPER_RIGHT:
             {
@@ -69,44 +76,44 @@ GameInputManagerState GameInputManager::update()
                 {
                     drop2ndPlayer();
                 }
-                continue;
+                break;
             }
             case GPEB_BUTTON_A:
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_CONFIRM, e->isPressed());
-                continue;
+                SET_BIT(inputState, GISF_CONFIRM, e->isPressed());
+                break;
             case GPEB_BUTTON_B:
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_CANCEL, e->isPressed());
-                continue;
+                SET_BIT(inputState, GISF_CANCEL, e->isPressed());
+                break;
             case GPEB_D_PAD_UP:
             {
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, e->isPressed());
-                continue;
+                SET_BIT(inputState, GISF_MOVING_UP, e->isPressed());
+                break;
             }
             case GPEB_D_PAD_LEFT:
             {
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, e->isPressed());
-                continue;
+                SET_BIT(inputState, GISF_MOVING_LEFT, e->isPressed());
+                break;
             }
             case GPEB_D_PAD_DOWN:
             {
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, e->isPressed());
-                continue;
+                SET_BIT(inputState, GISF_MOVING_DOWN, e->isPressed());
+                break;
             }
             case GPEB_D_PAD_RIGHT:
             {
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, e->isPressed());
-                continue;
+                SET_BIT(inputState, GISF_MOVING_RIGHT, e->isPressed());
+                break;
             }
             case GPEB_STICK_LEFT:
             {
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_UP, e->_y < 0);
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_LEFT, e->_x < 0);
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_DOWN, e->_y > 0);
-                SET_BIT(_inputState->getPlayerInputState(e->_index)._inputState, GISF_MOVING_RIGHT, e->_x > 0);
-                continue;
+                SET_BIT(inputState, GISF_MOVING_UP, e->_y < 0);
+                SET_BIT(inputState, GISF_MOVING_LEFT, e->_x < 0);
+                SET_BIT(inputState, GISF_MOVING_DOWN, e->_y > 0);
+                SET_BIT(inputState, GISF_MOVING_RIGHT, e->_x > 0);
+                break;
             }
             default:
-                continue;
+                break;
         }
     }
     
@@ -116,54 +123,54 @@ GameInputManagerState GameInputManager::update()
         {
             case GOW_KEY_ESCAPE:
                 _state = GIMS_EXIT;
-                continue;
-            case GOW_KEY_SPACE_BAR: // Player 1
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CONFIRM, e->isPressed());
-                continue;
+                break;
+            case GOW_KEY_SPACE_BAR:
+                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed());
+                break;
             case GOW_KEY_DELETE:
-            case GOW_KEY_BACK_SPACE: // Player 1
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_CANCEL, e->isPressed());
-                continue;
-            case GOW_KEY_W: // Player 1
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_UP, e->isPressed());
-                continue;
-            case GOW_KEY_A: // Player 1
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_LEFT, e->isPressed());
-                continue;
-            case GOW_KEY_S: // Player 1
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_DOWN, e->isPressed());
-                continue;
-            case GOW_KEY_D: // Player 1
-                SET_BIT(_inputState->getPlayerInputState(0)._inputState, GISF_MOVING_RIGHT, e->isPressed());
-                continue;
-            case GOW_KEY_CARRIAGE_RETURN: // Player 2
-                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_CONFIRM, e->isPressed());
-                continue;
-            case GOW_KEY_COMMA: // Player 2
-                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_CANCEL, e->isPressed());
-                continue;
-            case GOW_KEY_ARROW_UP: // Player 2
-                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_MOVING_UP, e->isPressed());
-                continue;
-            case GOW_KEY_ARROW_LEFT: // Player 2
-                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_MOVING_LEFT, e->isPressed());
-                continue;
-            case GOW_KEY_ARROW_DOWN: // Player 2
-                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_MOVING_DOWN, e->isPressed());
-                continue;
-            case GOW_KEY_ARROW_RIGHT: // Player 2
-                SET_BIT(_inputState->getPlayerInputState(1)._inputState, GISF_MOVING_RIGHT, e->isPressed());
-                continue;
+            case GOW_KEY_BACK_SPACE:
+                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed());
+                break;
+            case GOW_KEY_W:
+                SET_BIT(inputStateP1, GISF_MOVING_UP, e->isPressed());
+                break;
+            case GOW_KEY_A:
+                SET_BIT(inputStateP1, GISF_MOVING_LEFT, e->isPressed());
+                break;
+            case GOW_KEY_S:
+                SET_BIT(inputStateP1, GISF_MOVING_DOWN, e->isPressed());
+                break;
+            case GOW_KEY_D:
+                SET_BIT(inputStateP1, GISF_MOVING_RIGHT, e->isPressed());
+                break;
+            case GOW_KEY_CARRIAGE_RETURN:
+                SET_BIT(inputStateP2, GISF_CONFIRM, e->isPressed());
+                break;
+            case GOW_KEY_COMMA:
+                SET_BIT(inputStateP2, GISF_CANCEL, e->isPressed());
+                break;
+            case GOW_KEY_ARROW_UP:
+                SET_BIT(inputStateP2, GISF_MOVING_UP, e->isPressed());
+                break;
+            case GOW_KEY_ARROW_LEFT:
+                SET_BIT(inputStateP2, GISF_MOVING_LEFT, e->isPressed());
+                break;
+            case GOW_KEY_ARROW_DOWN:
+                SET_BIT(inputStateP2, GISF_MOVING_DOWN, e->isPressed());
+                break;
+            case GOW_KEY_ARROW_RIGHT:
+                SET_BIT(inputStateP2, GISF_MOVING_RIGHT, e->isPressed());
+                break;
             case GOW_KEY_PERIOD:
             {
                 if (e->isDown())
                 {
                     drop2ndPlayer();
                 }
-                continue;
+                break;
             }
             default:
-                continue;
+                break;
         }
     }
     

@@ -31,6 +31,7 @@
 #include "Macros.hpp"
 #include "Network.hpp"
 #include "HideController.hpp"
+#include "GameRenderer.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -183,7 +184,7 @@ void GameClientEngineState::createDeviceDependentResources()
     
     _renderer.createDeviceDependentResources();
     GOW_AUDIO.createDeviceDependentResources();
-    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._sfxDisabled);
+    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._soundsDisabled);
     GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
@@ -247,7 +248,7 @@ void GameClientEngineState::update(Engine* e)
 
 void GameClientEngineState::render()
 {
-    _renderer.render();
+    GameRenderer::render(_renderer);
     GOW_AUDIO.render();
 }
 
