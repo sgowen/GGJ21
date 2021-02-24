@@ -224,8 +224,8 @@
 		BBBA579E25BB175A00C8207D /* MoveList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576425BB175900C8207D /* MoveList.cpp */; };
 		BBBA579F25BB175A00C8207D /* SocketAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576525BB175900C8207D /* SocketAddress.cpp */; };
 		BBBA57A025BB175A00C8207D /* SocketAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576525BB175900C8207D /* SocketAddress.cpp */; };
-		BBBA57A125BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */; };
-		BBBA57A225BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */; };
+		BBBA57A125BB175A00C8207D /* ReplicationTransmissionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576825BB175900C8207D /* ReplicationTransmissionData.cpp */; };
+		BBBA57A225BB175A00C8207D /* ReplicationTransmissionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576825BB175900C8207D /* ReplicationTransmissionData.cpp */; };
 		BBBA57A325BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */; };
 		BBBA57A425BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */; };
 		BBBA57A925BB175A00C8207D /* SocketUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA577125BB175A00C8207D /* SocketUtil.cpp */; };
@@ -987,7 +987,7 @@
 		BBBA575425BB175900C8207D /* InputMemoryBitStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputMemoryBitStream.hpp; sourceTree = "<group>"; };
 		BBBA575525BB175900C8207D /* SocketAddressFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketAddressFactory.cpp; sourceTree = "<group>"; };
 		BBBA575625BB175900C8207D /* Move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Move.cpp; sourceTree = "<group>"; };
-		BBBA575825BB175900C8207D /* ReplicationManagerTransmissionData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerTransmissionData.hpp; sourceTree = "<group>"; };
+		BBBA575825BB175900C8207D /* ReplicationTransmissionData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationTransmissionData.hpp; sourceTree = "<group>"; };
 		BBBA575925BB175900C8207D /* UDPSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UDPSocket.hpp; sourceTree = "<group>"; };
 		BBBA575B25BB175900C8207D /* NetworkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkClient.hpp; sourceTree = "<group>"; };
 		BBBA575E25BB175900C8207D /* SocketAddressFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketAddressFactory.hpp; sourceTree = "<group>"; };
@@ -999,7 +999,7 @@
 		BBBA576525BB175900C8207D /* SocketAddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketAddress.cpp; sourceTree = "<group>"; };
 		BBBA576625BB175900C8207D /* ReplicationCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationCommand.hpp; sourceTree = "<group>"; };
 		BBBA576725BB175900C8207D /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkServer.hpp; sourceTree = "<group>"; };
-		BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationManagerTransmissionData.cpp; sourceTree = "<group>"; };
+		BBBA576825BB175900C8207D /* ReplicationTransmissionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationTransmissionData.cpp; sourceTree = "<group>"; };
 		BBBA576925BB175900C8207D /* InputState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputState.hpp; sourceTree = "<group>"; };
 		BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryBitStreamUtil.cpp; sourceTree = "<group>"; };
 		BBBA576C25BB175A00C8207D /* MoveList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MoveList.hpp; sourceTree = "<group>"; };
@@ -1664,8 +1664,8 @@
 				BBBA573F25BB175800C8207D /* ReplicationManagerClient.hpp */,
 				BBBA573C25BB175800C8207D /* ReplicationManagerServer.cpp */,
 				BBBA576E25BB175A00C8207D /* ReplicationManagerServer.hpp */,
-				BBBA576825BB175900C8207D /* ReplicationManagerTransmissionData.cpp */,
-				BBBA575825BB175900C8207D /* ReplicationManagerTransmissionData.hpp */,
+				BBBA576825BB175900C8207D /* ReplicationTransmissionData.cpp */,
+				BBBA575825BB175900C8207D /* ReplicationTransmissionData.hpp */,
 				BB0BC1C525E0743F00276CEC /* ResourceManager.cpp */,
 				BB0BC1C425E0743F00276CEC /* ResourceManager.hpp */,
 				BBBA5C8925C332F000C8207D /* RTTI.cpp */,
@@ -2857,7 +2857,7 @@
 				BBBA46E225B913D900C8207D /* ALSoundSourcePool.m in Sources */,
 				BBBA5AF025BB5D1A00C8207D /* b2_collide_circle.cpp in Sources */,
 				BB76E11925DC76220016A19E /* GameHostEngineState.cpp in Sources */,
-				BBBA57A125BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */,
+				BBBA57A125BB175A00C8207D /* ReplicationTransmissionData.cpp in Sources */,
 				BBBA5ACE25BB5D1A00C8207D /* b2_friction_joint.cpp in Sources */,
 				BBBA5AC825BB5D1A00C8207D /* b2_edge_polygon_contact.cpp in Sources */,
 				BBBA471925B9150000C8207D /* Sound.cpp in Sources */,
@@ -2968,7 +2968,7 @@
 				BBBA5ADF25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
 				BB9E475325CE6AAD0031FE3A /* TopDownPhysicsController.cpp in Sources */,
 				BBBA5AB725BB5D1A00C8207D /* b2_contact.cpp in Sources */,
-				BBBA57A225BB175A00C8207D /* ReplicationManagerTransmissionData.cpp in Sources */,
+				BBBA57A225BB175A00C8207D /* ReplicationTransmissionData.cpp in Sources */,
 				BB2CD6C625C518B3007B8775 /* GameInputManager.cpp in Sources */,
 				BBBA5AF125BB5D1A00C8207D /* b2_collide_circle.cpp in Sources */,
 				BBBA46E125B913D900C8207D /* ALContext.m in Sources */,
