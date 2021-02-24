@@ -1,107 +1,106 @@
 {
-  "circleBatchers": [
-      "main": {
-          "maxBatchSize": 1
-      }
-  ],
-  "fontBatchers": [
-      "main": {
-          "texture": "texture_font"
-          "maxBatchSize": 256,
-          "glyphsPerRow": 16,
-          "glyphWidth": 16,
-          "glyphHeight": 16
-      }
-  ],
-  "framebuffers": [
-      "main": {
-          "width": 1600,
-          "height": 960,
-          "filterMin": "SMOOTH",
-          "filterMag": "SMOOTH"
-      }
-  ],
-  "matrices": [
-      "main": {
-          "left": 0,
-          "right": 96,
-          "bottom": 0,
-          "top": 60
-      }
-  ],
-  "rektangleBatchers": [
-      "main_border": {
-          "maxBatchSize": 1
-          "isFill": false
-      },
-      "main_filled": {
-          "maxBatchSize": 1
-          "isFill": true
-      }
-  ],
-  "spriteBatchers": [
-      "main": {
-          "maxBatchSize": 1
-      }
-  ],
-  "textViews": [
-      "dedicatedServerMode": {
-          "text": "Dedicated Server Mode",
-          "alignment": 1,
-          "xWeight": 0.5,
-          "yWeight": 0.5,
-          "glyphWidthWeight": 0.025
-      },
-      "hostServer": {
-          "text": "[H]ost Server",
-          "alignment": 1,
-          "xWeight": 0.5,
-          "yWeight": 0.12,
-          "glyphWidthWeight": 0.025
-      },
-      "joinServer": {
-          "text": "[J]oin Server",
-          "alignment": 1,
-          "xWeight": 0.5,
-          "yWeight": 0.06,
-          "glyphWidthWeight": 0.025
-      },
-      "enterIP": {
-          "text": "Enter IP address",
-          "alignment": 1,
-          "xWeight": 0.5,
-          "yWeight": 0.12,
-          "glyphWidthWeight": 0.025
-      },
-      "enterName": {
-          "text": "Enter name",
-          "alignment": 1,
-          "xWeight": 0.5,
-          "yWeight": 0.12,
-          "glyphWidthWeight": 0.025
-      },
-      "input": {
-          "alignment": 1,
-          "xWeight": 0.5,
-          "yWeight": 0.06,
-          "glyphWidthWeight": 0.025
-      },
-      "escToExit": {
-          "text": "[ESC] to exit"
-          "alignment": 2,
-          "xWeight": 0.98,
-          "yWeight": 0.02,
-          "glyphWidthWeight": 0.012
-      }
-  ],
-  "triangleBatchers": [
-      "main_border": {
-          "maxBatchSize": 1,
-          "isFill": false
-      },
-      "main_filled": {
-          "maxBatchSize": 1,
-          "isFill": true
-      }
-  ]
+  "circleBatchers": {
+    "main": {
+      "maxBatchSize": 1
+    }
+  },
+  "fontBatchers": {
+    "main": {
+      "matrix": "main",
+      "texture": "texture_font",
+      "maxBatchSize": 256,
+      "glyphsPerRow": 16,
+      "glyphWidth": 16,
+      "glyphHeight": 16
+    }
+  },
+  "framebuffers": {
+    "main": {
+      "width": 1600,
+      "height": 960,
+      "filterMin": "SMOOTH",
+      "filterMag": "SMOOTH"
+    }
+  },
+  "matrices": {
+    "main": {
+      "width": 100,
+      "height": 100
+    }
+  },
+  "rektangleBatchers": {
+    "main_border": {
+      "maxBatchSize": 1,
+      "isFill": false
+    },
+    "main_filled": {
+      "maxBatchSize": 1,
+      "isFill": true
+    }
+  },
+  "spriteBatchers": {
+    "main": {
+      "maxBatchSize": 1
+    }
+  },
+  "textViews": {
+    "dedicatedServerMode": {
+      "text": "Dedicated Server Mode",
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.5,
+      "glyphWidthWeight": 0.025
+    },
+    "hostServer": {
+      "text": "[H]ost Server",
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.12,
+      "glyphWidthWeight": 0.025
+    },
+    "joinServer": {
+      "text": "[J]oin Server",
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.06,
+      "glyphWidthWeight": 0.025
+    },
+    "enterIP": {
+      "text": "Enter IP address",
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.12,
+      "glyphWidthWeight": 0.025
+    },
+    "enterName": {
+      "text": "Enter name",
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.12,
+      "glyphWidthWeight": 0.025
+    },
+    "input": {
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.06,
+      "glyphWidthWeight": 0.025
+    },
+    "escToExit": {
+      "text": "[ESC] to exit",
+      "alignment": 2,
+      "xWeight": 0.98,
+      "yWeight": 0.02,
+      "glyphWidthWeight": 0.012
+    }
+  },
+  "triangleBatchers": {
+    "main_border": {
+      "maxBatchSize": 1,
+      "isFill": false
+    },
+    "main_filled": {
+      "maxBatchSize": 1,
+      "isFill": true
+    }
+  }
 }

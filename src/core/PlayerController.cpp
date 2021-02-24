@@ -65,25 +65,25 @@ void PlayerController::processInput(InputState* inputState, bool isLive)
     if (IS_BIT_SET(piss, GISF_MOVING_UP))
     {
         state = STAT_MOVING;
-        _stats._dir = PDIR_UP;
+        _stats._dir = EDIR_UP;
         vel._y = CFG_MAIN._playerMaxTopDownSpeed;
     }
     if (IS_BIT_SET(piss, GISF_MOVING_LEFT))
     {
         state = STAT_MOVING;
-        _stats._dir = PDIR_LEFT;
+        _stats._dir = EDIR_LEFT;
         vel._x = -  CFG_MAIN._playerMaxTopDownSpeed;
     }
     if (IS_BIT_SET(piss, GISF_MOVING_DOWN))
     {
         state = STAT_MOVING;
-        _stats._dir = PDIR_DOWN;
+        _stats._dir = EDIR_DOWN;
         vel._y = -CFG_MAIN._playerMaxTopDownSpeed;
     }
     if (IS_BIT_SET(piss, GISF_MOVING_RIGHT))
     {
         state = STAT_MOVING;
-        _stats._dir = PDIR_RIGHT;
+        _stats._dir = EDIR_RIGHT;
         vel._x = CFG_MAIN._playerMaxTopDownSpeed;
     }
     
@@ -121,11 +121,6 @@ void PlayerController::setPlayerID(uint8_t value)
 uint8_t PlayerController::getPlayerID() const
 {
     return _playerInfo._playerID;
-}
-
-PlayerDirection PlayerController::getPlayerDirection()
-{
-    return static_cast<PlayerDirection>(_stats._dir);
 }
 
 uint16_t PlayerController::getHealth()
@@ -243,10 +238,10 @@ IMPL_EntityController_create(PlayerRenderController, EntityRenderController)
 void PlayerRenderController::addSprite(SpriteBatcher& sb)
 {
     Entity& e = *_entity;
-    TextureRegion tr = RES_MGR.findTextureRegion(getTextureMapping(), e.stateTime());
+    TextureRegion& tr = RES_MGR.findTextureRegion(getTextureMapping(), e.stateTime());
     
     // I know... but look at the sprite sheet
     PlayerController* ec = e.controller<PlayerController>();
-    bool flipX = ec->_stats._dir == PDIR_RIGHT;
+    bool flipX = ec->_stats._dir == EDIR_RIGHT;
     sb.addSprite(tr, e.position()._x, e.position()._y, e.width(), e.height(), e.angle(), flipX);
 }

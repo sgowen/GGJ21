@@ -33,13 +33,12 @@ _entityLayout()
 
 World::~World()
 {
-    clearLayout();
-    clearNetwork();
+    reset();
 }
 
 void World::populateFromEntityLayout(EntityLayoutDef& eld)
 {
-    clearLayout();
+    reset();
     
     _entityLayout = eld;
     
@@ -146,18 +145,12 @@ std::vector<Entity*> World::update()
     return toDelete;
 }
 
-void World::clearLayout()
+void World::reset()
 {
     _entityLayout = EntityLayoutDef();
     
     GowUtil::cleanUpVectorOfPointers(_layers);
     GowUtil::cleanUpVectorOfPointers(_staticEntities);
-}
-
-void World::clearNetwork()
-{
-    GowUtil::cleanUpVectorOfPointers(_networkEntities);
-    GowUtil::cleanUpVectorOfPointers(_players);
 }
 
 bool World::isEntityLayoutLoaded()

@@ -44,6 +44,7 @@ public:
     float _playerBattleY;
     float _playerBattleWidth;
     float _playerBattleHeight;
+    float _jackiePushForce;
     float _monsterBattleX;
     float _monsterBattleY;
     float _monsterBattleWidth;
@@ -78,6 +79,7 @@ public:
         _playerBattleY = c.getFloat("playerBattleY");
         _playerBattleWidth = c.getFloat("playerBattleWidth");
         _playerBattleHeight = c.getFloat("playerBattleHeight");
+        _jackiePushForce = c.getFloat("jackiePushForce");
         _monsterBattleX = c.getFloat("monsterBattleX");
         _monsterBattleY = c.getFloat("monsterBattleY");
         _monsterBattleWidth = c.getFloat("monsterBattleWidth");

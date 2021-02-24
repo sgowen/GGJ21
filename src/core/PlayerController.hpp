@@ -15,14 +15,6 @@
 class InputState;
 struct Rektangle;
 
-enum PlayerDirection
-{
-    PDIR_UP      = 0,
-    PDIR_DOWN    = 1,
-    PDIR_LEFT    = 2,
-    PDIR_RIGHT   = 3
-};
-
 class PlayerController : public EntityController
 {
     friend class PlayerNetworkController;
@@ -44,7 +36,6 @@ public:
     std::string getUserAddress() const;
     void setPlayerID(uint8_t value);
     uint8_t getPlayerID() const;
-    PlayerDirection getPlayerDirection();
     uint16_t getHealth();
     
 protected:
@@ -97,7 +88,7 @@ protected:
         Stats()
         {
             _health = 3;
-            _dir = PDIR_UP;
+            _dir = 0;
         }
         
         friend bool operator==(Stats& a, Stats& b)

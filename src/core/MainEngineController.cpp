@@ -46,7 +46,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     configureForNetwork(configNW, CFG_MAIN._entityLayoutManagerFilePath);
     
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
-    configPhysics.emplace("Entity", TopDownPhysicsController::create);
+    configPhysics.emplace("Default", TopDownPhysicsController::create);
     configPhysics.emplace("Jackie", JackiePhysicsController::create);
     configPhysics.emplace("Monster", MonsterPhysicsController::create);
     configPhysics.emplace("Oven", OvenPhysicsController::create);

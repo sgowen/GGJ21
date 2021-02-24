@@ -1095,10 +1095,6 @@
       }
     },
     {
-      "name": "demo",
-      "filePath": "data/textures/demo.png"
-    },
-    {
       "name": "overworld_characters",
       "filePath": "data/textures/overworld_characters.png",
       "textureWidth": 1024,

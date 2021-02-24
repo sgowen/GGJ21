@@ -27,7 +27,7 @@ enum TitleInputManagerUpdate
     MIMU_READ_TEXT
 };
 
-#define INPUT_MAIN TitleInputManager::getInstance()
+#define INPUT_TITLE TitleInputManager::getInstance()
 
 class TitleInputManager
 {

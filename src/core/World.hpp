@@ -31,8 +31,7 @@ public:
     void recallCache();
     void stepPhysics(TimeTracker* tt);
     std::vector<Entity*> update();
-    void clearLayout();
-    void clearNetwork();
+    void reset();
     
     bool isEntityLayoutLoaded();
     EntityLayoutDef& getEntityLayout();

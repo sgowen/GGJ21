@@ -8,20 +8,10 @@
 
 #pragma once
 
-#include "Renderer.hpp"
-
-#include <stdint.h>
+class Renderer;
 
 class TitleRenderer
 {
 public:
-    TitleRenderer();
-    
-    void createDeviceDependentResources();
-    void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);
-    void releaseDeviceDependentResources();
-    void render();
-    
-private:
-    Renderer _renderer;
+    void render(Renderer& r);
 };

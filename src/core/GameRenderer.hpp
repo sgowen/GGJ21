@@ -8,22 +8,15 @@
 
 #pragma once
 
-#include "Renderer.hpp"
+class Renderer;
 
 class GameRenderer
 {
 public:
-    GameRenderer();
-    
-    void createDeviceDependentResources();
-    void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);
-    void releaseDeviceDependentResources();
-    void render();
+    void render(Renderer& r);
     
 private:
-    Renderer _renderer;
-    
-    void renderWorld();
-    void renderEncounter();
-    void renderUI();
+    void renderWorld(Renderer& r);
+    void renderEncounter(Renderer& r);
+    void renderUI(Renderer& r);
 };

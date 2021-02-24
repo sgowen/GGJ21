@@ -20,6 +20,4 @@ public:
     virtual ~CrystalController() {}
     
     virtual void onMessage(uint16_t message) override;
-    
-    void push(int dir);
 };

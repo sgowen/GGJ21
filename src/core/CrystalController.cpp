@@ -46,36 +46,12 @@ void CrystalController::onMessage(uint16_t message)
             // Only way to do that though... is to sync _nextNetworkEntityID
             if (_entity->isServer())
             {
-                _entity->physicsController<TopDownPhysicsController>()->updatePoseFromBody();
                 NW_SRVR->registerEntity(ENTITY_MGR.createEntity(EntityInstanceDef(INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID(), 'EXPL', _entity->position()._x, _entity->position()._y, true)));
                 NW_SRVR->registerEntity(ENTITY_MGR.createEntity(EntityInstanceDef(INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID(), 'MON1', rand() % 24 + 6, rand() % 32 + 12, true)));
                 _entity->requestDeletion();
             }
             break;
         }
-        default:
-            break;
-    }
-}
-
-void CrystalController::push(int dir)
-{
-    static float pushSpeed = 6;
-    
-    switch (dir)
-    {
-        case PDIR_UP:
-            _entity->velocity()._y = pushSpeed;
-            break;
-        case PDIR_DOWN:
-            _entity->velocity()._y = -pushSpeed;
-            break;
-        case PDIR_LEFT:
-            _entity->velocity()._x = -pushSpeed;
-            break;
-        case PDIR_RIGHT:
-            _entity->velocity()._x = pushSpeed;
-            break;
         default:
             break;
     }

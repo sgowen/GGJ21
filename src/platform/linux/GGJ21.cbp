@@ -37,10 +37,11 @@
 			<Add option="-D_GLFW_X11" />
 			<Add directory="../../../deps/GowEngine/deps/box2d/include" />
 			<Add directory="../../../deps/GowEngine/deps/box2d/src" />
-            <Add directory="../../../deps/GowEngine/deps/tinythreadpp/source" />
-			<Add directory="../../../deps/GowEngine/deps/glfw/include" />
+            <Add directory="../../../deps/GowEngine/deps/glfw/include" />
 			<Add directory="../../../deps/GowEngine/deps/rapidjson/include" />
+            <Add directory="../../../deps/GowEngine/deps/spdlog/include" />
 			<Add directory="../../../deps/GowEngine/deps/stb" />
+            <Add directory="../../../deps/GowEngine/deps/tinythreadpp/source" />
 			<Add directory="../../../deps/GowEngine/src" />
 			<Add directory="../../core" />
 		</Compiler>
@@ -58,7 +59,8 @@
 			<Add after="cp $(TARGET_OUTPUT_FILE) $(PROJECT_DIR)" />
 			<Mode after="always" />
 		</ExtraCommands>
-		<UnitsGlob directory="../../../deps/GowEngine/src" recursive="0" wildcard="*.cpp" />
+        <UnitsGlob directory="../../../deps/GowEngine/deps/spdlog/src" recursive="0" wildcard="*.cpp" />
+        <UnitsGlob directory="../../../deps/GowEngine/src" recursive="0" wildcard="*.cpp" />
 		<UnitsGlob directory="../../../deps/GowEngine/src" recursive="0" wildcard="*.hpp" />
 		<UnitsGlob directory="../../../deps/GowEngine/src/linux" recursive="0" wildcard="*.cpp" />
 		<UnitsGlob directory="../../../deps/GowEngine/src/linux" recursive="0" wildcard="*.hpp" />

@@ -55,7 +55,15 @@
       "name": "demo",
       "filePath": "data/textures/demo.png",
       "filterMin": "SMOOTH",
-      "filterMag": "SMOOTH"
+      "filterMag": "SMOOTH",
+      "mappings": {
+        "DEMO": {
+          "x": 0,
+          "y": 480,
+          "regionWidth": 1366,
+          "regionHeight": 619
+        }
+      }
     },
     {
       "name": "texture_font",

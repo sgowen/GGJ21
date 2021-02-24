@@ -114,8 +114,7 @@ void GameServerEngineState::exit(Engine* e)
 {
     NetworkServer::destroy();
     
-    _world.clearLayout();
-    _world.clearNetwork();
+    _world.reset();
 }
 
 void GameServerEngineState::handleNewClient(std::string username, uint8_t playerID)
@@ -138,11 +137,6 @@ void GameServerEngineState::handleLostClient(ClientProxy& cp, uint8_t localPlaye
             removePlayer(playerID);
         }
     }
-    
-    if (NW_SRVR->getNumPlayersConnected() == 0)
-    {
-        resetWorld();
-    }
 }
 
 InputState* GameServerEngineState::handleInputStateCreation()
@@ -159,20 +153,9 @@ void GameServerEngineState::handleInputStateRelease(InputState* inputState)
     _poolGameInputState.free(gameInputState);
 }
 
-void GameServerEngineState::resetWorld()
-{
-    _world.clearLayout();
-    
-    std::vector<Entity*>& networkEntities = _world.getNetworkEntities();
-    while (!networkEntities.empty())
-    {
-        NW_SRVR->deregisterEntity(networkEntities.front());
-    }
-}
-
 void GameServerEngineState::loadEntityLayout(EntityLayoutDef& eld)
 {
-    resetWorld();
+    NW_SRVR->deregisterAllEntities();
     
     _world.populateFromEntityLayout(eld);
     

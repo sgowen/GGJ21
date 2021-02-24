@@ -1,0 +1,128 @@
+{
+  "fontBatchers": {
+    "main": {
+      "matrix": "font",
+      "texture": "texture_font",
+      "maxBatchSize": 256,
+      "glyphsPerRow": 16,
+      "glyphWidth": 16,
+      "glyphHeight": 16
+    }
+  },
+  "framebuffers": {
+    "main": {
+      "width": 1600,
+      "height": 960,
+      "filterMin": "SMOOTH",
+      "filterMag": "SMOOTH"
+    }
+  },
+  "matrices": {
+    "main": {
+      "width": 96,
+      "height": 60
+    },
+    "font": {
+      "width": 100,
+      "height": 100
+    }
+  },
+  "rektangleBatchers": {
+    "main": {
+      "maxBatchSize": 2,
+      "isFill": true
+    }
+  },
+  "spriteBatchers": {
+    "main": {
+      "maxBatchSize": 4096
+    }
+  },
+  "textViews": {
+    "joiningServer": {
+      "text": "Joining Server... [ESC] to exit",
+      "alignment": 1,
+      "xWeight": 0.5,
+      "yWeight": 0.12,
+      "glyphWidthWeight": 0.02
+    },
+    "lostJackieAgain_0": {
+      "text": "Lost Jackie again...",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.7,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_1": {
+      "text": "She needs to connect",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.6,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_2": {
+      "text": "a controller or",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.56,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_3": {
+      "text": "join me via IP.",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.52,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_4": {
+      "text": "Though I suppose",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.4,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_5": {
+      "text": "I could imagine her",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.36,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_6": {
+      "text": "with the arrow keys...",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.32,
+      "glyphWidthWeight": 0.018
+    },
+    "lostJackieAgain_7": {
+      "text": "and unimagine her with .",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.28,
+      "glyphWidthWeight": 0.018
+    },
+    "player1Info": {
+      "alignment": 1,
+      "xWeight": 0.25,
+      "yWeight": 0.025,
+      "glyphWidthWeight": 0.012
+    },
+    "player2Info": {
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.025,
+      "glyphWidthWeight": 0.012
+    }
+  },
+  "triangleBatchers": {
+    "main_border": {
+      "maxBatchSize": 1,
+      "isFill": false
+    },
+    "main_filled": {
+      "maxBatchSize": 1,
+      "isFill": true
+    }
+  }
+}

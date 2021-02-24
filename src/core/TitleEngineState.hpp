@@ -10,15 +10,15 @@
 
 #include "StateMachine.hpp"
 
-#include "TitleRenderer.hpp"
+#include "Renderer.hpp"
 
 enum TitleEngineStateState
 {
-    MESS_DEFAULT,
-    MESS_INPUT_IP,
-    MESS_INPUT_HOST_NAME,
-    MESS_INPUT_JOIN_NAME,
-    MESS_START_DEDICATED_SERVER,
+    TESS_DEFAULT,
+    TESS_INPUT_IP,
+    TESS_INPUT_HOST_NAME,
+    TESS_INPUT_JOIN_NAME,
+    TESS_START_DEDICATED_SERVER,
 };
 
 class Engine;
@@ -41,7 +41,7 @@ public:
     virtual void exit(Engine* e);
     
 private:    
-    TitleRenderer _renderer;
+    Renderer _renderer;
     TitleEngineStateState _state;
     std::string _userEnteredIPAddress;
     int _stateTime;

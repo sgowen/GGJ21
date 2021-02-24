@@ -15,6 +15,7 @@
 #include "GowAudioEngine.hpp"
 #include "StringUtil.hpp"
 #include "EntityRenderController.hpp"
+#include "MainConfig.hpp"
 
 IMPL_RTTI(JackieController, PlayerController)
 IMPL_EntityController_create(JackieController, EntityController)
@@ -48,8 +49,7 @@ void JackiePhysicsController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        CrystalController* ec = e->controller<CrystalController>();
-        ec->push(_entity->controller<JackieController>()->_stats._dir);
+        e->physicsController<TopDownPhysicsController>()->push(_entity->controller<JackieController>()->_stats._dir, CFG_MAIN._jackiePushForce);
     }
 }
 
@@ -62,12 +62,12 @@ std::string JackieRenderController::getTextureMapping()
     
     switch (ec->_stats._dir)
     {
-        case PDIR_UP:
+        case EDIR_UP:
             return "JACKIE_UP";
-        case PDIR_LEFT:
-        case PDIR_RIGHT:
+        case EDIR_LEFT:
+        case EDIR_RIGHT:
             return "JACKIE_LEFT";
-        case PDIR_DOWN:
+        case EDIR_DOWN:
             return "JACKIE_DOWN";
     }
     

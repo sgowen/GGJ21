@@ -65,10 +65,10 @@ void TitleEngineState::exit(Engine* e)
 {
     releaseDeviceDependentResources();
     
-    _state = MESS_DEFAULT;
+    _state = TESS_DEFAULT;
     _stateTime = 0;
     _userEnteredIPAddress.clear();
-    INPUT_MAIN.clearTextInput();
+    INPUT_TITLE.clearTextInput();
 }
 
 void TitleEngineState::createDeviceDependentResources()
@@ -107,19 +107,19 @@ void TitleEngineState::update(Engine* e)
 {
     switch (_state)
     {
-        case MESS_DEFAULT:
+        case TESS_DEFAULT:
             updateDefault(e);
             break;
-        case MESS_INPUT_IP:
+        case TESS_INPUT_IP:
             updateInputIP(e);
             break;
-        case MESS_INPUT_HOST_NAME:
+        case TESS_INPUT_HOST_NAME:
             updateInputHostName(e);
             break;
-        case MESS_INPUT_JOIN_NAME:
+        case TESS_INPUT_JOIN_NAME:
             updateInputJoinName(e);
             break;
-        case MESS_START_DEDICATED_SERVER:
+        case TESS_START_DEDICATED_SERVER:
             updateStartDedicatedServer(e);
             break;
         default:
@@ -129,20 +129,20 @@ void TitleEngineState::update(Engine* e)
 
 void TitleEngineState::updateDefault(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_DEFAULT);
+    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_DEFAULT);
     switch (mims)
     {
         case MIMS_EXIT:
             e->setRequestedHostAction(ERHA_EXIT);
             break;
         case MIMS_START_SRVR:
-            _state = MESS_START_DEDICATED_SERVER;
+            _state = TESS_START_DEDICATED_SERVER;
             break;
         case MIMS_HOST_SRVR:
-            _state = MESS_INPUT_HOST_NAME;
+            _state = TESS_INPUT_HOST_NAME;
             break;
         case MIMS_JOIN_SRVR:
-            _state = MESS_INPUT_IP;
+            _state = TESS_INPUT_IP;
             break;
         default:
             break;
@@ -151,16 +151,16 @@ void TitleEngineState::updateDefault(Engine* e)
 
 void TitleEngineState::updateInputIP(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_READ_TEXT);
     switch (mims)
     {
         case MIMS_EXIT:
-            _state = MESS_DEFAULT;
+            _state = TESS_DEFAULT;
             break;
         case MIMS_TEXT_INPUT_READY:
-            _userEnteredIPAddress = INPUT_MAIN.getTextInput();
-            INPUT_MAIN.clearTextInput();
-            _state = MESS_INPUT_JOIN_NAME;
+            _userEnteredIPAddress = INPUT_TITLE.getTextInput();
+            INPUT_TITLE.clearTextInput();
+            _state = TESS_INPUT_JOIN_NAME;
             break;
         default:
             break;
@@ -169,16 +169,16 @@ void TitleEngineState::updateInputIP(Engine* e)
 
 void TitleEngineState::updateInputHostName(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_READ_TEXT);
     switch (mims)
     {
         case MIMS_EXIT:
-            _state = MESS_DEFAULT;
+            _state = TESS_DEFAULT;
             break;
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().insert({ARG_USERNAME, INPUT_MAIN.getTextInput()});
+            args.getMap().insert({ARG_USERNAME, INPUT_TITLE.getTextInput()});
             e->changeState(&ENGINE_STATE_GAME_HOST, args);
             break;
         }
@@ -189,18 +189,18 @@ void TitleEngineState::updateInputHostName(Engine* e)
 
 void TitleEngineState::updateInputJoinName(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_MAIN.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_READ_TEXT);
     switch (mims)
     {
         case MIMS_EXIT:
-            _state = MESS_INPUT_IP;
-            INPUT_MAIN.setTextInput(_userEnteredIPAddress);
+            _state = TESS_INPUT_IP;
+            INPUT_TITLE.setTextInput(_userEnteredIPAddress);
             break;
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
             args.getMap().insert({ARG_IP_ADDRESS, _userEnteredIPAddress});
-            args.getMap().insert({ARG_USERNAME, INPUT_MAIN.getTextInput()});
+            args.getMap().insert({ARG_USERNAME, INPUT_TITLE.getTextInput()});
             e->changeState(&ENGINE_STATE_GAME_CLNT, args);
             break;
         }
@@ -226,7 +226,7 @@ void TitleEngineState::render()
 
 TitleEngineState::TitleEngineState() : State<Engine>(),
 _renderer(),
-_state(MESS_DEFAULT),
+_state(TESS_DEFAULT),
 _stateTime(0)
 {
     // Empty

@@ -256,12 +256,12 @@ std::string HideRenderController::getTextureMapping()
     
     switch (ec->_stats._dir)
     {
-        case PDIR_UP:
+        case EDIR_UP:
             return "HIDE_UP";
-        case PDIR_LEFT:
-        case PDIR_RIGHT:
+        case EDIR_LEFT:
+        case EDIR_RIGHT:
             return "HIDE_LEFT";
-        case PDIR_DOWN:
+        case EDIR_DOWN:
             return "HIDE_DOWN";
     }
     

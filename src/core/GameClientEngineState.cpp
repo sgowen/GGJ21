@@ -61,9 +61,9 @@ void cb_client_handleInputStateRelease(InputState* inputState)
     INPUT_GAME.free(gis);
 }
 
-void cb_client_removeProcessedMoves(float inLastMoveProcessedOnServerTimestamp)
+void cb_client_removeProcessedMoves(float lastMoveProcessedOnServerTimestamp)
 {
-    INPUT_GAME.moveList().removeProcessedMoves(inLastMoveProcessedOnServerTimestamp, cb_client_handleInputStateRelease);
+    INPUT_GAME.moveList().removeProcessedMoves(lastMoveProcessedOnServerTimestamp, cb_client_handleInputStateRelease);
 }
 
 MoveList& cb_client_getMoveList()
@@ -147,11 +147,9 @@ void GameClientEngineState::exit(Engine* e)
     {
         NetworkClient::destroy();
     }
+    _world.reset();
     
     INPUT_GAME.reset();
-    
-    _world.clearLayout();
-    _world.clearNetwork();
 }
 
 Entity* GameClientEngineState::getControlledPlayer()
