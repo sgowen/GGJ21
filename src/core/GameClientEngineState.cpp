@@ -11,7 +11,7 @@
 #include "Engine.hpp"
 #include "TimeTracker.hpp"
 #include "Move.hpp"
-#include "ResourceManager.hpp"
+#include "AssetManager.hpp"
 #include "GameInputManager.hpp"
 #include "GowAudioEngine.hpp"
 #include "PlayerController.hpp"
@@ -106,7 +106,7 @@ void GameClientEngineState::enter(Engine* e)
         return;
     }
     
-    GOW_AUDIO.playMusic(true, 0.1f);
+    GOW_AUDIO.playMusic(0.1f, true);
 }
 
 void GameClientEngineState::execute(Engine* e)
@@ -179,13 +179,10 @@ World& GameClientEngineState::getWorld()
 
 void GameClientEngineState::createDeviceDependentResources()
 {
-    RES_MGR.registerAssets("data/json/assets_game.json");
-    RES_MGR.createDeviceDependentResources();
-    
+    ASSETS.registerAssets("data/json/assets_game.json");
+    ASSETS.createDeviceDependentResources();
+    _renderer.initWithJSONFile("data/json/renderer_game.json");
     _renderer.createDeviceDependentResources();
-    GOW_AUDIO.createDeviceDependentResources();
-    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._soundsDisabled);
-    GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
 void GameClientEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
@@ -196,7 +193,8 @@ void GameClientEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t s
 void GameClientEngineState::releaseDeviceDependentResources()
 {
     _renderer.releaseDeviceDependentResources();
-    GOW_AUDIO.releaseDeviceDependentResources();
+    ASSETS.releaseDeviceDependentResources();
+    ASSETS.deregisterAssets("data/json/assets_game.json");
 }
 
 void GameClientEngineState::resume()

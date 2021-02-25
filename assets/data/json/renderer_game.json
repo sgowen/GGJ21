@@ -46,60 +46,11 @@
       "yWeight": 0.12,
       "glyphWidthWeight": 0.02
     },
-    "lostJackieAgain_0": {
-      "text": "Lost Jackie again...",
+    "lostJackieAgain": {
+      "text": "Lost Jackie again...\n\nShe needs to connect\na controller or\njoin me via IP.\n\nThough I suppose\nI could imagine her\nwith the arrow keys...\nand unimagine her with .",
       "alignment": 1,
       "xWeight": 0.75,
       "yWeight": 0.7,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_1": {
-      "text": "She needs to connect",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.6,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_2": {
-      "text": "a controller or",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.56,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_3": {
-      "text": "join me via IP.",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.52,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_4": {
-      "text": "Though I suppose",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.4,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_5": {
-      "text": "I could imagine her",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.36,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_6": {
-      "text": "with the arrow keys...",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.32,
-      "glyphWidthWeight": 0.018
-    },
-    "lostJackieAgain_7": {
-      "text": "and unimagine her with .",
-      "alignment": 1,
-      "xWeight": 0.75,
-      "yWeight": 0.28,
       "glyphWidthWeight": 0.018
     },
     "player1Info": {

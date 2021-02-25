@@ -27,14 +27,14 @@ void TitleRenderer::render(Renderer& r)
         r.renderSprite("demo", "DEMO", 50, 60, 100, 80);
     }
     
-    r.textView("dedicatedServerMode")._visibility = tess == TESS_START_DEDICATED_SERVER;
-    r.textView("hostServer")._visibility = tess == TESS_DEFAULT;
-    r.textView("joinServer")._visibility = tess == TESS_DEFAULT;
-    r.textView("enterIP")._visibility = tess == TESS_INPUT_IP;
-    r.textView("enterName")._visibility = tess == TESS_INPUT_HOST_NAME || tess == TESS_INPUT_JOIN_NAME;
-    r.textView("input")._visibility = tess == TESS_INPUT_IP || tess == TESS_INPUT_HOST_NAME || tess == TESS_INPUT_JOIN_NAME;
-    r.textView("input")._text = INPUT_TITLE.getTextInput();
-    r.textView("escToExit")._visibility = tess != TESS_START_DEDICATED_SERVER;
+    r.setTextVisible("dedicatedServerMode", tess == TESS_START_DEDICATED_SERVER);
+    r.setTextVisible("hostServer", tess == TESS_DEFAULT);
+    r.setTextVisible("joinServer", tess == TESS_DEFAULT);
+    r.setTextVisible("enterIP", tess == TESS_INPUT_IP);
+    r.setTextVisible("enterName", tess == TESS_INPUT_HOST_NAME || tess == TESS_INPUT_JOIN_NAME);
+    r.setTextVisible("input", tess == TESS_INPUT_IP || tess == TESS_INPUT_HOST_NAME || tess == TESS_INPUT_JOIN_NAME);
+    r.setText("input", INPUT_TITLE.getTextInput());
+    r.setTextVisible("escToExit", tess != TESS_START_DEDICATED_SERVER);
     r.renderText();
 
     r.renderToScreen();

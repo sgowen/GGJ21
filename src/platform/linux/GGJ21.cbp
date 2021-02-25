@@ -35,6 +35,8 @@
 			<Add option="-fno-exceptions" />
 			<Add option="-fno-unwind-tables" />
 			<Add option="-D_GLFW_X11" />
+            <Add option="-DSPDLOG_COMPILED_LIB" />
+            <Add option="-DSPDLOG_NO_EXCEPTIONS" />
 			<Add directory="../../../deps/GowEngine/deps/box2d/include" />
 			<Add directory="../../../deps/GowEngine/deps/box2d/src" />
             <Add directory="../../../deps/GowEngine/deps/glfw/include" />

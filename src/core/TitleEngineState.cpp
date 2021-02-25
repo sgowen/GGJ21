@@ -17,7 +17,7 @@
 #include "GameServerEngineState.hpp"
 #include "StringUtil.hpp"
 #include "MainConfig.hpp"
-#include "ResourceManager.hpp"
+#include "AssetManager.hpp"
 #include "TitleRenderer.hpp"
 
 #include <stdlib.h>
@@ -28,7 +28,7 @@ void TitleEngineState::enter(Engine* e)
     createDeviceDependentResources();
     onWindowSizeChanged(e->screenWidth(), e->screenHeight());
     
-    GOW_AUDIO.playMusic(true, 0.1f);
+    GOW_AUDIO.playMusic(0.1f, true);
 }
 
 void TitleEngineState::execute(Engine* e)
@@ -74,13 +74,10 @@ void TitleEngineState::exit(Engine* e)
 
 void TitleEngineState::createDeviceDependentResources()
 {
-    RES_MGR.registerAssets("data/json/assets_title.json");
-    RES_MGR.createDeviceDependentResources();
+    ASSETS.registerAssets("data/json/assets_title.json");
+    ASSETS.createDeviceDependentResources();
     _renderer.initWithJSONFile("data/json/renderer_title.json");
     _renderer.createDeviceDependentResources();
-    GOW_AUDIO.createDeviceDependentResources();
-    GOW_AUDIO.setSoundsDisabled(CFG_MAIN._soundsDisabled);
-    GOW_AUDIO.setMusicDisabled(CFG_MAIN._musicDisabled);
 }
 
 void TitleEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
@@ -90,9 +87,9 @@ void TitleEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screen
 
 void TitleEngineState::releaseDeviceDependentResources()
 {
-    RES_MGR.releaseDeviceDependentResources();
     _renderer.releaseDeviceDependentResources();
-    GOW_AUDIO.releaseDeviceDependentResources();
+    ASSETS.releaseDeviceDependentResources();
+    ASSETS.deregisterAssets("data/json/assets_title.json");
 }
 
 void TitleEngineState::resume()

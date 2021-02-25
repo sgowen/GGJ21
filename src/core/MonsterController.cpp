@@ -217,7 +217,7 @@ void MonsterPhysicsController::onCollision(Entity* e)
     }
 }
 
-#include "ResourceManager.hpp"
+#include "AssetManager.hpp"
 #include "SpriteBatcher.hpp"
 
 IMPL_RTTI(MonsterRenderController, EntityRenderController)
@@ -240,7 +240,7 @@ std::string MonsterRenderController::getTextureMapping()
 
 void MonsterRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 {
-    TextureRegion tr = RES_MGR.findTextureRegion(getTextureMappingForEncounter(), 0);
+    TextureRegion tr = ASSETS.findTextureRegion(getTextureMappingForEncounter(), 0);
     sb.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
 }
 

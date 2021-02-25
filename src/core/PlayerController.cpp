@@ -229,7 +229,7 @@ uint8_t PlayerNetworkController::refreshDirtyState()
     return ret;
 }
 
-#include "ResourceManager.hpp"
+#include "AssetManager.hpp"
 #include "SpriteBatcher.hpp"
 
 IMPL_RTTI(PlayerRenderController, EntityRenderController)
@@ -238,7 +238,7 @@ IMPL_EntityController_create(PlayerRenderController, EntityRenderController)
 void PlayerRenderController::addSprite(SpriteBatcher& sb)
 {
     Entity& e = *_entity;
-    TextureRegion& tr = RES_MGR.findTextureRegion(getTextureMapping(), e.stateTime());
+    TextureRegion& tr = ASSETS.findTextureRegion(getTextureMapping(), e.stateTime());
     
     // I know... but look at the sprite sheet
     PlayerController* ec = e.controller<PlayerController>();

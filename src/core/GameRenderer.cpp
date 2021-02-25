@@ -27,7 +27,8 @@
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
 #include "EntityRenderController.hpp"
-#include "ResourceManager.hpp"
+#include "AssetManager.hpp"
+#include "Rektangle.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -53,15 +54,15 @@ void GameRenderer::renderWorld(Renderer& r)
         return;
     }
     
-    r.spriteBatcherBeginBatch();
+    r.spriteBatcherBegin();
     r.spriteBatcherAddEntities(w.getLayers());
     r.spriteBatcherAddEntities(w.getStaticEntities());
     r.spriteBatcherAddEntities(w.getNetworkEntities());
-    r.spriteBatcherEndBatch("background_tiles");
+    r.spriteBatcherEnd("background_tiles");
     
-    r.spriteBatcherBeginBatch();
+    r.spriteBatcherBegin();
     r.spriteBatcherAddEntities(w.getPlayers());
-    r.spriteBatcherEndBatch("overworld_characters");
+    r.spriteBatcherEnd("overworld_characters");
 }
 
 void GameRenderer::renderEncounter(Renderer& r)
@@ -88,86 +89,70 @@ void GameRenderer::renderEncounter(Renderer& r)
         return;
     }
     
-    _rektangleBatcher.begin();
-    _rektangleBatcher.addRektangle(0,
-                                 0,
-                                 CFG_MAIN._camWidth / 2,
-                                 CFG_MAIN._camHeight);
-    _rektangleBatcher.end(RES_MGR.shader("geometry"), _matrix, Color::DIM);
+    r.rektangleBatcherBegin();
+    Rektangle encounterBackground(0, 0, CFG_MAIN._camWidth / 2, CFG_MAIN._camHeight);
+    r.rektangleBatcherAddRektangle(encounterBackground);
+    r.rektangleBatcherEnd(Color::DIM);
     
-    _spriteBatcher.begin();
+    r.spriteBatcherBegin();
     for (Entity* e : w.getNetworkEntities())
     {
         if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
             e->controller<MonsterController>()->isInEncounter())
         {
-            e->renderController<MonsterRenderController>()->addSpriteForEncounter(_spriteBatcher);
+            e->renderController<MonsterRenderController>()->addSpriteForEncounter(r.spriteBatcher());
         }
     }
-    
-    hide->renderController<HideRenderController>()->addSpriteForEncounter(_spriteBatcher);
-    
-    _spriteBatcher.end(RES_MGR.shader("texture"), _matrix, RES_MGR.texture("big_sprites"));
+    hide->renderController<HideRenderController>()->addSpriteForEncounter(r.spriteBatcher());
+    r.spriteBatcherEnd("big_sprites");
 }
 
 void GameRenderer::renderUI(Renderer& r)
 {
-    for (auto& tv : _textViews)
-    {
-        tv._visibility = TEXV_HIDDEN;
-    }
+    r.hideAllText();
     
     World& w = ENGINE_STATE_GAME_CLNT._world;
     if (CFG_MAIN._showDebug)
     {
-        _rektangleBatcher.begin();
+        r.rektangleBatcherBegin();
         for (Entity* e : w.getPlayers())
         {
             PlayerController* ec = e->controller<PlayerController>();
             
             uint8_t playerID = ec->getPlayerID();
-            _textViews[playerID + 8]._visibility = TEXV_VISIBLE;
-            
             if (playerID == 1)
             {
-                _textViews[playerID + 8]._text = StringUtil::format("%s", ec->getUsername().c_str());
-                _rektangleBatcher.addRektangle(0,
-                                             0,
-                                             CFG_MAIN._camWidth / 2,
-                                             3);
+                r.setTextVisible("player1Info", true);
+                r.setText("player1Info", StringUtil::format("%s", ec->getUsername().c_str()));
+                Rektangle player1InfoBar(0, 0, CFG_MAIN._camWidth / 2, 3);
+                r.rektangleBatcherAddRektangle(player1InfoBar);
             }
             else if (playerID == 2)
             {
-                _textViews[playerID + 8]._text = StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str());
-                _rektangleBatcher.addRektangle(CFG_MAIN._camWidth / 2,
-                                             0,
-                                             CFG_MAIN._camWidth,
-                                             3);
+                r.setTextVisible("player2Info", true);
+                r.setText("player2Info", StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str()));
+                Rektangle player2InfoBar(CFG_MAIN._camWidth / 2, 0, CFG_MAIN._camWidth, 3);
+                r.rektangleBatcherAddRektangle(player2InfoBar);
             }
         }
-        _rektangleBatcher.end(RES_MGR.shader("geometry"), _matrix, Color::DIM);
+        r.rektangleBatcherEnd(Color::DIM);
     }
     
     if (NW_CLNT->state() == NWCS_WELCOMED)
     {
         if (w.getPlayers().size() == 1)
         {
-            _rektangleBatcher.begin();
-            _rektangleBatcher.addRektangle(CFG_MAIN._camWidth / 2,
-                                         0,
-                                         CFG_MAIN._camWidth,
-                                         CFG_MAIN._camHeight);
-            _rektangleBatcher.end(RES_MGR.shader("geometry"), _matrix, Color::BLACK);
+            r.rektangleBatcherBegin();
+            Rektangle player2BlackedOut(CFG_MAIN._camWidth / 2, 0, CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+            r.rektangleBatcherAddRektangle(player2BlackedOut);
+            r.rektangleBatcherEnd(Color::BLACK);
             
-            for (uint8_t i = 1; i <= 8; ++i)
-            {
-                _textViews[i]._visibility = TEXV_VISIBLE;
-            }
+            r.setTextVisible("lostJackieAgain", true);
         }
     }
     else
     {
-        _textViews[0]._visibility = TEXV_VISIBLE;
+        r.setTextVisible("joiningServer", true);
     }
     
     r.renderText();
