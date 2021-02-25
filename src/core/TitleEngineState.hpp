@@ -8,9 +8,7 @@
 
 #pragma once
 
-#include "StateMachine.hpp"
-
-#include "Renderer.hpp"
+#include "EngineState.hpp"
 
 enum TitleEngineStateState
 {
@@ -25,7 +23,7 @@ class Engine;
 
 #define ENGINE_STATE_TITLE TitleEngineState::getInstance()
 
-class TitleEngineState : public State<Engine>
+class TitleEngineState : public EngineState
 {
     friend class TitleRenderer;
     
@@ -37,30 +35,23 @@ public:
     }
     
     virtual void enter(Engine* e);
-    virtual void execute(Engine* e);
     virtual void exit(Engine* e);
+    virtual void update(Engine* e);
+    virtual void render(Engine* e);
     
-private:    
-    Renderer _renderer;
+private:
     TitleEngineStateState _state;
     std::string _userEnteredIPAddress;
     int _stateTime;
     
-    void createDeviceDependentResources();
-    void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);
-    void releaseDeviceDependentResources();
-    void resume();
-    void pause();
-    void update(Engine* e);
     void updateDefault(Engine* e);
     void updateInputIP(Engine* e);
     void updateInputHostName(Engine* e);
     void updateInputJoinName(Engine* e);
     void updateStartDedicatedServer(Engine* e);
-    void render();
     
     TitleEngineState();
-    ~TitleEngineState() {}
+    virtual ~TitleEngineState() {}
     TitleEngineState(const TitleEngineState&);
     TitleEngineState& operator=(const TitleEngineState&);
 };

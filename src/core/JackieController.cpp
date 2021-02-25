@@ -12,7 +12,7 @@
 #include "CrystalController.hpp"
 #include "GameInputState.hpp"
 #include "Macros.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "StringUtil.hpp"
 #include "EntityRenderController.hpp"
 #include "MainConfig.hpp"

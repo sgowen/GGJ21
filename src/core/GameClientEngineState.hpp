@@ -8,9 +8,8 @@
 
 #pragma once
 
-#include "StateMachine.hpp"
+#include "EngineState.hpp"
 #include "World.hpp"
-#include "Renderer.hpp"
 
 class Engine;
 class TimeTracker;
@@ -20,7 +19,7 @@ class Entity;
 
 #define ENGINE_STATE_GAME_CLNT GameClientEngineState::getInstance()
 
-class GameClientEngineState : public State<Engine>
+class GameClientEngineState : public EngineState
 {
     friend class GameInputManager;
     friend class GameRenderer;
@@ -33,23 +32,15 @@ public:
     }
     
     virtual void enter(Engine* e);
-    virtual void execute(Engine* e);
     virtual void exit(Engine* e);
+    virtual void update(Engine* e);
+    virtual void render(Engine* e);
     
     Entity* getControlledPlayer();
     World& getWorld();
     
 private:
     World _world;
-    Renderer _renderer;
-    
-    void createDeviceDependentResources();
-    void onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight);
-    void releaseDeviceDependentResources();
-    void resume();
-    void pause();
-    void update(Engine* e);
-    void render();
     
     void updateWorld(const Move& move, bool isLive);
     

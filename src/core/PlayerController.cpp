@@ -19,7 +19,7 @@
 #include "NetworkServer.hpp"
 #include "NetworkClient.hpp"
 #include "GameInputManager.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "SoundUtil.hpp"
 #include "Config.hpp"
 #include "MainConfig.hpp"
@@ -238,7 +238,7 @@ IMPL_EntityController_create(PlayerRenderController, EntityRenderController)
 void PlayerRenderController::addSprite(SpriteBatcher& sb)
 {
     Entity& e = *_entity;
-    TextureRegion& tr = ASSETS.findTextureRegion(getTextureMapping(), e.stateTime());
+    TextureRegion& tr = ASSETS.textureRegion(getTextureMapping(), e.stateTime());
     
     // I know... but look at the sprite sheet
     PlayerController* ec = e.controller<PlayerController>();

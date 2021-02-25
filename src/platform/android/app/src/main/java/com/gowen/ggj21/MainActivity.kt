@@ -1,4 +1,4 @@
-package com.sgowen.ggj21
+package com.gowen.ggj21
 
 import android.annotation.SuppressLint
 import android.content.Context

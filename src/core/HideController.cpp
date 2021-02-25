@@ -11,7 +11,7 @@
 #include "MainConfig.hpp"
 #include "Macros.hpp"
 #include "Entity.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "World.hpp"
 #include "MonsterController.hpp"
 #include "GameServerEngineState.hpp"
@@ -109,7 +109,7 @@ void HideController::processInput(InputState* inputState, bool isLive)
                 
                 if (isLive)
                 {
-                    GOW_AUDIO.playSound(_entity->renderController()->getSoundMapping(4));
+                    AUDIO_ENGINE.playSound(_entity->renderController()->getSoundMapping(4));
                 }
             }
         }
@@ -165,11 +165,11 @@ void HideNetworkController::read(InputMemoryBitStream& imbs)
         
         if (!ec->_encounterCache._isInCounter && ec->_encounter._isInCounter)
         {
-            GOW_AUDIO.playSound(_entity->renderController()->getSoundMapping(2));
+            AUDIO_ENGINE.playSound(_entity->renderController()->getSoundMapping(2));
         }
         else if (ec->_encounterCache._isInCounter && !ec->_encounter._isInCounter)
         {
-            GOW_AUDIO.playSound(_entity->renderController()->getSoundMapping(3));
+            AUDIO_ENGINE.playSound(_entity->renderController()->getSoundMapping(3));
         }
         
         ec->_encounterCache = ec->_encounter;
@@ -271,7 +271,7 @@ std::string HideRenderController::getTextureMapping()
 void HideRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 {
     HideController* ec = _entity->controller<HideController>();
-    TextureRegion tr = ASSETS.findTextureRegion(getTextureMappingForEncounter(), ec->_encounter._stateTime);
+    TextureRegion tr = ASSETS.textureRegion(getTextureMappingForEncounter(), ec->_encounter._stateTime);
     sb.addSprite(tr, CFG_MAIN._playerBattleX, CFG_MAIN._playerBattleY, getWidthForEncounter(), CFG_MAIN._playerBattleHeight, 0);
 }
 

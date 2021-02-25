@@ -10,7 +10,7 @@
 
 #include "Entity.hpp"
 #include "EntityRenderController.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 
 void SoundUtil::playSoundForStateIfChanged(Entity* e, uint8_t fromState, uint8_t toState)
 {
@@ -19,5 +19,5 @@ void SoundUtil::playSoundForStateIfChanged(Entity* e, uint8_t fromState, uint8_t
         return;
     }
     
-    GOW_AUDIO.playSound(e->renderController()->getSoundMapping(toState));
+    AUDIO_ENGINE.playSound(e->renderController()->getSoundMapping(toState));
 }

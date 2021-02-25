@@ -11,7 +11,7 @@
 #include "Engine.hpp"
 #include "Assets.hpp"
 #include "TitleInputManager.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "GameClientEngineState.hpp"
 #include "GameHostEngineState.hpp"
 #include "GameServerEngineState.hpp"
@@ -19,52 +19,21 @@
 #include "MainConfig.hpp"
 #include "AssetManager.hpp"
 #include "TitleRenderer.hpp"
+#include "Renderer.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
 
 void TitleEngineState::enter(Engine* e)
 {
-    createDeviceDependentResources();
-    onWindowSizeChanged(e->screenWidth(), e->screenHeight());
+    EngineState::enter(e);
     
-    GOW_AUDIO.playMusic(0.1f, true);
-}
-
-void TitleEngineState::execute(Engine* e)
-{
-    switch (e->requestedStateAction())
-    {
-        case ERSA_CREATE_RESOURCES:
-            createDeviceDependentResources();
-            break;
-        case ERSA_WINDOW_SIZE_CHANGED:
-            onWindowSizeChanged(e->screenWidth(), e->screenHeight());
-            break;
-        case ERSA_RELEASE_RESOURCES:
-            releaseDeviceDependentResources();
-            break;
-        case ERSA_RESUME:
-            resume();
-            break;
-        case ERSA_PAUSE:
-            pause();
-            break;
-        case ERSA_UPDATE:
-            update(e);
-            break;
-        case ERSA_RENDER:
-            render();
-            break;
-        case ERSA_DEFAULT:
-        default:
-            break;
-    }
+    AUDIO_ENGINE.playMusic(0.1f, true);
 }
 
 void TitleEngineState::exit(Engine* e)
 {
-    releaseDeviceDependentResources();
+    EngineState::exit(e);
     
     _state = TESS_DEFAULT;
     _stateTime = 0;
@@ -72,38 +41,10 @@ void TitleEngineState::exit(Engine* e)
     INPUT_TITLE.clearTextInput();
 }
 
-void TitleEngineState::createDeviceDependentResources()
-{
-    ASSETS.registerAssets("data/json/assets_title.json");
-    ASSETS.createDeviceDependentResources();
-    _renderer.initWithJSONFile("data/json/renderer_title.json");
-    _renderer.createDeviceDependentResources();
-}
-
-void TitleEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
-{
-    _renderer.onWindowSizeChanged(screenWidth, screenHeight);
-}
-
-void TitleEngineState::releaseDeviceDependentResources()
-{
-    _renderer.releaseDeviceDependentResources();
-    ASSETS.releaseDeviceDependentResources();
-    ASSETS.deregisterAssets("data/json/assets_title.json");
-}
-
-void TitleEngineState::resume()
-{
-    GOW_AUDIO.resume();
-}
-
-void TitleEngineState::pause()
-{
-    GOW_AUDIO.pause();
-}
-
 void TitleEngineState::update(Engine* e)
 {
+    EngineState::update(e);
+    
     switch (_state)
     {
         case TESS_DEFAULT:
@@ -124,6 +65,13 @@ void TitleEngineState::update(Engine* e)
         default:
             break;
     }
+}
+
+void TitleEngineState::render(Engine* e)
+{
+    EngineState::render(e);
+    
+    TitleRenderer::render(_renderer);
 }
 
 void TitleEngineState::updateDefault(Engine* e)
@@ -177,7 +125,7 @@ void TitleEngineState::updateInputHostName(Engine* e)
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().emplace(ARG_USERNAME, INPUT_TITLE.getTextInput());
+            args.putString(ARG_USERNAME, INPUT_TITLE.getTextInput());
             e->changeState(&ENGINE_STATE_GAME_HOST, args);
             break;
         }
@@ -198,8 +146,8 @@ void TitleEngineState::updateInputJoinName(Engine* e)
         case MIMS_TEXT_INPUT_READY:
         {
             Config args;
-            args.getMap().emplace(ARG_IP_ADDRESS, _userEnteredIPAddress);
-            args.getMap().emplace(ARG_USERNAME, INPUT_TITLE.getTextInput());
+            args.putString(ARG_IP_ADDRESS, _userEnteredIPAddress);
+            args.putString(ARG_USERNAME, INPUT_TITLE.getTextInput());
             e->changeState(&ENGINE_STATE_GAME_CLNT, args);
             break;
         }
@@ -217,14 +165,7 @@ void TitleEngineState::updateStartDedicatedServer(Engine* e)
     }
 }
 
-void TitleEngineState::render()
-{
-    TitleRenderer::render(_renderer);
-    GOW_AUDIO.render();
-}
-
-TitleEngineState::TitleEngineState() : State<Engine>(),
-_renderer(),
+TitleEngineState::TitleEngineState() : EngineState("data/json/assets_title.json", "data/json/renderer_title.json"),
 _state(TESS_DEFAULT),
 _userEnteredIPAddress(""),
 _stateTime(0)

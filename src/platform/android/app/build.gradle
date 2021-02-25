@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.sgowen.ggj21"
+        applicationId "com.gowen.ggj21"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

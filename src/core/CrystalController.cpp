@@ -19,7 +19,7 @@
 #include "NetworkServer.hpp"
 #include "NetworkClient.hpp"
 #include "GameInputManager.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "SoundUtil.hpp"
 #include "Config.hpp"
 #include "MainConfig.hpp"

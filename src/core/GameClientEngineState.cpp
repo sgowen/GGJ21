@@ -13,7 +13,7 @@
 #include "Move.hpp"
 #include "AssetManager.hpp"
 #include "GameInputManager.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "PlayerController.hpp"
 #include "Entity.hpp"
 #include "StringUtil.hpp"
@@ -21,7 +21,6 @@
 #include "NetworkClient.hpp"
 #include "GameInputState.hpp"
 #include "EntityRegistry.hpp"
-#include "GowAudioEngine.hpp"
 #include "Assets.hpp"
 #include "EntityManager.hpp"
 #include "EntityLayoutManager.hpp"
@@ -32,6 +31,8 @@
 #include "Network.hpp"
 #include "HideController.hpp"
 #include "GameRenderer.hpp"
+#include "Renderer.hpp"
+#include "AssetsLoader.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -81,8 +82,7 @@ void cb_client_onPlayerWelcomed(uint8_t playerID)
 
 void GameClientEngineState::enter(Engine* e)
 {
-    createDeviceDependentResources();
-    onWindowSizeChanged(e->screenWidth(), e->screenHeight());
+    EngineState::enter(e);
     
     std::string serverIPAddress;
     uint16_t port;
@@ -106,43 +106,12 @@ void GameClientEngineState::enter(Engine* e)
         return;
     }
     
-    GOW_AUDIO.playMusic(0.1f, true);
-}
-
-void GameClientEngineState::execute(Engine* e)
-{
-    switch (e->requestedStateAction())
-    {
-        case ERSA_CREATE_RESOURCES:
-            createDeviceDependentResources();
-            break;
-        case ERSA_WINDOW_SIZE_CHANGED:
-            onWindowSizeChanged(e->screenWidth(), e->screenHeight());
-            break;
-        case ERSA_RELEASE_RESOURCES:
-            releaseDeviceDependentResources();
-            break;
-        case ERSA_RESUME:
-            resume();
-            break;
-        case ERSA_PAUSE:
-            pause();
-            break;
-        case ERSA_UPDATE:
-            update(e);
-            break;
-        case ERSA_RENDER:
-            render();
-            break;
-        case ERSA_DEFAULT:
-        default:
-            break;
-    }
+    AUDIO_ENGINE.playMusic(0.1f, true);
 }
 
 void GameClientEngineState::exit(Engine* e)
 {
-    releaseDeviceDependentResources();
+    EngineState::exit(e);
     
     if (NW_CLNT != NULL)
     {
@@ -153,62 +122,10 @@ void GameClientEngineState::exit(Engine* e)
     INPUT_GAME.reset();
 }
 
-Entity* GameClientEngineState::getControlledPlayer()
-{
-    uint8_t playerID = INPUT_GAME.inputState()->getPlayerInputState(0).playerID();
-    Entity* ret = NULL;
-    
-    for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
-    {
-        PlayerController* ec = e->controller<PlayerController>();
-        
-        if (playerID == ec->getPlayerID())
-        {
-            ret = e;
-            break;
-        }
-    }
-    
-    return ret;
-}
-
-World& GameClientEngineState::getWorld()
-{
-    return _world;
-}
-
-void GameClientEngineState::createDeviceDependentResources()
-{
-    ASSETS.registerAssets("data/json/assets_game.json");
-    ASSETS.createDeviceDependentResources();
-    _renderer.initWithJSONFile("data/json/renderer_game.json");
-    _renderer.createDeviceDependentResources();
-}
-
-void GameClientEngineState::onWindowSizeChanged(uint16_t screenWidth, uint16_t screenHeight)
-{
-    _renderer.onWindowSizeChanged(screenWidth, screenHeight);
-}
-
-void GameClientEngineState::releaseDeviceDependentResources()
-{
-    _renderer.releaseDeviceDependentResources();
-    ASSETS.releaseDeviceDependentResources();
-    ASSETS.deregisterAssets("data/json/assets_game.json");
-}
-
-void GameClientEngineState::resume()
-{
-    GOW_AUDIO.resume();
-}
-
-void GameClientEngineState::pause()
-{
-    GOW_AUDIO.pause();
-}
-
 void GameClientEngineState::update(Engine* e)
 {
+    EngineState::update(e);
+    
     INST_REG.get<TimeTracker>(INSK_TIME_CLNT)->onFrame();
     
     if (INPUT_GAME.update() == GIMS_EXIT ||
@@ -244,10 +161,35 @@ void GameClientEngineState::update(Engine* e)
     NW_CLNT->sendOutgoingPackets();
 }
 
-void GameClientEngineState::render()
+void GameClientEngineState::render(Engine* e)
 {
+    EngineState::render(e);
+    
     GameRenderer::render(_renderer);
-    GOW_AUDIO.render();
+}
+
+Entity* GameClientEngineState::getControlledPlayer()
+{
+    uint8_t playerID = INPUT_GAME.inputState()->getPlayerInputState(0).playerID();
+    Entity* ret = NULL;
+    
+    for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
+    {
+        PlayerController* ec = e->controller<PlayerController>();
+        
+        if (playerID == ec->getPlayerID())
+        {
+            ret = e;
+            break;
+        }
+    }
+    
+    return ret;
+}
+
+World& GameClientEngineState::getWorld()
+{
+    return _world;
 }
 
 void GameClientEngineState::updateWorld(const Move& move, bool isLive)
@@ -265,9 +207,8 @@ void GameClientEngineState::updateWorld(const Move& move, bool isLive)
     NW_CLNT->onMoveProcessed();
 }
 
-GameClientEngineState::GameClientEngineState() : State<Engine>(),
-_world(),
-_renderer()
+GameClientEngineState::GameClientEngineState() : EngineState("data/json/assets_game.json", "data/json/renderer_game.json"),
+_world()
 {
     // Empty
 }

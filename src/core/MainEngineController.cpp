@@ -22,7 +22,7 @@
 #include "ExplosionController.hpp"
 #include "InputManager.hpp"
 #include "SocketUtil.hpp"
-#include "AudioEngineHelperFactory.hpp"
+#include "AudioEngineFactory.hpp"
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
@@ -31,8 +31,8 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     SOCKET_UTIL.setLoggingEnabled(CFG_MAIN._networkLoggingEnabled);
     INPUT_MGR.setLoggingEnabled(CFG_MAIN._inputLoggingEnabled);
     INPUT_MGR.setMatrixSize(CFG_MAIN._camWidth, CFG_MAIN._camHeight);
-    AUDIO_ENGINE_HELPER.setSoundsDisabled(CFG_MAIN._soundsDisabled);
-    AUDIO_ENGINE_HELPER.setMusicDisabled(CFG_MAIN._musicDisabled);
+    AUDIO_ENGINE.setSoundsDisabled(CFG_MAIN._soundsDisabled);
+    AUDIO_ENGINE.setMusicDisabled(CFG_MAIN._musicDisabled);
     
     std::map<std::string, EntityControllerCreationFunc> config;
     config.emplace("Hide", HideController::create);
@@ -62,9 +62,9 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     registerRenderControllers(configRender);
 }
 
-State<Engine>* MainEngineController::getInitialState()
+State<Engine>& MainEngineController::getInitialState()
 {
-    return &ENGINE_STATE_TITLE;
+    return ENGINE_STATE_TITLE;
 }
 
 double MainEngineController::getFrameRate()

@@ -19,7 +19,7 @@
 #include "NetworkServer.hpp"
 #include "NetworkClient.hpp"
 #include "GameInputManager.hpp"
-#include "GowAudioEngine.hpp"
+#include "AudioEngineFactory.hpp"
 #include "SoundUtil.hpp"
 #include "Config.hpp"
 #include "MainConfig.hpp"
@@ -240,7 +240,7 @@ std::string MonsterRenderController::getTextureMapping()
 
 void MonsterRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 {
-    TextureRegion tr = ASSETS.findTextureRegion(getTextureMappingForEncounter(), 0);
+    TextureRegion tr = ASSETS.textureRegion(getTextureMappingForEncounter(), 0);
     sb.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
 }
 
