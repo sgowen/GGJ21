@@ -30,10 +30,6 @@ public:
     uint32_t _clientPortHost;
     uint32_t _clientPortJoin;
     uint32_t _serverPort;
-    uint32_t _framebufferWidth;
-    uint32_t _framebufferHeight;
-    uint32_t _camWidth;
-    uint32_t _camHeight;
     uint32_t _maxTextInputLength;
     uint32_t _maxNumPlayers;
     float _playerMaxTopDownSpeed;
@@ -65,10 +61,6 @@ public:
         _clientPortHost = c.getUInt("clientPortHost");
         _clientPortJoin = c.getUInt("clientPortJoin");
         _serverPort = c.getUInt("serverPort");
-        _framebufferWidth = c.getUInt("framebufferWidth");
-        _framebufferHeight = c.getUInt("framebufferHeight");
-        _camWidth = c.getUInt("camWidth");
-        _camHeight = c.getUInt("camHeight");
         _maxTextInputLength = c.getUInt("maxTextInputLength");
         _maxNumPlayers = c.getUInt("maxNumPlayers");
         _playerMaxTopDownSpeed = c.getFloat("playerMaxTopDownSpeed");

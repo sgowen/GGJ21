@@ -84,6 +84,8 @@ void GameClientEngineState::enter(Engine* e)
 {
     EngineState::enter(e);
     
+    INPUT_GAME.setMatrix(&_renderer.matrix());
+    
     std::string serverIPAddress;
     uint16_t port;
     if (_args.hasValue(ARG_IP_ADDRESS))

@@ -40,7 +40,7 @@ void cb_server_onEntityRegistered(Entity* e)
         EntityLayoutDef& eld = elm->findEntityLayoutDef(key);
         elm->loadEntityLayout(eld);
         
-        ENGINE_STATE_GAME_SRVR.loadEntityLayout(eld);
+        ENGINE_STATE_GAME_SRVR.populateFromEntityLayout(eld);
     }
 }
 
@@ -153,9 +153,12 @@ void GameServerEngineState::handleInputStateRelease(InputState* inputState)
     _poolGameInputState.free(gameInputState);
 }
 
-void GameServerEngineState::loadEntityLayout(EntityLayoutDef& eld)
+void GameServerEngineState::populateFromEntityLayout(EntityLayoutDef& eld)
 {
-    NW_SRVR->deregisterAllEntities();
+    for (auto& e : _world.getNetworkEntities())
+    {
+        NW_SRVR->deregisterEntity(e);
+    }
     
     _world.populateFromEntityLayout(eld);
     

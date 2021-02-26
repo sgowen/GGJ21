@@ -89,8 +89,12 @@ void GameRenderer::renderEncounter(Renderer& r)
         return;
     }
     
+    Matrix& m = r.matrix();
+    float width = m._desc.width();
+    float height = m._desc.height();
+    
     r.rektangleBatcherBegin();
-    Rektangle encounterBackground(0, 0, CFG_MAIN._camWidth / 2, CFG_MAIN._camHeight);
+    Rektangle encounterBackground(0, 0, width / 2, height);
     r.rektangleBatcherAddRektangle(encounterBackground);
     r.rektangleBatcherEnd(Color::DIM);
     
@@ -111,6 +115,10 @@ void GameRenderer::renderUI(Renderer& r)
 {
     r.hideAllText();
     
+    Matrix& m = r.matrix();
+    float width = m._desc.width();
+    float height = m._desc.height();
+    
     World& w = ENGINE_STATE_GAME_CLNT._world;
     if (CFG_MAIN._showDebug)
     {
@@ -124,14 +132,14 @@ void GameRenderer::renderUI(Renderer& r)
             {
                 r.setTextVisible("player1Info", true);
                 r.setText("player1Info", StringUtil::format("%s", ec->getUsername().c_str()));
-                Rektangle player1InfoBar(0, 0, CFG_MAIN._camWidth / 2, 3);
+                Rektangle player1InfoBar(0, 0, width / 2, 3);
                 r.rektangleBatcherAddRektangle(player1InfoBar);
             }
             else if (playerID == 2)
             {
                 r.setTextVisible("player2Info", true);
                 r.setText("player2Info", StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str()));
-                Rektangle player2InfoBar(CFG_MAIN._camWidth / 2, 0, CFG_MAIN._camWidth, 3);
+                Rektangle player2InfoBar(width / 2, 0, width, 3);
                 r.rektangleBatcherAddRektangle(player2InfoBar);
             }
         }
@@ -143,7 +151,7 @@ void GameRenderer::renderUI(Renderer& r)
         if (w.getPlayers().size() == 1)
         {
             r.rektangleBatcherBegin();
-            Rektangle player2BlackedOut(CFG_MAIN._camWidth / 2, 0, CFG_MAIN._camWidth, CFG_MAIN._camHeight);
+            Rektangle player2BlackedOut(width / 2, 0, width, height);
             r.rektangleBatcherAddRektangle(player2BlackedOut);
             r.rektangleBatcherEnd(Color::BLACK);
             

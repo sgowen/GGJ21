@@ -20,6 +20,13 @@
 #include "PlayerController.hpp"
 #include "World.hpp"
 #include "Entity.hpp"
+#include "Matrix.hpp"
+
+void GameInputManager::setMatrix(Matrix* m)
+{
+    _matrix = m;
+    INPUT_MGR.setMatrix(m);
+}
 
 GameInputManagerState GameInputManager::update()
 {
@@ -28,26 +35,27 @@ GameInputManagerState GameInputManager::update()
     uint8_t& inputStateP1 = _inputState->getPlayerInputState(0)._inputState;
     uint8_t& inputStateP2 = _inputState->getPlayerInputState(1)._inputState;
     
-#if IS_MOBILE
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
-    if (controlledPlayer != NULL)
+    if (controlledPlayer != NULL && _matrix != NULL)
     {
         uint8_t playerID = controlledPlayer->controller<PlayerController>()->getPlayerID();
         float playerX = controlledPlayer->position()._x;
         float playerY = controlledPlayer->position()._y;
+        float width = _matrix->_desc.width();
+        float height = _matrix->_desc.height();
         for (CursorEvent* e : INPUT_MGR.getCursorEvents())
         {
             Vector2& v = INPUT_MGR.convert(e);
-            if (playerID == 1 && v._x > (CFG_MAIN._camWidth / 2))
+            if (playerID == 1 && v._x > (width / 2))
             {
-                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
-                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
+                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed() && v._y < height / 2);
+                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed() && v._y > height / 2);
                 continue;
             }
-            else if (playerID == 2 && v._x < (CFG_MAIN._camWidth / 2))
+            else if (playerID == 2 && v._x < (width / 2))
             {
-                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed() && v._y < CFG_MAIN._camHeight / 2);
-                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed() && v._y > CFG_MAIN._camHeight / 2);
+                SET_BIT(inputStateP1, GISF_CONFIRM, e->isPressed() && v._y < height / 2);
+                SET_BIT(inputStateP1, GISF_CANCEL, e->isPressed() && v._y > height / 2);
                 continue;
             }
             
@@ -57,7 +65,6 @@ GameInputManagerState GameInputManager::update()
             SET_BIT(inputStateP1, GISF_MOVING_RIGHT, e->isPressed() && v._x > playerX + 4);
         }
     }
-#endif
     
     for (GamepadEvent* e : INPUT_MGR.getGamepadEvents())
     {
@@ -231,7 +238,8 @@ void GameInputManager::drop2ndPlayer()
 
 GameInputManager::GameInputManager() :
 _inputState(NULL),
-_state(GIMS_DEFAULT)
+_state(GIMS_DEFAULT),
+_matrix(NULL)
 {
     reset();
 }

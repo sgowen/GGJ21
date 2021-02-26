@@ -24,7 +24,10 @@ void TitleRenderer::render(Renderer& r)
     }
     else
     {
-        r.renderSprite("demo", "DEMO", 50, 60, 100, 80);
+        Matrix& m = r.matrix();
+        float w = m._desc.width();
+        float h = m._desc.height();
+        r.renderSprite("demo", "DEMO", w / 2, h * 0.6, w, h * 0.8);
     }
     
     r.setTextVisible("dedicatedServerMode", tess == TESS_START_DEDICATED_SERVER);

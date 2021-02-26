@@ -3,8 +3,6 @@
   "clientPortHost": "1337",
   "clientPortJoin": "1338",
   "serverPort": "9999",
-  "camWidth": "96",
-  "camHeight": "60",
   "maxTextInputLength": "16",
   "maxNumPlayers": "2",
   "playerMaxTopDownSpeed": "8.0",

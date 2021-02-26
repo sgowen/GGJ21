@@ -1,7 +1,7 @@
 {
   "fontBatchers": {
     "main": {
-      "matrix": "font",
+      "matrix": "main",
       "texture": "texture_font",
       "maxBatchSize": 256,
       "glyphsPerRow": 16,
@@ -43,7 +43,7 @@
       "glyphWidthWeight": 0.02
     },
     "lostJackieAgain": {
-      "text": "Lost Jackie again...\n\nShe needs to connect\na controller or\njoin me via IP.\n\nThough I suppose\nI could imagine her\nwith the arrow keys...\nand unimagine her with .",
+      "text": "Lost Jackie again...\n\n\nShe needs to connect\na controller or\njoin me via IP.\n\n\nThough I suppose\nI could imagine her\nwith the arrow keys...\nand unimagine her with .",
       "alignment": 1,
       "xWeight": 0.75,
       "yWeight": 0.7,

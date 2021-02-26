@@ -22,6 +22,8 @@ enum GameInputManagerState
 
 #define INPUT_GAME GameInputManager::getInstance()
 
+class Matrix;
+
 class GameInputManager
 {
 public:
@@ -31,6 +33,7 @@ public:
         return ret;
     }
     
+    void setMatrix(Matrix* m);
     GameInputManagerState update();
     const Move& sampleInputAsNewMove();
     GameInputState* inputState();
@@ -44,6 +47,7 @@ private:
     Pool<GameInputState> _poolGameInputState;
     GameInputState* _inputState;
     MoveList _moveList;
+    Matrix* _matrix;
     
     void drop2ndPlayer();
     

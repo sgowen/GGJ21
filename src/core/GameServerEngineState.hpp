@@ -41,7 +41,7 @@ public:
     InputState* handleInputStateCreation();
     void handleInputStateRelease(InputState* inputState);
     void resetWorld();
-    void loadEntityLayout(EntityLayoutDef& eld);
+    void populateFromEntityLayout(EntityLayoutDef& eld);
     void restart();
     World& getWorld();
     
