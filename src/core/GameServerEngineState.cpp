@@ -37,9 +37,8 @@ void cb_server_onEntityRegistered(Entity* e)
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();
         EntityLayoutManager* elm = INST_REG.get<EntityLayoutManager>(INSK_ELM_SRVR);
-        EntityLayoutDef& eld = elm->findEntityLayoutDef(key);
+        EntityLayoutDef& eld = elm->entityLayoutDef(key);
         elm->loadEntityLayout(eld);
-        
         ENGINE_STATE_GAME_SRVR.populateFromEntityLayout(eld);
     }
 }

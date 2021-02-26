@@ -164,4 +164,18 @@ void GameRenderer::renderUI(Renderer& r)
     }
     
     r.renderText();
+    
+    MoveList& ml = INPUT_GAME.moveList();
+    if (ml.getMoveCount() == NW_CLNT_MAX_NUM_MOVES)
+    {
+        Matrix& m = r.matrix();
+        float width = m._desc.width();
+        float height = m._desc.height();
+        
+        Rektangle networkLagBg(0, 0, width, height);
+        Color networkLag(1, 0, 0, 0.1);
+        r.rektangleBatcherBegin();
+        r.rektangleBatcherAddRektangle(networkLagBg);
+        r.rektangleBatcherEnd(networkLag);
+    }
 }

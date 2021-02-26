@@ -32,7 +32,6 @@
 #include "HideController.hpp"
 #include "GameRenderer.hpp"
 #include "Renderer.hpp"
-#include "AssetsLoader.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -46,7 +45,7 @@ void cb_client_onEntityRegistered(Entity* e)
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();
         EntityLayoutManager* elm = INST_REG.get<EntityLayoutManager>(INSK_ELM_CLNT);
-        EntityLayoutDef& eld = elm->findEntityLayoutDef(key);
+        EntityLayoutDef& eld = elm->entityLayoutDef(key);
         elm->loadEntityLayout(eld);
         ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld);
     }
