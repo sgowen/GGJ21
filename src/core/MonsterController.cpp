@@ -217,7 +217,7 @@ void MonsterPhysicsController::onCollision(Entity* e)
     }
 }
 
-#include "AssetManager.hpp"
+#include "AssetsManager.hpp"
 #include "SpriteBatcher.hpp"
 
 IMPL_RTTI(MonsterRenderController, EntityRenderController)

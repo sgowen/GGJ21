@@ -11,7 +11,7 @@
 #include "Engine.hpp"
 #include "TimeTracker.hpp"
 #include "Move.hpp"
-#include "AssetManager.hpp"
+#include "AssetsManager.hpp"
 #include "GameInputManager.hpp"
 #include "AudioEngineFactory.hpp"
 #include "PlayerController.hpp"

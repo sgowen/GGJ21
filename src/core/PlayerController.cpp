@@ -229,7 +229,7 @@ uint8_t PlayerNetworkController::refreshDirtyState()
     return ret;
 }
 
-#include "AssetManager.hpp"
+#include "AssetsManager.hpp"
 #include "SpriteBatcher.hpp"
 
 IMPL_RTTI(PlayerRenderController, EntityRenderController)

@@ -244,7 +244,7 @@ uint8_t HideNetworkController::refreshDirtyState()
     return ret;
 }
 
-#include "AssetManager.hpp"
+#include "AssetsManager.hpp"
 #include "SpriteBatcher.hpp"
 
 IMPL_RTTI(HideRenderController, EntityRenderController)

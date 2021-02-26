@@ -17,7 +17,7 @@
 #include "GameServerEngineState.hpp"
 #include "StringUtil.hpp"
 #include "MainConfig.hpp"
-#include "AssetManager.hpp"
+#include "AssetsManager.hpp"
 #include "TitleRenderer.hpp"
 #include "Renderer.hpp"
 

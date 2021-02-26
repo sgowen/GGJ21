@@ -27,7 +27,7 @@
 #include "MonsterController.hpp"
 #include "CrystalController.hpp"
 #include "EntityRenderController.hpp"
-#include "AssetManager.hpp"
+#include "AssetsManager.hpp"
 #include "Rektangle.hpp"
 
 #include <sstream>
