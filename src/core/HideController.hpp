@@ -24,7 +24,7 @@ public:
     
     virtual void update() override;
     virtual void onMessage(uint16_t message) override;
-    virtual void processInput(InputState* inputState, bool isLive) override;
+    virtual void processInput(InputState* is, bool isLive) override;
     
     bool isInEncounter();
     void setEntityLayoutKey(uint32_t value);

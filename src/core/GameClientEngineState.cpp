@@ -19,7 +19,7 @@
 #include "StringUtil.hpp"
 #include "MathUtil.hpp"
 #include "NetworkClient.hpp"
-#include "GameInputState.hpp"
+#include "InputState.hpp"
 #include "EntityRegistry.hpp"
 #include "Assets.hpp"
 #include "EntityManager.hpp"
@@ -57,15 +57,9 @@ void cb_client_onEntityDeregistered(Entity* e)
     ENGINE_STATE_GAME_CLNT.getWorld().removeNetworkEntity(e);
 }
 
-void cb_client_handleInputStateRelease(InputState* inputState)
-{
-    GameInputState* gis = static_cast<GameInputState*>(inputState);
-    INPUT_GAME.free(gis);
-}
-
 void cb_client_removeProcessedMoves(float lastMoveProcessedOnServerTimestamp)
 {
-    INPUT_GAME.moveList().removeProcessedMoves(lastMoveProcessedOnServerTimestamp, cb_client_handleInputStateRelease);
+    INPUT_GAME.moveList().removeProcessedMovesAtTimestamp(lastMoveProcessedOnServerTimestamp, GameInputManager::cb_inputStateRelease);
 }
 
 MoveList& cb_client_getMoveList()
@@ -172,7 +166,7 @@ void GameClientEngineState::render(Engine* e)
 
 Entity* GameClientEngineState::getControlledPlayer()
 {
-    uint8_t playerID = INPUT_GAME.inputState()->getPlayerInputState(0).playerID();
+    uint8_t playerID = INPUT_GAME.inputState()->playerInputState(0)._playerID;
     Entity* ret = NULL;
     
     for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())

@@ -9,7 +9,7 @@
 #include "CrystalController.hpp"
 
 #include "Entity.hpp"
-#include "GameInputState.hpp"
+#include "InputState.hpp"
 #include "Rektangle.hpp"
 #include "World.hpp"
 #include "Macros.hpp"

@@ -31,8 +31,6 @@
 		BB21814D25C5282E004398D5 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21814A25C5282D004398D5 /* World.cpp */; };
 		BB21815225C52F00004398D5 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815025C52EFF004398D5 /* PlayerController.cpp */; };
 		BB21815325C52F00004398D5 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815025C52EFF004398D5 /* PlayerController.cpp */; };
-		BB21815825C52FF7004398D5 /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815725C52FF7004398D5 /* SoundUtil.cpp */; };
-		BB21815925C52FF7004398D5 /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21815725C52FF7004398D5 /* SoundUtil.cpp */; };
 		BB21816425C65B9E004398D5 /* JackieController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816125C65B9E004398D5 /* JackieController.cpp */; };
 		BB21816525C65B9E004398D5 /* JackieController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816125C65B9E004398D5 /* JackieController.cpp */; };
 		BB21816625C65B9E004398D5 /* HideController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB21816325C65B9E004398D5 /* HideController.cpp */; };
@@ -49,8 +47,6 @@
 		BB2CD6C625C518B3007B8775 /* GameInputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */; };
 		BB2CD6C725C518B3007B8775 /* GameClientEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6C025C518B3007B8775 /* GameClientEngineState.cpp */; };
 		BB2CD6C825C518B3007B8775 /* GameClientEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6C025C518B3007B8775 /* GameClientEngineState.cpp */; };
-		BB2CD6D525C522B0007B8775 /* GameInputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6D325C522B0007B8775 /* GameInputState.cpp */; };
-		BB2CD6D625C522B0007B8775 /* GameInputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB2CD6D325C522B0007B8775 /* GameInputState.cpp */; };
 		BB76E11925DC76220016A19E /* GameHostEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB76E11725DC76220016A19E /* GameHostEngineState.cpp */; };
 		BB76E11A25DC76220016A19E /* GameHostEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB76E11725DC76220016A19E /* GameHostEngineState.cpp */; };
 		BB76E12125DC76400016A19E /* GameServerEngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB76E12025DC76400016A19E /* GameServerEngineState.cpp */; };
@@ -364,6 +360,10 @@
 		BBBF680E25E84E7E00C1D6BD /* EngineState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF680B25E84E7E00C1D6BD /* EngineState.cpp */; };
 		BBBF681325E8593600C1D6BD /* RendererLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF681125E8593600C1D6BD /* RendererLoader.cpp */; };
 		BBBF681425E8593600C1D6BD /* RendererLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF681125E8593600C1D6BD /* RendererLoader.cpp */; };
+		BBBF682D25E9978B00C1D6BD /* InputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF682B25E9978A00C1D6BD /* InputState.cpp */; };
+		BBBF682E25E9978B00C1D6BD /* InputState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF682B25E9978A00C1D6BD /* InputState.cpp */; };
+		BBBF683525E99BDC00C1D6BD /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF683325E99BDC00C1D6BD /* SoundUtil.cpp */; };
+		BBBF683625E99BDC00C1D6BD /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF683325E99BDC00C1D6BD /* SoundUtil.cpp */; };
 		BBC149B425DD679900B78385 /* TriangleBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBC149B225DD679900B78385 /* TriangleBatcher.cpp */; };
 		BBC149B525DD679900B78385 /* TriangleBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBC149B225DD679900B78385 /* TriangleBatcher.cpp */; };
 		BBC149D425DDA89B00B78385 /* EntityRenderController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBC149D325DDA89B00B78385 /* EntityRenderController.cpp */; };
@@ -488,8 +488,6 @@
 		BB21814B25C5282D004398D5 /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		BB21815025C52EFF004398D5 /* PlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerController.cpp; sourceTree = "<group>"; };
 		BB21815125C52F00004398D5 /* PlayerController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerController.hpp; sourceTree = "<group>"; };
-		BB21815625C52FF7004398D5 /* SoundUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundUtil.hpp; sourceTree = "<group>"; };
-		BB21815725C52FF7004398D5 /* SoundUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundUtil.cpp; sourceTree = "<group>"; };
 		BB21816025C65B9E004398D5 /* HideController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HideController.hpp; sourceTree = "<group>"; };
 		BB21816125C65B9E004398D5 /* JackieController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JackieController.cpp; sourceTree = "<group>"; };
 		BB21816225C65B9E004398D5 /* JackieController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JackieController.hpp; sourceTree = "<group>"; };
@@ -506,8 +504,6 @@
 		BB2CD6C025C518B3007B8775 /* GameClientEngineState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameClientEngineState.cpp; sourceTree = "<group>"; };
 		BB2CD6C125C518B3007B8775 /* GameInputManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameInputManager.hpp; sourceTree = "<group>"; };
 		BB2CD6C225C518B3007B8775 /* GameRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameRenderer.hpp; sourceTree = "<group>"; };
-		BB2CD6D325C522B0007B8775 /* GameInputState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameInputState.cpp; sourceTree = "<group>"; };
-		BB2CD6D425C522B0007B8775 /* GameInputState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameInputState.hpp; sourceTree = "<group>"; };
 		BB76E11725DC76220016A19E /* GameHostEngineState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameHostEngineState.cpp; sourceTree = "<group>"; };
 		BB76E11825DC76220016A19E /* GameHostEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameHostEngineState.hpp; sourceTree = "<group>"; };
 		BB76E11F25DC76400016A19E /* GameServerEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameServerEngineState.hpp; sourceTree = "<group>"; };
@@ -1002,7 +998,6 @@
 		BBBA576625BB175900C8207D /* ReplicationCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationCommand.hpp; sourceTree = "<group>"; };
 		BBBA576725BB175900C8207D /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkServer.hpp; sourceTree = "<group>"; };
 		BBBA576825BB175900C8207D /* ReplicationTransmissionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReplicationTransmissionData.cpp; sourceTree = "<group>"; };
-		BBBA576925BB175900C8207D /* InputState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputState.hpp; sourceTree = "<group>"; };
 		BBBA576A25BB175A00C8207D /* MemoryBitStreamUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryBitStreamUtil.cpp; sourceTree = "<group>"; };
 		BBBA576C25BB175A00C8207D /* MoveList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MoveList.hpp; sourceTree = "<group>"; };
 		BBBA576E25BB175A00C8207D /* ReplicationManagerServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ReplicationManagerServer.hpp; sourceTree = "<group>"; };
@@ -1162,6 +1157,10 @@
 		BBBF680C25E84E7E00C1D6BD /* EngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EngineState.hpp; sourceTree = "<group>"; };
 		BBBF681125E8593600C1D6BD /* RendererLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RendererLoader.cpp; sourceTree = "<group>"; };
 		BBBF681225E8593600C1D6BD /* RendererLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererLoader.hpp; sourceTree = "<group>"; };
+		BBBF682B25E9978A00C1D6BD /* InputState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputState.cpp; sourceTree = "<group>"; };
+		BBBF682C25E9978A00C1D6BD /* InputState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputState.hpp; sourceTree = "<group>"; };
+		BBBF683325E99BDC00C1D6BD /* SoundUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundUtil.cpp; sourceTree = "<group>"; };
+		BBBF683425E99BDC00C1D6BD /* SoundUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundUtil.hpp; sourceTree = "<group>"; };
 		BBC149B225DD679900B78385 /* TriangleBatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TriangleBatcher.cpp; sourceTree = "<group>"; };
 		BBC149B325DD679900B78385 /* TriangleBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TriangleBatcher.hpp; sourceTree = "<group>"; };
 		BBC149D225DDA89B00B78385 /* EntityRenderController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityRenderController.hpp; sourceTree = "<group>"; };
@@ -1639,7 +1638,8 @@
 				BB7B07AF25B646BA0021E545 /* InputManager.hpp */,
 				BBBA573B25BB175800C8207D /* InputMemoryBitStream.cpp */,
 				BBBA575425BB175900C8207D /* InputMemoryBitStream.hpp */,
-				BBBA576925BB175900C8207D /* InputState.hpp */,
+				BBBF682B25E9978A00C1D6BD /* InputState.cpp */,
+				BBBF682C25E9978A00C1D6BD /* InputState.hpp */,
 				BBBA57D325BB566100C8207D /* InstanceRegistry.hpp */,
 				BBBA452C25B8822C00C8207D /* KeyboardEvent.hpp */,
 				BBBA5B9325BE1E3400C8207D /* LightRenderer.cpp */,
@@ -1713,6 +1713,8 @@
 				BBBA470625B914FF00C8207D /* SoundDescriptor.hpp */,
 				BBC779E025E6FA53000BF382 /* SoundManager.cpp */,
 				BBC779E125E6FA53000BF382 /* SoundManager.hpp */,
+				BBBF683325E99BDC00C1D6BD /* SoundUtil.cpp */,
+				BBBF683425E99BDC00C1D6BD /* SoundUtil.hpp */,
 				BBBA470825B914FF00C8207D /* SoundWrapper.cpp */,
 				BBBA470C25B914FF00C8207D /* SoundWrapper.hpp */,
 				BB7B079A25B646BA0021E545 /* SpriteBatcher.cpp */,
@@ -1820,8 +1822,6 @@
 				BB76E11825DC76220016A19E /* GameHostEngineState.hpp */,
 				BB2CD6BF25C518B2007B8775 /* GameInputManager.cpp */,
 				BB2CD6C125C518B3007B8775 /* GameInputManager.hpp */,
-				BB2CD6D325C522B0007B8775 /* GameInputState.cpp */,
-				BB2CD6D425C522B0007B8775 /* GameInputState.hpp */,
 				BB2CD6BE25C518B2007B8775 /* GameRenderer.cpp */,
 				BB2CD6C225C518B3007B8775 /* GameRenderer.hpp */,
 				BB76E12025DC76400016A19E /* GameServerEngineState.cpp */,
@@ -1839,8 +1839,6 @@
 				BB21817925C75AB5004398D5 /* OvenController.hpp */,
 				BB21815025C52EFF004398D5 /* PlayerController.cpp */,
 				BB21815125C52F00004398D5 /* PlayerController.hpp */,
-				BB21815725C52FF7004398D5 /* SoundUtil.cpp */,
-				BB21815625C52FF7004398D5 /* SoundUtil.hpp */,
 				BB7B091C25B659E70021E545 /* TitleEngineState.cpp */,
 				BB7B091B25B659E70021E545 /* TitleEngineState.hpp */,
 				BBBA5C1E25C2002300C8207D /* TitleInputManager.cpp */,
@@ -2737,7 +2735,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB2CD6D525C522B0007B8775 /* GameInputState.cpp in Sources */,
 				BBBA5AFE25BB5D1A00C8207D /* b2_polygon_shape.cpp in Sources */,
 				BBBA56E925BA453A00C8207D /* osmesa_context.c in Sources */,
 				BBBA579F25BB175A00C8207D /* SocketAddress.cpp in Sources */,
@@ -2847,6 +2844,7 @@
 				BB9E475225CE6AAD0031FE3A /* TopDownPhysicsController.cpp in Sources */,
 				BBBA577D25BB175A00C8207D /* ReplicationCommand.cpp in Sources */,
 				BBBA5C6A25C31B1400C8207D /* Color.cpp in Sources */,
+				BBBF683525E99BDC00C1D6BD /* SoundUtil.cpp in Sources */,
 				BBBA56EF25BA453A00C8207D /* posix_thread.c in Sources */,
 				BBC779E225E6FA53000BF382 /* SoundManager.cpp in Sources */,
 				BBBA56F925BA453A00C8207D /* xkb_unicode.c in Sources */,
@@ -2869,7 +2867,6 @@
 				BBBA56F425BA453A00C8207D /* egl_context.c in Sources */,
 				BBBA5AFC25BB5D1A00C8207D /* b2_dynamic_tree.cpp in Sources */,
 				BBBA468025B9121600C8207D /* AppleSound.cpp in Sources */,
-				BB21815825C52FF7004398D5 /* SoundUtil.cpp in Sources */,
 				BB16D1FF25B7623700C340C1 /* LinuxAssetHandler.cpp in Sources */,
 				BBBA57A325BB175A00C8207D /* MemoryBitStreamUtil.cpp in Sources */,
 				BBBA577F25BB175A00C8207D /* NetworkServer.cpp in Sources */,
@@ -2897,6 +2894,7 @@
 				BBBA5C2125C2002300C8207D /* TitleInputManager.cpp in Sources */,
 				BBBA5AB825BB5D1A00C8207D /* b2_revolute_joint.cpp in Sources */,
 				BBBA46F625B913D900C8207D /* OALAudioActions.m in Sources */,
+				BBBF682D25E9978B00C1D6BD /* InputState.cpp in Sources */,
 				BBBA46DC25B913D900C8207D /* ALBuffer.m in Sources */,
 				BBBA5ABC25BB5D1A00C8207D /* b2_world_callbacks.cpp in Sources */,
 				BBBA46DE25B913D900C8207D /* ALCaptureDevice.m in Sources */,
@@ -2985,14 +2983,12 @@
 				BBBA578825BB175A00C8207D /* NetworkClient.cpp in Sources */,
 				BBBA5AFF25BB5D1A00C8207D /* b2_polygon_shape.cpp in Sources */,
 				BBBA579025BB175A00C8207D /* Move.cpp in Sources */,
-				BB21815925C52FF7004398D5 /* SoundUtil.cpp in Sources */,
 				BB1C5E0925E5624A00ED3EF0 /* color_sinks.cpp in Sources */,
 				BB21816F25C66D37004398D5 /* MonsterController.cpp in Sources */,
 				BBBA57A025BB175A00C8207D /* SocketAddress.cpp in Sources */,
 				BB21816525C65B9E004398D5 /* JackieController.cpp in Sources */,
 				BBBA57AE25BB175A00C8207D /* ReplicationManagerClient.cpp in Sources */,
 				BBBA5AF325BB5D1A00C8207D /* b2_circle_shape.cpp in Sources */,
-				BB2CD6D625C522B0007B8775 /* GameInputState.cpp in Sources */,
 				BBBA5ADF25BB5D1A00C8207D /* b2_fixture.cpp in Sources */,
 				BB9E475325CE6AAD0031FE3A /* TopDownPhysicsController.cpp in Sources */,
 				BBBA5AB725BB5D1A00C8207D /* b2_contact.cpp in Sources */,
@@ -3033,6 +3029,7 @@
 				BB8BCD2425B68490005F57B8 /* OpenGLWrapper.cpp in Sources */,
 				BBBF680E25E84E7E00C1D6BD /* EngineState.cpp in Sources */,
 				BBBA5ADB25BB5D1A00C8207D /* b2_circle_contact.cpp in Sources */,
+				BBBF682E25E9978B00C1D6BD /* InputState.cpp in Sources */,
 				BBBA57F125BB58CA00C8207D /* EntityLayoutManager.cpp in Sources */,
 				BBBA46EB25B913D900C8207D /* NSMutableArray+WeakReferences.m in Sources */,
 				BBBA5ABD25BB5D1A00C8207D /* b2_world_callbacks.cpp in Sources */,
@@ -3056,6 +3053,7 @@
 				BBBA46F125B913D900C8207D /* OALActionManager.m in Sources */,
 				BBBA578E25BB175A00C8207D /* SocketAddressFactory.cpp in Sources */,
 				BBBA5C2425C2002300C8207D /* TitleRenderer.cpp in Sources */,
+				BBBF683625E99BDC00C1D6BD /* SoundUtil.cpp in Sources */,
 				BB1C5E0125E5624A00ED3EF0 /* stdout_sinks.cpp in Sources */,
 				BBBA46F325B913D900C8207D /* OALAction.m in Sources */,
 				BBBA467D25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */,

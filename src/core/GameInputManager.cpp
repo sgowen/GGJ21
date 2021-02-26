@@ -32,8 +32,8 @@ GameInputManagerState GameInputManager::update()
 {
     _state = GIMS_DEFAULT;
     
-    uint8_t& inputStateP1 = _inputState->getPlayerInputState(0)._inputState;
-    uint8_t& inputStateP2 = _inputState->getPlayerInputState(1)._inputState;
+    uint8_t& inputStateP1 = _inputState->playerInputState(0)._inputState;
+    uint8_t& inputStateP2 = _inputState->playerInputState(1)._inputState;
     
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
     if (controlledPlayer != NULL && _matrix != NULL)
@@ -191,14 +191,14 @@ GameInputManagerState GameInputManager::update()
 
 const Move& GameInputManager::sampleInputAsNewMove()
 {
-    GameInputState* inputState = _poolGameInputState.obtain();
+    InputState* inputState = _poolInputState.obtain();
     _inputState->copyTo(inputState);
     
     TimeTracker* tt = INST_REG.get<TimeTracker>(INSK_TIME_CLNT);
     return _moveList.addMove(inputState, tt->_time, NW_CLNT->getNumMovesProcessed());
 }
 
-GameInputState* GameInputManager::inputState()
+InputState* GameInputManager::inputState()
 {
     return _inputState;
 }
@@ -208,22 +208,23 @@ MoveList& GameInputManager::moveList()
     return _moveList;
 }
 
-void GameInputManager::free(GameInputState *gis)
+void GameInputManager::free(InputState *gis)
 {
     if (gis == NULL)
     {
         return;
     }
     
-    _poolGameInputState.free(gis);
+    _poolInputState.free(gis);
 }
 
 void GameInputManager::reset()
 {
     free(_inputState);
     
-    _inputState = _poolGameInputState.obtain();
+    _inputState = _poolInputState.obtain();
     _inputState->reset();
+    _inputState->setMaxNumPlayers(CFG_MAIN._maxNumPlayers);
     
     _state = GIMS_DEFAULT;
     _moveList.clear();
@@ -231,7 +232,7 @@ void GameInputManager::reset()
 
 void GameInputManager::drop2ndPlayer()
 {
-    GameInputState::PlayerInputState& pis = _inputState->getPlayerInputState(1);
+    InputState::PlayerInputState& pis = _inputState->playerInputState(1);
     pis._playerID = NW_INPUT_UNASSIGNED;
     NW_CLNT->requestToDropLocalPlayer(1);
 }

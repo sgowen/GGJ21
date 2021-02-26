@@ -9,7 +9,7 @@
 #include "PlayerController.hpp"
 
 #include "Entity.hpp"
-#include "GameInputState.hpp"
+#include "InputState.hpp"
 #include "Rektangle.hpp"
 #include "World.hpp"
 #include "Macros.hpp"
@@ -47,10 +47,9 @@ void PlayerController::update()
     }
 }
 
-void PlayerController::processInput(InputState* inputState, bool isLive)
+void PlayerController::processInput(InputState* is, bool isLive)
 {
-    GameInputState* is = static_cast<GameInputState*>(inputState);
-    GameInputState::PlayerInputState* pis = is->getPlayerInputStateForID(getPlayerID());
+    InputState::PlayerInputState* pis = is->playerInputStateForID(getPlayerID());
     if (pis == NULL)
     {
         return;
@@ -58,7 +57,7 @@ void PlayerController::processInput(InputState* inputState, bool isLive)
     
     uint8_t fromState = _entity->state()._state;
     uint8_t& state = _entity->state()._state;
-    uint8_t piss = pis->inputState();
+    uint8_t piss = pis->_inputState;
     
     state = STAT_IDLE;
     Vector2& vel = _entity->velocity();

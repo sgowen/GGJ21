@@ -74,17 +74,7 @@ void cb_server_handleLostClient(ClientProxy& cp, uint8_t localPlayerIndex)
     ENGINE_STATE_GAME_SRVR.handleLostClient(cp, localPlayerIndex);
 }
 
-InputState* cb_server_handleInputStateCreation()
-{
-    return ENGINE_STATE_GAME_SRVR.handleInputStateCreation();
-}
-
-void cb_server_handleInputStateRelease(InputState* inputState)
-{
-    ENGINE_STATE_GAME_SRVR.handleInputStateRelease(inputState);
-}
-
-#define GAME_ENGINE_SERVER_CBS cb_server_onEntityRegistered, cb_server_onEntityDeregistered, cb_server_handleNewClient, cb_server_handleLostClient, cb_server_handleInputStateCreation, cb_server_handleInputStateRelease
+#define GAME_ENGINE_SERVER_CBS cb_server_onEntityRegistered, cb_server_onEntityDeregistered, cb_server_handleNewClient, cb_server_handleLostClient
 
 void GameServerEngineState::enter(Engine* e)
 {
@@ -137,20 +127,6 @@ void GameServerEngineState::handleLostClient(ClientProxy& cp, uint8_t localPlaye
             removePlayer(playerID);
         }
     }
-}
-
-InputState* GameServerEngineState::handleInputStateCreation()
-{
-    InputState* ret = _poolGameInputState.obtain();
-    ret->reset();
-    
-    return ret;
-}
-
-void GameServerEngineState::handleInputStateRelease(InputState* inputState)
-{
-    GameInputState* gameInputState = static_cast<GameInputState*>(inputState);
-    _poolGameInputState.free(gameInputState);
 }
 
 void GameServerEngineState::populateFromEntityLayout(EntityLayoutDef& eld)
@@ -208,7 +184,13 @@ void GameServerEngineState::update(Engine* e)
     {
         updateWorld(i);
     }
-    removeProcessedMoves();
+    for (Entity* e : _world.getPlayers())
+    {
+        PlayerController* ec = e->controller<PlayerController>();
+        assert(ec != NULL);
+        
+        NW_SRVR->removeProcessedMovesForPlayer(ec->getPlayerID());
+    }
     NW_SRVR->onMovesProcessed(moveCount);
     
     NW_SRVR->sendOutgoingPackets();
@@ -258,21 +240,6 @@ void GameServerEngineState::handleDirtyStates(std::vector<Entity*>& entities)
         {
             NW_SRVR->setStateDirty(e->getID(), dirtyState);
         }
-    }
-}
-
-void GameServerEngineState::removeProcessedMoves()
-{
-    for (Entity* e : _world.getPlayers())
-    {
-        PlayerController* ec = e->controller<PlayerController>();
-        assert(ec != NULL);
-        
-        ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
-        assert(cp != NULL);
-
-        MoveList& ml = cp->getUnprocessedMoveList();
-        ml.removeProcessedMoves(cp->getUnprocessedMoveList().getLastProcessedMoveTimestamp(), cb_server_handleInputStateRelease);
     }
 }
 

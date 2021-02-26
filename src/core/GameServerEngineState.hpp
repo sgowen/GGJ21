@@ -11,7 +11,7 @@
 #include "StateMachine.hpp"
 
 #include "Pool.hpp"
-#include "GameInputState.hpp"
+#include "InputState.hpp"
 #include "World.hpp"
 
 #include <string>
@@ -38,8 +38,6 @@ public:
     
     void handleNewClient(std::string username, uint8_t playerID);
     void handleLostClient(ClientProxy& cp, uint8_t localPlayerIndex);
-    InputState* handleInputStateCreation();
-    void handleInputStateRelease(InputState* inputState);
     void resetWorld();
     void populateFromEntityLayout(EntityLayoutDef& eld);
     void restart();
@@ -47,13 +45,11 @@ public:
     
 private:
     World _world;
-    Pool<GameInputState> _poolGameInputState;
     bool _isRestarting;
     
     void update(Engine* e);
     void updateWorld(int moveIndex);
     void handleDirtyStates(std::vector<Entity*>& entities);
-    void removeProcessedMoves();
     void addPlayer(std::string username, uint8_t playerID);
     void removePlayer(uint8_t playerID);
     

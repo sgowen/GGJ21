@@ -22,7 +22,7 @@ public:
     JackieController(Entity* e) : PlayerController(e) {}
     virtual ~JackieController() {}
     
-    virtual void processInput(InputState* inputState, bool isLive) override;
+    virtual void processInput(InputState* is, bool isLive) override;
 };
 
 #include "TopDownPhysicsController.hpp"

@@ -10,7 +10,8 @@
 
 #include "Entity.hpp"
 #include "CrystalController.hpp"
-#include "GameInputState.hpp"
+#include "InputState.hpp"
+#include "GameInputManager.hpp"
 #include "Macros.hpp"
 #include "AudioEngineFactory.hpp"
 #include "StringUtil.hpp"
@@ -20,18 +21,17 @@
 IMPL_RTTI(JackieController, PlayerController)
 IMPL_EntityController_create(JackieController, EntityController)
 
-void JackieController::processInput(InputState* inputState, bool isLive)
+void JackieController::processInput(InputState* is, bool isLive)
 {
-    PlayerController::processInput(inputState, isLive);
+    PlayerController::processInput(is, isLive);
     
-    GameInputState* is = static_cast<GameInputState*>(inputState);
-    GameInputState::PlayerInputState* pis = is->getPlayerInputStateForID(getPlayerID());
+    InputState::PlayerInputState* pis = is->playerInputStateForID(getPlayerID());
     if (pis == NULL)
     {
         return;
     }
     
-    uint8_t piss = pis->inputState();
+    uint8_t piss = pis->_inputState;
     if (IS_BIT_SET(piss, GISF_CONFIRM))
     {
         // TODO

@@ -10,7 +10,7 @@
 
 #include "MoveList.hpp"
 #include "Pool.hpp"
-#include "GameInputState.hpp"
+#include "InputState.hpp"
 
 #include <string>
 
@@ -18,6 +18,16 @@ enum GameInputManagerState
 {
     GIMS_DEFAULT,
     GIMS_EXIT
+};
+
+enum InputStateFlags
+{
+    GISF_MOVING_RIGHT = 1 << 0,
+    GISF_MOVING_LEFT =  1 << 1,
+    GISF_MOVING_UP =    1 << 2,
+    GISF_MOVING_DOWN =  1 << 3,
+    GISF_CONFIRM     =  1 << 4,
+    GISF_CANCEL      =  1 << 5
 };
 
 #define INPUT_GAME GameInputManager::getInstance()
@@ -33,19 +43,24 @@ public:
         return ret;
     }
     
+    static void cb_inputStateRelease(InputState* is)
+    {
+        INPUT_GAME.free(is);
+    }
+    
     void setMatrix(Matrix* m);
     GameInputManagerState update();
     const Move& sampleInputAsNewMove();
-    GameInputState* inputState();
+    InputState* inputState();
     MoveList& moveList();
-    void free(GameInputState* gis);
+    void free(InputState* gis);
     void reset();
     
 private:
     GameInputManagerState _state;
     
-    Pool<GameInputState> _poolGameInputState;
-    GameInputState* _inputState;
+    Pool<InputState> _poolInputState;
+    InputState* _inputState;
     MoveList _moveList;
     Matrix* _matrix;
     

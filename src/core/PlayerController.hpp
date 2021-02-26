@@ -28,7 +28,7 @@ public:
     virtual ~PlayerController() {}
     
     virtual void update() override;
-    virtual void processInput(InputState* inputState, bool isLive);
+    virtual void processInput(InputState* is, bool isLive);
     
     void setUsername(std::string value);
     std::string getUsername() const;

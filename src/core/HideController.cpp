@@ -17,6 +17,7 @@
 #include "GameServerEngineState.hpp"
 #include "GameClientEngineState.hpp"
 #include "EntityRenderController.hpp"
+#include "GameInputManager.hpp"
 
 #include <assert.h>
 
@@ -88,10 +89,9 @@ void HideController::onMessage(uint16_t message)
     }
 }
 
-void HideController::processInput(InputState* inputState, bool isLive)
+void HideController::processInput(InputState* is, bool isLive)
 {
-    GameInputState* is = static_cast<GameInputState*>(inputState);
-    GameInputState::PlayerInputState* pis = is->getPlayerInputStateForID(getPlayerID());
+    InputState::PlayerInputState* pis = is->playerInputStateForID(getPlayerID());
     if (pis == NULL)
     {
         return;
@@ -99,7 +99,7 @@ void HideController::processInput(InputState* inputState, bool isLive)
     
     if (_encounter._isInCounter)
     {
-        uint8_t piss = pis->inputState();
+        uint8_t piss = pis->_inputState;
         if (_encounter._state == ESTA_IDLE)
         {
             if (IS_BIT_SET(piss, GISF_CONFIRM))
@@ -124,7 +124,7 @@ void HideController::processInput(InputState* inputState, bool isLive)
     }
     else
     {
-        PlayerController::processInput(inputState, isLive);
+        PlayerController::processInput(is, isLive);
     }
 }
 
