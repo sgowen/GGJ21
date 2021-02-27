@@ -23,7 +23,7 @@
 #include "EntityRegistry.hpp"
 #include "Assets.hpp"
 #include "EntityManager.hpp"
-#include "EntityLayoutManager.hpp"
+#include "EntityLayout.hpp"
 #include "MainConfig.hpp"
 #include "InstanceRegistry.hpp"
 #include "Config.hpp"
@@ -32,6 +32,7 @@
 #include "HideController.hpp"
 #include "GameRenderer.hpp"
 #include "Renderer.hpp"
+#include "rapidjson/EntityLayoutLoader.hpp"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -44,9 +45,9 @@ void cb_client_onEntityRegistered(Entity* e)
     {
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();
-        EntityLayoutManager* elm = INST_REG.get<EntityLayoutManager>(INSK_ELM_CLNT);
+        EntityLayout* elm = INST_REG.get<EntityLayout>(INSK_ELM_CLNT);
         EntityLayoutDef& eld = elm->entityLayoutDef(key);
-        elm->loadEntityLayout(eld);
+        EntityLayoutLoader::loadEntityLayout(eld, false);
         ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld);
     }
 }
@@ -73,10 +74,8 @@ void cb_client_onPlayerWelcomed(uint8_t playerID)
 
 #define GAME_ENGINE_CLIENT_CBS cb_client_onEntityRegistered, cb_client_onEntityDeregistered, cb_client_removeProcessedMoves, cb_client_getMoveList, cb_client_onPlayerWelcomed
 
-void GameClientEngineState::enter(Engine* e)
+void GameClientEngineState::onEnter(Engine* e)
 {
-    EngineState::enter(e);
-    
     INPUT_GAME.setMatrix(&_renderer.matrix());
     
     std::string serverIPAddress;
@@ -104,10 +103,8 @@ void GameClientEngineState::enter(Engine* e)
     AUDIO_ENGINE.playMusic(0.1f, true);
 }
 
-void GameClientEngineState::exit(Engine* e)
+void GameClientEngineState::onExit(Engine* e)
 {
-    EngineState::exit(e);
-    
     if (NW_CLNT != NULL)
     {
         NetworkClient::destroy();
@@ -117,10 +114,8 @@ void GameClientEngineState::exit(Engine* e)
     INPUT_GAME.reset();
 }
 
-void GameClientEngineState::update(Engine* e)
+void GameClientEngineState::onUpdate(Engine* e)
 {
-    EngineState::update(e);
-    
     INST_REG.get<TimeTracker>(INSK_TIME_CLNT)->onFrame();
     
     if (INPUT_GAME.update() == GIMS_EXIT ||
@@ -154,13 +149,6 @@ void GameClientEngineState::update(Engine* e)
     }
     
     NW_CLNT->sendOutgoingPackets();
-}
-
-void GameClientEngineState::render(Engine* e)
-{
-    EngineState::render(e);
-    
-    GameRenderer::render(_renderer);
 }
 
 Entity* GameClientEngineState::getControlledPlayer()
@@ -202,7 +190,7 @@ void GameClientEngineState::updateWorld(const Move& move, bool isLive)
     NW_CLNT->onMoveProcessed();
 }
 
-GameClientEngineState::GameClientEngineState() : EngineState("data/json/assets_game.json", "data/json/renderer_game.json"),
+GameClientEngineState::GameClientEngineState() : EngineState("data/json/assets_game.json", "data/json/renderer_game.json", GameRenderer::render),
 _world()
 {
     // Empty

@@ -34,10 +34,9 @@ public:
         return ret;
     }
     
-    virtual void enter(Engine* e);
-    virtual void exit(Engine* e);
-    virtual void update(Engine* e);
-    virtual void render(Engine* e);
+    virtual void onEnter(Engine* e);
+    virtual void onExit(Engine* e);
+    virtual void onUpdate(Engine* e);
     
 private:
     TitleEngineStateState _state;

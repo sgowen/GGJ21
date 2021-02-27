@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "Config.hpp"
+#include "rapidjson/ConfigLoader.hpp"
 
 #define CFG_MAIN MainConfig::getInstance()
 
@@ -54,8 +54,7 @@ public:
 
     void init()
     {
-        Config c;
-        c.initWithJSONFile("data/json/config_main.json");
+        Config c = ConfigLoader::initWithJSONFile("data/json/config_main.json");
         
         _framesPerSecond = c.getUInt("framesPerSecond");
         _clientPortHost = c.getUInt("clientPortHost");

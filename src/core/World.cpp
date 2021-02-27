@@ -13,7 +13,7 @@
 #include "TimeTracker.hpp"
 #include "Rektangle.hpp"
 #include "EntityManager.hpp"
-#include "EntityLayoutManager.hpp"
+#include "EntityLayout.hpp"
 #include "EntityNetworkController.hpp"
 #include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"

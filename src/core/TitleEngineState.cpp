@@ -24,27 +24,21 @@
 #include <stdlib.h>
 #include <assert.h>
 
-void TitleEngineState::enter(Engine* e)
+void TitleEngineState::onEnter(Engine* e)
 {
-    EngineState::enter(e);
-    
     AUDIO_ENGINE.playMusic(0.1f, true);
 }
 
-void TitleEngineState::exit(Engine* e)
+void TitleEngineState::onExit(Engine* e)
 {
-    EngineState::exit(e);
-    
     _state = TESS_DEFAULT;
     _stateTime = 0;
     _userEnteredIPAddress.clear();
     INPUT_TITLE.clearTextInput();
 }
 
-void TitleEngineState::update(Engine* e)
+void TitleEngineState::onUpdate(Engine* e)
 {
-    EngineState::update(e);
-    
     switch (_state)
     {
         case TESS_DEFAULT:
@@ -65,13 +59,6 @@ void TitleEngineState::update(Engine* e)
         default:
             break;
     }
-}
-
-void TitleEngineState::render(Engine* e)
-{
-    EngineState::render(e);
-    
-    TitleRenderer::render(_renderer);
 }
 
 void TitleEngineState::updateDefault(Engine* e)
@@ -165,7 +152,7 @@ void TitleEngineState::updateStartDedicatedServer(Engine* e)
     }
 }
 
-TitleEngineState::TitleEngineState() : EngineState("data/json/assets_title.json", "data/json/renderer_title.json"),
+TitleEngineState::TitleEngineState() : EngineState("data/json/assets_title.json", "data/json/renderer_title.json", TitleRenderer::render),
 _state(TESS_DEFAULT),
 _userEnteredIPAddress(""),
 _stateTime(0)

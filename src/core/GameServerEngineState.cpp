@@ -19,11 +19,12 @@
 #include "PlayerController.hpp"
 #include "HideController.hpp"
 #include "EntityManager.hpp"
-#include "EntityLayoutManager.hpp"
+#include "EntityLayout.hpp"
 #include "InstanceRegistry.hpp"
 #include "MainConfig.hpp"
 #include "Network.hpp"
 #include "StringUtil.hpp"
+#include "rapidjson/EntityLayoutLoader.hpp"
 
 #include <ctime>
 #include <assert.h>
@@ -36,9 +37,9 @@ void cb_server_onEntityRegistered(Entity* e)
     {
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();
-        EntityLayoutManager* elm = INST_REG.get<EntityLayoutManager>(INSK_ELM_SRVR);
+        EntityLayout* elm = INST_REG.get<EntityLayout>(INSK_ELM_SRVR);
         EntityLayoutDef& eld = elm->entityLayoutDef(key);
-        elm->loadEntityLayout(eld);
+        EntityLayoutLoader::loadEntityLayout(eld, true);
         ENGINE_STATE_GAME_SRVR.populateFromEntityLayout(eld);
     }
 }
@@ -185,10 +186,7 @@ void GameServerEngineState::update(Engine* e)
     }
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* ec = e->controller<PlayerController>();
-        assert(ec != NULL);
-        
-        NW_SRVR->removeProcessedMovesForPlayer(ec->getPlayerID());
+        NW_SRVR->removeProcessedMovesForPlayer(e->controller<PlayerController>()->getPlayerID());
     }
     NW_SRVR->onMovesProcessed(moveCount);
     
@@ -260,7 +258,7 @@ void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
     ec->setPlayerID(playerID);
     if (ec->getRTTI().isExactly(HideController::rtti))
     {
-        static_cast<HideController*>(ec)->setEntityLayoutKey('LYT1');
+        e->controller<HideController>()->setEntityLayoutKey('LYT1');
     }
     
     NW_SRVR->registerEntity(e);
