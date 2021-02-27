@@ -33,7 +33,7 @@ void cb_server_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_SRVR.getWorld().addNetworkEntity(e);
     
-    if (e->controller()->getRTTI().isExactly(HideController::rtti))
+    if (e->entityDef()._data.getUInt("playerID", 0) == 1)
     {
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();

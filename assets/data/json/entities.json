@@ -63,6 +63,9 @@
         "flags": 1
       }
     ],
+    "data": {
+        "playerID": "1"
+    },
     "bodyFlags": 14,
     "width": 4,
     "height": 4
@@ -93,6 +96,9 @@
         "flags": 1
       }
     ],
+    "data": {
+        "playerID": "2"
+    },
     "bodyFlags": 14,
     "width": 4,
     "height": 4
