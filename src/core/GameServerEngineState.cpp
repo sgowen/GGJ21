@@ -78,7 +78,7 @@ void cb_server_handleLostClient(ClientProxy& cp, uint8_t localPlayerIndex)
 
 void GameServerEngineState::enter(Engine* e)
 {
-    NetworkServer::create(CFG_MAIN._serverPort, CFG_MAIN._maxNumPlayers, GAME_ENGINE_SERVER_CBS);
+    NetworkServer::create(CFG_MAIN.serverPort(), CFG_MAIN.maxNumPlayers(), GAME_ENGINE_SERVER_CBS);
     assert(NW_SRVR != NULL);
     
     if (!NW_SRVR->connect())

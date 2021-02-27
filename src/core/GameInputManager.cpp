@@ -224,7 +224,7 @@ void GameInputManager::reset()
     
     _inputState = _poolInputState.obtain();
     _inputState->reset();
-    _inputState->setMaxNumPlayers(CFG_MAIN._maxNumPlayers);
+    _inputState->setMaxNumPlayers(CFG_MAIN.maxNumPlayers());
     
     _state = GIMS_DEFAULT;
     _moveList.clear();

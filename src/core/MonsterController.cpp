@@ -64,7 +64,7 @@ void MonsterController::update()
             if (playerID == 1)
             {
                 float distance = e->position().dist(_entity->position());
-                if (distance < CFG_MAIN._monsterLineOfSight)
+                if (distance < CFG_MAIN.monsterLineOfSight())
                 {
                     hasTarget = true;
                     playerPosition.set(e->position()._x, e->position()._y);
@@ -77,7 +77,7 @@ void MonsterController::update()
     {
         float angle = playerPosition.sub(_entity->position()._x, _entity->position()._y).angle();
         float radians = DEGREES_TO_RADIANS(angle);
-        _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN._monsterMaxTopDownSpeed, sinf(radians) * CFG_MAIN._monsterMaxTopDownSpeed);
+        _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN.monsterMaxTopDownSpeed(), sinf(radians) * CFG_MAIN.monsterMaxTopDownSpeed());
         
         if (_entity->pose()._velocity._y < 0)
         {
@@ -241,7 +241,7 @@ std::string MonsterRenderController::getTextureMapping()
 void MonsterRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 {
     TextureRegion tr = ASSETS.textureRegion(getTextureMappingForEncounter(), 0);
-    sb.addSprite(tr, CFG_MAIN._monsterBattleX, CFG_MAIN._monsterBattleY, CFG_MAIN._monsterBattleWidth, CFG_MAIN._monsterBattleHeight, 0);
+    sb.addSprite(tr, CFG_MAIN.monsterBattleX(), CFG_MAIN.monsterBattleY(), CFG_MAIN.monsterBattleWidth(), CFG_MAIN.monsterBattleHeight(), 0);
 }
 
 std::string MonsterRenderController::getTextureMappingForEncounter()

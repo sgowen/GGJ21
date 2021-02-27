@@ -14,7 +14,7 @@
 
 - (void)createDeviceDependentResources;
 - (void)onWindowSizeChanged:(int)screenWidth :(int)screenHeight :(int)cursorWidth :(int)cursorHeight;
-- (void)releaseDeviceDependentResources;
+- (void)destroyDeviceDependentResources;
 - (void)onResume;
 - (void)onPause;
 - (int)update:(double)deltaTime;

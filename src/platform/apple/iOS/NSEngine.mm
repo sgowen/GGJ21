@@ -39,9 +39,9 @@
     _engine->onWindowSizeChanged(screenWidth, screenHeight, cursorWidth, cursorHeight);
 }
 
-- (void)releaseDeviceDependentResources
+- (void)destroyDeviceDependentResources
 {
-    _engine->releaseDeviceDependentResources();
+    _engine->destroyDeviceDependentResources();
 }
 
 - (void)onResume

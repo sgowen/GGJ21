@@ -120,7 +120,7 @@ void GameRenderer::renderUI(Renderer& r)
     float height = m._desc.height();
     
     World& w = ENGINE_STATE_GAME_CLNT._world;
-    if (CFG_MAIN._showDebug)
+    if (CFG_MAIN.showDebug())
     {
         r.rektangleBatcherBegin();
         for (Entity* e : w.getPlayers())

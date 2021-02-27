@@ -16,7 +16,7 @@ final class ViewController: GLKViewController
     
     deinit
     {
-        engine?.releaseDeviceDependentResources()
+        engine?.destroyDeviceDependentResources()
         
         EAGLContext.setCurrent(nil)
         context = nil
@@ -112,7 +112,6 @@ final class ViewController: GLKViewController
     }
 }
 
-// MARK: - GLKViewController Delegate
 extension ViewController: GLKViewControllerDelegate
 {
     func glkViewControllerUpdate(_ controller: GLKViewController)
@@ -121,7 +120,6 @@ extension ViewController: GLKViewControllerDelegate
     }
 }
 
-// MARK: - GLKViewDelegate Delegate
 extension ViewController
 {
     override func glkView(_ view: GLKView, drawIn rect: CGRect)

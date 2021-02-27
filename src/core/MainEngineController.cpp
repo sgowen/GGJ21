@@ -26,12 +26,10 @@
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
-    CFG_MAIN.init();
-    
-    SOCKET_UTIL.setLoggingEnabled(CFG_MAIN._networkLoggingEnabled);
-    INPUT_MGR.setLoggingEnabled(CFG_MAIN._inputLoggingEnabled);
-    AUDIO_ENGINE.setSoundsDisabled(CFG_MAIN._soundsDisabled);
-    AUDIO_ENGINE.setMusicDisabled(CFG_MAIN._musicDisabled);
+    SOCKET_UTIL.setLoggingEnabled(CFG_MAIN.networkLoggingEnabled());
+    INPUT_MGR.setLoggingEnabled(CFG_MAIN.inputLoggingEnabled());
+    AUDIO_ENGINE.setSoundsDisabled(CFG_MAIN.soundsDisabled());
+    AUDIO_ENGINE.setMusicDisabled(CFG_MAIN.musicDisabled());
     
     std::map<std::string, EntityControllerCreationFunc> config;
     config.emplace("Hide", HideController::create);
@@ -39,13 +37,13 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     config.emplace("Monster", MonsterController::create);
     config.emplace("Crystal", CrystalController::create);
     config.emplace("Explosion", ExplosionController::create);
-    registerControllers(config, CFG_MAIN._entityManagerFilePath);
+    registerControllers(config, CFG_MAIN.entityManagerFilePath());
     
     std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
     configNW.emplace("Hide", HideNetworkController::create);
     configNW.emplace("Jackie", PlayerNetworkController::create);
     configNW.emplace("Monster", MonsterNetworkController::create);
-    configureForNetwork(configNW, CFG_MAIN._entityLayoutManagerFilePath);
+    configureForNetwork(configNW, CFG_MAIN.entityLayoutManagerFilePath());
     
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
     configPhysics.emplace("Default", TopDownPhysicsController::create);
@@ -68,5 +66,5 @@ State<Engine>& MainEngineController::getInitialState()
 
 double MainEngineController::getFrameRate()
 {
-    return 1.0 / CFG_MAIN._framesPerSecond;
+    return 1.0 / CFG_MAIN.framesPerSecond();
 }

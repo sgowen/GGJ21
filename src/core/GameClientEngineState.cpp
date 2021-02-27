@@ -83,15 +83,15 @@ void GameClientEngineState::onEnter(Engine* e)
     if (_args.hasValue(ARG_IP_ADDRESS))
     {
         serverIPAddress = _args.getString(ARG_IP_ADDRESS);
-        port = CFG_MAIN._clientPortJoin;
+        port = CFG_MAIN.clientPortJoin();
     }
     else
     {
         serverIPAddress = "localhost";
-        port = CFG_MAIN._clientPortHost;
+        port = CFG_MAIN.clientPortHost();
     }
     
-    NetworkClient::create(StringUtil::format("%s:%d", serverIPAddress.c_str(), CFG_MAIN._serverPort), _args.getString(ARG_USERNAME), port, GAME_ENGINE_CLIENT_CBS);
+    NetworkClient::create(StringUtil::format("%s:%d", serverIPAddress.c_str(), CFG_MAIN.serverPort()), _args.getString(ARG_USERNAME), port, GAME_ENGINE_CLIENT_CBS);
     assert(NW_CLNT != NULL);
     
     if (!NW_CLNT->connect())
@@ -132,7 +132,7 @@ void GameClientEngineState::onUpdate(Engine* e)
         {
             _world.recallCache();
             
-            if (CFG_MAIN._networkLoggingEnabled)
+            if (CFG_MAIN.networkLoggingEnabled())
             {
                 LOG("Client side prediction reprocessing %d moves", ml.getMoveCount());
             }

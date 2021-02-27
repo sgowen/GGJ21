@@ -55,13 +55,12 @@
 		BB7B047525B6455F0021E545 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B047425B6455F0021E545 /* main.cpp */; };
 		BB7B08B125B64A620021E545 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B925B646BA0021E545 /* Animation.cpp */; };
 		BB7B08B225B64A620021E545 /* AppleAssetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079425B646BA0021E545 /* AppleAssetHandler.cpp */; };
-		BB7B08B325B64A620021E545 /* NSAppleAssetHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */; };
+		BB7B08B325B64A620021E545 /* NSBundleHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSBundleHelper.mm */; };
 		BB7B08B825B64A620021E545 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07BA25B646BA0021E545 /* InputManager.cpp */; };
 		BB7B08BA25B64A620021E545 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07CB25B646BA0021E545 /* Engine.cpp */; };
 		BB7B08BC25B64A620021E545 /* FPSUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B625B646BA0021E545 /* FPSUtil.cpp */; };
 		BB7B08BF25B64A620021E545 /* OpenGLWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D625B646BA0021E545 /* OpenGLWrapper.cpp */; };
 		BB7B08C225B64A620021E545 /* ScreenRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07DC25B646BA0021E545 /* ScreenRenderer.cpp */; };
-		BB7B08C325B64A620021E545 /* ShaderDescriptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D725B646BA0021E545 /* ShaderDescriptor.cpp */; };
 		BB7B08C425B64A620021E545 /* ShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D525B646BA0021E545 /* ShaderLoader.cpp */; };
 		BB7B08C525B64A620021E545 /* ShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D225B646BA0021E545 /* ShaderManager.cpp */; };
 		BB7B08C625B64A620021E545 /* SpriteBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079A25B646BA0021E545 /* SpriteBatcher.cpp */; };
@@ -84,12 +83,11 @@
 		BB8BCD2125B68490005F57B8 /* FPSUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07B625B646BA0021E545 /* FPSUtil.cpp */; };
 		BB8BCD2425B68490005F57B8 /* OpenGLWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D625B646BA0021E545 /* OpenGLWrapper.cpp */; };
 		BB8BCD2725B68490005F57B8 /* ScreenRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07DC25B646BA0021E545 /* ScreenRenderer.cpp */; };
-		BB8BCD2825B68490005F57B8 /* ShaderDescriptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D725B646BA0021E545 /* ShaderDescriptor.cpp */; };
 		BB8BCD2925B68490005F57B8 /* ShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D525B646BA0021E545 /* ShaderLoader.cpp */; };
 		BB8BCD2A25B68490005F57B8 /* ShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07D225B646BA0021E545 /* ShaderManager.cpp */; };
 		BB8BCD2B25B68490005F57B8 /* SpriteBatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079A25B646BA0021E545 /* SpriteBatcher.cpp */; };
 		BB8BCD2E25B68490005F57B8 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB7B07C625B646BA0021E545 /* TextureManager.cpp */; };
-		BB8BCD3325B6849A005F57B8 /* NSAppleAssetHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */; };
+		BB8BCD3325B6849A005F57B8 /* NSBundleHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B079525B646BA0021E545 /* NSBundleHelper.mm */; };
 		BB9E471725CB0C5D0031FE3A /* EngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E471625CB0C5D0031FE3A /* EngineController.cpp */; };
 		BB9E471825CB0C5D0031FE3A /* EngineController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E471625CB0C5D0031FE3A /* EngineController.cpp */; };
 		BB9E473225CCB75F0031FE3A /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB9E473125CCB75F0031FE3A /* EntityPhysicsController.cpp */; };
@@ -106,8 +104,8 @@
 		BBBA467B25B9121600C8207D /* AppleAudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467225B9121600C8207D /* AppleAudioEngine.cpp */; };
 		BBBA467C25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */; };
 		BBBA467D25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */; };
-		BBBA467E25B9121600C8207D /* ObjectALWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467625B9121600C8207D /* ObjectALWrapper.mm */; };
-		BBBA467F25B9121600C8207D /* ObjectALWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467625B9121600C8207D /* ObjectALWrapper.mm */; };
+		BBBA467E25B9121600C8207D /* ObjectALHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467625B9121600C8207D /* ObjectALHelper.mm */; };
+		BBBA467F25B9121600C8207D /* ObjectALHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467625B9121600C8207D /* ObjectALHelper.mm */; };
 		BBBA468025B9121600C8207D /* AppleSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467925B9121600C8207D /* AppleSound.cpp */; };
 		BBBA468125B9121600C8207D /* AppleSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBA467925B9121600C8207D /* AppleSound.cpp */; };
 		BBBA46CA25B913D900C8207D /* OALAudioTracks.m in Sources */ = {isa = PBXBuildFile; fileRef = BBBA468C25B913D900C8207D /* OALAudioTracks.m */; };
@@ -555,9 +553,9 @@
 		BB7B073E25B646BA0021E545 /* pointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pointer.h; sourceTree = "<group>"; };
 		BB7B074025B646BA0021E545 /* inttypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
 		BB7B074125B646BA0021E545 /* stdint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
-		BB7B079325B646BA0021E545 /* NSAppleAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NSAppleAssetHandler.hpp; sourceTree = "<group>"; };
+		BB7B079325B646BA0021E545 /* NSBundleHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NSBundleHelper.hpp; sourceTree = "<group>"; };
 		BB7B079425B646BA0021E545 /* AppleAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AppleAssetHandler.cpp; sourceTree = "<group>"; };
-		BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSAppleAssetHandler.mm; sourceTree = "<group>"; };
+		BB7B079525B646BA0021E545 /* NSBundleHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NSBundleHelper.mm; sourceTree = "<group>"; };
 		BB7B079625B646BA0021E545 /* AppleAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppleAssetHandler.hpp; sourceTree = "<group>"; };
 		BB7B079725B646BA0021E545 /* Engine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
 		BB7B079825B646BA0021E545 /* TextureDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureDescriptor.hpp; sourceTree = "<group>"; };
@@ -584,10 +582,8 @@
 		BB7B07BE25B646BA0021E545 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		BB7B07BF25B646BA0021E545 /* AssetHandlerFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetHandlerFactory.hpp; sourceTree = "<group>"; };
 		BB7B07C025B646BA0021E545 /* MathUtil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtil.hpp; sourceTree = "<group>"; };
-		BB7B07C225B646BA0021E545 /* AndroidAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AndroidAssetHandler.cpp; sourceTree = "<group>"; };
-		BB7B07C325B646BA0021E545 /* JNIAndroidAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JNIAndroidAssetHandler.hpp; sourceTree = "<group>"; };
-		BB7B07C425B646BA0021E545 /* AndroidAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AndroidAssetHandler.hpp; sourceTree = "<group>"; };
-		BB7B07C525B646BA0021E545 /* JNIAndroidAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = JNIAndroidAssetHandler.cpp; sourceTree = "<group>"; };
+		BB7B07C325B646BA0021E545 /* AndroidAssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AndroidAssetHandler.hpp; sourceTree = "<group>"; };
+		BB7B07C525B646BA0021E545 /* AndroidAssetHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AndroidAssetHandler.cpp; sourceTree = "<group>"; };
 		BB7B07C625B646BA0021E545 /* TextureManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		BB7B07C925B646BA0021E545 /* Color.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Color.hpp; sourceTree = "<group>"; };
 		BB7B07CA25B646BA0021E545 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
@@ -599,7 +595,6 @@
 		BB7B07D325B646BA0021E545 /* Assets.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Assets.hpp; sourceTree = "<group>"; };
 		BB7B07D525B646BA0021E545 /* ShaderLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderLoader.cpp; sourceTree = "<group>"; };
 		BB7B07D625B646BA0021E545 /* OpenGLWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLWrapper.cpp; sourceTree = "<group>"; };
-		BB7B07D725B646BA0021E545 /* ShaderDescriptor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderDescriptor.cpp; sourceTree = "<group>"; };
 		BB7B07DA25B646BA0021E545 /* AssetHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetHandler.hpp; sourceTree = "<group>"; };
 		BB7B07DB25B646BA0021E545 /* FixedSizePool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedSizePool.hpp; sourceTree = "<group>"; };
 		BB7B07DC25B646BA0021E545 /* ScreenRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenRenderer.cpp; sourceTree = "<group>"; };
@@ -639,8 +634,8 @@
 		BBBA467325B9121600C8207D /* AppleAudioEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppleAudioEngine.hpp; sourceTree = "<group>"; };
 		BBBA467425B9121600C8207D /* AppleSound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppleSound.hpp; sourceTree = "<group>"; };
 		BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleSoundWrapper.cpp; sourceTree = "<group>"; };
-		BBBA467625B9121600C8207D /* ObjectALWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectALWrapper.mm; sourceTree = "<group>"; };
-		BBBA467725B9121600C8207D /* ObjectALWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectALWrapper.hpp; sourceTree = "<group>"; };
+		BBBA467625B9121600C8207D /* ObjectALHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectALHelper.mm; sourceTree = "<group>"; };
+		BBBA467725B9121600C8207D /* ObjectALHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectALHelper.hpp; sourceTree = "<group>"; };
 		BBBA467825B9121600C8207D /* AppleSoundWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppleSoundWrapper.hpp; sourceTree = "<group>"; };
 		BBBA467925B9121600C8207D /* AppleSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleSound.cpp; sourceTree = "<group>"; };
 		BBBA468925B913D900C8207D /* OALSimpleAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OALSimpleAudio.h; sourceTree = "<group>"; };
@@ -1699,7 +1694,6 @@
 				BB7B07A525B646BA0021E545 /* ScreenRenderer.hpp */,
 				BB7B07CA25B646BA0021E545 /* Shader.hpp */,
 				BB7B07B725B646BA0021E545 /* ShaderAttribute.hpp */,
-				BB7B07D725B646BA0021E545 /* ShaderDescriptor.cpp */,
 				BB7B07A225B646BA0021E545 /* ShaderDescriptor.hpp */,
 				BB7B07AD25B646BA0021E545 /* ShaderInput.hpp */,
 				BB7B07D525B646BA0021E545 /* ShaderLoader.cpp */,
@@ -1761,10 +1755,10 @@
 				BBBA467425B9121600C8207D /* AppleSound.hpp */,
 				BBBA467525B9121600C8207D /* AppleSoundWrapper.cpp */,
 				BBBA467825B9121600C8207D /* AppleSoundWrapper.hpp */,
-				BB7B079325B646BA0021E545 /* NSAppleAssetHandler.hpp */,
-				BB7B079525B646BA0021E545 /* NSAppleAssetHandler.mm */,
-				BBBA467725B9121600C8207D /* ObjectALWrapper.hpp */,
-				BBBA467625B9121600C8207D /* ObjectALWrapper.mm */,
+				BB7B079325B646BA0021E545 /* NSBundleHelper.hpp */,
+				BB7B079525B646BA0021E545 /* NSBundleHelper.mm */,
+				BBBA467725B9121600C8207D /* ObjectALHelper.hpp */,
+				BBBA467625B9121600C8207D /* ObjectALHelper.mm */,
 			);
 			path = apple;
 			sourceTree = "<group>";
@@ -1772,8 +1766,8 @@
 		BB7B07C125B646BA0021E545 /* android */ = {
 			isa = PBXGroup;
 			children = (
-				BB7B07C225B646BA0021E545 /* AndroidAssetHandler.cpp */,
-				BB7B07C425B646BA0021E545 /* AndroidAssetHandler.hpp */,
+				BB7B07C525B646BA0021E545 /* AndroidAssetHandler.cpp */,
+				BB7B07C325B646BA0021E545 /* AndroidAssetHandler.hpp */,
 				BBBA474E25B932DA00C8207D /* AndroidAudioEngine.cpp */,
 				BBBA475225B932DA00C8207D /* AndroidAudioEngine.hpp */,
 				BBBA4E5025BA3E8800C8207D /* AndroidSound.cpp */,
@@ -1782,8 +1776,6 @@
 				BBBA4E4F25BA3E8800C8207D /* AndroidSoundWrapper.hpp */,
 				BBBA4E4625BA1A6F00C8207D /* InputStream.cpp */,
 				BBBA4E4025BA1A6F00C8207D /* InputStream.hpp */,
-				BB7B07C525B646BA0021E545 /* JNIAndroidAssetHandler.cpp */,
-				BB7B07C325B646BA0021E545 /* JNIAndroidAssetHandler.hpp */,
 				BBBA4E3625BA1A6F00C8207D /* SampleBuffer.cpp */,
 				BBBA4E3825BA1A6F00C8207D /* SampleBuffer.hpp */,
 				BBBA4E3A25BA1A6F00C8207D /* SampleSource.cpp */,
@@ -2783,7 +2775,7 @@
 				BBBA579925BB175A00C8207D /* InFlightPacket.cpp in Sources */,
 				BBBA56EC25BA453A00C8207D /* vulkan.c in Sources */,
 				BB7B08B225B64A620021E545 /* AppleAssetHandler.cpp in Sources */,
-				BB7B08B325B64A620021E545 /* NSAppleAssetHandler.mm in Sources */,
+				BB7B08B325B64A620021E545 /* NSBundleHelper.mm in Sources */,
 				BBA2D26F25DADD000012D7AB /* ExplosionController.cpp in Sources */,
 				BBBA5AD225BB5D1A00C8207D /* b2_motor_joint.cpp in Sources */,
 				BBBA5B9C25BE1E3400C8207D /* LightRenderer.cpp in Sources */,
@@ -2847,7 +2839,7 @@
 				BBBA579D25BB175A00C8207D /* MoveList.cpp in Sources */,
 				BB21816425C65B9E004398D5 /* JackieController.cpp in Sources */,
 				BB21816E25C66D37004398D5 /* MonsterController.cpp in Sources */,
-				BBBA467E25B9121600C8207D /* ObjectALWrapper.mm in Sources */,
+				BBBA467E25B9121600C8207D /* ObjectALHelper.mm in Sources */,
 				BBBA46EE25B913D900C8207D /* mach_timing.c in Sources */,
 				BBBA5AE625BB5D1A00C8207D /* b2_timer.cpp in Sources */,
 				BBBA46EC25B913D900C8207D /* OALTools.m in Sources */,
@@ -2863,7 +2855,6 @@
 				BBBA57F625BB58CA00C8207D /* EntityRegistry.cpp in Sources */,
 				BB2CD6C525C518B3007B8775 /* GameInputManager.cpp in Sources */,
 				BB7B08C225B64A620021E545 /* ScreenRenderer.cpp in Sources */,
-				BB7B08C325B64A620021E545 /* ShaderDescriptor.cpp in Sources */,
 				BBBF685525E9B81F00C1D6BD /* EntityManagerLoader.cpp in Sources */,
 				BBBA5AF625BB5D1A00C8207D /* b2_collide_edge.cpp in Sources */,
 				BBBA578F25BB175A00C8207D /* Move.cpp in Sources */,
@@ -2964,7 +2955,7 @@
 				BBBA578A25BB175A00C8207D /* UDPSocket.cpp in Sources */,
 				BB8BCCEE25B682E8005F57B8 /* ViewController.swift in Sources */,
 				BBBA579E25BB175A00C8207D /* MoveList.cpp in Sources */,
-				BBBA467F25B9121600C8207D /* ObjectALWrapper.mm in Sources */,
+				BBBA467F25B9121600C8207D /* ObjectALHelper.mm in Sources */,
 				BB8BCD0B25B68446005F57B8 /* NSEngine.mm in Sources */,
 				BBBA57F925BB58CA00C8207D /* EntityIDManager.cpp in Sources */,
 				BBBA5B8525BE019E00C8207D /* FontBatcher.cpp in Sources */,
@@ -3031,7 +3022,7 @@
 				BBBA46E125B913D900C8207D /* ALContext.m in Sources */,
 				BBBF684C25E9AFD100C1D6BD /* TextureLoader.cpp in Sources */,
 				BBBA5C6B25C31B1400C8207D /* Color.cpp in Sources */,
-				BB8BCD3325B6849A005F57B8 /* NSAppleAssetHandler.mm in Sources */,
+				BB8BCD3325B6849A005F57B8 /* NSBundleHelper.mm in Sources */,
 				BBBA57FB25BB58CA00C8207D /* Entity.cpp in Sources */,
 				BBBA46F725B913D900C8207D /* OALAudioActions.m in Sources */,
 				BBBA46F525B913D900C8207D /* OALUtilityActions.m in Sources */,
@@ -3094,7 +3085,6 @@
 				BBBA467D25B9121600C8207D /* AppleSoundWrapper.cpp in Sources */,
 				BBBA577825BB175A00C8207D /* InputMemoryBitStream.cpp in Sources */,
 				BBBA5AE525BB5D1A00C8207D /* b2_draw.cpp in Sources */,
-				BB8BCD2825B68490005F57B8 /* ShaderDescriptor.cpp in Sources */,
 				BBBA46CD25B913D900C8207D /* OALAudioTrack.m in Sources */,
 				BBBA578225BB175A00C8207D /* AckRange.cpp in Sources */,
 				BBBA46ED25B913D900C8207D /* OALTools.m in Sources */,

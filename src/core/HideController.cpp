@@ -272,7 +272,7 @@ void HideRenderController::addSpriteForEncounter(SpriteBatcher& sb)
 {
     HideController* ec = _entity->controller<HideController>();
     TextureRegion tr = ASSETS.textureRegion(getTextureMappingForEncounter(), ec->_encounter._stateTime);
-    sb.addSprite(tr, CFG_MAIN._playerBattleX, CFG_MAIN._playerBattleY, getWidthForEncounter(), CFG_MAIN._playerBattleHeight, 0);
+    sb.addSprite(tr, CFG_MAIN.playerBattleX(), CFG_MAIN.playerBattleY(), getWidthForEncounter(), CFG_MAIN.playerBattleHeight(), 0);
 }
 
 std::string HideRenderController::getTextureMappingForEncounter()
@@ -298,9 +298,9 @@ float HideRenderController::getWidthForEncounter()
     switch (ec->_encounter._state)
     {
         case HideController::ESTA_IDLE:
-            return CFG_MAIN._playerBattleWidth;
+            return CFG_MAIN.playerBattleWidth();
         case HideController::ESTA_SWING:
         default:
-            return ec->_encounter._stateTime >= 35 ? CFG_MAIN._playerBattleWidth : ec->_encounter._stateTime >= 14 ? (CFG_MAIN._playerBattleWidth + 4) : CFG_MAIN._playerBattleWidth;
+            return ec->_encounter._stateTime >= 35 ? CFG_MAIN.playerBattleWidth() : ec->_encounter._stateTime >= 14 ? (CFG_MAIN.playerBattleWidth() + 4) : CFG_MAIN.playerBattleWidth();
     }
 }

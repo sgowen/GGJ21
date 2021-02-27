@@ -18,7 +18,7 @@
   "monsterBattleY": "30",
   "monsterBattleWidth": "16",
   "monsterBattleHeight": "20",
-  "sfxDisabled": "true",
+  "soundsDisabled": "true",
   "musicDisabled": "true",
   "inputLoggingEnabled": "false",
   "networkLoggingEnabled": "false",

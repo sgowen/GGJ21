@@ -16,7 +16,7 @@ class Engine(assetManager: AssetManager)
 
     external fun createDeviceDependentResources()
     external fun onWindowSizeChanged(screenWidth: Int, screenHeight: Int, cursorWidth: Int, cursorHeight: Int)
-    external fun releaseDeviceDependentResources()
+    external fun destroyDeviceDependentResources()
     external fun onResume()
     external fun onPause()
     external fun update(deltaTime: Double): Int

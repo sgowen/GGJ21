@@ -41,9 +41,7 @@ void CrystalController::onMessage(uint16_t message)
     {
         case MSG_ENCOUNTER:
         {
-            // TODO, client should be able to create entities locally
-            // and have everything line up correctly on the registry side
-            // Only way to do that though... is to sync _nextNetworkEntityID
+            // TODO, client should be able to create entities locally and have everything line up correctly on the registry side. Only way to do that though... is to sync _nextNetworkEntityID
             if (_entity->isServer())
             {
                 NW_SRVR->registerEntity(ENTITY_MGR.createEntity(EntityInstanceDef(INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextNetworkEntityID(), 'EXPL', _entity->position()._x, _entity->position()._y, true)));

@@ -186,9 +186,9 @@ void TitleInputManager::updateReadText()
                 {
                     const char* clipboard = CLIPBOARD_UTIL.getClipboardString();
                     _textInput += clipboard;
-                    if (_textInput.length() >= CFG_MAIN._maxTextInputLength)
+                    if (_textInput.length() >= CFG_MAIN.maxTextInputLength())
                     {
-                        int remove = (int)_textInput.length() - CFG_MAIN._maxTextInputLength;
+                        int remove = (int)_textInput.length() - CFG_MAIN.maxTextInputLength();
                         _textInput.erase(_textInput.end() - remove, _textInput.end());
                     }
                     continue;
@@ -205,7 +205,7 @@ void TitleInputManager::updateReadText()
 
 void TitleInputManager::acceptKeyInput(uint16_t key)
 {
-    if (_textInput.length() >= CFG_MAIN._maxTextInputLength)
+    if (_textInput.length() >= CFG_MAIN.maxTextInputLength())
     {
         return;
     }

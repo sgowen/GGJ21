@@ -23,9 +23,9 @@ Java_com_gowen_ggj21_Engine_onWindowSizeChanged(JNIEnv *env, jobject thiz, jint 
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_gowen_ggj21_Engine_releaseDeviceDependentResources(JNIEnv *env, jobject thiz)
+Java_com_gowen_ggj21_Engine_destroyDeviceDependentResources(JNIEnv *env, jobject thiz)
 {
-    _engine->releaseDeviceDependentResources();
+    _engine->destroyDeviceDependentResources();
 }
 
 extern "C"

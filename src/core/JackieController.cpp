@@ -49,7 +49,7 @@ void JackiePhysicsController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        e->physicsController<TopDownPhysicsController>()->push(_entity->controller<JackieController>()->_stats._dir, CFG_MAIN._jackiePushForce);
+        e->physicsController<TopDownPhysicsController>()->push(_entity->controller<JackieController>()->_stats._dir, CFG_MAIN.jackiePushForce());
     }
 }
 

@@ -42,7 +42,6 @@ void PlayerController::update()
 {
     if (_entity->state()._state == STAT_IDLE)
     {
-        // 2nd frame is more appropriate for idle
         _entity->state()._stateTime = 6;
     }
 }
@@ -65,25 +64,25 @@ void PlayerController::processInput(InputState* is, bool isLive)
     {
         state = STAT_MOVING;
         _stats._dir = EDIR_UP;
-        vel._y = CFG_MAIN._playerMaxTopDownSpeed;
+        vel._y = CFG_MAIN.playerMaxTopDownSpeed();
     }
     if (IS_BIT_SET(piss, GISF_MOVING_LEFT))
     {
         state = STAT_MOVING;
         _stats._dir = EDIR_LEFT;
-        vel._x = -  CFG_MAIN._playerMaxTopDownSpeed;
+        vel._x = -  CFG_MAIN.playerMaxTopDownSpeed();
     }
     if (IS_BIT_SET(piss, GISF_MOVING_DOWN))
     {
         state = STAT_MOVING;
         _stats._dir = EDIR_DOWN;
-        vel._y = -CFG_MAIN._playerMaxTopDownSpeed;
+        vel._y = -CFG_MAIN.playerMaxTopDownSpeed();
     }
     if (IS_BIT_SET(piss, GISF_MOVING_RIGHT))
     {
         state = STAT_MOVING;
         _stats._dir = EDIR_RIGHT;
-        vel._x = CFG_MAIN._playerMaxTopDownSpeed;
+        vel._x = CFG_MAIN.playerMaxTopDownSpeed();
     }
     
     if (isLive)
@@ -239,7 +238,6 @@ void PlayerRenderController::addSprite(SpriteBatcher& sb)
     Entity& e = *_entity;
     TextureRegion& tr = ASSETS.textureRegion(getTextureMapping(), e.stateTime());
     
-    // I know... but look at the sprite sheet
     PlayerController* ec = e.controller<PlayerController>();
     bool flipX = ec->_stats._dir == EDIR_RIGHT;
     sb.addSprite(tr, e.position()._x, e.position()._y, e.width(), e.height(), e.angle(), flipX);
