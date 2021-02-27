@@ -50,10 +50,8 @@ void cb_server_onEntityDeregistered(Entity* e)
     
     if (e->isPlayer())
     {
-        PlayerController* ec = e->controller<PlayerController>();
-        assert(ec != NULL);
-        
-        needsRestart = NW_SRVR->getClientProxy(ec->getPlayerID()) != NULL;
+        uint8_t playerID = e->entityDef()._data.getUInt("playerID");
+        needsRestart = NW_SRVR->getClientProxy(playerID) != NULL;
     }
     
     ENGINE_STATE_GAME_SRVR.getWorld().removeNetworkEntity(e);
@@ -186,7 +184,7 @@ void GameServerEngineState::update(Engine* e)
     }
     for (Entity* e : _world.getPlayers())
     {
-        NW_SRVR->removeProcessedMovesForPlayer(e->controller<PlayerController>()->getPlayerID());
+        NW_SRVR->removeProcessedMovesForPlayer(e->entityDef()._data.getUInt("playerID"));
     }
     NW_SRVR->onMovesProcessed(moveCount);
     
@@ -200,7 +198,7 @@ void GameServerEngineState::updateWorld(int moveIndex)
         PlayerController* ec = e->controller<PlayerController>();
         assert(ec != NULL);
         
-        ClientProxy* cp = NW_SRVR->getClientProxy(ec->getPlayerID());
+        ClientProxy* cp = NW_SRVR->getClientProxy(e->entityDef()._data.getUInt("playerID"));
         assert(cp != NULL);
         
         MoveList& ml = cp->getUnprocessedMoveList();
@@ -255,7 +253,6 @@ void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
     PlayerController* ec = e->controller<PlayerController>();
     ec->setUsername(username);
     ec->setUserAddress(cp->getSocketAddress()->toString());
-    ec->setPlayerID(playerID);
     if (ec->getRTTI().isExactly(HideController::rtti))
     {
         e->controller<HideController>()->setEntityLayoutKey('LYT1');
@@ -268,8 +265,7 @@ void GameServerEngineState::removePlayer(uint8_t playerID)
 {
     for (Entity* e : _world.getPlayers())
     {
-        PlayerController* ec = e->controller<PlayerController>();
-        if (ec->getPlayerID() == playerID)
+        if (e->entityDef()._data.getUInt("playerID") == playerID)
         {
             NW_SRVR->deregisterEntity(e);
             break;

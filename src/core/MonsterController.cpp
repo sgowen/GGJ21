@@ -59,8 +59,7 @@ void MonsterController::update()
         std::vector<Entity*>& players = w.getPlayers();
         for (Entity* e : players)
         {
-            PlayerController* ec = e->controller<PlayerController>();
-            uint8_t playerID = ec->getPlayerID();
+            uint8_t playerID = e->entityDef()._data.getUInt("playerID");
             if (playerID == 1)
             {
                 float distance = e->position().dist(_entity->position());

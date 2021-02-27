@@ -48,7 +48,8 @@ void PlayerController::update()
 
 void PlayerController::processInput(InputState* is, bool isLive)
 {
-    InputState::PlayerInputState* pis = is->playerInputStateForID(getPlayerID());
+    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
+    InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {
         return;
@@ -111,16 +112,6 @@ std::string PlayerController::getUserAddress() const
     return _playerInfo._userAddress;
 }
 
-void PlayerController::setPlayerID(uint8_t value)
-{
-    _playerInfo._playerID = value;
-}
-
-uint8_t PlayerController::getPlayerID() const
-{
-    return _playerInfo._playerID;
-}
-
 uint16_t PlayerController::getHealth()
 {
     return _stats._health;
@@ -146,7 +137,6 @@ void PlayerNetworkController::read(InputMemoryBitStream& imbs)
     {
         imbs.readSmall(c->_playerInfo._username);
         imbs.readSmall(c->_playerInfo._userAddress);
-        imbs.read<uint8_t, 3>(c->_playerInfo._playerID);
         
         c->_playerInfoCache = c->_playerInfo;
     }
@@ -160,7 +150,8 @@ void PlayerNetworkController::read(InputMemoryBitStream& imbs)
         c->_statsCache = c->_stats;
     }
     
-    if (!NW_CLNT->isPlayerIDLocal(c->_playerInfo._playerID))
+    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
+    if (!NW_CLNT->isPlayerIDLocal(playerID))
     {
         SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
     }
@@ -178,7 +169,6 @@ uint8_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirt
     {
         ombs.writeSmall(c->_playerInfo._username);
         ombs.writeSmall(c->_playerInfo._userAddress);
-        ombs.write<uint8_t, 3>(c->_playerInfo._playerID);
         
         ret |= PlayerController::RSTF_PLAYER_INFO;
     }

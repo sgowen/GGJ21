@@ -34,8 +34,6 @@ public:
     std::string getUsername() const;
     void setUserAddress(std::string value);
     std::string getUserAddress() const;
-    void setPlayerID(uint8_t value);
-    uint8_t getPlayerID() const;
     uint16_t getHealth();
     
 protected:
@@ -55,21 +53,18 @@ protected:
     {
         std::string _username;
         std::string _userAddress;
-        uint8_t _playerID;
         
         PlayerInfo()
         {
             _username = "Unknown";
             _userAddress = "1.3.3.7";
-            _playerID = 0;
         }
         
         friend bool operator==(PlayerInfo& a, PlayerInfo& b)
         {
             return
             a._username    == b._username &&
-            a._userAddress == b._userAddress &&
-            a._playerID    == b._playerID;
+            a._userAddress == b._userAddress;
         }
         
         friend bool operator!=(PlayerInfo& a, PlayerInfo& b)

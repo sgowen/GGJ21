@@ -91,7 +91,8 @@ void HideController::onMessage(uint16_t message)
 
 void HideController::processInput(InputState* is, bool isLive)
 {
-    InputState::PlayerInputState* pis = is->playerInputStateForID(getPlayerID());
+    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
+    InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {
         return;

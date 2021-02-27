@@ -158,9 +158,7 @@ Entity* GameClientEngineState::getControlledPlayer()
     
     for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
     {
-        PlayerController* ec = e->controller<PlayerController>();
-        
-        if (playerID == ec->getPlayerID())
+        if (playerID == e->entityDef()._data.getUInt("playerID"))
         {
             ret = e;
             break;
