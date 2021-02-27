@@ -1165,6 +1165,8 @@
 		BBBF685F25EA8BE600C1D6BD /* ConfigLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigLoader.cpp; sourceTree = "<group>"; };
 		BBBF686425EA8F5B00C1D6BD /* EntityLayoutLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityLayoutLoader.cpp; sourceTree = "<group>"; };
 		BBBF686525EA8F5B00C1D6BD /* EntityLayoutLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityLayoutLoader.hpp; sourceTree = "<group>"; };
+		BBBF688325EB0B8300C1D6BD /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		BBBF688525EB0B8300C1D6BD /* ThreadManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ThreadManager.hpp; sourceTree = "<group>"; };
 		BBC149B225DD679900B78385 /* TriangleBatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TriangleBatcher.cpp; sourceTree = "<group>"; };
 		BBC149B325DD679900B78385 /* TriangleBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TriangleBatcher.hpp; sourceTree = "<group>"; };
 		BBC149D225DDA89B00B78385 /* EntityRenderController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityRenderController.hpp; sourceTree = "<group>"; };
@@ -1715,6 +1717,7 @@
 				BBBF683425E99BDC00C1D6BD /* SoundUtil.hpp */,
 				BBBA470825B914FF00C8207D /* SoundWrapper.cpp */,
 				BBBA470C25B914FF00C8207D /* SoundWrapper.hpp */,
+				BBBF688225EB0B8300C1D6BD /* spdlog */,
 				BB7B079A25B646BA0021E545 /* SpriteBatcher.cpp */,
 				BB7B07CF25B646BA0021E545 /* SpriteBatcher.hpp */,
 				BB7B091625B6537D0021E545 /* StateMachine.hpp */,
@@ -1728,6 +1731,7 @@
 				BB7B07CE25B646BA0021E545 /* TextureRegion.hpp */,
 				BBBA5CEB25C3CFC000C8207D /* TextView.hpp */,
 				BBBA57D825BB567300C8207D /* TimeTracker.hpp */,
+				BBBF688425EB0B8300C1D6BD /* tinythreadpp */,
 				BB9E475125CE6AAD0031FE3A /* TopDownPhysicsController.cpp */,
 				BB9E475025CE6AAD0031FE3A /* TopDownPhysicsController.hpp */,
 				BBBA575025BB175900C8207D /* TransmissionData.hpp */,
@@ -2635,6 +2639,22 @@
 				BBBF684A25E9AFD100C1D6BD /* TextureLoader.hpp */,
 			);
 			path = stb;
+			sourceTree = "<group>";
+		};
+		BBBF688225EB0B8300C1D6BD /* spdlog */ = {
+			isa = PBXGroup;
+			children = (
+				BBBF688325EB0B8300C1D6BD /* Logger.hpp */,
+			);
+			path = spdlog;
+			sourceTree = "<group>";
+		};
+		BBBF688425EB0B8300C1D6BD /* tinythreadpp */ = {
+			isa = PBXGroup;
+			children = (
+				BBBF688525EB0B8300C1D6BD /* ThreadManager.hpp */,
+			);
+			path = tinythreadpp;
 			sourceTree = "<group>";
 		};
 		BBF1D21825E3510900CABC9F /* tinythreadpp */ = {
