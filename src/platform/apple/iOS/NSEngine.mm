@@ -10,23 +10,27 @@
 
 #include "MainEngineController.hpp"
 #include "Engine.hpp"
+#include "core/engine/AppleEngineControllerMacro.hpp"
 
 @implementation NSEngine
 {
 @private
-    MainEngineController _controller;
+    MainEngineController* _controller;
     Engine* _engine;
 }
 
 - (NSEngine*)init
 {
-    _engine = new Engine(_controller);
+    APPLE_INIT_BUNDLE_ROOT_FILE_PATH;
+    _controller = new MainEngineController(APPLE_BUNDLE_ROOT_FILE_PATH);
+    _engine = new Engine(*_controller);
     return self;
 }
 
 - (void)dealloc
 {
     delete _engine;
+    delete _controller;
 }
 
 - (void)createDeviceDependentResources

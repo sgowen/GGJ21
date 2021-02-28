@@ -49,6 +49,13 @@
       "yWeight": 0.7,
       "glyphWidthWeight": 0.018
     },
+    "lostJackieAgain_mobile": {
+      "text": "Lost Jackie again...\n\n\nShe needs to join me\nvia IP.",
+      "alignment": 1,
+      "xWeight": 0.75,
+      "yWeight": 0.7,
+      "glyphWidthWeight": 0.018
+    },
     "player1Info": {
       "alignment": 1,
       "xWeight": 0.25,

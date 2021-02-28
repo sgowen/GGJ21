@@ -32,7 +32,7 @@
 #include "HideController.hpp"
 #include "GameRenderer.hpp"
 #include "Renderer.hpp"
-#include "rapidjson/EntityLayoutLoader.hpp"
+#include "deps/rapidjson/EntityLayoutLoader.hpp"
 
 #include <stdlib.h>
 #include <assert.h>

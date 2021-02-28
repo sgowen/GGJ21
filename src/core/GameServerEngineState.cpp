@@ -24,7 +24,7 @@
 #include "MainConfig.hpp"
 #include "Network.hpp"
 #include "StringUtil.hpp"
-#include "rapidjson/EntityLayoutLoader.hpp"
+#include "deps/rapidjson/EntityLayoutLoader.hpp"
 
 #include <ctime>
 #include <assert.h>

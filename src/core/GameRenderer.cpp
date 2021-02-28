@@ -29,6 +29,7 @@
 #include "EntityRenderController.hpp"
 #include "AssetsManager.hpp"
 #include "Rektangle.hpp"
+#include "PlatformMacros.hpp"
 
 #include <sstream>
 #include <ctime>
@@ -155,7 +156,11 @@ void GameRenderer::renderUI(Renderer& r)
             r.rektangleBatcherAddRektangle(player2BlackedOut);
             r.rektangleBatcherEnd(Color::BLACK);
             
+#if IS_MOBILE
+            r.setTextVisible("lostJackieAgain_mobile", true);
+#else
             r.setTextVisible("lostJackieAgain", true);
+#endif
         }
     }
     else

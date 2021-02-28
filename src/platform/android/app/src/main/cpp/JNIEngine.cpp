@@ -5,7 +5,7 @@
 #include "MainEngineController.hpp"
 
 Engine* _engine = NULL;
-MainEngineController* _mainEngineController = NULL;
+MainEngineController* _controller = NULL;
 
 extern "C"
 JNIEXPORT void JNICALL
@@ -81,11 +81,11 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_com_gowen_ggj21_Engine_init(JNIEnv *env, jobject thiz, jobject asset_manager)
 {
-    assert(_mainEngineController == NULL);
-    _mainEngineController = new MainEngineController(env, asset_manager);
+    assert(_controller == NULL);
+    _controller = new MainEngineController(env, asset_manager);
 
     assert(_engine == NULL);
-    _engine = new Engine(*_mainEngineController);
+    _engine = new Engine(*_controller);
 }
 
 extern "C"
@@ -95,6 +95,6 @@ Java_com_gowen_ggj21_Engine_deinit(JNIEnv *env, jobject thiz)
     delete _engine;
     _engine = NULL;
 
-    delete _mainEngineController;
-    _mainEngineController = NULL;
+    delete _controller;
+    _controller = NULL;
 }

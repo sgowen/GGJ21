@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "rapidjson/ConfigLoader.hpp"
+#include "deps/rapidjson/ConfigLoader.hpp"
 
 #define CFG_MAIN MainConfig::getInstance()
 
@@ -55,7 +55,7 @@ public:
 private:
     Config _config;
     
-    MainConfig() : _config(ConfigLoader::initWithJSONFile("data/json/config_main.json")) {}
+    MainConfig() : _config(ConfigLoader::initWithJSONFile("data/json/config.json")) {}
     ~MainConfig() {}
     MainConfig(const MainConfig&);
     MainConfig& operator=(const MainConfig&);

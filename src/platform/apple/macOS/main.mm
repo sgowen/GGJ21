@@ -1,5 +1,5 @@
 //
-//  main.cpp
+//  main.mm
 //  GGJ21
 //
 //  Created by Stephen Gowen on 1/18/21.
@@ -7,10 +7,12 @@
 //
 
 #include "MainEngineController.hpp"
-#include "glfw/GlfwMain.hpp"
+#include "deps/glfw/GlfwMain.hpp"
+#include "core/engine/AppleEngineControllerMacro.hpp"
 
 int main(void)
 {
-    MainEngineController controller;
+    APPLE_INIT_BUNDLE_ROOT_FILE_PATH;
+    MainEngineController controller(APPLE_BUNDLE_ROOT_FILE_PATH);
     return GlfwMain::exec(controller, "Lost Between Woods");
 }
