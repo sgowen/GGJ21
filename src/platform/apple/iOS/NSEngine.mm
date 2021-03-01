@@ -9,7 +9,7 @@
 #import "NSEngine.hpp"
 
 #include <GowEngine/GowEngine.hpp>
-#include <GowEngine/AppleEngineControllerMacro.hpp>
+#include <GowEngine/AppleMacros.hpp>
 #include "GGJ21.hpp"
 
 @implementation NSEngine

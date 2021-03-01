@@ -7,7 +7,7 @@
 //
 
 #include <GowEngine/GowEngine.hpp>
-#include <GowEngine/AppleEngineControllerMacro.hpp>
+#include <GowEngine/AppleMacros.hpp>
 #include "GGJ21.hpp"
 
 int main(void)

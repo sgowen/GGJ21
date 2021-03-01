@@ -979,7 +979,7 @@
 		BBBF6DE325EC113F00C1D6BD /* CrystalController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CrystalController.hpp; sourceTree = "<group>"; };
 		BBBF6DE425EC113F00C1D6BD /* GameClientEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameClientEngineState.hpp; sourceTree = "<group>"; };
 		BBBF710725EC71DA00C1D6BD /* GGJ21.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GGJ21.hpp; sourceTree = "<group>"; };
-		BBBF711025EC760000C1D6BD /* AppleEngineControllerMacro.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppleEngineControllerMacro.hpp; sourceTree = "<group>"; };
+		BBBF711025EC760000C1D6BD /* AppleMacros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppleMacros.hpp; sourceTree = "<group>"; };
 		BBBF712325EC775000C1D6BD /* InputState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputState.cpp; sourceTree = "<group>"; };
 		BBBF712425EC775000C1D6BD /* ClipboardUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClipboardUtil.hpp; sourceTree = "<group>"; };
 		BBBF712525EC775000C1D6BD /* InputManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputManager.hpp; sourceTree = "<group>"; };
@@ -2365,7 +2365,7 @@
 		BBBF6DBF25EC113500C1D6BD /* GowEngine */ = {
 			isa = PBXGroup;
 			children = (
-				BBBF711025EC760000C1D6BD /* AppleEngineControllerMacro.hpp */,
+				BBBF711025EC760000C1D6BD /* AppleMacros.hpp */,
 				BBBF6DC025EC113500C1D6BD /* GowEngine.hpp */,
 			);
 			path = GowEngine;
