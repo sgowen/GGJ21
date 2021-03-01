@@ -8,16 +8,11 @@
 
 #pragma once
 
-#include "EntityLayout.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 #include <memory>
 #include <vector>
 #include <string>
-
-class Entity;
-class EntityIDManager;
-class TimeTracker;
-struct Rektangle;
 
 class World
 {

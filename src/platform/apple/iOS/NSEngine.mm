@@ -8,9 +8,9 @@
 
 #import "NSEngine.hpp"
 
-#include "MainEngineController.hpp"
-#include "Engine.hpp"
-#include "core/engine/AppleEngineControllerMacro.hpp"
+#include <GowEngine/GowEngine.hpp>
+#include <GowEngine/AppleEngineControllerMacro.hpp>
+#include "GGJ21.hpp"
 
 @implementation NSEngine
 {

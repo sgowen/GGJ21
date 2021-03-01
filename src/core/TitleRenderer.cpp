@@ -6,11 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "TitleRenderer.hpp"
-
-#include "TitleEngineState.hpp"
-#include "Renderer.hpp"
-#include "TitleInputManager.hpp"
+#include "GGJ21.hpp"
 
 void TitleRenderer::render(Renderer& r)
 {

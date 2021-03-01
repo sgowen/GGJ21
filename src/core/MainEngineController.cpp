@@ -6,23 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "MainEngineController.hpp"
-
-#include "Network.hpp"
-#include "InstanceRegistry.hpp"
-#include "TitleEngineState.hpp"
-#include "EntityManager.hpp"
-#include "HideController.hpp"
-#include "JackieController.hpp"
-#include "MonsterController.hpp"
-#include "CrystalController.hpp"
-#include "OvenController.hpp"
-#include "MainConfig.hpp"
-#include "TopDownPhysicsController.hpp"
-#include "ExplosionController.hpp"
-#include "InputManager.hpp"
-#include "SocketUtil.hpp"
-#include "AudioEngineFactory.hpp"
+#include "GGJ21.hpp"
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {

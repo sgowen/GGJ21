@@ -6,11 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "OvenController.hpp"
-
-#include "Entity.hpp"
-#include "CrystalController.hpp"
-#include "MainConfig.hpp"
+#include "GGJ21.hpp"
 
 IMPL_RTTI(OvenPhysicsController, TopDownPhysicsController)
 IMPL_EntityController_create(OvenPhysicsController, EntityPhysicsController)

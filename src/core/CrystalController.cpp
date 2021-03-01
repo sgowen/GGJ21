@@ -6,31 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "CrystalController.hpp"
-
-#include "Entity.hpp"
-#include "InputState.hpp"
-#include "Rektangle.hpp"
-#include "World.hpp"
-#include "Macros.hpp"
-#include "TimeTracker.hpp"
-#include "StringUtil.hpp"
-#include "MathUtil.hpp"
-#include "NetworkServer.hpp"
-#include "NetworkClient.hpp"
-#include "GameInputManager.hpp"
-#include "AudioEngineFactory.hpp"
-#include "SoundUtil.hpp"
-#include "Config.hpp"
-#include "MainConfig.hpp"
-#include "Macros.hpp"
-#include "PlayerController.hpp"
-#include "MathUtil.hpp"
-#include "InstanceRegistry.hpp"
-#include "EntityIDManager.hpp"
-#include "Network.hpp"
-#include "EntityManager.hpp"
-#include "TopDownPhysicsController.hpp"
+#include "GGJ21.hpp"
 
 IMPL_RTTI(CrystalController, EntityController)
 IMPL_EntityController_create(CrystalController, EntityController)

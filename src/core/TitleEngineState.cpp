@@ -6,20 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "TitleEngineState.hpp"
-
-#include "Engine.hpp"
-#include "Assets.hpp"
-#include "TitleInputManager.hpp"
-#include "AudioEngineFactory.hpp"
-#include "GameClientEngineState.hpp"
-#include "GameHostEngineState.hpp"
-#include "GameServerEngineState.hpp"
-#include "StringUtil.hpp"
-#include "MainConfig.hpp"
-#include "AssetsManager.hpp"
-#include "TitleRenderer.hpp"
-#include "Renderer.hpp"
+#include "GGJ21.hpp"
 
 #include <stdlib.h>
 #include <assert.h>

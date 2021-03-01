@@ -8,18 +8,10 @@
 
 #pragma once
 
-#include "StateMachine.hpp"
-
-#include "Pool.hpp"
-#include "InputState.hpp"
-#include "World.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 #include <string>
 #include <vector>
-
-class Engine;
-class ClientProxy;
-class Entity;
 
 #define ENGINE_STATE_GAME_SRVR GameServerEngineState::getInstance()
 

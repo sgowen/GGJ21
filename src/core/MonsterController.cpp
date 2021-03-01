@@ -6,28 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "MonsterController.hpp"
-
-#include "Entity.hpp"
-#include "InputState.hpp"
-#include "Rektangle.hpp"
-#include "World.hpp"
-#include "Macros.hpp"
-#include "TimeTracker.hpp"
-#include "StringUtil.hpp"
-#include "MathUtil.hpp"
-#include "NetworkServer.hpp"
-#include "NetworkClient.hpp"
-#include "GameInputManager.hpp"
-#include "AudioEngineFactory.hpp"
-#include "SoundUtil.hpp"
-#include "Config.hpp"
-#include "MainConfig.hpp"
-#include "Macros.hpp"
-#include "GameServerEngineState.hpp"
-#include "GameClientEngineState.hpp"
-#include "HideController.hpp"
-#include "MathUtil.hpp"
+#include "GGJ21.hpp"
 
 IMPL_RTTI(MonsterController, EntityController)
 IMPL_EntityController_create(MonsterController, EntityController)
@@ -99,9 +78,6 @@ bool MonsterController::isInEncounter()
 {
     return _encounter._isInCounter;
 }
-
-#include "InputMemoryBitStream.hpp"
-#include "OutputMemoryBitStream.hpp"
 
 IMPL_EntityController_create(MonsterNetworkController, EntityNetworkController)
 
@@ -215,9 +191,6 @@ void MonsterPhysicsController::onCollision(Entity* e)
         _entity->pose()._velocity._y = 0;
     }
 }
-
-#include "AssetsManager.hpp"
-#include "SpriteBatcher.hpp"
 
 IMPL_RTTI(MonsterRenderController, EntityRenderController)
 IMPL_EntityController_create(MonsterRenderController, EntityRenderController)

@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "EntityController.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 class ExplosionController : public EntityController
 {    

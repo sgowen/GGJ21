@@ -8,7 +8,8 @@
 
 #pragma once
 
-#include "PlayerController.hpp"
+#include <GowEngine/GowEngine.hpp>
+#include "GGJ21.hpp"
 
 class HideController : public PlayerController
 {

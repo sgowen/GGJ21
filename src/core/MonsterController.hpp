@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "EntityController.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 enum MonsterDirection
 {
@@ -108,8 +108,6 @@ private:
     Encounter _encounterCache;
 };
 
-#include "EntityNetworkController.hpp"
-
 class MonsterNetworkController : public EntityNetworkController
 {
     DECL_EntityController_create(EntityNetworkController);
@@ -124,8 +122,6 @@ public:
     virtual uint8_t refreshDirtyState();
 };
 
-#include "TopDownPhysicsController.hpp"
-
 class MonsterPhysicsController : public TopDownPhysicsController
 {
     DECL_RTTI;
@@ -138,8 +134,6 @@ public:
 protected:
     virtual void onCollision(Entity* e) override;
 };
-
-#include "EntityRenderController.hpp"
 
 class MonsterRenderController : public EntityRenderController
 {

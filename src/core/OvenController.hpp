@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "TopDownPhysicsController.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 class OvenPhysicsController : public TopDownPhysicsController
 {

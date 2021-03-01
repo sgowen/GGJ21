@@ -6,25 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "PlayerController.hpp"
-
-#include "Entity.hpp"
-#include "InputState.hpp"
-#include "Rektangle.hpp"
-#include "World.hpp"
-#include "Macros.hpp"
-#include "TimeTracker.hpp"
-#include "StringUtil.hpp"
-#include "MathUtil.hpp"
-#include "NetworkServer.hpp"
-#include "NetworkClient.hpp"
-#include "GameInputManager.hpp"
-#include "AudioEngineFactory.hpp"
-#include "SoundUtil.hpp"
-#include "Config.hpp"
-#include "MainConfig.hpp"
-#include "Macros.hpp"
-#include "MonsterController.hpp"
+#include "GGJ21.hpp"
 
 IMPL_RTTI(PlayerController, EntityController)
 IMPL_EntityController_create(PlayerController, EntityController)
@@ -116,9 +98,6 @@ uint16_t PlayerController::getHealth()
 {
     return _stats._health;
 }
-
-#include "InputMemoryBitStream.hpp"
-#include "OutputMemoryBitStream.hpp"
 
 IMPL_EntityController_create(PlayerNetworkController, EntityNetworkController)
 
@@ -216,9 +195,6 @@ uint8_t PlayerNetworkController::refreshDirtyState()
     
     return ret;
 }
-
-#include "AssetsManager.hpp"
-#include "SpriteBatcher.hpp"
 
 IMPL_RTTI(PlayerRenderController, EntityRenderController)
 IMPL_EntityController_create(PlayerRenderController, EntityRenderController)

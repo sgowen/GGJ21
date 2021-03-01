@@ -8,9 +8,7 @@
 
 #pragma once
 
-#include "StateMachine.hpp"
-
-class Engine;
+#include <GowEngine/GowEngine.hpp>
 
 #define ENGINE_STATE_GAME_HOST GameHostEngineState::getInstance()
 

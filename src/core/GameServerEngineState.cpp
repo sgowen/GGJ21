@@ -6,25 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "GameServerEngineState.hpp"
-
-#include "Engine.hpp"
-#include "ClientProxy.hpp"
-#include "Entity.hpp"
-#include "TimeTracker.hpp"
-#include "EntityIDManager.hpp"
-#include "NetworkServer.hpp"
-#include "EntityRegistry.hpp"
-#include "SocketAddress.hpp"
-#include "PlayerController.hpp"
-#include "HideController.hpp"
-#include "EntityManager.hpp"
-#include "EntityLayout.hpp"
-#include "InstanceRegistry.hpp"
-#include "MainConfig.hpp"
-#include "Network.hpp"
-#include "StringUtil.hpp"
-#include "deps/rapidjson/EntityLayoutLoader.hpp"
+#include "GGJ21.hpp"
 
 #include <ctime>
 #include <assert.h>

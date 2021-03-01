@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <GowEngine/GowEngine.hpp>
+
 #include <string>
 #include <stdint.h>
 

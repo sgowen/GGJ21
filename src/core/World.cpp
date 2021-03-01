@@ -6,24 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "World.hpp"
-
-#include "Entity.hpp"
-#include "EntityIDManager.hpp"
-#include "TimeTracker.hpp"
-#include "Rektangle.hpp"
-#include "EntityManager.hpp"
-#include "EntityLayout.hpp"
-#include "EntityNetworkController.hpp"
-#include "InstanceRegistry.hpp"
-#include "MainConfig.hpp"
-#include "StringUtil.hpp"
-#include "STLUtil.hpp"
-#include "Network.hpp"
-#include "Macros.hpp"
-#include "PlayerController.hpp"
-#include "OverlapTester.hpp"
-#include "TopDownPhysicsController.hpp"
+#include "GGJ21.hpp"
 
 World::World() :
 _entityLayout()

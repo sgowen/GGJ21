@@ -8,9 +8,7 @@
 
 #pragma once
 
-#include "MoveList.hpp"
-#include "Pool.hpp"
-#include "InputState.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 #include <string>
 
@@ -31,8 +29,6 @@ enum InputStateFlags
 };
 
 #define INPUT_GAME GameInputManager::getInstance()
-
-class Matrix;
 
 class GameInputManager
 {

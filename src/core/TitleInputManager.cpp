@@ -6,12 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "TitleInputManager.hpp"
-
-#include "InputManager.hpp"
-#include "MainConfig.hpp"
-#include "StringUtil.hpp"
-#include "ClipboardUtil.hpp"
+#include "GGJ21.hpp"
 
 TitleInputManagerState TitleInputManager::update(TitleInputManagerUpdate mimu)
 {

@@ -8,14 +8,7 @@
 
 #pragma once
 
-#include "EngineState.hpp"
-#include "World.hpp"
-
-class Engine;
-class TimeTracker;
-class Server;
-class Move;
-class Entity;
+#include <GowEngine/GowEngine.hpp>
 
 #define ENGINE_STATE_GAME_CLNT GameClientEngineState::getInstance()
 

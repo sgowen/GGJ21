@@ -6,11 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "GameHostEngineState.hpp"
-
-#include "Engine.hpp"
-#include "GameServerEngineState.hpp"
-#include "GameClientEngineState.hpp"
+#include "GGJ21.hpp"
 
 void GameHostEngineState::enter(Engine* e)
 {

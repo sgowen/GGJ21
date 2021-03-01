@@ -6,9 +6,9 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "MainEngineController.hpp"
-#include "deps/glfw/GlfwMain.hpp"
-#include "core/engine/AppleEngineControllerMacro.hpp"
+#include <GowEngine/GowEngine.hpp>
+#include <GowEngine/AppleEngineControllerMacro.hpp>
+#include "GGJ21.hpp"
 
 int main(void)
 {

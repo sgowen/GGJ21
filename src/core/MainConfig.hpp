@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "deps/rapidjson/ConfigLoader.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 #define CFG_MAIN MainConfig::getInstance()
 

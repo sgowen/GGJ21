@@ -6,21 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "GameInputManager.hpp"
-
-#include "InputManager.hpp"
-#include "TimeTracker.hpp"
-#include "InstanceRegistry.hpp"
-#include "Network.hpp"
-#include "NetworkClient.hpp"
-#include "Macros.hpp"
-#include "MathUtil.hpp"
-#include "MainConfig.hpp"
-#include "GameClientEngineState.hpp"
-#include "PlayerController.hpp"
-#include "World.hpp"
-#include "Entity.hpp"
-#include "Matrix.hpp"
+#include "GGJ21.hpp"
 
 void GameInputManager::setMatrix(Matrix* m)
 {

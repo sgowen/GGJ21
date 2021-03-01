@@ -6,33 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "GameClientEngineState.hpp"
-
-#include "Engine.hpp"
-#include "TimeTracker.hpp"
-#include "Move.hpp"
-#include "AssetsManager.hpp"
-#include "GameInputManager.hpp"
-#include "AudioEngineFactory.hpp"
-#include "PlayerController.hpp"
-#include "Entity.hpp"
-#include "StringUtil.hpp"
-#include "MathUtil.hpp"
-#include "NetworkClient.hpp"
-#include "InputState.hpp"
-#include "EntityRegistry.hpp"
-#include "Assets.hpp"
-#include "EntityManager.hpp"
-#include "EntityLayout.hpp"
-#include "MainConfig.hpp"
-#include "InstanceRegistry.hpp"
-#include "Config.hpp"
-#include "Macros.hpp"
-#include "Network.hpp"
-#include "HideController.hpp"
-#include "GameRenderer.hpp"
-#include "Renderer.hpp"
-#include "deps/rapidjson/EntityLayoutLoader.hpp"
+#include "GGJ21.hpp"
 
 #include <stdlib.h>
 #include <assert.h>

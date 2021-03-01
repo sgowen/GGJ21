@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "EngineController.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 class MainEngineController : public EngineController
 {

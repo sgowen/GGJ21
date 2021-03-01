@@ -8,7 +8,7 @@
 
 #pragma once
 
-class Renderer;
+#include <GowEngine/GowEngine.hpp>
 
 class TitleRenderer
 {

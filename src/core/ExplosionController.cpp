@@ -6,9 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "ExplosionController.hpp"
-
-#include "Entity.hpp"
+#include "GGJ21.hpp"
 
 IMPL_RTTI(ExplosionController, EntityController)
 IMPL_EntityController_create(ExplosionController, EntityController)

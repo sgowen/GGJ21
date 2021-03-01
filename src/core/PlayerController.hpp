@@ -8,12 +8,9 @@
 
 #pragma once
 
-#include "EntityController.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 #include <string>
-
-class InputState;
-struct Rektangle;
 
 class PlayerController : public EntityController
 {
@@ -102,8 +99,6 @@ protected:
     Stats _statsCache;
 };
 
-#include "EntityNetworkController.hpp"
-
 class PlayerNetworkController : public EntityNetworkController
 {
 public:
@@ -117,8 +112,6 @@ public:
     virtual void recallCache();
     virtual uint8_t refreshDirtyState();
 };
-
-#include "EntityRenderController.hpp"
 
 class PlayerRenderController : public EntityRenderController
 {

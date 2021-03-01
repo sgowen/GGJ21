@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "EngineState.hpp"
+#include <GowEngine/GowEngine.hpp>
 
 enum TitleEngineStateState
 {
@@ -18,8 +18,6 @@ enum TitleEngineStateState
     TESS_INPUT_JOIN_NAME,
     TESS_START_DEDICATED_SERVER,
 };
-
-class Engine;
 
 #define ENGINE_STATE_TITLE TitleEngineState::getInstance()
 

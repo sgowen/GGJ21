@@ -6,17 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "JackieController.hpp"
-
-#include "Entity.hpp"
-#include "CrystalController.hpp"
-#include "InputState.hpp"
-#include "GameInputManager.hpp"
-#include "Macros.hpp"
-#include "AudioEngineFactory.hpp"
-#include "StringUtil.hpp"
-#include "EntityRenderController.hpp"
-#include "MainConfig.hpp"
+#include "GGJ21.hpp"
 
 IMPL_RTTI(JackieController, PlayerController)
 IMPL_EntityController_create(JackieController, EntityController)

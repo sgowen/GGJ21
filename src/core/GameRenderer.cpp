@@ -6,30 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "GameRenderer.hpp"
-
-#include "Renderer.hpp"
-#include "Entity.hpp"
-#include "GameClientEngineState.hpp"
-#include "OpenGLWrapper.hpp"
-#include "Macros.hpp"
-#include "Color.hpp"
-#include "MainConfig.hpp"
-#include "InputManager.hpp"
-#include "GameInputManager.hpp"
-#include "StringUtil.hpp"
-#include "FPSUtil.hpp"
-#include "Assets.hpp"
-#include "World.hpp"
-#include "Network.hpp"
-#include "NetworkClient.hpp"
-#include "HideController.hpp"
-#include "MonsterController.hpp"
-#include "CrystalController.hpp"
-#include "EntityRenderController.hpp"
-#include "AssetsManager.hpp"
-#include "Rektangle.hpp"
-#include "PlatformMacros.hpp"
+#include "GGJ21.hpp"
 
 #include <sstream>
 #include <ctime>

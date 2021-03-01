@@ -6,18 +6,7 @@
 //  Copyright © 2021 Stephen Gowen. All rights reserved.
 //
 
-#include "HideController.hpp"
-
-#include "MainConfig.hpp"
-#include "Macros.hpp"
-#include "Entity.hpp"
-#include "AudioEngineFactory.hpp"
-#include "World.hpp"
-#include "MonsterController.hpp"
-#include "GameServerEngineState.hpp"
-#include "GameClientEngineState.hpp"
-#include "EntityRenderController.hpp"
-#include "GameInputManager.hpp"
+#include "GGJ21.hpp"
 
 #include <assert.h>
 
