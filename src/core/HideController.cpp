@@ -133,9 +133,6 @@ uint32_t HideController::getEntityLayoutKey()
     return _entityLayoutInfo._key;
 }
 
-#include "InputMemoryBitStream.hpp"
-#include "OutputMemoryBitStream.hpp"
-
 IMPL_EntityController_create(HideNetworkController, EntityNetworkController)
 
 void HideNetworkController::read(InputMemoryBitStream& imbs)
@@ -233,9 +230,6 @@ uint8_t HideNetworkController::refreshDirtyState()
     
     return ret;
 }
-
-#include "AssetsManager.hpp"
-#include "SpriteBatcher.hpp"
 
 IMPL_RTTI(HideRenderController, EntityRenderController)
 IMPL_EntityController_create(HideRenderController, EntityRenderController)
