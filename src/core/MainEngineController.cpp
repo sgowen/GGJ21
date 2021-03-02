@@ -10,6 +10,8 @@
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
+    ASSETS.registerAssets("global", AssetsLoader::initWithJSONFile("data/json/assets_global.json"));
+    
     SOCKET_UTIL.setLoggingEnabled(CFG_MAIN.networkLoggingEnabled());
     INPUT_MGR.setLoggingEnabled(CFG_MAIN.inputLoggingEnabled());
     AUDIO_ENGINE.setSoundsDisabled(CFG_MAIN.soundsDisabled());

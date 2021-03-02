@@ -1,8 +1,5 @@
-#include <jni.h>
-#include <assert.h>
-
-#include "Engine.hpp"
-#include "MainEngineController.hpp"
+#include <GowEngine/GowEngine.hpp>
+#include "GGJ21.hpp"
 
 Engine* _engine = NULL;
 MainEngineController* _controller = NULL;

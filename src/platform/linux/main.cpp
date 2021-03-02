@@ -6,8 +6,8 @@
 //  Copyright © 2020 Stephen Gowen. All rights reserved.
 //
 
-#include "MainEngineController.hpp"
-#include "glfw/GlfwMain.hpp"
+#include <GowEngine/GowEngine.hpp>
+#include "GGJ21.hpp"
 
 int main(void)
 {

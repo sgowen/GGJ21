@@ -796,73 +796,6 @@
   ],
   "shaders": [
     {
-      "name": "framebuffer",
-      "vertexShaderFilePath": "data/shaders/framebuffer.vsh",
-      "fragmentShaderFilePath": "data/shaders/framebuffer.fsh",
-      "uniforms": [
-        {
-          "name": "u_Texture",
-          "type": "sampler2D"
-        }
-      ],
-      "attributes": [
-        {
-          "name": "a_Position",
-          "type": "vec2"
-        }
-      ]
-    },
-    {
-      "name": "texture",
-      "vertexShaderFilePath": "data/shaders/texture.vsh",
-      "fragmentShaderFilePath": "data/shaders/texture.fsh",
-      "uniforms": [
-        {
-          "name": "u_Matrix",
-          "type": "mat4"
-        },
-        {
-          "name": "u_ColorFactor",
-          "type": "vec4"
-        },
-        {
-          "name": "u_Texture",
-          "type": "sampler2D"
-        }
-      ],
-      "attributes": [
-        {
-          "name": "a_Position",
-          "type": "vec2"
-        },
-        {
-          "name": "a_TexCoord",
-          "type": "vec2"
-        }
-      ]
-    },
-    {
-      "name": "geometry",
-      "vertexShaderFilePath": "data/shaders/geometry.vsh",
-      "fragmentShaderFilePath": "data/shaders/geometry.fsh",
-      "uniforms": [
-        {
-          "name": "u_Matrix",
-          "type": "mat4"
-        },
-        {
-          "name": "u_Color",
-          "type": "vec4"
-        }
-      ],
-      "attributes": [
-        {
-          "name": "a_Position",
-          "type": "vec2"
-        }
-      ]
-    },
-    {
       "name": "lights",
       "vertexShaderFilePath": "data/shaders/lights.vsh",
       "fragmentShaderFilePath": "data/shaders/lights.fsh",
@@ -1204,11 +1137,6 @@
           "numFrames": 4
         }
       }
-    },
-    {
-      "name": "texture_font",
-      "filePath": "data/textures/Cheepicus_16x16.png",
-      "mipMap": false
     }
   ]
 }
