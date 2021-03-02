@@ -26,8 +26,6 @@ public:
     virtual void processInput(InputState* is, bool isLive) override;
 };
 
-#include "TopDownPhysicsController.hpp"
-
 class JackiePhysicsController : public TopDownPhysicsController
 {
     DECL_RTTI;
