@@ -23,6 +23,8 @@
 		BB1C5E0925E5624A00ED3EF0 /* color_sinks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB1C5DFC25E5624A00ED3EF0 /* color_sinks.cpp */; };
 		BB1C5E0A25E5624A00ED3EF0 /* spdlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB1C5DFD25E5624A00ED3EF0 /* spdlog.cpp */; };
 		BB1C5E0B25E5624A00ED3EF0 /* spdlog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB1C5DFD25E5624A00ED3EF0 /* spdlog.cpp */; };
+		BB71D33B25EEFDCC00A0A382 /* ThreadManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB71D33A25EEFDCC00A0A382 /* ThreadManager.cpp */; };
+		BB71D33C25EEFDCC00A0A382 /* ThreadManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB71D33A25EEFDCC00A0A382 /* ThreadManager.cpp */; };
 		BB7B046525B644E10021E545 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7B046425B644E10021E545 /* Assets.xcassets */; };
 		BB7B047525B6455F0021E545 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B047425B6455F0021E545 /* main.mm */; };
 		BB7B08D225B64CF20021E545 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7B08D125B64CF20021E545 /* OpenGL.framework */; };
@@ -515,6 +517,7 @@
 		BB1C5DFB25E5624A00ED3EF0 /* file_sinks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_sinks.cpp; sourceTree = "<group>"; };
 		BB1C5DFC25E5624A00ED3EF0 /* color_sinks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color_sinks.cpp; sourceTree = "<group>"; };
 		BB1C5DFD25E5624A00ED3EF0 /* spdlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spdlog.cpp; sourceTree = "<group>"; };
+		BB71D33A25EEFDCC00A0A382 /* ThreadManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThreadManager.cpp; sourceTree = "<group>"; };
 		BB7B045D25B644E00021E545 /* GGJ21-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GGJ21-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7B046425B644E10021E545 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB7B046925B644E10021E545 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2773,6 +2776,7 @@
 			isa = PBXGroup;
 			children = (
 				BBBF720D25EC775100C1D6BD /* GowEngine_tinythreadpp.hpp */,
+				BB71D33A25EEFDCC00A0A382 /* ThreadManager.cpp */,
 				BBBF720C25EC775100C1D6BD /* ThreadManager.hpp */,
 			);
 			path = tinythreadpp;
@@ -3154,6 +3158,7 @@
 				BBBA56DA25BA453A00C8207D /* monitor.c in Sources */,
 				BBBF72AB25EC775100C1D6BD /* LightRenderer.cpp in Sources */,
 				BBBA5B0025BB5D1A00C8207D /* b2_collide_polygon.cpp in Sources */,
+				BB71D33B25EEFDCC00A0A382 /* ThreadManager.cpp in Sources */,
 				BBBF725B25EC775100C1D6BD /* MovingAverage.cpp in Sources */,
 				BBBF727D25EC775100C1D6BD /* Config.cpp in Sources */,
 				BBBF723925EC775100C1D6BD /* InputManager.cpp in Sources */,
@@ -3238,6 +3243,7 @@
 				BBBA5ACB25BB5D1A00C8207D /* b2_edge_circle_contact.cpp in Sources */,
 				BBBF6DE625EC113F00C1D6BD /* OvenController.cpp in Sources */,
 				BBBA5AEB25BB5D1A00C8207D /* b2_stack_allocator.cpp in Sources */,
+				BB71D33C25EEFDCC00A0A382 /* ThreadManager.cpp in Sources */,
 				BBBA5AD125BB5D1A00C8207D /* b2_wheel_joint.cpp in Sources */,
 				BBBF724825EC775100C1D6BD /* ReplicationTransmissionData.cpp in Sources */,
 				BBBF72D225EC775100C1D6BD /* OboeSoundWrapper.cpp in Sources */,
