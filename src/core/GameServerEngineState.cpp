@@ -235,7 +235,7 @@ void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
     PlayerController* ec = e->controller<PlayerController>();
     ec->setUsername(username);
     ec->setUserAddress(cp->getSocketAddress()->toString());
-    if (ec->getRTTI().isExactly(HideController::rtti))
+    if (ec->getRTTI().isDerivedFrom(HideController::rtti))
     {
         e->controller<HideController>()->setEntityLayoutKey('LYT1');
     }
