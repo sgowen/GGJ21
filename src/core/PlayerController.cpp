@@ -70,7 +70,7 @@ void PlayerController::processInput(InputState* is, bool isLive)
     
     if (isLive)
     {
-        SoundUtil::playSoundForStateIfChanged(_entity, fromState, state);
+        SoundUtil::playSoundForStateIfChanged(*_entity, fromState, state);
     }
 }
 
@@ -97,103 +97,6 @@ std::string PlayerController::getUserAddress() const
 uint16_t PlayerController::getHealth()
 {
     return _stats._health;
-}
-
-IMPL_EntityController_create(PlayerNetworkController, EntityNetworkController)
-
-void PlayerNetworkController::read(InputMemoryBitStream& imbs)
-{
-    uint8_t fromState = _entity->stateCache()._state;
-    
-    EntityNetworkController::read(imbs);
-    
-    PlayerController* c = _entity->controller<PlayerController>();
-    
-    bool stateBit;
-    
-    imbs.read(stateBit);
-    if (stateBit)
-    {
-        imbs.readSmall(c->_playerInfo._username);
-        imbs.readSmall(c->_playerInfo._userAddress);
-        
-        c->_playerInfoCache = c->_playerInfo;
-    }
-    
-    imbs.read(stateBit);
-    if (stateBit)
-    {
-        imbs.read(c->_stats._health);
-        imbs.read(c->_stats._dir);
-        
-        c->_statsCache = c->_stats;
-    }
-    
-    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
-    if (!NW_CLNT->isPlayerIDLocal(playerID))
-    {
-        SoundUtil::playSoundForStateIfChanged(_entity, fromState, _entity->state()._state);
-    }
-}
-
-uint8_t PlayerNetworkController::write(OutputMemoryBitStream& ombs, uint8_t dirtyState)
-{
-    uint8_t ret = EntityNetworkController::write(ombs, dirtyState);
-    
-    PlayerController* c = _entity->controller<PlayerController>();
-    
-    bool RSTF_PLAYER_INFO = IS_BIT_SET(dirtyState, PlayerController::RSTF_PLAYER_INFO);
-    ombs.write(RSTF_PLAYER_INFO);
-    if (RSTF_PLAYER_INFO)
-    {
-        ombs.writeSmall(c->_playerInfo._username);
-        ombs.writeSmall(c->_playerInfo._userAddress);
-        
-        ret |= PlayerController::RSTF_PLAYER_INFO;
-    }
-    
-    bool RSTF_STATS = IS_BIT_SET(dirtyState, PlayerController::RSTF_STATS);
-    ombs.write(RSTF_STATS);
-    if (RSTF_STATS)
-    {
-        ombs.write(c->_stats._health);
-        ombs.write(c->_stats._dir);
-        
-        ret |= PlayerController::RSTF_STATS;
-    }
-    
-    return ret;
-}
-
-void PlayerNetworkController::recallCache()
-{
-    EntityNetworkController::recallCache();
-    
-    PlayerController* c = _entity->controller<PlayerController>();
-    
-    c->_playerInfo = c->_playerInfoCache;
-    c->_stats = c->_statsCache;
-}
-
-uint8_t PlayerNetworkController::refreshDirtyState()
-{
-    uint8_t ret = EntityNetworkController::refreshDirtyState();
-    
-    PlayerController* c = _entity->controller<PlayerController>();
-    
-    if (c->_playerInfoCache != c->_playerInfo)
-    {
-        c->_playerInfoCache = c->_playerInfo;
-        ret |= PlayerController::RSTF_PLAYER_INFO;
-    }
-    
-    if (c->_statsCache != c->_stats)
-    {
-        c->_statsCache = c->_stats;
-        ret |= PlayerController::RSTF_STATS;
-    }
-    
-    return ret;
 }
 
 IMPL_RTTI(PlayerRenderController, EntityRenderController)

@@ -303,8 +303,6 @@
 		BBBF728225EC775100C1D6BD /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF718F25EC775100C1D6BD /* SoundManager.cpp */; };
 		BBBF728325EC775100C1D6BD /* SoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719125EC775100C1D6BD /* SoundWrapper.cpp */; };
 		BBBF728425EC775100C1D6BD /* SoundWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719125EC775100C1D6BD /* SoundWrapper.cpp */; };
-		BBBF728525EC775100C1D6BD /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719625EC775100C1D6BD /* SoundUtil.cpp */; };
-		BBBF728625EC775100C1D6BD /* SoundUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719625EC775100C1D6BD /* SoundUtil.cpp */; };
 		BBBF728725EC775100C1D6BD /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719B25EC775100C1D6BD /* EntityPhysicsController.cpp */; };
 		BBBF728825EC775100C1D6BD /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719B25EC775100C1D6BD /* EntityPhysicsController.cpp */; };
 		BBBF728925EC775100C1D6BD /* TopDownPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF719C25EC775100C1D6BD /* TopDownPhysicsController.cpp */; };
@@ -1093,7 +1091,6 @@
 		BBBF719325EC775100C1D6BD /* SoundUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundUtil.hpp; sourceTree = "<group>"; };
 		BBBF719425EC775100C1D6BD /* SoundWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundWrapper.hpp; sourceTree = "<group>"; };
 		BBBF719525EC775100C1D6BD /* SoundDescriptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundDescriptor.hpp; sourceTree = "<group>"; };
-		BBBF719625EC775100C1D6BD /* SoundUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundUtil.cpp; sourceTree = "<group>"; };
 		BBBF719725EC775100C1D6BD /* AudioEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngine.hpp; sourceTree = "<group>"; };
 		BBBF719825EC775100C1D6BD /* SoundManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundManager.hpp; sourceTree = "<group>"; };
 		BBBF719925EC775100C1D6BD /* AudioEngineFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngineFactory.hpp; sourceTree = "<group>"; };
@@ -2600,7 +2597,6 @@
 				BBBF719525EC775100C1D6BD /* SoundDescriptor.hpp */,
 				BBBF718F25EC775100C1D6BD /* SoundManager.cpp */,
 				BBBF719825EC775100C1D6BD /* SoundManager.hpp */,
-				BBBF719625EC775100C1D6BD /* SoundUtil.cpp */,
 				BBBF719325EC775100C1D6BD /* SoundUtil.hpp */,
 				BBBF719125EC775100C1D6BD /* SoundWrapper.cpp */,
 				BBBF719425EC775100C1D6BD /* SoundWrapper.hpp */,
@@ -3168,7 +3164,6 @@
 				BBBF6DF725EC114000C1D6BD /* TitleEngineState.cpp in Sources */,
 				BB1C5E0425E5624A00ED3EF0 /* async.cpp in Sources */,
 				BBBF727725EC775100C1D6BD /* OverlapTester.cpp in Sources */,
-				BBBF728525EC775100C1D6BD /* SoundUtil.cpp in Sources */,
 				BBBA5AC625BB5D1A00C8207D /* b2_polygon_contact.cpp in Sources */,
 				BBBF72DB25EC775100C1D6BD /* EntityLayoutLoader.cpp in Sources */,
 				BBBA5ACA25BB5D1A00C8207D /* b2_edge_circle_contact.cpp in Sources */,
@@ -3309,7 +3304,6 @@
 				BBBA46E325B913D900C8207D /* ALSoundSourcePool.m in Sources */,
 				BBBA5ACD25BB5D1A00C8207D /* b2_gear_joint.cpp in Sources */,
 				BBBA5AE925BB5D1A00C8207D /* b2_block_allocator.cpp in Sources */,
-				BBBF728625EC775100C1D6BD /* SoundUtil.cpp in Sources */,
 				BBBF72B625EC775100C1D6BD /* CircleBatcher.cpp in Sources */,
 				BBBA5ABB25BB5D1A00C8207D /* b2_contact_solver.cpp in Sources */,
 				BBBF72AE25EC775100C1D6BD /* TextureManager.cpp in Sources */,

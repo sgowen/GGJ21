@@ -26,9 +26,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     registerControllers(config, CFG_MAIN.entityManagerFilePath());
     
     std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
-    configNW.emplace("Hide", HideNetworkController::create);
-    configNW.emplace("Jackie", PlayerNetworkController::create);
-    configNW.emplace("Monster", MonsterNetworkController::create);
+    // TODO, no longer need map
     configureForNetwork(configNW, CFG_MAIN.entityLayoutManagerFilePath());
     
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;

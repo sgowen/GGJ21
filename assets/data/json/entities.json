@@ -2,7 +2,6 @@
   "MON1": {
     "name": "Monster",
     "controller": "Monster",
-    "networkController": "Monster",
     "physicsController": "Monster",
     "renderController": "Monster",
     "soundMappings": {
@@ -14,6 +13,40 @@
         "flags": 1
       }
     ],
+    "networkData": [
+      {
+        "name": "stats",
+        "data": [
+          {
+            "name": "health",
+            "type": "uint16_t",
+            "value": 3
+          },
+          {
+            "name": "dir",
+            "type": "uint8_t",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "name": "encounter",
+        "data": [
+          {
+            "name": "isInCounter",
+            "type": "bool"
+          },
+          {
+            "name": "state",
+            "type": "uint8_t"
+          },
+          {
+            "name": "stateTime",
+            "type": "uint16_t"
+          }
+        ]
+      }
+    ],
     "bodyFlags": 6,
     "width": 4,
     "height": 4
@@ -21,7 +54,6 @@
   "HIDE": {
     "name": "Hide",
     "controller": "Hide",
-    "networkController": "Hide",
     "renderController": "Hide",
     "soundMappings": {
       "99": 0
@@ -64,26 +96,63 @@
       }
     ],
     "data": {
-        "playerID": "1"
+      "playerID": "1"
     },
-    "networkData": {
-        "playerInfo": {
-            "username": {
-                "type": "smallString"
-            },
-            "userAddress": {
-                "type": "smallString"
-            }
-        },
-        "stats": {
-            "health": {
-                "type": "uint16_t"
-            },
-            "dir": {
-                "type": "uint8_t"
-            }
-        }
-    },
+    "networkData": [
+      {
+        "name": "playerInfo",
+        "data": [
+          {
+            "name": "username",
+            "type": "smallString"
+          },
+          {
+            "name": "userAddress",
+            "type": "smallString"
+          }
+        ]
+      },
+      {
+        "name": "stats",
+        "data": [
+          {
+            "name": "health",
+            "type": "uint16_t",
+            "value": 3
+          },
+          {
+            "name": "dir",
+            "type": "uint8_t"
+          }
+        ]
+      },
+      {
+        "name": "encounter",
+        "data": [
+          {
+            "name": "isInCounter",
+            "type": "bool"
+          },
+          {
+            "name": "state",
+            "type": "uint8_t"
+          },
+          {
+            "name": "stateTime",
+            "type": "uint16_t"
+          }
+        ]
+      },
+      {
+        "name": "entityLayoutInfo",
+        "data": [
+          {
+            "name": "key",
+            "type": "uint32_t"
+          }
+        ]
+      }
+    ],
     "bodyFlags": 14,
     "width": 4,
     "height": 4
@@ -91,7 +160,6 @@
   "JCKE": {
     "name": "Jackie",
     "controller": "Jackie",
-    "networkController": "Jackie",
     "physicsController": "Jackie",
     "renderController": "Jackie",
     "soundRandomMappings": {
@@ -115,8 +183,37 @@
       }
     ],
     "data": {
-        "playerID": "2"
+      "playerID": "2"
     },
+    "networkData": [
+      {
+        "name": "playerInfo",
+        "data": [
+          {
+            "name": "username",
+            "type": "smallString"
+          },
+          {
+            "name": "userAddress",
+            "type": "smallString"
+          }
+        ]
+      },
+      {
+        "name": "stats",
+        "data": [
+          {
+            "name": "health",
+            "type": "uint16_t",
+            "value": 3
+          },
+          {
+            "name": "dir",
+            "type": "uint8_t"
+          }
+        ]
+      }
+    ],
     "bodyFlags": 14,
     "width": 4,
     "height": 4
@@ -207,7 +304,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -219,7 +316,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -231,7 +328,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -243,7 +340,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -255,7 +352,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -267,7 +364,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -279,7 +376,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -291,7 +388,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -303,7 +400,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -315,7 +412,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -327,7 +424,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
@@ -339,7 +436,7 @@
     "height": 4,
     "fixtures": [
       {
-        "flags": 0
+        "flags": 1
       }
     ],
     "bodyFlags": 5
