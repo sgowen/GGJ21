@@ -145,7 +145,7 @@ void GameRenderer::renderUI(Renderer& r)
         r.setTextVisible("joiningServer", true);
     }
     
-    r.renderText();
+    r.renderTextViews();
     
     MoveList& ml = INPUT_GAME.moveList();
     if (ml.getMoveCount() == NW_CLNT_MAX_NUM_MOVES)

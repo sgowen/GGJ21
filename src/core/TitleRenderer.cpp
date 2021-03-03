@@ -20,10 +20,7 @@ void TitleRenderer::render(Renderer& r)
     }
     else
     {
-        Matrix& m = r.matrix();
-        float w = m._desc.width();
-        float h = m._desc.height();
-        r.renderSprite("demo", "DEMO", w / 2, h * 0.6, w, h * 0.8);
+        r.renderImageViews();
     }
     
     r.setTextVisible("dedicatedServerMode", tess == TESS_START_DEDICATED_SERVER);
@@ -34,7 +31,7 @@ void TitleRenderer::render(Renderer& r)
     r.setTextVisible("input", tess == TESS_INPUT_IP || tess == TESS_INPUT_HOST_NAME || tess == TESS_INPUT_JOIN_NAME);
     r.setText("input", INPUT_TITLE.getTextInput());
     r.setTextVisible("escToExit", tess != TESS_START_DEDICATED_SERVER);
-    r.renderText();
+    r.renderTextViews();
 
     r.renderToScreen();
 }

@@ -23,12 +23,6 @@ enum TitleInputManagerState
     MIMS_TEXT_INPUT_READY
 };
 
-enum TitleInputManagerUpdate
-{
-    MIMU_DEFAULT,
-    MIMU_READ_TEXT
-};
-
 #define INPUT_TITLE TitleInputManager::getInstance()
 
 class TitleInputManager
@@ -40,18 +34,16 @@ public:
         return ret;
     }
     
-    TitleInputManagerState update(TitleInputManagerUpdate mimu);
+    TitleInputManagerState update();
+    TitleInputManagerState updateReadText();
     std::string getTextInput();
     void setTextInput(std::string textInput);
     void clearTextInput();
     
 private:
-    TitleInputManagerState _state;
     std::string _textInput;
     bool _isControlHeldDown;
     
-    void updateDefault();
-    void updateReadText();
     void acceptKeyInput(uint16_t key);
     
     TitleInputManager();

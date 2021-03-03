@@ -8,41 +8,7 @@
 
 #include "GGJ21.hpp"
 
-TitleInputManagerState TitleInputManager::update(TitleInputManagerUpdate mimu)
-{
-    _state = MIMS_DEFAULT;
-    
-    switch (mimu)
-    {
-        case MIMU_DEFAULT:
-            updateDefault();
-            break;
-        case MIMU_READ_TEXT:
-            updateReadText();
-            break;
-        default:
-            break;
-    }
-    
-    return _state;
-}
-
-std::string TitleInputManager::getTextInput()
-{
-    return _textInput;
-}
-
-void TitleInputManager::setTextInput(std::string textInput)
-{
-    _textInput = textInput;
-}
-
-void TitleInputManager::clearTextInput()
-{
-    _textInput.clear();
-}
-
-void TitleInputManager::updateDefault()
+TitleInputManagerState TitleInputManager::update()
 {
 #if IS_MOBILE
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
@@ -52,8 +18,7 @@ void TitleInputManager::updateDefault()
             continue;
         }
         
-        _state = MIMS_HOST_SRVR;
-        break;
+        return MIMS_HOST_SRVR;
     }
 #endif
     
@@ -68,12 +33,10 @@ void TitleInputManager::updateDefault()
         {
             case GPEB_BUTTON_START:
             case GPEB_BUTTON_SNES_START:
-                _state = MIMS_HOST_SRVR;
-                continue;
+                return MIMS_HOST_SRVR;
             case GPEB_BUTTON_SELECT:
             case GPEB_BUTTON_SNES_SELECT:
-                _state = MIMS_EXIT;
-                continue;
+                return MIMS_EXIT;
             default:
                 continue;
         }
@@ -89,24 +52,22 @@ void TitleInputManager::updateDefault()
         switch (e->_key)
         {
             case GOW_KEY_S:
-                _state = MIMS_START_SRVR;
-                continue;
+                return MIMS_START_SRVR;
             case GOW_KEY_H:
-                _state = MIMS_HOST_SRVR;
-                continue;
+                return MIMS_HOST_SRVR;
             case GOW_KEY_J:
-                _state = MIMS_JOIN_SRVR;
-                continue;
+                return MIMS_JOIN_SRVR;
             case GOW_KEY_ESCAPE:
-                _state = MIMS_EXIT;
-                continue;
+                return MIMS_EXIT;
             default:
                 continue;
         }
     }
+    
+    return MIMS_DEFAULT;
 }
 
-void TitleInputManager::updateReadText()
+TitleInputManagerState TitleInputManager::updateReadText()
 {
 #if IS_MOBILE
     for (CursorEvent* e : INPUT_MGR.getCursorEvents())
@@ -116,9 +77,8 @@ void TitleInputManager::updateReadText()
             continue;
         }
         
-        _state = MIMS_TEXT_INPUT_READY;
         _textInput = "mobile";
-        break;
+        return MIMS_TEXT_INPUT_READY;
     }
 #endif
     
@@ -133,14 +93,12 @@ void TitleInputManager::updateReadText()
         {
             case GPEB_BUTTON_START:
             case GPEB_BUTTON_SNES_START:
-                _state = MIMS_TEXT_INPUT_READY;
                 _textInput = "gamer";
-                continue;
+                return MIMS_TEXT_INPUT_READY;
             case GPEB_BUTTON_SELECT:
             case GPEB_BUTTON_SNES_SELECT:
-                _state = MIMS_EXIT;
                 clearTextInput();
-                continue;
+                return MIMS_EXIT;
             default:
                 continue;
         }
@@ -161,8 +119,7 @@ void TitleInputManager::updateReadText()
         switch (e->_key)
         {
             case GOW_KEY_CARRIAGE_RETURN:
-                _state = MIMS_TEXT_INPUT_READY;
-                continue;
+                return MIMS_TEXT_INPUT_READY;
             case GOW_KEY_BACK_SPACE:
             case GOW_KEY_DELETE:
             {
@@ -173,9 +130,8 @@ void TitleInputManager::updateReadText()
                 continue;
             }
             case GOW_KEY_ESCAPE:
-                _state = MIMS_EXIT;
                 clearTextInput();
-                continue;
+                return MIMS_EXIT;
             case GOW_KEY_V:
                 if (_isControlHeldDown)
                 {
@@ -196,6 +152,23 @@ void TitleInputManager::updateReadText()
                 continue;
         }
     }
+    
+    return MIMS_DEFAULT;
+}
+
+std::string TitleInputManager::getTextInput()
+{
+    return _textInput;
+}
+
+void TitleInputManager::setTextInput(std::string textInput)
+{
+    _textInput = textInput;
+}
+
+void TitleInputManager::clearTextInput()
+{
+    _textInput.clear();
 }
 
 void TitleInputManager::acceptKeyInput(uint16_t key)
@@ -210,7 +183,6 @@ void TitleInputManager::acceptKeyInput(uint16_t key)
 }
 
 TitleInputManager::TitleInputManager() :
-_state(MIMS_DEFAULT),
 _textInput(""),
 _isControlHeldDown(false)
 {

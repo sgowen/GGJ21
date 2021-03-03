@@ -50,7 +50,7 @@ void TitleEngineState::onUpdate(Engine* e)
 
 void TitleEngineState::updateDefault(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_DEFAULT);
+    TitleInputManagerState mims = INPUT_TITLE.update();
     switch (mims)
     {
         case MIMS_EXIT:
@@ -72,7 +72,7 @@ void TitleEngineState::updateDefault(Engine* e)
 
 void TitleEngineState::updateInputIP(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_TITLE.updateReadText();
     switch (mims)
     {
         case MIMS_EXIT:
@@ -90,7 +90,7 @@ void TitleEngineState::updateInputIP(Engine* e)
 
 void TitleEngineState::updateInputHostName(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_TITLE.updateReadText();
     switch (mims)
     {
         case MIMS_EXIT:
@@ -110,7 +110,7 @@ void TitleEngineState::updateInputHostName(Engine* e)
 
 void TitleEngineState::updateInputJoinName(Engine* e)
 {
-    TitleInputManagerState mims = INPUT_TITLE.update(MIMU_READ_TEXT);
+    TitleInputManagerState mims = INPUT_TITLE.updateReadText();
     switch (mims)
     {
         case MIMS_EXIT:

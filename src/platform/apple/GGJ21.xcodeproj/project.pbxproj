@@ -562,6 +562,7 @@
 		BB7B074025B646BA0021E545 /* inttypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
 		BB7B074125B646BA0021E545 /* stdint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
 		BB7B08D125B64CF20021E545 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		BB83027125F021D100A9F6F1 /* ImageView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageView.hpp; sourceTree = "<group>"; };
 		BB8BCCE725B682E8005F57B8 /* GGJ21-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GGJ21-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB8BCCE925B682E8005F57B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB8BCCEB25B682E8005F57B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -2673,6 +2674,7 @@
 				BBBF71DC25EC775100C1D6BD /* FontBatcher.hpp */,
 				BBBF71D725EC775100C1D6BD /* Framebuffer.hpp */,
 				BBBF71E625EC775100C1D6BD /* GowEngine_opengl.hpp */,
+				BB83027125F021D100A9F6F1 /* ImageView.hpp */,
 				BBBF71D625EC775100C1D6BD /* LightRenderer.cpp */,
 				BBBF71CB25EC775100C1D6BD /* LightRenderer.hpp */,
 				BBBF71D025EC775100C1D6BD /* LineBatcher.cpp */,

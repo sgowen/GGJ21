@@ -1,9 +1,4 @@
 {
-  "circleBatchers": {
-    "main": {
-      "maxBatchSize": 1
-    }
-  },
   "fontBatchers": {
     "main": {
       "matrix": "main",
@@ -26,16 +21,6 @@
     "main": {
       "width": 96,
       "height": 60
-    }
-  },
-  "rektangleBatchers": {
-    "main_border": {
-      "maxBatchSize": 1,
-      "isFill": false
-    },
-    "main_filled": {
-      "maxBatchSize": 1,
-      "isFill": true
     }
   },
   "spriteBatchers": {
@@ -93,14 +78,14 @@
       "glyphWidthWeight": 0.012
     }
   },
-  "triangleBatchers": {
-    "main_border": {
-      "maxBatchSize": 1,
-      "isFill": false
-    },
-    "main_filled": {
-      "maxBatchSize": 1,
-      "isFill": true
+  "imageViews": {
+    "demo": {
+      "texture": "demo",
+      "textureRegion": "DEMO",
+      "xWeight": 0.5,
+      "yWeight": 0.6,
+      "widthWeight": 1,
+      "heightWeight": 0.8
     }
   }
 }

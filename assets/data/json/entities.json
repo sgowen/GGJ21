@@ -66,6 +66,24 @@
     "data": {
         "playerID": "1"
     },
+    "networkData": {
+        "playerInfo": {
+            "username": {
+                "type": "smallString"
+            },
+            "userAddress": {
+                "type": "smallString"
+            }
+        },
+        "stats": {
+            "health": {
+                "type": "uint16_t"
+            },
+            "dir": {
+                "type": "uint8_t"
+            }
+        }
+    },
     "bodyFlags": 14,
     "width": 4,
     "height": 4
