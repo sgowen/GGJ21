@@ -15,7 +15,7 @@ void cb_client_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_CLNT.getWorld().addNetworkEntity(e);
     
-    if (e->controller()->getRTTI().isExactly(HideController::rtti))
+    if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
     {
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();
