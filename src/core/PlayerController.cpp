@@ -11,23 +11,6 @@
 IMPL_RTTI(PlayerController, EntityController)
 IMPL_EntityController_create(PlayerController, EntityController)
 
-PlayerController::PlayerController(Entity* e) : EntityController(e),
-_playerInfo(),
-_playerInfoCache(_playerInfo),
-_stats(),
-_statsCache(_stats)
-{
-    // Empty
-}
-
-void PlayerController::update()
-{
-    if (_entity->state()._state == STAT_IDLE)
-    {
-        _entity->state()._stateTime = 6;
-    }
-}
-
 void PlayerController::processInput(InputState* is, bool isLive)
 {
     uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
@@ -39,6 +22,7 @@ void PlayerController::processInput(InputState* is, bool isLive)
     
     uint8_t fromState = _entity->state()._state;
     uint8_t& state = _entity->state()._state;
+    uint8_t& stateFlags = _entity->state()._stateFlags;
     uint8_t piss = pis->_inputState;
     
     state = STAT_IDLE;
@@ -46,25 +30,25 @@ void PlayerController::processInput(InputState* is, bool isLive)
     if (IS_BIT_SET(piss, GISF_MOVING_UP))
     {
         state = STAT_MOVING;
-        _stats._dir = EDIR_UP;
+        stateFlags = EDIR_UP;
         vel._y = CFG_MAIN.playerMaxTopDownSpeed();
     }
     if (IS_BIT_SET(piss, GISF_MOVING_LEFT))
     {
         state = STAT_MOVING;
-        _stats._dir = EDIR_LEFT;
+        stateFlags = EDIR_LEFT;
         vel._x = -  CFG_MAIN.playerMaxTopDownSpeed();
     }
     if (IS_BIT_SET(piss, GISF_MOVING_DOWN))
     {
         state = STAT_MOVING;
-        _stats._dir = EDIR_DOWN;
+        stateFlags = EDIR_DOWN;
         vel._y = -CFG_MAIN.playerMaxTopDownSpeed();
     }
     if (IS_BIT_SET(piss, GISF_MOVING_RIGHT))
     {
         state = STAT_MOVING;
-        _stats._dir = EDIR_RIGHT;
+        stateFlags = EDIR_RIGHT;
         vel._x = CFG_MAIN.playerMaxTopDownSpeed();
     }
     

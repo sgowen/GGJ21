@@ -2,7 +2,6 @@
   "MON1": {
     "name": "Monster",
     "controller": "Monster",
-    "physicsController": "Monster",
     "renderController": "Monster",
     "soundMappings": {
       "0": 18,
@@ -15,21 +14,6 @@
     ],
     "networkData": [
       {
-        "name": "stats",
-        "data": [
-          {
-            "name": "health",
-            "type": "uint16_t",
-            "value": 3
-          },
-          {
-            "name": "dir",
-            "type": "uint8_t",
-            "value": 1
-          }
-        ]
-      },
-      {
         "name": "encounter",
         "data": [
           {
@@ -37,12 +21,9 @@
             "type": "bool"
           },
           {
-            "name": "state",
-            "type": "uint8_t"
-          },
-          {
-            "name": "stateTime",
-            "type": "uint16_t"
+            "name": "health",
+            "type": "uint16_t",
+            "value": 3
           }
         ]
       }
@@ -113,20 +94,6 @@
         ]
       },
       {
-        "name": "stats",
-        "data": [
-          {
-            "name": "health",
-            "type": "uint16_t",
-            "value": 3
-          },
-          {
-            "name": "dir",
-            "type": "uint8_t"
-          }
-        ]
-      },
-      {
         "name": "encounter",
         "data": [
           {
@@ -134,12 +101,9 @@
             "type": "bool"
           },
           {
-            "name": "state",
-            "type": "uint8_t"
-          },
-          {
-            "name": "stateTime",
-            "type": "uint16_t"
+            "name": "health",
+            "type": "uint16_t",
+            "value": 3
           }
         ]
       },
@@ -160,7 +124,6 @@
   "JCKE": {
     "name": "Jackie",
     "controller": "Jackie",
-    "physicsController": "Jackie",
     "renderController": "Jackie",
     "soundRandomMappings": {
       "1": [
@@ -196,20 +159,6 @@
           {
             "name": "userAddress",
             "type": "smallString"
-          }
-        ]
-      },
-      {
-        "name": "stats",
-        "data": [
-          {
-            "name": "health",
-            "type": "uint16_t",
-            "value": 3
-          },
-          {
-            "name": "dir",
-            "type": "uint8_t"
           }
         ]
       }
@@ -267,7 +216,7 @@
   },
   "OVEN": {
     "name": "OVEN",
-    "physicsController": "Oven",
+    "controller": "Oven",
     "textureMapping": "OVEN",
     "width": 4,
     "height": 4,

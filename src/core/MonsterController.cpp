@@ -12,28 +12,27 @@ IMPL_RTTI(MonsterController, EntityController)
 IMPL_EntityController_create(MonsterController, EntityController)
 
 MonsterController::MonsterController(Entity* e) : EntityController(e),
-_stats(),
-_statsCache(_stats),
-_encounter(),
-_encounterCache(_encounter)
+_battleAvatar(NULL) // TODO
 {
-    // Empty
+    e->state()._stateFlags = EDIR_DOWN;
 }
 
 void MonsterController::update()
 {
-    bool hasTarget = false;
-    Vector2 playerPosition;
-    uint8_t& state = _entity->state()._state;
-    uint16_t& stateTime = _entity->state()._stateTime;
-    state = STAT_IDLE;
-    
     if (_encounter._isInCounter)
     {
         ++_encounter._stateTime;
+        // TODO, update held Entity
     }
     else
     {
+        Vector2 playerPosition;
+        uint8_t& state = _entity->state()._state;
+        uint8_t& stateFlags = _entity->state()._stateFlags;
+        state = STAT_IDLE;
+        stateFlags = EDIR_DOWN;
+        bool hasTarget = false;
+        
         World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
         std::vector<Entity*>& players = w.getPlayers();
         for (Entity* e : players)
@@ -49,40 +48,24 @@ void MonsterController::update()
                 }
             }
         }
-    }
-    
-    if (hasTarget)
-    {
-        float angle = playerPosition.sub(_entity->position()._x, _entity->position()._y).angle();
-        float radians = DEGREES_TO_RADIANS(angle);
-        _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN.monsterMaxTopDownSpeed(), sinf(radians) * CFG_MAIN.monsterMaxTopDownSpeed());
         
-        if (_entity->pose()._velocity._y < 0)
+        if (hasTarget)
         {
+            float angle = playerPosition.sub(_entity->position()._x, _entity->position()._y).angle();
+            float radians = DEGREES_TO_RADIANS(angle);
+            _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN.monsterMaxTopDownSpeed(), sinf(radians) * CFG_MAIN.monsterMaxTopDownSpeed());
+            
             state = STAT_MOVING;
-            _stats._dir = MDIR_DOWN;
+            
+            if (_entity->pose()._velocity._y > 0)
+            {
+                stateFlags = EDIR_UP;
+            }
         }
-        if (_entity->pose()._velocity._y > 0)
-        {
-            state = STAT_MOVING;
-            _stats._dir = MDIR_UP;
-        }
-    }
-    else
-    {
-        stateTime = 0;
     }
 }
 
-bool MonsterController::isInEncounter()
-{
-    return _encounter._isInCounter;
-}
-
-IMPL_RTTI(MonsterPhysicsController, TopDownPhysicsController)
-IMPL_EntityController_create(MonsterPhysicsController, EntityPhysicsController)
-
-void MonsterPhysicsController::onCollision(Entity* e)
+void MonsterController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
     {
@@ -95,6 +78,11 @@ void MonsterPhysicsController::onCollision(Entity* e)
         _entity->pose()._velocity._x = 0;
         _entity->pose()._velocity._y = 0;
     }
+}
+
+bool MonsterController::isInEncounter()
+{
+    return _encounter._isInCounter;
 }
 
 IMPL_RTTI(MonsterRenderController, EntityRenderController)

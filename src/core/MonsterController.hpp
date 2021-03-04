@@ -10,16 +10,9 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-enum MonsterDirection
-{
-    MDIR_UP      = 0,
-    MDIR_DOWN    = 1
-};
-
 class MonsterController : public EntityController
 {
     friend class MonsterNetworkController;
-    friend class MonsterPhysicsController;
     friend class MonsterRenderController;
     
     DECL_RTTI;
@@ -30,6 +23,7 @@ public:
     virtual ~MonsterController() {}
     
     virtual void update() override;
+    virtual void onCollision(Entity* e) override;
     
     bool isInEncounter();
     
@@ -39,19 +33,7 @@ private:
         STAT_IDLE   = 0,
         STAT_MOVING = 1
     };
-};
-
-class MonsterPhysicsController : public TopDownPhysicsController
-{
-    DECL_RTTI;
-    DECL_EntityController_create(EntityPhysicsController);
-    
-public:
-    MonsterPhysicsController(Entity* e) : TopDownPhysicsController(e) {}
-    virtual ~MonsterPhysicsController() {}
-    
-protected:
-    virtual void onCollision(Entity* e) override;
+    Entity* _battleAvatar;
 };
 
 class MonsterRenderController : public EntityRenderController

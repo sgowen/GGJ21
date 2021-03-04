@@ -37,6 +37,7 @@ private:
         ESTA_IDLE = 0,
         ESTA_SWING = 1
     };
+    Entity* _battleAvatar;
 };
 
 class HideRenderController : public PlayerRenderController

@@ -33,10 +33,7 @@ void JackieController::processInput(InputState* is, bool isLive)
     }
 }
 
-IMPL_RTTI(JackiePhysicsController, TopDownPhysicsController)
-IMPL_EntityController_create(JackiePhysicsController, EntityPhysicsController)
-
-void JackiePhysicsController::onCollision(Entity* e)
+void JackieController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {

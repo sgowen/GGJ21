@@ -13,7 +13,6 @@
 
 class JackieController : public PlayerController
 {
-    friend class JackiePhysicsController;
     friend class JackieRenderController;
     
     DECL_RTTI;
@@ -24,18 +23,6 @@ public:
     virtual ~JackieController() {}
     
     virtual void processInput(InputState* is, bool isLive) override;
-};
-
-class JackiePhysicsController : public TopDownPhysicsController
-{
-    DECL_RTTI;
-    DECL_EntityController_create(EntityPhysicsController);
-    
-public:
-    JackiePhysicsController(Entity* e) : TopDownPhysicsController(e) {}
-    virtual ~JackiePhysicsController() {}
-    
-protected:
     virtual void onCollision(Entity* e) override;
 };
 

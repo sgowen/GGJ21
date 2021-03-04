@@ -14,21 +14,17 @@ IMPL_RTTI(HideController, PlayerController)
 IMPL_EntityController_create(HideController, EntityController)
 
 HideController::HideController(Entity* e) : PlayerController(e),
-_encounter(),
-_encounterCache(_encounter),
-_entityLayoutInfo(),
-_entityLayoutInfoCache(_entityLayoutInfo)
+_battleAvatar(NULL) // TODO
 {
     // Empty
 }
 
 void HideController::update()
 {
-    PlayerController::update();
-    
     if (_encounter._isInCounter)
     {
         ++_encounter._stateTime;
+        // TODO, update held Entity
     }
     
     if (_encounter._state == ESTA_SWING)
@@ -111,6 +107,9 @@ void HideController::processInput(InputState* is, bool isLive)
                 _encounter._stateTime = 0;
             }
         }
+        
+        // TODO, forward this entire block to held Entity
+        // that'll allow us to use SoundUtil since enounter.state is now simply e.state
     }
     else
     {

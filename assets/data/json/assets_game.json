@@ -940,6 +940,20 @@
           "regionWidth": 64,
           "regionHeight": 64
         },
+        "GENERIC_MONSTER_DOWN": {
+          "x": 0,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64,
+          "frameTime": 8,
+          "numFrames": 2
+        },
+        "GENERIC_MONSTER_DOWN_IDLE": {
+          "x": 0,
+          "y": 128,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
         "GENERIC_MONSTER_UP": {
           "x": 128,
           "y": 128,
@@ -948,13 +962,11 @@
           "frameTime": 8,
           "numFrames": 2
         },
-        "GENERIC_MONSTER_DOWN": {
-          "x": 0,
+        "GENERIC_MONSTER_UP_IDLE": {
+          "x": 128,
           "y": 128,
           "regionWidth": 64,
-          "regionHeight": 64,
-          "frameTime": 8,
-          "numFrames": 2
+          "regionHeight": 64
         },
         "CRYSTAL_BLUE": {
           "x": 0,
@@ -1041,6 +1053,12 @@
           "frameTime": 6,
           "numFrames": 3
         },
+        "HIDE_LEFT_IDLE": {
+          "x": 64,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
         "HIDE_UP": {
           "x": 192,
           "y": 0,
@@ -1048,6 +1066,12 @@
           "regionHeight": 64,
           "frameTime": 6,
           "numFrames": 3
+        },
+        "HIDE_UP_IDLE": {
+          "x": 256,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
         },
         "HIDE_DOWN": {
           "x": 384,
@@ -1057,6 +1081,12 @@
           "frameTime": 6,
           "numFrames": 3
         },
+        "HIDE_DOWN_IDLE": {
+          "x": 448,
+          "y": 0,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
         "JACKIE_LEFT": {
           "x": 0,
           "y": 64,
@@ -1064,6 +1094,12 @@
           "regionHeight": 64,
           "frameTime": 6,
           "numFrames": 3
+        },
+        "JACKIE_LEFT_IDLE": {
+          "x": 64,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64
         },
         "JACKIE_UP": {
           "x": 192,
@@ -1073,6 +1109,12 @@
           "frameTime": 6,
           "numFrames": 3
         },
+        "JACKIE_UP_IDLE": {
+          "x": 256,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64
+        },
         "JACKIE_DOWN": {
           "x": 384,
           "y": 64,
@@ -1080,6 +1122,12 @@
           "regionHeight": 64,
           "frameTime": 6,
           "numFrames": 3
+        },
+        "JACKIE_DOWN_IDLE": {
+          "x": 448,
+          "y": 64,
+          "regionWidth": 64,
+          "regionHeight": 64
         }
       }
     },

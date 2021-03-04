@@ -10,15 +10,14 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-class OvenPhysicsController : public TopDownPhysicsController
+class OvenController : public EntityController
 {
     DECL_RTTI;
-    DECL_EntityController_create(EntityPhysicsController);
+    DECL_EntityController_create(EntityController);
     
 public:
-    OvenPhysicsController(Entity* e) : TopDownPhysicsController(e) {}
-    virtual ~OvenPhysicsController() {}
+    OvenController(Entity* e) : EntityController(e) {}
+    virtual ~OvenController() {}
     
-protected:
     virtual void onCollision(Entity* e) override;
 };

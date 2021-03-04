@@ -21,10 +21,9 @@ class PlayerController : public EntityController
     DECL_EntityController_create(EntityController);
     
 public:
-    PlayerController(Entity* e);
+    PlayerController(Entity* e) : EntityController(e) {}
     virtual ~PlayerController() {}
     
-    virtual void update() override;
     virtual void processInput(InputState* is, bool isLive);
     
     void setUsername(std::string value);

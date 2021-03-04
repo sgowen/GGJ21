@@ -20,20 +20,18 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     std::map<std::string, EntityControllerCreationFunc> config;
     config.emplace("Hide", HideController::create);
     config.emplace("Jackie", JackieController::create);
+    config.emplace("Oven", OvenController::create);
     config.emplace("Monster", MonsterController::create);
     config.emplace("Crystal", CrystalController::create);
     config.emplace("Explosion", ExplosionController::create);
     registerControllers(config, CFG_MAIN.entityManagerFilePath());
     
     std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
-    // TODO, no longer need map
+    // TODO, no longer need this map
     configureForNetwork(configNW, CFG_MAIN.entityLayoutManagerFilePath());
     
     std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
-    configPhysics.emplace("Default", TopDownPhysicsController::create);
-    configPhysics.emplace("Jackie", JackiePhysicsController::create);
-    configPhysics.emplace("Monster", MonsterPhysicsController::create);
-    configPhysics.emplace("Oven", OvenPhysicsController::create);
+    // TODO, no longer need this map
     registerPhysicsControllers(configPhysics);
     
     std::map<std::string, EntityRenderControllerCreationFunc> configRender;

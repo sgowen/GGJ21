@@ -8,10 +8,10 @@
 
 #include "GGJ21.hpp"
 
-IMPL_RTTI(OvenPhysicsController, TopDownPhysicsController)
-IMPL_EntityController_create(OvenPhysicsController, EntityPhysicsController)
+IMPL_RTTI(OvenController, EntityController)
+IMPL_EntityController_create(OvenController, EntityController)
 
-void OvenPhysicsController::onCollision(Entity* e)
+void OvenController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
