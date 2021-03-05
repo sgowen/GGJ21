@@ -17,11 +17,11 @@ class HideController : public PlayerController
     friend class HideRenderController;
     
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(HideController);
     
 public:
     HideController(Entity* e);
-    virtual ~HideController() {}
+    virtual ~HideController();
     
     virtual void update() override;
     virtual void onMessage(uint16_t message) override;
@@ -30,6 +30,7 @@ public:
     bool isInEncounter();
     void setEntityLayoutKey(uint32_t value);
     uint32_t getEntityLayoutKey();
+    Entity* battleAvatar();
     
 private:
     enum EncounterState
@@ -38,22 +39,4 @@ private:
         ESTA_SWING = 1
     };
     Entity* _battleAvatar;
-};
-
-class HideRenderController : public PlayerRenderController
-{
-    DECL_RTTI;
-    DECL_EntityController_create(EntityRenderController);
-    
-public:
-    HideRenderController(Entity* e) : PlayerRenderController(e) {}
-    virtual ~HideRenderController() {}
-    
-    virtual std::string getTextureMapping() override;
-    
-    void addSpriteForEncounter(SpriteBatcher& sb);
-
-private:
-    std::string getTextureMappingForEncounter();
-    float getWidthForEncounter();
 };

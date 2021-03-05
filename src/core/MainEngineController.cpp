@@ -10,35 +10,25 @@
 
 MainEngineController::MainEngineController(void* data1, void* data2) : EngineController(data1, data2)
 {
-    ASSETS.registerAssets("global", AssetsLoader::initWithJSONFile("data/json/assets_global.json"));
-    
     SOCKET_UTIL.setLoggingEnabled(CFG_MAIN.networkLoggingEnabled());
     INPUT_MGR.setLoggingEnabled(CFG_MAIN.inputLoggingEnabled());
     AUDIO_ENGINE.setSoundsDisabled(CFG_MAIN.soundsDisabled());
     AUDIO_ENGINE.setMusicDisabled(CFG_MAIN.musicDisabled());
     
+    ASSETS.registerAssets("global", AssetsLoader::initWithJSONFile("data/json/assets_global.json"));
+    
     std::map<std::string, EntityControllerCreationFunc> config;
     config.emplace("Hide", HideController::create);
+    config.emplace("HideAvatar", HideAvatarController::create);
     config.emplace("Jackie", JackieController::create);
     config.emplace("Oven", OvenController::create);
     config.emplace("Monster", MonsterController::create);
     config.emplace("Crystal", CrystalController::create);
     config.emplace("Explosion", ExplosionController::create);
-    registerControllers(config, CFG_MAIN.entityManagerFilePath());
+    configureForNetwork(CFG_MAIN.entityManagerFilePath(), CFG_MAIN.entityLayoutManagerFilePath(), config);
     
-    std::map<std::string, EntityNetworkControllerCreationFunc> configNW;
-    // TODO, no longer need this map
-    configureForNetwork(configNW, CFG_MAIN.entityLayoutManagerFilePath());
-    
-    std::map<std::string, EntityPhysicsControllerCreationFunc> configPhysics;
-    // TODO, no longer need this map
-    registerPhysicsControllers(configPhysics);
-    
-    std::map<std::string, EntityRenderControllerCreationFunc> configRender;
-    configRender.emplace("Monster", MonsterRenderController::create);
-    configRender.emplace("Hide", HideRenderController::create);
-    configRender.emplace("Jackie", JackieRenderController::create);
-    registerRenderControllers(configRender);
+    // TODO, physics should be registered via json file
+    ENTITY_MGR.registerPhysicsController("Default", TopDownPhysicsController::create);
 }
 
 State<Engine>& MainEngineController::getInitialState()

@@ -9,7 +9,7 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(PlayerController, EntityController)
-IMPL_EntityController_create(PlayerController, EntityController)
+IMPL_EntityController_create(PlayerController)
 
 void PlayerController::processInput(InputState* is, bool isLive)
 {
@@ -52,6 +52,8 @@ void PlayerController::processInput(InputState* is, bool isLive)
         vel._x = CFG_MAIN.playerMaxTopDownSpeed();
     }
     
+    _entity->pose()._isXFlipped = stateFlags == EDIR_RIGHT;
+    
     if (isLive)
     {
         SoundUtil::playSoundForStateIfChanged(*_entity, fromState, state);
@@ -81,17 +83,4 @@ std::string PlayerController::getUserAddress() const
 uint16_t PlayerController::getHealth()
 {
     return _stats._health;
-}
-
-IMPL_RTTI(PlayerRenderController, EntityRenderController)
-IMPL_EntityController_create(PlayerRenderController, EntityRenderController)
-
-void PlayerRenderController::addSprite(SpriteBatcher& sb)
-{
-    Entity& e = *_entity;
-    TextureRegion& tr = ASSETS.textureRegion(getTextureMapping(), e.stateTime());
-    
-    PlayerController* ec = e.controller<PlayerController>();
-    bool flipX = ec->_stats._dir == EDIR_RIGHT;
-    sb.addSprite(tr, e.position()._x, e.position()._y, e.width(), e.height(), e.angle(), flipX);
 }

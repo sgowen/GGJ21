@@ -9,7 +9,7 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(ExplosionController, EntityController)
-IMPL_EntityController_create(ExplosionController, EntityController)
+IMPL_EntityController_create(ExplosionController)
 
 void ExplosionController::update()
 {

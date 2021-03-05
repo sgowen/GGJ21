@@ -2,10 +2,19 @@
   "MON1": {
     "name": "Monster",
     "controller": "Monster",
-    "renderController": "Monster",
     "soundMappings": {
       "0": 18,
       "1": 21
+    },
+    "textureMappings": {
+      "0": {
+        "0": "GENERIC_MONSTER_UP_IDLE",
+        "1": "GENERIC_MONSTER_DOWN_IDLE"
+      },
+      "1": {
+        "0": "GENERIC_MONSTER_UP",
+        "1": "GENERIC_MONSTER_DOWN"
+      }
     },
     "fixtures": [
       {
@@ -32,10 +41,19 @@
     "width": 4,
     "height": 4
   },
+  "HIDA": {
+    "name": "Hide's Battle Avatar",
+    "controller": "HideAvatar",
+    "textureMappings": {
+      "0": "BIG_HIDE_IDLE",
+      "1": "BIG_HIDE_SWING"
+    },
+    "width": 16,
+    "height": 16
+  },
   "HIDE": {
     "name": "Hide",
     "controller": "Hide",
-    "renderController": "Hide",
     "soundMappings": {
       "99": 0
     },
@@ -70,6 +88,20 @@
         82,
         83
       ]
+    },
+    "textureMappings": {
+      "0": {
+        "0": "HIDE_UP_IDLE",
+        "1": "HIDE_DOWN_IDLE",
+        "2": "HIDE_LEFT_IDLE",
+        "3": "HIDE_RIGHT_IDLE"
+      },
+      "1": {
+        "0": "HIDE_UP",
+        "1": "HIDE_DOWN",
+        "2": "HIDE_LEFT",
+        "3": "HIDE_RIGHT"
+      }
     },
     "fixtures": [
       {
@@ -124,7 +156,6 @@
   "JCKE": {
     "name": "Jackie",
     "controller": "Jackie",
-    "renderController": "Jackie",
     "soundRandomMappings": {
       "1": [
         33,
@@ -139,6 +170,20 @@
         57,
         58
       ]
+    },
+    "textureMappings": {
+      "0": {
+        "0": "JACKIE_UP_IDLE",
+        "1": "JACKIE_DOWN_IDLE",
+        "2": "JACKIE_LEFT_IDLE",
+        "3": "JACKIE_RIGHT_IDLE"
+      },
+      "1": {
+        "0": "JACKIE_UP",
+        "1": "JACKIE_DOWN",
+        "2": "JACKIE_LEFT",
+        "3": "JACKIE_RIGHT"
+      }
     },
     "fixtures": [
       {

@@ -38,8 +38,6 @@ public:
     bool showDebug() { return _config.getBool("showDebug"); }
     float playerBattleX() { return _config.getFloat("playerBattleX"); }
     float playerBattleY() { return _config.getFloat("playerBattleY"); }
-    float playerBattleWidth() { return _config.getFloat("playerBattleWidth"); }
-    float playerBattleHeight() { return _config.getFloat("playerBattleHeight"); }
     float jackiePushForce() { return _config.getFloat("jackiePushForce"); }
     float monsterBattleX() { return _config.getFloat("monsterBattleX"); }
     float monsterBattleY() { return _config.getFloat("monsterBattleY"); }

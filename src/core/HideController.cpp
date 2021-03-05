@@ -11,12 +11,17 @@
 #include <assert.h>
 
 IMPL_RTTI(HideController, PlayerController)
-IMPL_EntityController_create(HideController, EntityController)
+IMPL_EntityController_create(HideController)
 
 HideController::HideController(Entity* e) : PlayerController(e),
-_battleAvatar(NULL) // TODO
+_battleAvatar(ENTITY_MGR.createEntity(EntityInstanceDef(0, 'HIDA', CFG_MAIN.playerBattleX(), CFG_MAIN.playerBattleY(), e->isServer())))
 {
     // Empty
+}
+
+HideController::~HideController()
+{
+    delete _battleAvatar;
 }
 
 void HideController::update()
@@ -24,27 +29,7 @@ void HideController::update()
     if (_encounter._isInCounter)
     {
         ++_encounter._stateTime;
-        // TODO, update held Entity
-    }
-    
-    if (_encounter._state == ESTA_SWING)
-    {
-        if (_encounter._stateTime >= 42)
-        {
-            _encounter._state = ESTA_IDLE;
-            
-            World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
-            for (Entity* e : w.getNetworkEntities())
-            {
-                if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
-                    e->controller<MonsterController>()->isInEncounter())
-                {
-                    e->requestDeletion();
-                    _encounter._isInCounter = false;
-                    break;
-                }
-            }
-        }
+        _battleAvatar->update();
     }
     
     if (_stats._health == 0)
@@ -85,31 +70,7 @@ void HideController::processInput(InputState* is, bool isLive)
     
     if (_encounter._isInCounter)
     {
-        uint8_t piss = pis->_inputState;
-        if (_encounter._state == ESTA_IDLE)
-        {
-            if (IS_BIT_SET(piss, GISF_CONFIRM))
-            {
-                _encounter._state = ESTA_SWING;
-                _encounter._stateTime = 0;
-                
-                if (isLive)
-                {
-                    AUDIO_ENGINE.playSound(_entity->renderController()->getSoundMapping(4));
-                }
-            }
-        }
-        else
-        {
-            if (IS_BIT_SET(piss, GISF_CANCEL))
-            {
-                _encounter._state = ESTA_IDLE;
-                _encounter._stateTime = 0;
-            }
-        }
-        
-        // TODO, forward this entire block to held Entity
-        // that'll allow us to use SoundUtil since enounter.state is now simply e.state
+        _battleAvatar->processInput(pis, isLive);
     }
     else
     {
@@ -132,60 +93,7 @@ uint32_t HideController::getEntityLayoutKey()
     return _entityLayoutInfo._key;
 }
 
-IMPL_RTTI(HideRenderController, EntityRenderController)
-IMPL_EntityController_create(HideRenderController, EntityRenderController)
-
-std::string HideRenderController::getTextureMapping()
+Entity* HideController::battleAvatar()
 {
-    HideController* ec = _entity->controller<HideController>();
-    
-    switch (ec->_stats._dir)
-    {
-        case EDIR_UP:
-            return "HIDE_UP";
-        case EDIR_LEFT:
-        case EDIR_RIGHT:
-            return "HIDE_LEFT";
-        case EDIR_DOWN:
-            return "HIDE_DOWN";
-    }
-    
-    return EntityRenderController::getTextureMapping();
-}
-
-void HideRenderController::addSpriteForEncounter(SpriteBatcher& sb)
-{
-    HideController* ec = _entity->controller<HideController>();
-    TextureRegion tr = ASSETS.textureRegion(getTextureMappingForEncounter(), ec->_encounter._stateTime);
-    sb.addSprite(tr, CFG_MAIN.playerBattleX(), CFG_MAIN.playerBattleY(), getWidthForEncounter(), CFG_MAIN.playerBattleHeight(), 0);
-}
-
-std::string HideRenderController::getTextureMappingForEncounter()
-{
-    HideController* ec = _entity->controller<HideController>();
-    assert(ec->_encounter._state <= HideController::ESTA_SWING);
-    
-    switch (ec->_encounter._state)
-    {
-        case HideController::ESTA_IDLE:
-            return "BIG_HIDE_IDLE";
-        case HideController::ESTA_SWING:
-        default:
-            return ec->_encounter._stateTime >= 35 ? "BIG_HIDE_SWING_3" : ec->_encounter._stateTime >= 14 ? "BIG_HIDE_SWING_2" : "BIG_HIDE_SWING_1";
-    }
-}
-
-float HideRenderController::getWidthForEncounter()
-{
-    HideController* ec = _entity->controller<HideController>();
-    assert(ec->_encounter._state <= HideController::ESTA_SWING);
-    
-    switch (ec->_encounter._state)
-    {
-        case HideController::ESTA_IDLE:
-            return CFG_MAIN.playerBattleWidth();
-        case HideController::ESTA_SWING:
-        default:
-            return ec->_encounter._stateTime >= 35 ? CFG_MAIN.playerBattleWidth() : ec->_encounter._stateTime >= 14 ? (CFG_MAIN.playerBattleWidth() + 4) : CFG_MAIN.playerBattleWidth();
-    }
+    return _battleAvatar;
 }

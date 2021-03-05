@@ -11,8 +11,6 @@
   "showDebug": "true",
   "playerBattleX": "20",
   "playerBattleY": "30",
-  "playerBattleWidth": "16",
-  "playerBattleHeight": "16",
   "jackiePushForce": "6",
   "monsterBattleX": "28",
   "monsterBattleY": "30",

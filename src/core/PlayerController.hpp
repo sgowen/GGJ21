@@ -39,15 +39,3 @@ protected:
         STAT_MOVING = 1
     };
 };
-
-class PlayerRenderController : public EntityRenderController
-{
-    DECL_RTTI;
-    DECL_EntityController_create(EntityRenderController);
-    
-public:
-    PlayerRenderController(Entity* e) : EntityRenderController(e) {}
-    virtual ~PlayerRenderController() {}
-    
-    virtual void addSprite(SpriteBatcher& sb) override;
-};

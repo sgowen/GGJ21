@@ -17,6 +17,7 @@
 #include "GameInputManager.hpp"
 #include "GameRenderer.hpp"
 #include "GameServerEngineState.hpp"
+#include "HideAvatarController.hpp"
 #include "HideController.hpp"
 #include "JackieController.hpp"
 #include "MainConfig.hpp"

@@ -25,15 +25,3 @@ public:
     virtual void processInput(InputState* is, bool isLive) override;
     virtual void onCollision(Entity* e) override;
 };
-
-class JackieRenderController : public PlayerRenderController
-{
-    DECL_RTTI;
-    DECL_EntityController_create(EntityRenderController);
-    
-public:
-    JackieRenderController(Entity* e) : PlayerRenderController(e) {}
-    virtual ~JackieRenderController() {}
-    
-    virtual std::string getTextureMapping() override;
-};

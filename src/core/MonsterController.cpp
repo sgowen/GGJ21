@@ -9,12 +9,17 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(MonsterController, EntityController)
-IMPL_EntityController_create(MonsterController, EntityController)
+IMPL_EntityController_create(MonsterController)
 
 MonsterController::MonsterController(Entity* e) : EntityController(e),
-_battleAvatar(NULL) // TODO
+_battleAvatar(ENTITY_MGR.createEntity(EntityInstanceDef(0, 'MOA1', CFG_MAIN.monsterBattleX(), CFG_MAIN.monsterBattleY(), e->isServer())))
 {
     e->state()._stateFlags = EDIR_DOWN;
+}
+
+MonsterController::~MonsterController()
+{
+    delete _battleAvatar;
 }
 
 void MonsterController::update()
@@ -22,7 +27,7 @@ void MonsterController::update()
     if (_encounter._isInCounter)
     {
         ++_encounter._stateTime;
-        // TODO, update held Entity
+        _battleAvatar->update();
     }
     else
     {
@@ -85,31 +90,7 @@ bool MonsterController::isInEncounter()
     return _encounter._isInCounter;
 }
 
-IMPL_RTTI(MonsterRenderController, EntityRenderController)
-IMPL_EntityController_create(MonsterRenderController, EntityRenderController)
-
-std::string MonsterRenderController::getTextureMapping()
+Entity* MonsterController::battleAvatar()
 {
-    MonsterController* ec = _entity->controller<MonsterController>();
-    
-    switch (ec->_stats._dir)
-    {
-        case MDIR_UP:
-            return "GENERIC_MONSTER_UP";
-        case MDIR_DOWN:
-            return "GENERIC_MONSTER_DOWN";
-    }
-    
-    return EntityRenderController::getTextureMapping();
-}
-
-void MonsterRenderController::addSpriteForEncounter(SpriteBatcher& sb)
-{
-    TextureRegion tr = ASSETS.textureRegion(getTextureMappingForEncounter(), 0);
-    sb.addSprite(tr, CFG_MAIN.monsterBattleX(), CFG_MAIN.monsterBattleY(), CFG_MAIN.monsterBattleWidth(), CFG_MAIN.monsterBattleHeight(), 0);
-}
-
-std::string MonsterRenderController::getTextureMappingForEncounter()
-{
-    return "BIG_WITCH_PRETTY";
+    return _battleAvatar;
 }

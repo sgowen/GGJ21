@@ -9,7 +9,7 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(JackieController, PlayerController)
-IMPL_EntityController_create(JackieController, EntityController)
+IMPL_EntityController_create(JackieController)
 
 void JackieController::processInput(InputState* is, bool isLive)
 {
@@ -37,27 +37,6 @@ void JackieController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        e->physicsController<TopDownPhysicsController>()->push(_entity->controller<JackieController>()->_stats._dir, CFG_MAIN.jackiePushForce());
+        e->physicsController<TopDownPhysicsController>()->push(_stats._dir, CFG_MAIN.jackiePushForce());
     }
-}
-
-IMPL_RTTI(JackieRenderController, EntityRenderController)
-IMPL_EntityController_create(JackieRenderController, EntityRenderController)
-
-std::string JackieRenderController::getTextureMapping()
-{
-    JackieController* ec = _entity->controller<JackieController>();
-    
-    switch (ec->_stats._dir)
-    {
-        case EDIR_UP:
-            return "JACKIE_UP";
-        case EDIR_LEFT:
-        case EDIR_RIGHT:
-            return "JACKIE_LEFT";
-        case EDIR_DOWN:
-            return "JACKIE_DOWN";
-    }
-    
-    return EntityRenderController::getTextureMapping();
 }

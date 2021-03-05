@@ -20,12 +20,13 @@ class MonsterController : public EntityController
     
 public:
     MonsterController(Entity* e);
-    virtual ~MonsterController() {}
+    virtual ~MonsterController();
     
     virtual void update() override;
     virtual void onCollision(Entity* e) override;
     
     bool isInEncounter();
+    Entity* battleAvatar();
     
 private:
     enum State
@@ -34,21 +35,4 @@ private:
         STAT_MOVING = 1
     };
     Entity* _battleAvatar;
-};
-
-class MonsterRenderController : public EntityRenderController
-{
-    DECL_RTTI;
-    DECL_EntityController_create(EntityRenderController);
-    
-public:
-    MonsterRenderController(Entity* e) : EntityRenderController(e) {}
-    virtual ~MonsterRenderController() {}
-    
-    virtual std::string getTextureMapping() override;
-    
-    void addSpriteForEncounter(SpriteBatcher& sb);
-
-private:
-    std::string getTextureMappingForEncounter();
 };

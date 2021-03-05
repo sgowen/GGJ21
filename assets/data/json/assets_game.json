@@ -1143,31 +1143,20 @@
           "frameTime": 24,
           "numFrames": 5
         },
-        "BIG_HIDE_SWING_1": {
+        "BIG_HIDE_SWING": {
           "x": 0,
           "y": 256,
-          "regionWidth": 256,
+          "regionWidths": [
+            256,
+            256,
+            320,
+            320,
+            320,
+            256
+          ],
           "regionHeight": 256,
           "frameTime": 7,
-          "numFrames": 2,
-          "looping": false
-        },
-        "BIG_HIDE_SWING_2": {
-          "x": 512,
-          "y": 256,
-          "regionWidth": 320,
-          "regionHeight": 256,
-          "frameTime": 7,
-          "numFrames": 3,
-          "looping": false
-        },
-        "BIG_HIDE_SWING_3": {
-          "x": 1472,
-          "y": 256,
-          "regionWidth": 256,
-          "regionHeight": 256,
-          "frameTime": 7,
-          "numFrames": 1,
+          "numFrames": 6,
           "looping": false
         },
         "BIG_ENT_IDLE": {
