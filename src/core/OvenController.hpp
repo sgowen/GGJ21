@@ -13,7 +13,7 @@
 class OvenController : public EntityController
 {
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(OvenController);
     
 public:
     OvenController(Entity* e) : EntityController(e) {}

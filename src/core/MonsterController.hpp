@@ -12,11 +12,8 @@
 
 class MonsterController : public EntityController
 {
-    friend class MonsterNetworkController;
-    friend class MonsterRenderController;
-    
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(MonsterController);
     
 public:
     MonsterController(Entity* e);
@@ -25,7 +22,6 @@ public:
     virtual void update() override;
     virtual void onCollision(Entity* e) override;
     
-    bool isInEncounter();
     Entity* battleAvatar();
     
 private:

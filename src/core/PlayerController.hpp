@@ -13,24 +13,15 @@
 #include <string>
 
 class PlayerController : public EntityController
-{
-    friend class PlayerNetworkController;
-    friend class PlayerRenderController;
-    
+{    
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(PlayerController);
     
 public:
     PlayerController(Entity* e) : EntityController(e) {}
     virtual ~PlayerController() {}
     
     virtual void processInput(InputState* is, bool isLive);
-    
-    void setUsername(std::string value);
-    std::string getUsername() const;
-    void setUserAddress(std::string value);
-    std::string getUserAddress() const;
-    uint16_t getHealth();
     
 protected:
     enum State

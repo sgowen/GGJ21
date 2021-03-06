@@ -14,7 +14,7 @@
 class HideAvatarController : public EntityController
 {
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(HideAvatarController);
     
 public:
     HideAvatarController(Entity* e);

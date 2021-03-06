@@ -13,9 +13,6 @@
 
 class HideController : public PlayerController
 {
-    friend class HideNetworkController;
-    friend class HideRenderController;
-    
     DECL_RTTI;
     DECL_EntityController_create(HideController);
     
@@ -27,9 +24,6 @@ public:
     virtual void onMessage(uint16_t message) override;
     virtual void processInput(InputState* is, bool isLive) override;
     
-    bool isInEncounter();
-    void setEntityLayoutKey(uint32_t value);
-    uint32_t getEntityLayoutKey();
     Entity* battleAvatar();
     
 private:

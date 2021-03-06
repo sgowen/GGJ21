@@ -12,11 +12,9 @@
 #include "GGJ21.hpp"
 
 class JackieController : public PlayerController
-{
-    friend class JackieRenderController;
-    
+{    
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(JackieController);
     
 public:
     JackieController(Entity* e) : PlayerController(e) {}

@@ -59,28 +59,3 @@ void PlayerController::processInput(InputState* is, bool isLive)
         SoundUtil::playSoundForStateIfChanged(*_entity, fromState, state);
     }
 }
-
-void PlayerController::setUsername(std::string value)
-{
-    _playerInfo._username = value;
-}
-
-std::string PlayerController::getUsername() const
-{
-    return _playerInfo._username;
-}
-
-void PlayerController::setUserAddress(std::string value)
-{
-    _playerInfo._userAddress = value;
-}
-
-std::string PlayerController::getUserAddress() const
-{
-    return _playerInfo._userAddress;
-}
-
-uint16_t PlayerController::getHealth()
-{
-    return _stats._health;
-}

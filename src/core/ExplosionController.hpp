@@ -13,7 +13,7 @@
 class ExplosionController : public EntityController
 {    
     DECL_RTTI;
-    DECL_EntityController_create(EntityController);
+    DECL_EntityController_create(ExplosionController);
     
 public:
     ExplosionController(Entity* e) : EntityController(e) {}

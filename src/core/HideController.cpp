@@ -78,21 +78,6 @@ void HideController::processInput(InputState* is, bool isLive)
     }
 }
 
-bool HideController::isInEncounter()
-{
-    return _encounter._isInCounter;
-}
-
-void HideController::setEntityLayoutKey(uint32_t value)
-{
-    _entityLayoutInfo._key = value;
-}
-
-uint32_t HideController::getEntityLayoutKey()
-{
-    return _entityLayoutInfo._key;
-}
-
 Entity* HideController::battleAvatar()
 {
     return _battleAvatar;
