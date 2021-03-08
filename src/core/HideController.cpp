@@ -26,13 +26,12 @@ HideController::~HideController()
 
 void HideController::update()
 {
-    if (_encounter._isInCounter)
+    if (_entity->nwDataField("isInCounter").valueBool())
     {
-        ++_encounter._stateTime;
         _battleAvatar->update();
     }
     
-    if (_stats._health == 0)
+    if (_entity->nwDataField("health").valueUInt16() == 0)
     {
         _entity->requestDeletion();
     }
@@ -44,13 +43,13 @@ void HideController::onMessage(uint16_t message)
     {
         case MSG_ENCOUNTER:
         {
-            if (!_encounter._isInCounter)
+            bool& isInCounter = _entity->nwDataField("isInCounter").valueBool();
+            if (!isInCounter)
             {
-                _encounter._isInCounter = true;
-                _encounter._stateTime = 0;
+                isInCounter = true;
+                _battleAvatar->state()._stateTime = 0;
                 _entity->state()._state = STAT_IDLE;
-                _entity->pose()._velocity._x = 0;
-                _entity->pose()._velocity._y = 0;
+                _entity->pose()._velocity.reset();
             }
             break;
         }
@@ -61,16 +60,16 @@ void HideController::onMessage(uint16_t message)
 
 void HideController::processInput(InputState* is, bool isLive)
 {
-    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
+    uint8_t playerID = _entity->data().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {
         return;
     }
     
-    if (_encounter._isInCounter)
+    if (_entity->nwDataField("isInCounter").valueBool())
     {
-        _battleAvatar->processInput(pis, isLive);
+        _battleAvatar->controller<HideAvatarController>()->processInput(pis, isLive);
     }
     else
     {

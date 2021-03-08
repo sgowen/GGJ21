@@ -14,6 +14,7 @@ IMPL_EntityController_create(MonsterController)
 MonsterController::MonsterController(Entity* e) : EntityController(e),
 _battleAvatar(ENTITY_MGR.createEntity(EntityInstanceDef(0, 'MOA1', CFG_MAIN.monsterBattleX(), CFG_MAIN.monsterBattleY(), e->isServer())))
 {
+    // TODO, battle avatar position needs to be dynamic
     e->state()._stateFlags = EDIR_DOWN;
 }
 
@@ -24,9 +25,8 @@ MonsterController::~MonsterController()
 
 void MonsterController::update()
 {
-    if (_encounter._isInCounter)
+    if (_entity->nwDataField("isInCounter").valueBool())
     {
-        ++_encounter._stateTime;
         _battleAvatar->update();
     }
     else
@@ -42,7 +42,7 @@ void MonsterController::update()
         std::vector<Entity*>& players = w.getPlayers();
         for (Entity* e : players)
         {
-            uint8_t playerID = e->entityDef()._data.getUInt("playerID");
+            uint8_t playerID = e->data().getUInt("playerID");
             if (playerID == 1)
             {
                 float distance = e->position().dist(_entity->position());
@@ -76,18 +76,11 @@ void MonsterController::onCollision(Entity* e)
     {
         e->message(MSG_ENCOUNTER);
         
-        MonsterController* ec = _entity->controller<MonsterController>();
-        ec->_encounter._isInCounter = true;
-        ec->_encounter._stateTime = 0;
+        _entity->nwDataField("isInCounter").valueBool() = true;
+        _battleAvatar->state()._stateTime = 0;
         _entity->state()._state = MonsterController::STAT_IDLE;
-        _entity->pose()._velocity._x = 0;
-        _entity->pose()._velocity._y = 0;
+        _entity->pose()._velocity.reset();
     }
-}
-
-bool MonsterController::isInEncounter()
-{
-    return _encounter._isInCounter;
 }
 
 Entity* MonsterController::battleAvatar()

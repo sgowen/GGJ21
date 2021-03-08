@@ -15,7 +15,7 @@ void JackieController::processInput(InputState* is, bool isLive)
 {
     PlayerController::processInput(is, isLive);
     
-    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
+    uint8_t playerID = _entity->data().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {
@@ -37,6 +37,6 @@ void JackieController::onCollision(Entity* e)
 {
     if (e->controller()->getRTTI().isDerivedFrom(CrystalController::rtti))
     {
-        e->physicsController<TopDownPhysicsController>()->push(_stats._dir, CFG_MAIN.jackiePushForce());
+        e->physicsController<TopDownPhysicsController>()->push(_entity->state()._stateFlags, CFG_MAIN.jackiePushForce());
     }
 }

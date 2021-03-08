@@ -27,10 +27,5 @@ public:
     Entity* battleAvatar();
     
 private:
-    enum EncounterState
-    {
-        ESTA_IDLE = 0,
-        ESTA_SWING = 1
-    };
     Entity* _battleAvatar;
 };

@@ -25,4 +25,11 @@ public:
     
     void onEncounter(Entity* hide);
     void processInput(InputState::PlayerInputState* pis, bool isLive);
+    
+private:
+    enum EncounterState
+    {
+        ESTA_IDLE = 0,
+        ESTA_SWING = 1
+    };
 };

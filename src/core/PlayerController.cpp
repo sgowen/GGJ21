@@ -13,7 +13,7 @@ IMPL_EntityController_create(PlayerController)
 
 void PlayerController::processInput(InputState* is, bool isLive)
 {
-    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
+    uint8_t playerID = _entity->data().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {

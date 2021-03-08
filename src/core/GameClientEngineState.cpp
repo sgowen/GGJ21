@@ -132,7 +132,7 @@ Entity* GameClientEngineState::getControlledPlayer()
     
     for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
     {
-        if (playerID == e->entityDef()._data.getUInt("playerID"))
+        if (playerID == e->data().getUInt("playerID"))
         {
             ret = e;
             break;

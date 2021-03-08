@@ -105,7 +105,7 @@ void GameRenderer::renderUI(Renderer& r)
         {
             PlayerController* ec = e->controller<PlayerController>();
             
-            uint8_t playerID = e->entityDef()._data.getUInt("playerID");
+            uint8_t playerID = e->data().getUInt("playerID");
             if (playerID == 1)
             {
                 r.setTextVisible("player1Info", true);

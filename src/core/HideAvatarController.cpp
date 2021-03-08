@@ -34,19 +34,14 @@ void HideAvatarController::update()
             for (Entity* e : w.getNetworkEntities())
             {
                 if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
-                    e->controller<MonsterController>()->isInEncounter())
+                    e->nwDataField("isInCounter").valueBool())
                 {
                     e->requestDeletion();
-                    _encounter._isInCounter = false;
+                    _entity->nwDataField("isInCounter").valueBool() = false;
                     break;
                 }
             }
         }
-    }
-    
-    if (_stats._health == 0)
-    {
-        _entity->requestDeletion();
     }
 }
 
@@ -55,22 +50,17 @@ void HideAvatarController::onMessage(uint16_t message)
     // TODO, handle battle messages
 }
 
-void HideAvatarController::processInput(InputState* is, bool isLive)
+void HideAvatarController::processInput(InputState::PlayerInputState* pis, bool isLive)
 {
-    uint8_t playerID = _entity->entityDef()._data.getUInt("playerID");
-    InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
-    if (pis == NULL)
-    {
-        return;
-    }
-    
+    uint8_t& state = _entity->state()._state;
+    uint8_t& stateFlags = _entity->state()._stateFlags;
     uint8_t piss = pis->_inputState;
-    if (_encounter._state == ESTA_IDLE)
+    if (state == ESTA_IDLE)
     {
         if (IS_BIT_SET(piss, GISF_CONFIRM))
         {
-            _encounter._state = ESTA_SWING;
-            _encounter._stateTime = 0;
+            state = ESTA_SWING;
+            stateTime = 0;
             
             if (isLive)
             {
@@ -82,8 +72,8 @@ void HideAvatarController::processInput(InputState* is, bool isLive)
     {
         if (IS_BIT_SET(piss, GISF_CANCEL))
         {
-            _encounter._state = ESTA_IDLE;
-            _encounter._stateTime = 0;
+            state = ESTA_IDLE;
+            stateTime = 0;
         }
     }
 }

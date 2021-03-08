@@ -15,7 +15,7 @@ void cb_server_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_SRVR.getWorld().addNetworkEntity(e);
     
-    if (e->entityDef()._data.getUInt("playerID", 0) == 1)
+    if (e->data().getUInt("playerID", 0) == 1)
     {
         HideController* ec = e->controller<HideController>();
         uint32_t key = ec->getEntityLayoutKey();
@@ -32,7 +32,7 @@ void cb_server_onEntityDeregistered(Entity* e)
     
     if (e->isPlayer())
     {
-        uint8_t playerID = e->entityDef()._data.getUInt("playerID");
+        uint8_t playerID = e->data().getUInt("playerID");
         needsRestart = NW_SRVR->getClientProxy(playerID) != NULL;
     }
     
@@ -166,7 +166,7 @@ void GameServerEngineState::update(Engine* e)
     }
     for (Entity* e : _world.getPlayers())
     {
-        NW_SRVR->removeProcessedMovesForPlayer(e->entityDef()._data.getUInt("playerID"));
+        NW_SRVR->removeProcessedMovesForPlayer(e->data().getUInt("playerID"));
     }
     NW_SRVR->onMovesProcessed(moveCount);
     
@@ -180,7 +180,7 @@ void GameServerEngineState::updateWorld(int moveIndex)
         PlayerController* ec = e->controller<PlayerController>();
         assert(ec != NULL);
         
-        ClientProxy* cp = NW_SRVR->getClientProxy(e->entityDef()._data.getUInt("playerID"));
+        ClientProxy* cp = NW_SRVR->getClientProxy(e->data().getUInt("playerID"));
         assert(cp != NULL);
         
         MoveList& ml = cp->getUnprocessedMoveList();
@@ -247,7 +247,7 @@ void GameServerEngineState::removePlayer(uint8_t playerID)
 {
     for (Entity* e : _world.getPlayers())
     {
-        if (e->entityDef()._data.getUInt("playerID") == playerID)
+        if (e->data().getUInt("playerID") == playerID)
         {
             NW_SRVR->deregisterEntity(e);
             break;
