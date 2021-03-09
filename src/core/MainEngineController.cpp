@@ -23,6 +23,7 @@ MainEngineController::MainEngineController(void* data1, void* data2) : EngineCon
     config.emplace("Jackie", JackieController::create);
     config.emplace("Oven", OvenController::create);
     config.emplace("Monster", MonsterController::create);
+    config.emplace("MonsterAvatar", MonsterAvatarController::create);
     config.emplace("Crystal", CrystalController::create);
     config.emplace("Explosion", ExplosionController::create);
     configureForNetwork(CFG_MAIN.entityManagerFilePath(), CFG_MAIN.entityLayoutManagerFilePath(), config);

@@ -1155,7 +1155,7 @@
             256
           ],
           "regionHeight": 256,
-          "frameTime": 7,
+          "frameTime": 10,
           "numFrames": 6,
           "looping": false
         },

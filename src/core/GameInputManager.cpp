@@ -24,7 +24,7 @@ GameInputManagerState GameInputManager::update()
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
     if (controlledPlayer != NULL && _matrix != NULL)
     {
-        uint8_t playerID = controlledPlayer->data().getUInt("playerID");
+        uint8_t playerID = controlledPlayer->metadata().getUInt("playerID");
         float playerX = controlledPlayer->position()._x;
         float playerY = controlledPlayer->position()._y;
         float width = _matrix->_desc.width();

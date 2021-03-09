@@ -22,6 +22,7 @@
 #include "JackieController.hpp"
 #include "MainConfig.hpp"
 #include "MainEngineController.hpp"
+#include "MonsterAvatarController.hpp"
 #include "MonsterController.hpp"
 #include "OvenController.hpp"
 #include "TitleEngineState.hpp"

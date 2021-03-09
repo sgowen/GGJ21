@@ -14,7 +14,7 @@
 class HideController : public PlayerController
 {
     DECL_RTTI;
-    DECL_EntityController_create(HideController);
+    DECL_EntityController_create(EntityController);
     
 public:
     HideController(Entity* e);

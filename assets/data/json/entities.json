@@ -1,4 +1,14 @@
 {
+  "MOA1": {
+    "name": "1st Monster's Battle Avatar",
+    "controller": "MonsterAvatar",
+    "textureMappings": {
+      "0": "BIG_WITCH_PRETTY"
+    },
+    "bodyFlags": 2,
+    "width": 16,
+    "height": 20
+  },
   "MON1": {
     "name": "Monster",
     "controller": "Monster",
@@ -26,12 +36,12 @@
         "name": "encounter",
         "data": [
           {
-            "name": "isInCounter",
-            "type": "bool"
+            "name": "isInEncounter",
+            "type": 0
           },
           {
             "name": "health",
-            "type": "uint16_t",
+            "type": 2,
             "value": "3"
           }
         ]
@@ -48,6 +58,7 @@
       "0": "BIG_HIDE_IDLE",
       "1": "BIG_HIDE_SWING"
     },
+    "bodyFlags": 2,
     "width": 16,
     "height": 16
   },
@@ -94,13 +105,13 @@
         "0": "HIDE_UP_IDLE",
         "1": "HIDE_DOWN_IDLE",
         "2": "HIDE_LEFT_IDLE",
-        "3": "HIDE_RIGHT_IDLE"
+        "3": "HIDE_LEFT_IDLE"
       },
       "1": {
         "0": "HIDE_UP",
         "1": "HIDE_DOWN",
         "2": "HIDE_LEFT",
-        "3": "HIDE_RIGHT"
+        "3": "HIDE_LEFT"
       }
     },
     "fixtures": [
@@ -108,7 +119,7 @@
         "flags": 1
       }
     ],
-    "data": {
+    "metadata": {
       "playerID": "1"
     },
     "networkData": [
@@ -117,11 +128,11 @@
         "data": [
           {
             "name": "username",
-            "type": "smallString"
+            "type": 11
           },
           {
             "name": "userAddress",
-            "type": "smallString"
+            "type": 11
           }
         ]
       },
@@ -129,12 +140,12 @@
         "name": "encounter",
         "data": [
           {
-            "name": "isInCounter",
-            "type": "bool"
+            "name": "isInEncounter",
+            "type": 0
           },
           {
             "name": "health",
-            "type": "uint16_t",
+            "type": 2,
             "value": "3"
           }
         ]
@@ -143,8 +154,8 @@
         "name": "entityLayoutInfo",
         "data": [
           {
-            "name": "key",
-            "type": "uint32_t"
+            "name": "entityLayoutKey",
+            "type": 3
           }
         ]
       }
@@ -176,13 +187,13 @@
         "0": "JACKIE_UP_IDLE",
         "1": "JACKIE_DOWN_IDLE",
         "2": "JACKIE_LEFT_IDLE",
-        "3": "JACKIE_RIGHT_IDLE"
+        "3": "JACKIE_LEFT_IDLE"
       },
       "1": {
         "0": "JACKIE_UP",
         "1": "JACKIE_DOWN",
         "2": "JACKIE_LEFT",
-        "3": "JACKIE_RIGHT"
+        "3": "JACKIE_LEFT"
       }
     },
     "fixtures": [
@@ -190,7 +201,7 @@
         "flags": 1
       }
     ],
-    "data": {
+    "metadata": {
       "playerID": "2"
     },
     "networkData": [
@@ -199,11 +210,11 @@
         "data": [
           {
             "name": "username",
-            "type": "smallString"
+            "type": 11
           },
           {
             "name": "userAddress",
-            "type": "smallString"
+            "type": 11
           }
         ]
       }

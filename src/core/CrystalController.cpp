@@ -9,7 +9,7 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(CrystalController, EntityController)
-IMPL_EntityController_create(CrystalController)
+IMPL_EntityController_create(CrystalController, EntityController)
 
 void CrystalController::onMessage(uint16_t message)
 {

@@ -14,8 +14,6 @@
   "jackiePushForce": "6",
   "monsterBattleX": "28",
   "monsterBattleY": "30",
-  "monsterBattleWidth": "16",
-  "monsterBattleHeight": "20",
   "soundsDisabled": "true",
   "musicDisabled": "true",
   "inputLoggingEnabled": "false",

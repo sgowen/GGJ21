@@ -15,7 +15,7 @@
 class PlayerController : public EntityController
 {    
     DECL_RTTI;
-    DECL_EntityController_create(PlayerController);
+    DECL_EntityController_create(EntityController);
     
 public:
     PlayerController(Entity* e) : EntityController(e) {}

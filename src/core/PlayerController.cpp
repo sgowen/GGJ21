@@ -9,24 +9,25 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(PlayerController, EntityController)
-IMPL_EntityController_create(PlayerController)
+IMPL_EntityController_create(PlayerController, EntityController)
 
 void PlayerController::processInput(InputState* is, bool isLive)
 {
-    uint8_t playerID = _entity->data().getUInt("playerID");
+    Entity& e = *_entity;
+    uint8_t playerID = e.metadata().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {
         return;
     }
     
-    uint8_t fromState = _entity->state()._state;
-    uint8_t& state = _entity->state()._state;
-    uint8_t& stateFlags = _entity->state()._stateFlags;
+    uint8_t fromState = e.state()._state;
+    uint8_t& state = e.state()._state;
+    uint8_t& stateFlags = e.state()._stateFlags;
     uint8_t piss = pis->_inputState;
     
     state = STAT_IDLE;
-    Vector2& vel = _entity->velocity();
+    Vector2& vel = e.velocity();
     if (IS_BIT_SET(piss, GISF_MOVING_UP))
     {
         state = STAT_MOVING;
@@ -52,10 +53,10 @@ void PlayerController::processInput(InputState* is, bool isLive)
         vel._x = CFG_MAIN.playerMaxTopDownSpeed();
     }
     
-    _entity->pose()._isXFlipped = stateFlags == EDIR_RIGHT;
+    e.pose()._isXFlipped = stateFlags == EDIR_RIGHT;
     
     if (isLive)
     {
-        SoundUtil::playSoundForStateIfChanged(*_entity, fromState, state);
+        SoundUtil::playSoundForStateIfChanged(e, fromState, state);
     }
 }

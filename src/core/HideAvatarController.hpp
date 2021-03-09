@@ -14,19 +14,23 @@
 class HideAvatarController : public EntityController
 {
     DECL_RTTI;
-    DECL_EntityController_create(HideAvatarController);
+    DECL_EntityController_create(EntityController);
     
 public:
-    HideAvatarController(Entity* e);
+    HideAvatarController(Entity* e) : EntityController(e) {}
     virtual ~HideAvatarController() {}
     
     virtual void update() override;
     virtual void onMessage(uint16_t message) override;
     
-    void onEncounter(Entity* hide);
     void processInput(InputState::PlayerInputState* pis, bool isLive);
     
 private:
+    enum State
+    {
+        STAT_IDLE = 0,
+        STAT_SWING = 1
+    };
     enum EncounterState
     {
         ESTA_IDLE = 0,

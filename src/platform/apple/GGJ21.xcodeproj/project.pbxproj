@@ -405,6 +405,8 @@
 		BBBF72F025EC775100C1D6BD /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF722F25EC775100C1D6BD /* Box2DDebugRenderer.cpp */; };
 		BBBF72F125EC775100C1D6BD /* GlfwMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF723625EC775100C1D6BD /* GlfwMain.cpp */; };
 		BBBF72F225EC775100C1D6BD /* GlfwMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF723625EC775100C1D6BD /* GlfwMain.cpp */; };
+		BBE89FAB25F8209C00333129 /* MonsterAvatarController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */; };
+		BBE89FAC25F8209C00333129 /* MonsterAvatarController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */; };
 		BBEC881525F297EF0059DEC5 /* EntityNetworkController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881025F297EF0059DEC5 /* EntityNetworkController.cpp */; };
 		BBEC881625F297EF0059DEC5 /* EntityNetworkController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881025F297EF0059DEC5 /* EntityNetworkController.cpp */; };
 		BBEC881725F297EF0059DEC5 /* EntityRenderController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881225F297EF0059DEC5 /* EntityRenderController.cpp */; };
@@ -1211,6 +1213,8 @@
 		BBBF723125EC775100C1D6BD /* Box2DPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DPhysicsController.hpp; sourceTree = "<group>"; };
 		BBBF723425EC775100C1D6BD /* GlfwMain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GlfwMain.hpp; sourceTree = "<group>"; };
 		BBBF723625EC775100C1D6BD /* GlfwMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlfwMain.cpp; sourceTree = "<group>"; };
+		BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonsterAvatarController.cpp; sourceTree = "<group>"; };
+		BBE89FAA25F8209C00333129 /* MonsterAvatarController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MonsterAvatarController.hpp; sourceTree = "<group>"; };
 		BBEC880F25F297EF0059DEC5 /* EntityNetworkController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityNetworkController.hpp; sourceTree = "<group>"; };
 		BBEC881025F297EF0059DEC5 /* EntityNetworkController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityNetworkController.cpp; sourceTree = "<group>"; };
 		BBEC881125F297EF0059DEC5 /* EntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityPhysicsController.hpp; sourceTree = "<group>"; };
@@ -2381,6 +2385,8 @@
 				BBBF6DD325EC113F00C1D6BD /* MainConfig.hpp */,
 				BBBF6DC325EC113F00C1D6BD /* MainEngineController.cpp */,
 				BBBF6DDC25EC113F00C1D6BD /* MainEngineController.hpp */,
+				BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */,
+				BBE89FAA25F8209C00333129 /* MonsterAvatarController.hpp */,
 				BBBF6DE225EC113F00C1D6BD /* MonsterController.cpp */,
 				BBBF6DC825EC113F00C1D6BD /* MonsterController.hpp */,
 				BBBF6DC225EC113F00C1D6BD /* OvenController.cpp */,
@@ -3041,6 +3047,7 @@
 				BBBA56EF25BA453A00C8207D /* posix_thread.c in Sources */,
 				BBBA56F925BA453A00C8207D /* xkb_unicode.c in Sources */,
 				BBBF72A725EC775100C1D6BD /* TriangleBatcher.cpp in Sources */,
+				BBE89FAB25F8209C00333129 /* MonsterAvatarController.cpp in Sources */,
 				BBBF724125EC775100C1D6BD /* EntityRegistry.cpp in Sources */,
 				BBBA56EE25BA453A00C8207D /* input.c in Sources */,
 				BBBF6DF525EC114000C1D6BD /* HideController.cpp in Sources */,
@@ -3268,6 +3275,7 @@
 				BBBA5AAF25BB5D1A00C8207D /* b2_chain_circle_contact.cpp in Sources */,
 				BBBA46E325B913D900C8207D /* ALSoundSourcePool.m in Sources */,
 				BBBA5ACD25BB5D1A00C8207D /* b2_gear_joint.cpp in Sources */,
+				BBE89FAC25F8209C00333129 /* MonsterAvatarController.cpp in Sources */,
 				BBBA5AE925BB5D1A00C8207D /* b2_block_allocator.cpp in Sources */,
 				BBBF72B625EC775100C1D6BD /* CircleBatcher.cpp in Sources */,
 				BBBA5ABB25BB5D1A00C8207D /* b2_contact_solver.cpp in Sources */,

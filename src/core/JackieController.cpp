@@ -9,13 +9,13 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(JackieController, PlayerController)
-IMPL_EntityController_create(JackieController)
+IMPL_EntityController_create(JackieController, EntityController)
 
 void JackieController::processInput(InputState* is, bool isLive)
 {
     PlayerController::processInput(is, isLive);
     
-    uint8_t playerID = _entity->data().getUInt("playerID");
+    uint8_t playerID = _entity->metadata().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
     if (pis == NULL)
     {

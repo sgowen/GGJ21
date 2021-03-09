@@ -9,7 +9,7 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(MonsterController, EntityController)
-IMPL_EntityController_create(MonsterController)
+IMPL_EntityController_create(MonsterController, EntityController)
 
 MonsterController::MonsterController(Entity* e) : EntityController(e),
 _battleAvatar(ENTITY_MGR.createEntity(EntityInstanceDef(0, 'MOA1', CFG_MAIN.monsterBattleX(), CFG_MAIN.monsterBattleY(), e->isServer())))
@@ -25,7 +25,7 @@ MonsterController::~MonsterController()
 
 void MonsterController::update()
 {
-    if (_entity->nwDataField("isInCounter").valueBool())
+    if (_entity->dataField("isInEncounter").valueBool())
     {
         _battleAvatar->update();
     }
@@ -42,7 +42,7 @@ void MonsterController::update()
         std::vector<Entity*>& players = w.getPlayers();
         for (Entity* e : players)
         {
-            uint8_t playerID = e->data().getUInt("playerID");
+            uint8_t playerID = e->metadata().getUInt("playerID");
             if (playerID == 1)
             {
                 float distance = e->position().dist(_entity->position());
@@ -76,7 +76,7 @@ void MonsterController::onCollision(Entity* e)
     {
         e->message(MSG_ENCOUNTER);
         
-        _entity->nwDataField("isInCounter").valueBool() = true;
+        _entity->dataField("isInEncounter").valueBool() = true;
         _battleAvatar->state()._stateTime = 0;
         _entity->state()._state = MonsterController::STAT_IDLE;
         _entity->pose()._velocity.reset();

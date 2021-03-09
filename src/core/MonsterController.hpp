@@ -13,7 +13,7 @@
 class MonsterController : public EntityController
 {
     DECL_RTTI;
-    DECL_EntityController_create(MonsterController);
+    DECL_EntityController_create(EntityController);
     
 public:
     MonsterController(Entity* e);

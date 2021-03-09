@@ -13,7 +13,7 @@
 class CrystalController : public EntityController
 {    
     DECL_RTTI;
-    DECL_EntityController_create(CrystalController);
+    DECL_EntityController_create(EntityController);
     
 public:
     CrystalController(Entity* e) : EntityController(e) {}

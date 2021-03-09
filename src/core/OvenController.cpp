@@ -9,7 +9,7 @@
 #include "GGJ21.hpp"
 
 IMPL_RTTI(OvenController, EntityController)
-IMPL_EntityController_create(OvenController)
+IMPL_EntityController_create(OvenController, EntityController)
 
 void OvenController::onCollision(Entity* e)
 {

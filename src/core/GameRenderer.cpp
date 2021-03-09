@@ -52,13 +52,13 @@ void GameRenderer::renderEncounter(Renderer& r)
     }
     
     bool isInEncounter = false;
-    Entity* hide = NULL;
+    HideController* hide = NULL;
     for (Entity* e : w.getPlayers())
     {
         if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
         {
-            hide = e;
-            isInEncounter = e->controller<HideController>()->isInEncounter();
+            hide = e->controller<HideController>();
+            isInEncounter = e->dataField("isInEncounter").valueBool();
         }
     }
     
@@ -80,12 +80,12 @@ void GameRenderer::renderEncounter(Renderer& r)
     for (Entity* e : w.getNetworkEntities())
     {
         if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
-            e->controller<MonsterController>()->isInEncounter())
+            e->dataField("isInEncounter").valueBool())
         {
-            e->renderController<MonsterRenderController>()->addSpriteForEncounter(r.spriteBatcher());
+            r.addSpriteForEntity(e->controller<MonsterController>()->battleAvatar());
         }
     }
-    hide->renderController<HideRenderController>()->addSpriteForEncounter(r.spriteBatcher());
+    r.addSpriteForEntity(hide->battleAvatar());
     r.spriteBatcherEnd("big_sprites");
 }
 
@@ -103,20 +103,21 @@ void GameRenderer::renderUI(Renderer& r)
         r.rektangleBatcherBegin();
         for (Entity* e : w.getPlayers())
         {
-            PlayerController* ec = e->controller<PlayerController>();
-            
-            uint8_t playerID = e->data().getUInt("playerID");
+            uint8_t playerID = e->metadata().getUInt("playerID");
+            std::string username = e->dataField("username").valueString();
             if (playerID == 1)
             {
                 r.setTextVisible("player1Info", true);
-                r.setText("player1Info", StringUtil::format("%s", ec->getUsername().c_str()));
+                r.setText("player1Info", StringUtil::format("%s", username.c_str()));
                 Rektangle player1InfoBar(0, 0, width / 2, 3);
                 r.rektangleBatcherAddRektangle(player1InfoBar);
             }
             else if (playerID == 2)
             {
+                std::string userAddress = e->dataField("userAddress").valueString();
+                
                 r.setTextVisible("player2Info", true);
-                r.setText("player2Info", StringUtil::format("%s @%s", ec->getUsername().c_str(), ec->getUserAddress().c_str()));
+                r.setText("player2Info", StringUtil::format("%s @%s", username.c_str(), userAddress.c_str()));
                 Rektangle player2InfoBar(width / 2, 0, width, 3);
                 r.rektangleBatcherAddRektangle(player2InfoBar);
             }

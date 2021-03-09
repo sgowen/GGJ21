@@ -11,33 +11,27 @@
 #include <assert.h>
 
 IMPL_RTTI(HideAvatarController, EntityController)
-IMPL_EntityController_create(HideAvatarController)
-
-HideAvatarController::HideAvatarController(Entity* e) : EntityController(e)
-{
-    // Empty
-}
+IMPL_EntityController_create(HideAvatarController, EntityController)
 
 void HideAvatarController::update()
 {
     uint8_t& state = _entity->state()._state;
     uint16_t& stateTime = _entity->state()._stateTime;
-    uint8_t& stateFlags = _entity->state()._stateFlags;
     
-    if (state == ESTA_SWING)
+    if (state == STAT_SWING)
     {
-        if (stateTime >= 42)
+        if (stateTime >= 60)
         {
-            state = ESTA_IDLE;
+            state = STAT_IDLE;
             
             World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
             for (Entity* e : w.getNetworkEntities())
             {
                 if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
-                    e->nwDataField("isInCounter").valueBool())
+                    e->dataField("isInEncounter").valueBool())
                 {
                     e->requestDeletion();
-                    _entity->nwDataField("isInCounter").valueBool() = false;
+                    _entity->dataField("isInEncounter").valueBool() = false;
                     break;
                 }
             }
@@ -53,13 +47,13 @@ void HideAvatarController::onMessage(uint16_t message)
 void HideAvatarController::processInput(InputState::PlayerInputState* pis, bool isLive)
 {
     uint8_t& state = _entity->state()._state;
-    uint8_t& stateFlags = _entity->state()._stateFlags;
+    uint16_t& stateTime = _entity->state()._stateTime;
     uint8_t piss = pis->_inputState;
-    if (state == ESTA_IDLE)
+    if (state == STAT_IDLE)
     {
         if (IS_BIT_SET(piss, GISF_CONFIRM))
         {
-            state = ESTA_SWING;
+            state = STAT_SWING;
             stateTime = 0;
             
             if (isLive)
@@ -72,7 +66,7 @@ void HideAvatarController::processInput(InputState::PlayerInputState* pis, bool 
     {
         if (IS_BIT_SET(piss, GISF_CANCEL))
         {
-            state = ESTA_IDLE;
+            state = STAT_IDLE;
             stateTime = 0;
         }
     }

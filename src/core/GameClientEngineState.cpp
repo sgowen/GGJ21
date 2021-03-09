@@ -17,10 +17,9 @@ void cb_client_onEntityRegistered(Entity* e)
     
     if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
     {
-        HideController* ec = e->controller<HideController>();
-        uint32_t key = ec->getEntityLayoutKey();
+        uint32_t entityLayoutKey = e->dataField("entityLayoutKey").valueUInt32();
         EntityLayout* elm = INST_REG.get<EntityLayout>(INSK_ELM_CLNT);
-        EntityLayoutDef& eld = elm->entityLayoutDef(key);
+        EntityLayoutDef& eld = elm->entityLayoutDef(entityLayoutKey);
         EntityLayoutLoader::loadEntityLayout(eld, false);
         ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld);
     }
@@ -132,7 +131,7 @@ Entity* GameClientEngineState::getControlledPlayer()
     
     for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
     {
-        if (playerID == e->data().getUInt("playerID"))
+        if (playerID == e->metadata().getUInt("playerID"))
         {
             ret = e;
             break;
