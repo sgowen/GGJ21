@@ -15,7 +15,7 @@ void cb_server_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_SRVR.getWorld().addNetworkEntity(e);
     
-    if (e->metadata().getUInt("playerID", 0) == 1)
+    if (e->isPlayer() && e->metadata().getUInt("playerID", 0) == 1)
     {
         uint32_t entityLayoutKey = e->dataField("entityLayoutKey").valueUInt32();
         EntityLayout* elm = INST_REG.get<EntityLayout>(INSK_ELM_SRVR);
