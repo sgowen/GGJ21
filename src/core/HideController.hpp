@@ -27,5 +27,11 @@ public:
     Entity* battleAvatar();
     
 private:
+    enum BattleState
+    {
+        BSTT_IDLE = 0,
+        BSTT_SWING = 1
+    };
+    
     Entity* _battleAvatar;
 };

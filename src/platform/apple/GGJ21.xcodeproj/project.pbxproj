@@ -405,16 +405,12 @@
 		BBBF72F025EC775100C1D6BD /* Box2DDebugRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF722F25EC775100C1D6BD /* Box2DDebugRenderer.cpp */; };
 		BBBF72F125EC775100C1D6BD /* GlfwMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF723625EC775100C1D6BD /* GlfwMain.cpp */; };
 		BBBF72F225EC775100C1D6BD /* GlfwMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBBF723625EC775100C1D6BD /* GlfwMain.cpp */; };
-		BBE89FAB25F8209C00333129 /* MonsterAvatarController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */; };
-		BBE89FAC25F8209C00333129 /* MonsterAvatarController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */; };
 		BBEC881525F297EF0059DEC5 /* EntityNetworkController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881025F297EF0059DEC5 /* EntityNetworkController.cpp */; };
 		BBEC881625F297EF0059DEC5 /* EntityNetworkController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881025F297EF0059DEC5 /* EntityNetworkController.cpp */; };
 		BBEC881725F297EF0059DEC5 /* EntityRenderController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881225F297EF0059DEC5 /* EntityRenderController.cpp */; };
 		BBEC881825F297EF0059DEC5 /* EntityRenderController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881225F297EF0059DEC5 /* EntityRenderController.cpp */; };
 		BBEC881925F297EF0059DEC5 /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881325F297EF0059DEC5 /* EntityPhysicsController.cpp */; };
 		BBEC881A25F297EF0059DEC5 /* EntityPhysicsController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881325F297EF0059DEC5 /* EntityPhysicsController.cpp */; };
-		BBEC882125F2A1100059DEC5 /* HideAvatarController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881F25F2A1100059DEC5 /* HideAvatarController.cpp */; };
-		BBEC882225F2A1100059DEC5 /* HideAvatarController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEC881F25F2A1100059DEC5 /* HideAvatarController.cpp */; };
 		BBF1D23525E3510900CABC9F /* tinythread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBF1D22225E3510900CABC9F /* tinythread.cpp */; };
 		BBF1D23625E3510900CABC9F /* tinythread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBF1D22225E3510900CABC9F /* tinythread.cpp */; };
 /* End PBXBuildFile section */
@@ -1213,16 +1209,12 @@
 		BBBF723125EC775100C1D6BD /* Box2DPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box2DPhysicsController.hpp; sourceTree = "<group>"; };
 		BBBF723425EC775100C1D6BD /* GlfwMain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GlfwMain.hpp; sourceTree = "<group>"; };
 		BBBF723625EC775100C1D6BD /* GlfwMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlfwMain.cpp; sourceTree = "<group>"; };
-		BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonsterAvatarController.cpp; sourceTree = "<group>"; };
-		BBE89FAA25F8209C00333129 /* MonsterAvatarController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MonsterAvatarController.hpp; sourceTree = "<group>"; };
 		BBEC880F25F297EF0059DEC5 /* EntityNetworkController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityNetworkController.hpp; sourceTree = "<group>"; };
 		BBEC881025F297EF0059DEC5 /* EntityNetworkController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityNetworkController.cpp; sourceTree = "<group>"; };
 		BBEC881125F297EF0059DEC5 /* EntityPhysicsController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityPhysicsController.hpp; sourceTree = "<group>"; };
 		BBEC881225F297EF0059DEC5 /* EntityRenderController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityRenderController.cpp; sourceTree = "<group>"; };
 		BBEC881325F297EF0059DEC5 /* EntityPhysicsController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityPhysicsController.cpp; sourceTree = "<group>"; };
 		BBEC881425F297EF0059DEC5 /* EntityRenderController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityRenderController.hpp; sourceTree = "<group>"; };
-		BBEC881F25F2A1100059DEC5 /* HideAvatarController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HideAvatarController.cpp; sourceTree = "<group>"; };
-		BBEC882025F2A1100059DEC5 /* HideAvatarController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HideAvatarController.hpp; sourceTree = "<group>"; };
 		BBF1D22125E3510900CABC9F /* tinythread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinythread.h; sourceTree = "<group>"; };
 		BBF1D22225E3510900CABC9F /* tinythread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinythread.cpp; sourceTree = "<group>"; };
 		BBF1D22325E3510900CABC9F /* fast_mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fast_mutex.h; sourceTree = "<group>"; };
@@ -2376,8 +2368,6 @@
 				BBBF6DDE25EC113F00C1D6BD /* GameServerEngineState.cpp */,
 				BBBF6DC425EC113F00C1D6BD /* GameServerEngineState.hpp */,
 				BBBF710725EC71DA00C1D6BD /* GGJ21.hpp */,
-				BBEC881F25F2A1100059DEC5 /* HideAvatarController.cpp */,
-				BBEC882025F2A1100059DEC5 /* HideAvatarController.hpp */,
 				BBBF6DD725EC113F00C1D6BD /* HideController.cpp */,
 				BBBF6DCE25EC113F00C1D6BD /* HideController.hpp */,
 				BBBF6DE125EC113F00C1D6BD /* JackieController.cpp */,
@@ -2385,8 +2375,6 @@
 				BBBF6DD325EC113F00C1D6BD /* MainConfig.hpp */,
 				BBBF6DC325EC113F00C1D6BD /* MainEngineController.cpp */,
 				BBBF6DDC25EC113F00C1D6BD /* MainEngineController.hpp */,
-				BBE89FA925F8209C00333129 /* MonsterAvatarController.cpp */,
-				BBE89FAA25F8209C00333129 /* MonsterAvatarController.hpp */,
 				BBBF6DE225EC113F00C1D6BD /* MonsterController.cpp */,
 				BBBF6DC825EC113F00C1D6BD /* MonsterController.hpp */,
 				BBBF6DC225EC113F00C1D6BD /* OvenController.cpp */,
@@ -3047,7 +3035,6 @@
 				BBBA56EF25BA453A00C8207D /* posix_thread.c in Sources */,
 				BBBA56F925BA453A00C8207D /* xkb_unicode.c in Sources */,
 				BBBF72A725EC775100C1D6BD /* TriangleBatcher.cpp in Sources */,
-				BBE89FAB25F8209C00333129 /* MonsterAvatarController.cpp in Sources */,
 				BBBF724125EC775100C1D6BD /* EntityRegistry.cpp in Sources */,
 				BBBA56EE25BA453A00C8207D /* input.c in Sources */,
 				BBBF6DF525EC114000C1D6BD /* HideController.cpp in Sources */,
@@ -3064,7 +3051,6 @@
 				BBBA46E425B913D900C8207D /* OALSimpleAudio.m in Sources */,
 				BBBF72D125EC775100C1D6BD /* OboeSoundWrapper.cpp in Sources */,
 				BBBF6DE525EC113F00C1D6BD /* OvenController.cpp in Sources */,
-				BBEC882125F2A1100059DEC5 /* HideAvatarController.cpp in Sources */,
 				BBBF6DED25EC113F00C1D6BD /* GameClientEngineState.cpp in Sources */,
 				BBBF727525EC775100C1D6BD /* OpenALAudioEngine.cpp in Sources */,
 				BBBF72A525EC775100C1D6BD /* FontBatcher.cpp in Sources */,
@@ -3275,7 +3261,6 @@
 				BBBA5AAF25BB5D1A00C8207D /* b2_chain_circle_contact.cpp in Sources */,
 				BBBA46E325B913D900C8207D /* ALSoundSourcePool.m in Sources */,
 				BBBA5ACD25BB5D1A00C8207D /* b2_gear_joint.cpp in Sources */,
-				BBE89FAC25F8209C00333129 /* MonsterAvatarController.cpp in Sources */,
 				BBBA5AE925BB5D1A00C8207D /* b2_block_allocator.cpp in Sources */,
 				BBBF72B625EC775100C1D6BD /* CircleBatcher.cpp in Sources */,
 				BBBA5ABB25BB5D1A00C8207D /* b2_contact_solver.cpp in Sources */,
@@ -3294,7 +3279,6 @@
 				BBBA5AD325BB5D1A00C8207D /* b2_motor_joint.cpp in Sources */,
 				BBBA46F125B913D900C8207D /* OALActionManager.m in Sources */,
 				BBBF726E25EC775100C1D6BD /* DeliveryNotificationManager.cpp in Sources */,
-				BBEC882225F2A1100059DEC5 /* HideAvatarController.cpp in Sources */,
 				BB1C5E0125E5624A00ED3EF0 /* stdout_sinks.cpp in Sources */,
 				BBBF72F025EC775100C1D6BD /* Box2DDebugRenderer.cpp in Sources */,
 				BBBF72C625EC775100C1D6BD /* WavFmtChunkHeader.cpp in Sources */,

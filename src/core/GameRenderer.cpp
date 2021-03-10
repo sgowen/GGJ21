@@ -51,18 +51,18 @@ void GameRenderer::renderEncounter(Renderer& r)
         return;
     }
     
-    bool isInEncounter = false;
+    bool isInBattle = false;
     HideController* hide = NULL;
     for (Entity* e : w.getPlayers())
     {
         if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
         {
             hide = e->controller<HideController>();
-            isInEncounter = e->dataField("isInEncounter").valueBool();
+            isInBattle = e->dataField("isInBattle").valueBool();
         }
     }
     
-    if (!isInEncounter)
+    if (!isInBattle)
     {
         return;
     }
@@ -72,15 +72,15 @@ void GameRenderer::renderEncounter(Renderer& r)
     float height = m._desc.height();
     
     r.rektangleBatcherBegin();
-    Rektangle encounterBackground(0, 0, width / 2, height);
-    r.rektangleBatcherAddRektangle(encounterBackground);
+    Rektangle battleBackground(0, 0, width / 2, height);
+    r.rektangleBatcherAddRektangle(battleBackground);
     r.rektangleBatcherEnd(Color::DIM);
     
     r.spriteBatcherBegin();
     for (Entity* e : w.getNetworkEntities())
     {
         if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
-            e->dataField("isInEncounter").valueBool())
+            e->dataField("isInBattle").valueBool())
         {
             r.addSpriteForEntity(e->controller<MonsterController>()->battleAvatar());
         }

@@ -30,5 +30,12 @@ private:
         STAT_IDLE   = 0,
         STAT_MOVING = 1
     };
+    
+    enum BattleState
+    {
+        BSTT_IDLE = 0,
+        BSTT_SWING = 1
+    };
+    
     Entity* _battleAvatar;
 };

@@ -25,9 +25,9 @@ MonsterController::~MonsterController()
 
 void MonsterController::update()
 {
-    if (_entity->dataField("isInEncounter").valueBool())
+    if (_entity->dataField("isInBattle").valueBool())
     {
-        _battleAvatar->controller<MonsterAvatarController>()->update(_entity);
+        // TODO
     }
     else
     {
@@ -76,8 +76,10 @@ void MonsterController::onCollision(Entity* e)
     {
         e->message(MSG_ENCOUNTER);
         
-        _entity->dataField("isInEncounter").valueBool() = true;
-        _battleAvatar->state()._stateTime = 0;
+        _entity->dataField("isInBattle").valueBool() = true;
+        _entity->dataField("battleState").valueUInt8() = BSTT_IDLE;
+        _entity->dataField("battleStateTime").valueUInt16() = 0;
+        
         _entity->state()._state = MonsterController::STAT_IDLE;
         _entity->pose()._velocity.reset();
     }

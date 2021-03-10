@@ -1,10 +1,10 @@
 {
   "MOA1": {
     "name": "1st Monster's Battle Avatar",
-    "controller": "MonsterAvatar",
     "textureMappings": {
       "0": "BIG_WITCH_PRETTY"
     },
+    "bodyFlags": 16,
     "width": 16,
     "height": 20
   },
@@ -32,16 +32,24 @@
     ],
     "networkData": [
       {
-        "name": "encounter",
+        "name": "battle",
         "data": [
           {
-            "name": "isInEncounter",
+            "name": "isInBattle",
             "type": 0
           },
           {
             "name": "health",
             "type": 2,
             "value": "3"
+          },
+          {
+            "name": "battleState",
+            "type": 1
+          },
+          {
+            "name": "battleStateTime",
+            "type": 2
           }
         ]
       }
@@ -52,11 +60,11 @@
   },
   "HIDA": {
     "name": "Hide's Battle Avatar",
-    "controller": "HideAvatar",
     "textureMappings": {
       "0": "BIG_HIDE_IDLE",
       "1": "BIG_HIDE_SWING"
     },
+    "bodyFlags": 16,
     "width": 16,
     "height": 16
   },
@@ -135,16 +143,24 @@
         ]
       },
       {
-        "name": "encounter",
+        "name": "battle",
         "data": [
           {
-            "name": "isInEncounter",
+            "name": "isInBattle",
             "type": 0
           },
           {
             "name": "health",
             "type": 2,
             "value": "3"
+          },
+          {
+            "name": "battleState",
+            "type": 1
+          },
+          {
+            "name": "battleStateTime",
+            "type": 2
           }
         ]
       },
