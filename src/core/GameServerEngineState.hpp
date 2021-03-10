@@ -15,6 +15,8 @@
 
 #define ENGINE_STATE_GAME_SRVR GameServerEngineState::getInstance()
 
+class World;
+
 class GameServerEngineState : public State<Engine>
 {
 public:
@@ -33,10 +35,10 @@ public:
     void resetWorld();
     void populateFromEntityLayout(EntityLayoutDef& eld);
     void restart();
-    World& getWorld();
+    World& world();
     
 private:
-    World _world;
+    World* _world;
     bool _isRestarting;
     
     void update(Engine* e);

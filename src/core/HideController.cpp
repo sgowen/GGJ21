@@ -42,7 +42,7 @@ void HideController::update()
             {
                 state = BSTT_IDLE;
                 
-                World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
+                World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.world() : ENGINE_STATE_GAME_CLNT.world();
                 for (Entity* e : w.getNetworkEntities())
                 {
                     if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&

@@ -38,7 +38,7 @@ void MonsterController::update()
         stateFlags = EDIR_DOWN;
         bool hasTarget = false;
         
-        World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
+        World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.world() : ENGINE_STATE_GAME_CLNT.world();
         std::vector<Entity*>& players = w.getPlayers();
         for (Entity* e : players)
         {

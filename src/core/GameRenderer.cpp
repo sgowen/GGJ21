@@ -26,7 +26,7 @@ void GameRenderer::render(Renderer& r)
 
 void GameRenderer::renderWorld(Renderer& r)
 {
-    World& w = ENGINE_STATE_GAME_CLNT._world;
+    World& w = ENGINE_STATE_GAME_CLNT.world();
     if (!w.isEntityLayoutLoaded())
     {
         return;
@@ -45,7 +45,7 @@ void GameRenderer::renderWorld(Renderer& r)
 
 void GameRenderer::renderEncounter(Renderer& r)
 {
-    World& w = ENGINE_STATE_GAME_CLNT._world;
+    World& w = ENGINE_STATE_GAME_CLNT.world();
     if (!w.isEntityLayoutLoaded())
     {
         return;
@@ -97,7 +97,7 @@ void GameRenderer::renderUI(Renderer& r)
     float width = m._desc.width();
     float height = m._desc.height();
     
-    World& w = ENGINE_STATE_GAME_CLNT._world;
+    World& w = ENGINE_STATE_GAME_CLNT.world();
     if (CFG_MAIN.showDebug())
     {
         r.rektangleBatcherBegin();

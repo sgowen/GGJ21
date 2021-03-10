@@ -12,11 +12,10 @@
 
 #define ENGINE_STATE_GAME_CLNT GameClientEngineState::getInstance()
 
+class World;
+
 class GameClientEngineState : public EngineState
-{
-    friend class GameInputManager;
-    friend class GameRenderer;
-    
+{    
 public:    
     static GameClientEngineState& getInstance()
     {
@@ -29,10 +28,10 @@ public:
     virtual void onUpdate(Engine* e);
     
     Entity* getControlledPlayer();
-    World& getWorld();
+    World& world();
     
 private:
-    World _world;
+    World* _world;
     
     void updateWorld(const Move& move, bool isLive);
     

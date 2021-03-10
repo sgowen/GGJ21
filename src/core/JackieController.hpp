@@ -9,7 +9,8 @@
 #pragma once
 
 #include <GowEngine/GowEngine.hpp>
-#include "GGJ21.hpp"
+
+#include "PlayerController.hpp"
 
 class JackieController : public PlayerController
 {    

@@ -13,7 +13,7 @@
 
 void cb_server_onEntityRegistered(Entity* e)
 {
-    ENGINE_STATE_GAME_SRVR.getWorld().addNetworkEntity(e);
+    ENGINE_STATE_GAME_SRVR.world().addNetworkEntity(e);
     
     if (e->isPlayer() && e->metadata().getUInt("playerID", 0) == 1)
     {
@@ -35,7 +35,7 @@ void cb_server_onEntityDeregistered(Entity* e)
         needsRestart = NW_SRVR->getClientProxy(playerID) != NULL;
     }
     
-    ENGINE_STATE_GAME_SRVR.getWorld().removeNetworkEntity(e);
+    ENGINE_STATE_GAME_SRVR.world().removeNetworkEntity(e);
     
     if (needsRestart)
     {
@@ -83,7 +83,7 @@ void GameServerEngineState::exit(Engine* e)
 {
     NetworkServer::destroy();
     
-    _world.reset();
+    world().reset();
 }
 
 void GameServerEngineState::handleNewClient(std::string username, uint8_t playerID)
@@ -110,12 +110,12 @@ void GameServerEngineState::handleLostClient(ClientProxy& cp, uint8_t localPlaye
 
 void GameServerEngineState::populateFromEntityLayout(EntityLayoutDef& eld)
 {
-    for (auto& e : _world.getNetworkEntities())
+    for (auto& e : world().getNetworkEntities())
     {
         NW_SRVR->deregisterEntity(e);
     }
     
-    _world.populateFromEntityLayout(eld);
+    world().populateFromEntityLayout(eld);
     
     for (auto& eid : eld._entitiesNetwork)
     {
@@ -131,7 +131,7 @@ void GameServerEngineState::restart()
     }
     
     _isRestarting = true;
-    std::vector<Entity*>& players = _world.getPlayers();
+    std::vector<Entity*>& players = world().getPlayers();
     while (!players.empty())
     {
         Entity* e = players.front();
@@ -148,9 +148,9 @@ void GameServerEngineState::restart()
     }
 }
 
-World& GameServerEngineState::getWorld()
+World& GameServerEngineState::world()
 {
-    return _world;
+    return *_world;
 }
 
 void GameServerEngineState::update(Engine* e)
@@ -163,7 +163,7 @@ void GameServerEngineState::update(Engine* e)
     {
         updateWorld(i);
     }
-    for (Entity* e : _world.getPlayers())
+    for (Entity* e : world().getPlayers())
     {
         NW_SRVR->removeProcessedMovesForPlayer(e->metadata().getUInt("playerID"));
     }
@@ -174,7 +174,7 @@ void GameServerEngineState::update(Engine* e)
 
 void GameServerEngineState::updateWorld(int moveIndex)
 {
-    for (Entity* e : _world.getPlayers())
+    for (Entity* e : world().getPlayers())
     {
         PlayerController* ec = e->controller<PlayerController>();
         assert(ec != NULL);
@@ -191,8 +191,8 @@ void GameServerEngineState::updateWorld(int moveIndex)
         cp->setLastMoveTimestampDirty(true);
     }
     
-    _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
-    std::vector<Entity*> toDelete = _world.update();
+    world().stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_SRVR));
+    std::vector<Entity*> toDelete = world().update();
     for (Entity* e : toDelete)
     {
         bool exitImmediately = e->isPlayer();
@@ -203,8 +203,8 @@ void GameServerEngineState::updateWorld(int moveIndex)
         }
     }
     
-    handleDirtyStates(_world.getPlayers());
-    handleDirtyStates(_world.getNetworkEntities());
+    handleDirtyStates(world().getPlayers());
+    handleDirtyStates(world().getNetworkEntities());
 }
 
 void GameServerEngineState::handleDirtyStates(std::vector<Entity*>& entities)
@@ -243,7 +243,7 @@ void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
 
 void GameServerEngineState::removePlayer(uint8_t playerID)
 {
-    for (Entity* e : _world.getPlayers())
+    for (Entity* e : world().getPlayers())
     {
         if (e->metadata().getUInt("playerID") == playerID)
         {
@@ -254,7 +254,7 @@ void GameServerEngineState::removePlayer(uint8_t playerID)
 }
 
 GameServerEngineState::GameServerEngineState() : State<Engine>(),
-_world(),
+_world(new World()),
 _isRestarting(false)
 {
     // Empty

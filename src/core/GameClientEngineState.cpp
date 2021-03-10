@@ -13,7 +13,7 @@
 
 void cb_client_onEntityRegistered(Entity* e)
 {
-    ENGINE_STATE_GAME_CLNT.getWorld().addNetworkEntity(e);
+    ENGINE_STATE_GAME_CLNT.world().addNetworkEntity(e);
     
     if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
     {
@@ -21,13 +21,13 @@ void cb_client_onEntityRegistered(Entity* e)
         EntityLayout* elm = INST_REG.get<EntityLayout>(INSK_ELM_CLNT);
         EntityLayoutDef& eld = elm->entityLayoutDef(entityLayoutKey);
         EntityLayoutLoader::loadEntityLayout(eld, false);
-        ENGINE_STATE_GAME_CLNT.getWorld().populateFromEntityLayout(eld);
+        ENGINE_STATE_GAME_CLNT.world().populateFromEntityLayout(eld);
     }
 }
 
 void cb_client_onEntityDeregistered(Entity* e)
 {
-    ENGINE_STATE_GAME_CLNT.getWorld().removeNetworkEntity(e);
+    ENGINE_STATE_GAME_CLNT.world().removeNetworkEntity(e);
 }
 
 void cb_client_removeProcessedMoves(float lastMoveProcessedOnServerTimestamp)
@@ -82,7 +82,7 @@ void GameClientEngineState::onExit(Engine* e)
     {
         NetworkClient::destroy();
     }
-    _world.reset();
+    world().reset();
     
     INPUT_GAME.reset();
 }
@@ -103,7 +103,7 @@ void GameClientEngineState::onUpdate(Engine* e)
         MoveList& ml = INPUT_GAME.moveList();
         if (NW_CLNT->hasReceivedNewState())
         {
-            _world.recallCache();
+            world().recallCache();
             
             if (CFG_MAIN.networkLoggingEnabled())
             {
@@ -129,7 +129,7 @@ Entity* GameClientEngineState::getControlledPlayer()
     uint8_t playerID = INPUT_GAME.inputState()->playerInputState(0)._playerID;
     Entity* ret = NULL;
     
-    for (Entity* e : ENGINE_STATE_GAME_CLNT._world.getPlayers())
+    for (Entity* e : ENGINE_STATE_GAME_CLNT.world().getPlayers())
     {
         if (playerID == e->metadata().getUInt("playerID"))
         {
@@ -141,22 +141,22 @@ Entity* GameClientEngineState::getControlledPlayer()
     return ret;
 }
 
-World& GameClientEngineState::getWorld()
+World& GameClientEngineState::world()
 {
-    return _world;
+    return *_world;
 }
 
 void GameClientEngineState::updateWorld(const Move& move, bool isLive)
 {
-    for (Entity* e : _world.getPlayers())
+    for (Entity* e : world().getPlayers())
     {
         PlayerController* ec = e->controller<PlayerController>();
         assert(ec != NULL);
         ec->processInput(move.inputState(), isLive);
     }
     
-    _world.stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_CLNT));
-    _world.update();
+    world().stepPhysics(INST_REG.get<TimeTracker>(INSK_TIME_CLNT));
+    world().update();
     
     NW_CLNT->onMoveProcessed();
 }
