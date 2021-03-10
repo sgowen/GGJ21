@@ -28,7 +28,7 @@ void HideController::update()
 {
     if (_entity->dataField("isInEncounter").valueBool())
     {
-        _battleAvatar->update();
+        _battleAvatar->controller<HideAvatarController>()->update(_entity);
     }
     
     if (_entity->dataField("health").valueUInt16() == 0)
@@ -47,7 +47,7 @@ void HideController::onMessage(uint16_t message)
             if (!isInEncounter)
             {
                 isInEncounter = true;
-                _battleAvatar->state()._stateTime = 0;
+                _entity->state()._stateTime = 0;
                 _entity->state()._state = STAT_IDLE;
                 _entity->pose()._velocity.reset();
             }
@@ -69,7 +69,7 @@ void HideController::processInput(InputState* is, bool isLive)
     
     if (_entity->dataField("isInEncounter").valueBool())
     {
-        _battleAvatar->controller<HideAvatarController>()->processInput(pis, isLive);
+        _battleAvatar->controller<HideAvatarController>()->processInput(_entity, pis, isLive);
     }
     else
     {

@@ -11,7 +11,7 @@
 IMPL_RTTI(MonsterAvatarController, EntityController)
 IMPL_EntityController_create(MonsterAvatarController, EntityController)
 
-void MonsterAvatarController::update()
+void MonsterAvatarController::update(Entity* monster)
 {
     // TODO
 }

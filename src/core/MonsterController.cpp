@@ -27,7 +27,7 @@ void MonsterController::update()
 {
     if (_entity->dataField("isInEncounter").valueBool())
     {
-        _battleAvatar->update();
+        _battleAvatar->controller<MonsterAvatarController>()->update(_entity);
     }
     else
     {

@@ -20,20 +20,13 @@ public:
     HideAvatarController(Entity* e) : EntityController(e) {}
     virtual ~HideAvatarController() {}
     
-    virtual void update() override;
-    virtual void onMessage(uint16_t message) override;
-    
-    void processInput(InputState::PlayerInputState* pis, bool isLive);
+    void update(Entity* hide);
+    void processInput(Entity* hide, InputState::PlayerInputState* pis, bool isLive);
     
 private:
     enum State
     {
         STAT_IDLE = 0,
         STAT_SWING = 1
-    };
-    enum EncounterState
-    {
-        ESTA_IDLE = 0,
-        ESTA_SWING = 1
     };
 };

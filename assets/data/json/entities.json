@@ -5,7 +5,6 @@
     "textureMappings": {
       "0": "BIG_WITCH_PRETTY"
     },
-    "bodyFlags": 2,
     "width": 16,
     "height": 20
   },
@@ -58,7 +57,6 @@
       "0": "BIG_HIDE_IDLE",
       "1": "BIG_HIDE_SWING"
     },
-    "bodyFlags": 2,
     "width": 16,
     "height": 16
   },

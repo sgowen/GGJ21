@@ -13,41 +13,39 @@
 IMPL_RTTI(HideAvatarController, EntityController)
 IMPL_EntityController_create(HideAvatarController, EntityController)
 
-void HideAvatarController::update()
+void HideAvatarController::update(Entity* hide)
 {
-    uint8_t& state = _entity->state()._state;
-    uint16_t& stateTime = _entity->state()._stateTime;
+    uint8_t& state = hide->state()._state;
+    uint16_t& stateTime = hide->state()._stateTime;
     
     if (state == STAT_SWING)
     {
-        if (stateTime >= 60)
+        if (stateTime >= 42)
         {
             state = STAT_IDLE;
             
-            World& w = _entity->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
+            World& w = hide->isServer() ? ENGINE_STATE_GAME_SRVR.getWorld() : ENGINE_STATE_GAME_CLNT.getWorld();
             for (Entity* e : w.getNetworkEntities())
             {
                 if (e->controller()->getRTTI().isDerivedFrom(MonsterController::rtti) &&
                     e->dataField("isInEncounter").valueBool())
                 {
                     e->requestDeletion();
-                    _entity->dataField("isInEncounter").valueBool() = false;
+                    hide->dataField("isInEncounter").valueBool() = false;
                     break;
                 }
             }
         }
     }
+    
+    _entity->state()._state = state;
+    _entity->state()._stateTime = stateTime;
 }
 
-void HideAvatarController::onMessage(uint16_t message)
+void HideAvatarController::processInput(Entity* hide, InputState::PlayerInputState* pis, bool isLive)
 {
-    // TODO, handle battle messages
-}
-
-void HideAvatarController::processInput(InputState::PlayerInputState* pis, bool isLive)
-{
-    uint8_t& state = _entity->state()._state;
-    uint16_t& stateTime = _entity->state()._stateTime;
+    uint8_t& state = hide->state()._state;
+    uint16_t& stateTime = hide->state()._stateTime;
     uint8_t piss = pis->_inputState;
     if (state == STAT_IDLE)
     {
@@ -58,7 +56,7 @@ void HideAvatarController::processInput(InputState::PlayerInputState* pis, bool 
             
             if (isLive)
             {
-                AUDIO_ENGINE.playSound(_entity->renderController()->getSoundMapping(4));
+                AUDIO_ENGINE.playSound(hide->renderController()->getSoundMapping(4));
             }
         }
     }

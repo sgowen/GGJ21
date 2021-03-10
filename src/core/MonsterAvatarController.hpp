@@ -19,5 +19,5 @@ public:
     MonsterAvatarController(Entity* e) : EntityController(e) {}
     virtual ~MonsterAvatarController() {}
     
-    virtual void update() override;
+    void update(Entity* monster);
 };
