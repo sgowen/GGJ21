@@ -943,6 +943,10 @@
 		BBBA594B25BB5D1900C8207D /* b2_edge_shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2_edge_shape.cpp; sourceTree = "<group>"; };
 		BBBA594C25BB5D1900C8207D /* b2_time_of_impact.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2_time_of_impact.cpp; sourceTree = "<group>"; };
 		BBBA594D25BB5D1900C8207D /* b2_distance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2_distance.cpp; sourceTree = "<group>"; };
+		BBBB0BB125FAFCE7005C1611 /* SoundDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SoundDescriptor.hpp; sourceTree = "<group>"; };
+		BBBB0BB225FAFCE7005C1611 /* ShaderDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderDescriptor.hpp; sourceTree = "<group>"; };
+		BBBB0BB325FAFCE7005C1611 /* TextureDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextureDescriptor.hpp; sourceTree = "<group>"; };
+		BBBB0BB625FAFDF9005C1611 /* MatrixDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MatrixDescriptor.hpp; sourceTree = "<group>"; };
 		BBBF67FA25E8367200C1D6BD /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AndroidManifest.xml; sourceTree = "<group>"; };
 		BBBF6DC025EC113500C1D6BD /* GowEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GowEngine.hpp; sourceTree = "<group>"; };
 		BBBF6DC225EC113F00C1D6BD /* OvenController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OvenController.cpp; sourceTree = "<group>"; };
@@ -1080,7 +1084,6 @@
 		BBBF719225EC775100C1D6BD /* Sound.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sound.hpp; sourceTree = "<group>"; };
 		BBBF719325EC775100C1D6BD /* SoundUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundUtil.hpp; sourceTree = "<group>"; };
 		BBBF719425EC775100C1D6BD /* SoundWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundWrapper.hpp; sourceTree = "<group>"; };
-		BBBF719525EC775100C1D6BD /* SoundDescriptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundDescriptor.hpp; sourceTree = "<group>"; };
 		BBBF719725EC775100C1D6BD /* AudioEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngine.hpp; sourceTree = "<group>"; };
 		BBBF719825EC775100C1D6BD /* SoundManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundManager.hpp; sourceTree = "<group>"; };
 		BBBF719925EC775100C1D6BD /* AudioEngineFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngineFactory.hpp; sourceTree = "<group>"; };
@@ -1109,13 +1112,11 @@
 		BBBF71B825EC775100C1D6BD /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
 		BBBF71B925EC775100C1D6BD /* DefaultEngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DefaultEngineState.hpp; sourceTree = "<group>"; };
 		BBBF71BA25EC775100C1D6BD /* EngineState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EngineState.hpp; sourceTree = "<group>"; };
-		BBBF71BC25EC775100C1D6BD /* TextureDescriptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureDescriptor.hpp; sourceTree = "<group>"; };
 		BBBF71BD25EC775100C1D6BD /* SpriteBatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteBatcher.cpp; sourceTree = "<group>"; };
 		BBBF71BF25EC775100C1D6BD /* ShaderManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderManager.hpp; sourceTree = "<group>"; };
 		BBBF71C025EC775100C1D6BD /* ShaderLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderLoader.hpp; sourceTree = "<group>"; };
 		BBBF71C125EC775100C1D6BD /* OpenGLWrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLWrapper.hpp; sourceTree = "<group>"; };
 		BBBF71C225EC775100C1D6BD /* CircleBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CircleBatcher.hpp; sourceTree = "<group>"; };
-		BBBF71C325EC775100C1D6BD /* ShaderDescriptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderDescriptor.hpp; sourceTree = "<group>"; };
 		BBBF71C425EC775100C1D6BD /* Renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 		BBBF71C525EC775100C1D6BD /* ScreenRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ScreenRenderer.hpp; sourceTree = "<group>"; };
 		BBBF71C625EC775100C1D6BD /* TriangleBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TriangleBatcher.hpp; sourceTree = "<group>"; };
@@ -2568,7 +2569,6 @@
 				BBBF719725EC775100C1D6BD /* AudioEngine.hpp */,
 				BBBF719925EC775100C1D6BD /* AudioEngineFactory.hpp */,
 				BBBF719225EC775100C1D6BD /* Sound.hpp */,
-				BBBF719525EC775100C1D6BD /* SoundDescriptor.hpp */,
 				BBBF718F25EC775100C1D6BD /* SoundManager.cpp */,
 				BBBF719825EC775100C1D6BD /* SoundManager.hpp */,
 				BBBF719325EC775100C1D6BD /* SoundUtil.hpp */,
@@ -2603,6 +2603,10 @@
 				BBBF71A225EC775100C1D6BD /* FileUtil.hpp */,
 				BBBF71AE25EC775100C1D6BD /* LinuxAssetHandler.cpp */,
 				BBBF71A325EC775100C1D6BD /* LinuxAssetHandler.hpp */,
+				BBBB0BB625FAFDF9005C1611 /* MatrixDescriptor.hpp */,
+				BBBB0BB225FAFCE7005C1611 /* ShaderDescriptor.hpp */,
+				BBBB0BB125FAFCE7005C1611 /* SoundDescriptor.hpp */,
+				BBBB0BB325FAFCE7005C1611 /* TextureDescriptor.hpp */,
 				BBBF71A725EC775100C1D6BD /* WindowsAssetHandler.cpp */,
 				BBBF71AB25EC775100C1D6BD /* WindowsAssetHandler.hpp */,
 			);
@@ -2653,7 +2657,6 @@
 				BBBF71C525EC775100C1D6BD /* ScreenRenderer.hpp */,
 				BBBF71DE25EC775100C1D6BD /* Shader.hpp */,
 				BBBF71D325EC775100C1D6BD /* ShaderAttribute.hpp */,
-				BBBF71C325EC775100C1D6BD /* ShaderDescriptor.hpp */,
 				BBBF71C925EC775100C1D6BD /* ShaderInput.hpp */,
 				BBBF71E325EC775100C1D6BD /* ShaderLoader.cpp */,
 				BBBF71C025EC775100C1D6BD /* ShaderLoader.hpp */,
@@ -2663,7 +2666,6 @@
 				BBBF71BD25EC775100C1D6BD /* SpriteBatcher.cpp */,
 				BBBF71E025EC775100C1D6BD /* SpriteBatcher.hpp */,
 				BBBF71D825EC775100C1D6BD /* Texture.hpp */,
-				BBBF71BC25EC775100C1D6BD /* TextureDescriptor.hpp */,
 				BBBF71DA25EC775100C1D6BD /* TextureManager.cpp */,
 				BBBF71CD25EC775100C1D6BD /* TextureManager.hpp */,
 				BBBF71DF25EC775100C1D6BD /* TextureRegion.hpp */,
