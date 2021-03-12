@@ -154,7 +154,7 @@ void GameClientEngineState::updateWorld(const Move& move, bool isLive)
 }
 
 GameClientEngineState::GameClientEngineState() : EngineState("data/json/assets_game.json", "data/json/renderer_game.json", GameRenderer::render),
-_world()
+_world(new World())
 {
     // Empty
 }
