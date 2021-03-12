@@ -1138,7 +1138,6 @@
 		BBBF71D625EC775100C1D6BD /* LightRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightRenderer.cpp; sourceTree = "<group>"; };
 		BBBF71D725EC775100C1D6BD /* Framebuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Framebuffer.hpp; sourceTree = "<group>"; };
 		BBBF71D825EC775100C1D6BD /* Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
-		BBBF71D925EC775100C1D6BD /* MatrixDescriptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MatrixDescriptor.hpp; sourceTree = "<group>"; };
 		BBBF71DA25EC775100C1D6BD /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		BBBF71DB25EC775100C1D6BD /* LineBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LineBatcher.hpp; sourceTree = "<group>"; };
 		BBBF71DC25EC775100C1D6BD /* FontBatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FontBatcher.hpp; sourceTree = "<group>"; };
@@ -2646,7 +2645,6 @@
 				BBBF71D025EC775100C1D6BD /* LineBatcher.cpp */,
 				BBBF71DB25EC775100C1D6BD /* LineBatcher.hpp */,
 				BBBF71CC25EC775100C1D6BD /* Matrix.hpp */,
-				BBBF71D925EC775100C1D6BD /* MatrixDescriptor.hpp */,
 				BBBF71E525EC775100C1D6BD /* OpenGLWrapper.cpp */,
 				BBBF71C125EC775100C1D6BD /* OpenGLWrapper.hpp */,
 				BBBF71C825EC775100C1D6BD /* RektangleBatcher.cpp */,
