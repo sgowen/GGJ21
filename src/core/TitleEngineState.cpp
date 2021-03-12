@@ -8,9 +8,6 @@
 
 #include "GGJ21.hpp"
 
-#include <stdlib.h>
-#include <assert.h>
-
 void TitleEngineState::onEnter(Engine* e)
 {
     AUDIO_ENGINE.playMusic(0.1f, true);

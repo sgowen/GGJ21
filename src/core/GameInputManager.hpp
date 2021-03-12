@@ -10,8 +10,6 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-#include <string>
-
 enum GameInputManagerState
 {
     GIMS_DEFAULT,

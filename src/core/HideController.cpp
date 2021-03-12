@@ -8,8 +8,6 @@
 
 #include "GGJ21.hpp"
 
-#include <assert.h>
-
 IMPL_RTTI(HideController, PlayerController)
 IMPL_EntityController_create(HideController, EntityController)
 

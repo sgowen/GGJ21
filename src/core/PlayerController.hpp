@@ -10,8 +10,6 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-#include <string>
-
 class PlayerController : public EntityController
 {    
     DECL_RTTI;

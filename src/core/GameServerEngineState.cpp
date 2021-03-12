@@ -8,9 +8,6 @@
 
 #include "GGJ21.hpp"
 
-#include <ctime>
-#include <assert.h>
-
 void cb_server_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_SRVR.world().addNetworkEntity(e);

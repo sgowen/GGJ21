@@ -10,9 +10,6 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-#include <string>
-#include <vector>
-
 #define ENGINE_STATE_GAME_SRVR GameServerEngineState::getInstance()
 
 class World;

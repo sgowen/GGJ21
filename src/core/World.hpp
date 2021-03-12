@@ -10,10 +10,6 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-#include <memory>
-#include <vector>
-#include <string>
-
 class World
 {
 public:

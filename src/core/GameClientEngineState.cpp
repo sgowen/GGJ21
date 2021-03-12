@@ -8,9 +8,6 @@
 
 #include "GGJ21.hpp"
 
-#include <stdlib.h>
-#include <assert.h>
-
 void cb_client_onEntityRegistered(Entity* e)
 {
     ENGINE_STATE_GAME_CLNT.world().addNetworkEntity(e);
@@ -35,17 +32,12 @@ void cb_client_removeProcessedMoves(float lastMoveProcessedOnServerTimestamp)
     INPUT_GAME.moveList().removeProcessedMovesAtTimestamp(lastMoveProcessedOnServerTimestamp, GameInputManager::cb_inputStateRelease);
 }
 
-MoveList& cb_client_getMoveList()
-{
-    return INPUT_GAME.moveList();
-}
-
 void cb_client_onPlayerWelcomed(uint8_t playerID)
 {
     INPUT_GAME.inputState()->activateNextPlayer(playerID);
 }
 
-#define GAME_ENGINE_CLIENT_CBS cb_client_onEntityRegistered, cb_client_onEntityDeregistered, cb_client_removeProcessedMoves, cb_client_getMoveList, cb_client_onPlayerWelcomed
+#define GAME_ENGINE_CLIENT_CBS cb_client_onEntityRegistered, cb_client_onEntityDeregistered, cb_client_removeProcessedMoves, cb_client_onPlayerWelcomed
 
 void GameClientEngineState::onEnter(Engine* e)
 {
@@ -121,7 +113,7 @@ void GameClientEngineState::onUpdate(Engine* e)
         }
     }
     
-    NW_CLNT->sendOutgoingPackets();
+    NW_CLNT->sendOutgoingPackets(INPUT_GAME.moveList());
 }
 
 Entity* GameClientEngineState::getControlledPlayer()

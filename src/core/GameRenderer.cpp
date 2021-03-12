@@ -8,11 +8,6 @@
 
 #include "GGJ21.hpp"
 
-#include <sstream>
-#include <ctime>
-#include <string>
-#include <assert.h>
-
 void GameRenderer::render(Renderer& r)
 {
     r.bindFramebuffer();

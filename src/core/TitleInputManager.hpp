@@ -10,9 +10,6 @@
 
 #include <GowEngine/GowEngine.hpp>
 
-#include <string>
-#include <stdint.h>
-
 enum TitleInputManagerState
 {
     MIMS_DEFAULT,
