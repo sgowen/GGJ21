@@ -6,5 +6,5 @@ bin/
 obj/
 
 # copied to project dir after build
-assets/
+data/
 GGJ21

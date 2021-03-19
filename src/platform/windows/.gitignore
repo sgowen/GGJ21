@@ -15,5 +15,5 @@ AppPackages/
 .vs/
 
 # copied to project dir after build
-assets/
+data/
 *.exe

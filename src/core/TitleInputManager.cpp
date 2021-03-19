@@ -178,7 +178,7 @@ void TitleInputManager::acceptKeyInput(uint16_t key)
         return;
     }
     
-    char c = key;
+    char c = static_cast<char>(key);
     _textInput += StringUtil::format("%c", c);
 }
 

@@ -88,9 +88,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINSOCKAPI_;_CRT_SECURE_NO_WARNINGS;_GLFW_WIN32;SPDLOG_COMPILED_LIB;SPDLOG_NO_EXCEPTIONS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/deps/tinythreadpp/source;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/include;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -110,9 +110,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINSOCKAPI_;_CRT_SECURE_NO_WARNINGS;_GLFW_WIN32;SPDLOG_COMPILED_LIB;SPDLOG_NO_EXCEPTIONS;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/deps/tinythreadpp/source;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/include;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,9 +132,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINSOCKAPI_;_CRT_SECURE_NO_WARNINGS;_GLFW_WIN32;SPDLOG_COMPILED_LIB;SPDLOG_NO_EXCEPTIONS;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/deps/tinythreadpp/source;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/include;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,9 +154,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINSOCKAPI_;_CRT_SECURE_NO_WARNINGS;_GLFW_WIN32;SPDLOG_COMPILED_LIB;SPDLOG_NO_EXCEPTIONS;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/deps/tinythreadpp/source;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../deps/GowEngine/deps/box2d/include;../../../deps/GowEngine/deps/box2d/src;../../../deps/GowEngine/deps/DirectXTK/Inc;../../../deps/GowEngine/deps/DirectXTK/Src;../../../deps/GowEngine/deps/glfw/include;../../../deps/GowEngine/deps/glfw/deps;../../../deps/GowEngine/deps/rapidjson/include;../../../deps/GowEngine/deps/spdlog/include;../../../deps/GowEngine/deps/stb;../../../deps/GowEngine/include;../../../deps/GowEngine/src;../../core;</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -171,6 +171,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\box2d\src\*\*.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\AudioEngine.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\DynamicSoundEffectInstance.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundCommon.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundEffect.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundEffectInstance.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundStreamInstance.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WaveBank.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WaveBankReader.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WAVFileReader.cpp" />
     <ClCompile Include="..\..\..\deps\GowEngine\deps\glfw\deps\glad_gl.c" />
     <ClCompile Include="..\..\..\deps\GowEngine\deps\glfw\src\context.c" />
     <ClCompile Include="..\..\..\deps\GowEngine\deps\glfw\src\egl_context.c" />
@@ -187,33 +197,14 @@
     <ClCompile Include="..\..\..\deps\GowEngine\deps\glfw\src\win32_time.c" />
     <ClCompile Include="..\..\..\deps\GowEngine\deps\glfw\src\win32_window.c" />
     <ClCompile Include="..\..\..\deps\GowEngine\deps\glfw\src\window.c" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\box2d\src\collision\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\box2d\src\common\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\box2d\src\dynamics\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\box2d\src\rope\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\AudioEngine.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\DynamicSoundEffectInstance.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundCommon.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundEffect.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundEffectInstance.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\SoundStreamInstance.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WaveBank.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WaveBankReader.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\DirectXTK\Audio\WAVFileReader.cpp" />
     <ClCompile Include="..\..\..\deps\GowEngine\deps\spdlog\src\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\deps\tinythreadpp\source\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\src\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\src\windows\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\src\box2d\*.cpp" />
-    <ClCompile Include="..\..\..\deps\GowEngine\src\glfw\*.cpp" />
+    <ClCompile Include="..\..\..\deps\GowEngine\src\*\*\*.cpp" />
     <ClCompile Include="..\..\core\*.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\deps\GowEngine\src\*.hpp" />
-    <ClInclude Include="..\..\..\deps\GowEngine\src\windows\*.hpp" />
-    <ClInclude Include="..\..\..\deps\GowEngine\src\box2d\*.hpp" />
-    <ClInclude Include="..\..\..\deps\GowEngine\src\glfw\*.hpp" />
+    <ClInclude Include="..\..\..\deps\GowEngine\include\GowEngine\*.hpp" />
+    <ClInclude Include="..\..\..\deps\GowEngine\src\*\*\*.hpp" />
     <ClInclude Include="..\..\core\*.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

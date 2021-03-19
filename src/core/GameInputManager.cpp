@@ -224,8 +224,8 @@ void GameInputManager::drop2ndPlayer()
 }
 
 GameInputManager::GameInputManager() :
-_inputState(NULL),
 _state(GIMS_DEFAULT),
+_inputState(NULL),
 _matrix(NULL)
 {
     reset();

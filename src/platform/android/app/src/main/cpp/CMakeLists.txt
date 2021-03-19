@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 message(${ANDROID_ABI})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++14 -fno-rtti -fno-exceptions -fno-unwind-tables -DSPDLOG_COMPILED_LIB, -DSPDLOG_NO_EXCEPTIONS")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++14 -fno-rtti -fno-exceptions -fno-unwind-tables -DSPDLOG_COMPILED_LIB -DSPDLOG_NO_EXCEPTIONS")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O2")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
@@ -16,10 +16,7 @@ set(core_source_dir ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../core)
 
 file(GLOB_RECURSE BOX2D_CPP_FILES "${engine_source_dir}/../deps/box2d/src/*.cpp")
 file(GLOB_RECURSE SPDLOG_CPP_FILES "${engine_source_dir}/../deps/spdlog/src/*.cpp")
-file(GLOB_RECURSE TINYTHREAD_CPP_FILES "${engine_source_dir}/../deps/tinythreadpp/source/*.cpp")
-file(GLOB ENGINE_CPP_FILES "${engine_source_dir}/*.cpp")
-file(GLOB ENGINE_ANDROID_CPP_FILES "${engine_source_dir}/android/*.cpp")
-file(GLOB ENGINE_BOX2D_CPP_FILES "${engine_source_dir}/box2d/*.cpp")
+file(GLOB ENGINE_CPP_FILES "${engine_source_dir}/*/*/*.cpp")
 file(GLOB CORE_CPP_FILES "${core_source_dir}/*.cpp")
 
 include_directories(${engine_source_dir}/../deps/box2d/include)
@@ -27,7 +24,7 @@ include_directories(${engine_source_dir}/../deps/box2d/src)
 include_directories(${engine_source_dir}/../deps/rapidjson/include)
 include_directories(${engine_source_dir}/../deps/spdlog/include)
 include_directories(${engine_source_dir}/../deps/stb)
-include_directories(${engine_source_dir}/../deps/tinythreadpp/source)
+include_directories(${engine_source_dir}/../include)
 include_directories(${engine_source_dir})
 include_directories(${core_source_dir})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -44,10 +41,8 @@ add_library( # Sets the name of the library.
              SHARED
 
              ${BOX2D_CPP_FILES}
-             ${TINYTHREAD_CPP_FILES}
+             ${SPDLOG_CPP_FILES}
              ${ENGINE_CPP_FILES}
-             ${ENGINE_ANDROID_CPP_FILES}
-             ${ENGINE_BOX2D_CPP_FILES}
              ${CORE_CPP_FILES}
 
              JNIEngine.cpp )
