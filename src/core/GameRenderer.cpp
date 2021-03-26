@@ -151,7 +151,7 @@ void GameRenderer::renderUI(Renderer& r)
         float height = m._desc.height();
         
         Rektangle networkLagBg(0, 0, width, height);
-        Color networkLag(1, 0, 0, 0.1);
+        Color networkLag(1, 0, 0, 0.1f);
         r.rektangleBatcherBegin();
         r.rektangleBatcherAddRektangle(networkLagBg);
         r.rektangleBatcherEnd(networkLag);

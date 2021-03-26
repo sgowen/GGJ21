@@ -219,7 +219,7 @@ void GameInputManager::reset()
 void GameInputManager::drop2ndPlayer()
 {
     InputState::PlayerInputState& pis = _inputState->playerInputState(1);
-    pis._playerID = NW_INPUT_UNASSIGNED;
+    pis._playerID = 0;
     NW_CLNT->requestToDropLocalPlayer(1);
 }
 

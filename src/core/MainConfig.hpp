@@ -36,11 +36,11 @@ public:
     float monsterMaxTopDownSpeed() { return _config.getFloat("monsterMaxTopDownSpeed"); }
     float monsterLineOfSight() { return _config.getFloat("monsterLineOfSight"); }
     bool showDebug() { return _config.getBool("showDebug"); }
-    float playerBattleX() { return _config.getFloat("playerBattleX"); }
-    float playerBattleY() { return _config.getFloat("playerBattleY"); }
+    uint32_t playerBattleX() { return _config.getUInt("playerBattleX"); }
+    uint32_t playerBattleY() { return _config.getUInt("playerBattleY"); }
     float jackiePushForce() { return _config.getFloat("jackiePushForce"); }
-    float monsterBattleX() { return _config.getFloat("monsterBattleX"); }
-    float monsterBattleY() { return _config.getFloat("monsterBattleY"); }
+    uint32_t monsterBattleX() { return _config.getUInt("monsterBattleX"); }
+    uint32_t monsterBattleY() { return _config.getUInt("monsterBattleY"); }
     float monsterBattleWidth() { return _config.getFloat("monsterBattleWidth"); }
     float monsterBattleHeight() { return _config.getFloat("monsterBattleHeight"); }
     bool soundsDisabled() { return _config.getBool("soundsDisabled"); }

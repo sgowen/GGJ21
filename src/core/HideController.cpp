@@ -34,7 +34,7 @@ void HideController::update()
         if (state == BSTT_SWING)
         {
             // TODO, this should be data-driven
-            _battleAvatar->pose()._width = stateTime >= 14 && stateTime < 35 ? 20 : 16;
+            _battleAvatar->pose()._width = stateTime >= 14 && stateTime < 35 ? 20.0f : 16.0f;
             
             if (stateTime >= 42)
             {

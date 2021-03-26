@@ -21,6 +21,8 @@
 		BB1C5E0725E5624A00ED3EF0 /* file_sinks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB1C5DFB25E5624A00ED3EF0 /* file_sinks.cpp */; };
 		BB1C5E0825E5624A00ED3EF0 /* color_sinks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB1C5DFC25E5624A00ED3EF0 /* color_sinks.cpp */; };
 		BB1C5E0925E5624A00ED3EF0 /* color_sinks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB1C5DFC25E5624A00ED3EF0 /* color_sinks.cpp */; };
+		BB547E3B260E7532007E9E35 /* ClipboardUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB547E3A260E7532007E9E35 /* ClipboardUtil.cpp */; };
+		BB547E3C260E7532007E9E35 /* ClipboardUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB547E3A260E7532007E9E35 /* ClipboardUtil.cpp */; };
 		BB7B046525B644E10021E545 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7B046425B644E10021E545 /* Assets.xcassets */; };
 		BB7B047525B6455F0021E545 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB7B047425B6455F0021E545 /* main.mm */; };
 		BB7B08D225B64CF20021E545 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7B08D125B64CF20021E545 /* OpenGL.framework */; };
@@ -513,6 +515,7 @@
 		BB1C5DFB25E5624A00ED3EF0 /* file_sinks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = file_sinks.cpp; sourceTree = "<group>"; };
 		BB1C5DFC25E5624A00ED3EF0 /* color_sinks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color_sinks.cpp; sourceTree = "<group>"; };
 		BB1C5DFD25E5624A00ED3EF0 /* spdlog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spdlog.cpp; sourceTree = "<group>"; };
+		BB547E3A260E7532007E9E35 /* ClipboardUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClipboardUtil.cpp; sourceTree = "<group>"; };
 		BB7B045D25B644E00021E545 /* GGJ21-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GGJ21-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7B046425B644E10021E545 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB7B046925B644E10021E545 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2418,6 +2421,7 @@
 		BBBF712225EC775000C1D6BD /* input */ = {
 			isa = PBXGroup;
 			children = (
+				BB547E3A260E7532007E9E35 /* ClipboardUtil.cpp */,
 				BBBF712425EC775000C1D6BD /* ClipboardUtil.hpp */,
 				BBBF712725EC775000C1D6BD /* CursorEvent.hpp */,
 				BBBF712B25EC775100C1D6BD /* GamepadEvent.hpp */,
@@ -3059,6 +3063,7 @@
 				BBBF726125EC775100C1D6BD /* AckRange.cpp in Sources */,
 				BBBF72CF25EC775100C1D6BD /* WavRIFFChunkHeader.cpp in Sources */,
 				BBBA46DE25B913D900C8207D /* ALCaptureDevice.m in Sources */,
+				BB547E3B260E7532007E9E35 /* ClipboardUtil.cpp in Sources */,
 				BBBF723B25EC775100C1D6BD /* EntityManager.cpp in Sources */,
 				BBEC881925F297EF0059DEC5 /* EntityPhysicsController.cpp in Sources */,
 				BBBA46F425B913D900C8207D /* OALUtilityActions.m in Sources */,
@@ -3161,6 +3166,7 @@
 				BBBF725A25EC775100C1D6BD /* NetworkClient.cpp in Sources */,
 				BBBF724E25EC775100C1D6BD /* SocketUtil.cpp in Sources */,
 				BBBA5AB325BB5D1A00C8207D /* b2_chain_polygon_contact.cpp in Sources */,
+				BB547E3C260E7532007E9E35 /* ClipboardUtil.cpp in Sources */,
 				BBBF72D625EC775100C1D6BD /* SampleSource.cpp in Sources */,
 				BBBF6DF625EC114000C1D6BD /* HideController.cpp in Sources */,
 				BBBA5ACB25BB5D1A00C8207D /* b2_edge_circle_contact.cpp in Sources */,

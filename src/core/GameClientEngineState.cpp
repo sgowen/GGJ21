@@ -27,7 +27,7 @@ void cb_client_onEntityDeregistered(Entity* e)
     ENGINE_STATE_GAME_CLNT.world().removeNetworkEntity(e);
 }
 
-void cb_client_removeProcessedMoves(float lastMoveProcessedOnServerTimestamp)
+void cb_client_removeProcessedMoves(uint32_t lastMoveProcessedOnServerTimestamp)
 {
     INPUT_GAME.moveList().removeProcessedMovesAtTimestamp(lastMoveProcessedOnServerTimestamp, GameInputManager::cb_inputStateRelease);
 }

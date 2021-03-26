@@ -57,7 +57,7 @@ void MonsterController::update()
         if (hasTarget)
         {
             float angle = playerPosition.sub(_entity->position()._x, _entity->position()._y).angle();
-            float radians = DEGREES_TO_RADIANS(angle);
+            float radians = static_cast<float>(DEGREES_TO_RADIANS(angle));
             _entity->pose()._velocity.set(cosf(radians) * CFG_MAIN.monsterMaxTopDownSpeed(), sinf(radians) * CFG_MAIN.monsterMaxTopDownSpeed());
             
             state = STAT_MOVING;

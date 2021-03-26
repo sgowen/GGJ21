@@ -221,8 +221,8 @@ void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
     ClientProxy* cp = NW_SRVR->getClientProxy(playerID);
     assert(cp != NULL);
     
-    float spawnX = playerID == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
-    float spawnY = playerID == 1 ? rand() % 16 + 6 : rand() % 6 + 6;
+    uint32_t spawnX = playerID == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
+    uint32_t spawnY = playerID == 1 ? rand() % 16 + 6 : rand() % 6 + 6;
     
     uint32_t key = playerID == 1 ? 'HIDE' : 'JCKE';
     uint32_t networkID = INST_REG.get<EntityIDManager>(INSK_EID_SRVR)->getNextPlayerEntityID();
