@@ -29,7 +29,7 @@ void cb_server_onEntityDeregistered(Entity* e)
     if (e->isPlayer())
     {
         uint8_t playerID = e->metadata().getUInt("playerID");
-        needsRestart = NW_SRVR->getClientProxy(playerID) != NULL;
+        needsRestart = NW_SRVR->getClientProxy(playerID) != nullptr;
     }
     
     ENGINE_STATE_GAME_SRVR.world().removeNetworkEntity(e);
@@ -55,7 +55,7 @@ void cb_server_handleLostClient(ClientProxy& cp, uint8_t localPlayerIndex)
 void GameServerEngineState::enter(Engine* e)
 {
     NetworkServer::create(CFG_MAIN.serverPort(), CFG_MAIN.maxNumPlayers(), GAME_ENGINE_SERVER_CBS);
-    assert(NW_SRVR != NULL);
+    assert(NW_SRVR != nullptr);
     
     if (!NW_SRVR->connect())
     {
@@ -140,7 +140,7 @@ void GameServerEngineState::restart()
     for (auto& pair : playerIDToClientMap)
     {
         ClientProxy* cp = pair.second;
-        assert(cp != NULL);
+        assert(cp != nullptr);
         addPlayer(cp->getUsername(), pair.first);
     }
 }
@@ -174,14 +174,14 @@ void GameServerEngineState::updateWorld(int moveIndex)
     for (Entity* e : world().getPlayers())
     {
         PlayerController* ec = e->controller<PlayerController>();
-        assert(ec != NULL);
+        assert(ec != nullptr);
         
         ClientProxy* cp = NW_SRVR->getClientProxy(e->metadata().getUInt("playerID"));
-        assert(cp != NULL);
+        assert(cp != nullptr);
         
         MoveList& ml = cp->getUnprocessedMoveList();
         Move* m = ml.getMoveAtIndex(moveIndex);
-        assert(m != NULL);
+        assert(m != nullptr);
         
         ec->processInput(m->inputState(), false);
         ml.markMoveAsProcessed(m);
@@ -219,7 +219,7 @@ void GameServerEngineState::handleDirtyStates(std::vector<Entity*>& entities)
 void GameServerEngineState::addPlayer(std::string username, uint8_t playerID)
 {
     ClientProxy* cp = NW_SRVR->getClientProxy(playerID);
-    assert(cp != NULL);
+    assert(cp != nullptr);
     
     uint32_t spawnX = playerID == 1 ? rand() % 24 + 6 : rand() % 24 + 58;
     uint32_t spawnY = playerID == 1 ? rand() % 16 + 6 : rand() % 6 + 6;

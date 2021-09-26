@@ -17,7 +17,7 @@ void JackieController::processInput(InputState* is, bool isLive)
     
     uint8_t playerID = _entity->metadata().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
-    if (pis == NULL)
+    if (pis == nullptr)
     {
         return;
     }

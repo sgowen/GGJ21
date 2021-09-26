@@ -13,7 +13,7 @@
 class MainEngineController : public EngineController
 {
 public:
-    MainEngineController(void* data1 = NULL, void* data2 = NULL);
+    MainEngineController(void* data1 = nullptr, void* data2 = nullptr);
     virtual ~MainEngineController() {}
     
     virtual State<Engine>& getInitialState();

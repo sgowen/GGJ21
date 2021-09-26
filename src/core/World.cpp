@@ -199,7 +199,7 @@ void World::removeEntity(Entity* e)
 
 void World::removeEntity(Entity* e, std::vector<Entity*>& entities)
 {
-    assert(e != NULL);
+    assert(e != nullptr);
     
     for (std::vector<Entity*>::iterator i = entities.begin(); i != entities.end(); ++i)
     {

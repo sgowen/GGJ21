@@ -22,7 +22,7 @@ GameInputManagerState GameInputManager::update()
     uint8_t& inputStateP2 = _inputState->playerInputState(1)._inputState;
     
     Entity* controlledPlayer = ENGINE_STATE_GAME_CLNT.getControlledPlayer();
-    if (controlledPlayer != NULL && _matrix != NULL)
+    if (controlledPlayer != nullptr && _matrix != nullptr)
     {
         uint8_t playerID = controlledPlayer->metadata().getUInt("playerID");
         float playerX = controlledPlayer->position()._x;
@@ -196,7 +196,7 @@ MoveList& GameInputManager::moveList()
 
 void GameInputManager::free(InputState *gis)
 {
-    if (gis == NULL)
+    if (gis == nullptr)
     {
         return;
     }
@@ -225,8 +225,8 @@ void GameInputManager::drop2ndPlayer()
 
 GameInputManager::GameInputManager() :
 _state(GIMS_DEFAULT),
-_inputState(NULL),
-_matrix(NULL)
+_inputState(nullptr),
+_matrix(nullptr)
 {
     reset();
 }

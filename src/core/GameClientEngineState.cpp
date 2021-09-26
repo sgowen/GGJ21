@@ -57,7 +57,7 @@ void GameClientEngineState::onEnter(Engine* e)
     }
     
     NetworkClient::create(StringUtil::format("%s:%d", serverIPAddress.c_str(), CFG_MAIN.serverPort()), _args.getString(ARG_USERNAME), port, GAME_ENGINE_CLIENT_CBS);
-    assert(NW_CLNT != NULL);
+    assert(NW_CLNT != nullptr);
     
     if (!NW_CLNT->connect())
     {
@@ -70,7 +70,7 @@ void GameClientEngineState::onEnter(Engine* e)
 
 void GameClientEngineState::onExit(Engine* e)
 {
-    if (NW_CLNT != NULL)
+    if (NW_CLNT != nullptr)
     {
         NetworkClient::destroy();
     }
@@ -90,7 +90,7 @@ void GameClientEngineState::onUpdate(Engine* e)
         return;
     }
     
-    if (getControlledPlayer() != NULL)
+    if (getControlledPlayer() != nullptr)
     {
         MoveList& ml = INPUT_GAME.moveList();
         if (NW_CLNT->hasReceivedNewState())
@@ -119,7 +119,7 @@ void GameClientEngineState::onUpdate(Engine* e)
 Entity* GameClientEngineState::getControlledPlayer()
 {
     uint8_t playerID = INPUT_GAME.inputState()->playerInputState(0)._playerID;
-    Entity* ret = NULL;
+    Entity* ret = nullptr;
     
     for (Entity* e : ENGINE_STATE_GAME_CLNT.world().getPlayers())
     {
@@ -143,7 +143,7 @@ void GameClientEngineState::updateWorld(const Move& move, bool isLive)
     for (Entity* e : world().getPlayers())
     {
         PlayerController* ec = e->controller<PlayerController>();
-        assert(ec != NULL);
+        assert(ec != nullptr);
         ec->processInput(move.inputState(), isLive);
     }
     

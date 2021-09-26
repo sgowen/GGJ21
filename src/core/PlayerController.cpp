@@ -16,7 +16,7 @@ void PlayerController::processInput(InputState* is, bool isLive)
     Entity& e = *_entity;
     uint8_t playerID = e.metadata().getUInt("playerID");
     InputState::PlayerInputState* pis = is->playerInputStateForID(playerID);
-    if (pis == NULL)
+    if (pis == nullptr)
     {
         return;
     }

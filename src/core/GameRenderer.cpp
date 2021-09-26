@@ -47,7 +47,7 @@ void GameRenderer::renderEncounter(Renderer& r)
     }
     
     bool isInBattle = false;
-    HideController* hide = NULL;
+    HideController* hide = nullptr;
     for (Entity* e : w.getPlayers())
     {
         if (e->controller()->getRTTI().isDerivedFrom(HideController::rtti))
